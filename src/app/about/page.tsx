@@ -1,192 +1,241 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Hero from '@/components/Hero';
+import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
   title: 'About Us | Kaybi Beverage Industries Limited',
   description:
-    'Learn about Kaybi Beverage Industries Limited — the company behind Kayora Premium Purified Water. Proudly located at 173, Eket-Oron Road, Eket, Akwa Ibom State, Nigeria.',
+    'Kaybi Beverage Industries Limited — the company behind Kayora Premium Purified Water. Born in Eket, Akwa Ibom. NAFDAC Reg. A1-111026. SON MANCAP Registered.',
   alternates: { canonical: 'https://www.kayorawater.com/about' },
 };
-
-const values = [
-  {
-    title: 'Purity',
-    desc: 'Every bottle leaves our facility having passed six rigorous purification stages. We never compromise on what goes into Kayora water.',
-    icon: '💧',
-  },
-  {
-    title: 'Safety',
-    desc: 'NAFDAC and SON certification is not a checkbox — it is the foundation of our promise to every Nigerian family and business that trusts us.',
-    icon: '🛡️',
-  },
-  {
-    title: 'Community',
-    desc: 'We are an Akwa Ibom business, employing Akwa Ibom people, serving Akwa Ibom homes. Local pride drives everything we do.',
-    icon: '🤝',
-  },
-  {
-    title: 'Consistency',
-    desc: 'Whether you buy one bottle or one truckload, the water inside is held to exactly the same standard. That is our commitment.',
-    icon: '⚖️',
-  },
-];
-
-const certifications = [
-  {
-    name: 'NAFDAC',
-    full: 'National Agency for Food and Drug Administration and Control',
-    desc: 'Kayora is registered and certified by NAFDAC — Nigeria\'s foremost food and drug regulatory authority.',
-  },
-  {
-    name: 'SON',
-    full: 'Standards Organisation of Nigeria',
-    desc: 'Our products meet the Standards Organisation of Nigeria requirements for purified drinking water.',
-  },
-];
 
 export default function AboutPage() {
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-gradient-to-br from-azure-600 to-sky-500 text-white py-20">
+      <Hero
+        eyebrow="Our Story"
+        headline={'Born in Eket.\nBuilt for Every Table.'}
+        subhead="Kaybi Beverage Industries was founded on a stubborn idea — that the water Nigerians drink every day should meet the highest standard, not the lowest acceptable one."
+        primaryCTA={{ label: 'Schedule a Visit', href: '/contact' }}
+        secondaryCTA={{ label: 'Our Water', href: '/our-water' }}
+        imageSrc="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=1920&q=80"
+        imageAlt="Water production facility — Kaybi Beverage Industries"
+      />
+
+      {/* Why We Built This Company */}
+      <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <span className="text-azure-200 text-sm font-semibold uppercase tracking-wider">About Us</span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold mt-2 mb-4 text-balance">
-              Kaybi Beverage Industries Limited
-            </h1>
-            <p className="text-azure-100 text-lg leading-relaxed">
-              Producing Kayora Premium Purified Water in the heart of Eket, Akwa Ibom — for homes, offices, events, and communities across Nigeria.
+          <div className="max-w-3xl">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              Why We Built This Company
             </p>
+            <h2 className="font-display text-display-md text-kayora-ink mb-8">
+              A Stubborn Idea About Water
+            </h2>
+            <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
+              <p>
+                Akwa Ibom State has no shortage of water. What it has lacked — until now — is a producer who treats the standard as non-negotiable. Too many table water brands in this market are produced under conditions that wouldn&rsquo;t survive a regulator&rsquo;s flashlight. We built Kayora because we were frustrated by that.
+              </p>
+              <p>
+                Kaybi Beverage Industries Limited was incorporated with a single operating principle: every bottle that leaves our Eket facility must be something we would hand to our own family, without hesitation. That principle shapes everything from our borehole depth to our ozonisation step to the way we seal and label each unit.
+              </p>
+              <p>
+                We are not a large conglomerate. We are a focused manufacturing company, producing one product line with exceptional care. We think that focus is a feature, not a limitation.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Story ────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-20">
+      {/* Rooted in Akwa Ibom */}
+      <section className="bg-white py-[clamp(4rem,8vw,8rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-              <span className="text-azure-500 text-sm font-semibold uppercase tracking-wider">Our Story</span>
-              <h2 className="text-3xl font-extrabold mt-2 mb-6">Built on a Simple Mission</h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
+              <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+                Our Roots
+              </p>
+              <h2 className="font-display text-display-md text-kayora-ink mb-8">
+                Rooted in Akwa Ibom
+              </h2>
+              <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
                 <p>
-                  Kaybi Beverage Industries Limited was founded with a clear purpose: to give the people of Akwa Ibom State access to consistently safe, clean, and affordable purified water — water they can trust for their families, their businesses, and their guests.
+                  Our plant is at 173 Eket-Oron Road, Eket. That address is not incidental. Eket is where our founders live. It is where our staff come from. It is where our first customers trusted us. Grounding the business here, in the community we serve, keeps us accountable in ways that a distant corporate structure cannot replicate.
                 </p>
                 <p>
-                  Operating from our facility at <strong>173, Eket-Oron Road, Eket</strong>, we invested in a complete six-stage purification system — from deep borehole extraction through reverse osmosis and ozonisation — so that every bottle of Kayora water meets and exceeds Nigeria's regulatory standards.
+                  Akwa Ibom State is one of Nigeria&rsquo;s most economically active states — oil and gas, agriculture, hospitality, education. Every one of those sectors needs clean water. Hotels need it for guests. Offices need it for staff. Schools need it for children. We see our role as supplying a critical utility, not just a commodity.
                 </p>
                 <p>
-                  Our brand, <strong>Kayora Premium Purified Water</strong>, comes in four sizes designed for every use: 30cl for events, 50cl for everyday hydration, 75cl for active lifestyles, and 18.9L for offices and homes. Each size carries the same promise: <em>Purified to the Highest Standard. Safe for Every Table.</em>
-                </p>
-                <p>
-                  We are proud to be a Nigerian business, employing local people and serving local communities. As we grow, we continue to expand our distribution across Akwa Ibom State and beyond, partnering with distributors who share our commitment to quality.
+                  We deliver across Eket, Uyo, Oron, Ikot Ekpene and the wider state. As we grow, our distribution network will extend into neighbouring states — but our manufacturing heart will remain in Eket.
                 </p>
               </div>
             </div>
-            <div className="space-y-4">
-              <div className="bg-azure-50 rounded-2xl p-6">
-                <h3 className="font-bold text-gray-800 mb-2">Our Facility</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  173, Eket-Oron Road, Eket, Akwa Ibom State, Nigeria (524101)
-                </p>
+            <div className="space-y-6">
+              <div className="bg-kayora-blue-100 rounded-xl p-6">
+                <h3 className="font-display text-lg font-semibold text-kayora-ink mb-2">Our Facility</h3>
+                <address className="not-italic text-kayora-graphite text-sm leading-relaxed">
+                  173 Eket-Oron Road<br />
+                  Eket, Akwa Ibom State<br />
+                  Nigeria (Postal Code 524101)
+                </address>
                 <a
-                  href="https://maps.google.com/?q=173+Eket-Oron+Road+Eket+Akwa+Ibom+Nigeria"
+                  href="https://maps.google.com/?q=4.6420,7.9288"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 mt-3 text-sm text-azure-600 font-medium hover:underline"
+                  className="inline-flex items-center gap-1 mt-3 text-sm text-kayora-blue-700 font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                  View on Google Maps
+                  View on Google Maps &rarr;
                 </a>
               </div>
-              <div className="bg-gray-50 rounded-2xl p-6">
-                <h3 className="font-bold text-gray-800 mb-3">Business Hours</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li className="flex justify-between"><span>Monday – Friday</span><span className="font-medium">8:00 am – 6:00 pm</span></li>
-                  <li className="flex justify-between"><span>Saturday</span><span className="font-medium">8:00 am – 6:00 pm</span></li>
-                  <li className="flex justify-between"><span>Sunday</span><span className="font-medium text-red-500">Closed</span></li>
-                </ul>
-              </div>
-              <div className="bg-gray-50 rounded-2xl p-6">
-                <h3 className="font-bold text-gray-800 mb-3">Get in Touch</h3>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <a href="tel:+2349040789918" className="flex items-center gap-2 hover:text-azure-600 transition-colors">
-                    <svg className="w-4 h-4 text-azure-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                    09040789918
-                  </a>
-                  <a href="mailto:info@kaybibeverage.com" className="flex items-center gap-2 hover:text-azure-600 transition-colors">
-                    <svg className="w-4 h-4 text-azure-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    info@kaybibeverage.com
-                  </a>
-                </div>
+              <div className="bg-kayora-mist rounded-xl p-6">
+                <h3 className="font-display text-lg font-semibold text-kayora-ink mb-3">Business Hours</h3>
+                <dl className="space-y-1 text-sm text-kayora-graphite">
+                  <div className="flex justify-between">
+                    <dt>Monday – Friday</dt>
+                    <dd className="font-semibold">8:00am – 6:00pm WAT</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt>Saturday</dt>
+                    <dd className="font-semibold">8:00am – 6:00pm WAT</dd>
+                  </div>
+                  <div className="flex justify-between text-kayora-stone">
+                    <dt>Sunday</dt>
+                    <dd>Closed</dd>
+                  </div>
+                </dl>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Values ───────────────────────────────────────────────────────── */}
-      <section className="bg-gray-50 py-20">
+      {/* Safe for Every Table */}
+      <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-azure-500 text-sm font-semibold uppercase tracking-wider">Our Values</span>
-            <h2 className="text-3xl font-extrabold mt-2">What Guides Everything We Do</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map(({ title, desc, icon }) => (
-              <div key={title} className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow text-center">
-                <div className="text-4xl mb-4">{icon}</div>
-                <h3 className="font-bold text-gray-800 text-lg mb-2">{title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Certifications ───────────────────────────────────────────────── */}
-      <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-azure-500 text-sm font-semibold uppercase tracking-wider">Certifications</span>
-            <h2 className="text-3xl font-extrabold mt-2">Certified. Compliant. Trusted.</h2>
-            <p className="text-gray-500 mt-3 max-w-xl mx-auto">
-              Kayora Premium Purified Water meets the highest regulatory standards set by Nigeria's food and beverage authorities.
+          <div className="max-w-3xl">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              Our Tagline, Explained
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {certifications.map(({ name, full, desc }) => (
-              <div key={name} className="flex gap-4 bg-azure-50 rounded-2xl p-6 border border-azure-100">
-                <div className="w-12 h-12 rounded-full bg-azure-500 text-white font-extrabold text-lg flex items-center justify-center shrink-0">
-                  {name[0]}
-                </div>
-                <div>
-                  <div className="font-bold text-gray-800">{name}</div>
-                  <div className="text-xs text-azure-600 font-medium mb-2">{full}</div>
-                  <p className="text-sm text-gray-600 leading-relaxed">{desc}</p>
-                </div>
-              </div>
-            ))}
+            <h2 className="font-display text-display-md text-kayora-ink mb-8">
+              What &ldquo;Safe for Every Table&rdquo; Means to Us
+            </h2>
+            <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
+              <p>
+                &ldquo;Safe for every table&rdquo; is not marketing language. It is an operational commitment. The water in a Kayora 30cl served at a wedding in Eket is identical — in purity, in process, in standard — to the water in the 18.9L dispensed in an Uyo office. There is no &ldquo;event grade&rdquo; and &ldquo;bulk grade.&rdquo; There is only Kayora grade.
+              </p>
+              <p>
+                This matters because water is not optional. It is the one product a consumer cannot meaningfully inspect before consuming. That invisible trust is one we take seriously. Every batch we produce is traceable. Every label carries a valid NAFDAC registration number. Every bottle is sealed at point of fill.
+              </p>
+              <p>
+                We say &ldquo;every table&rdquo; because we mean it without qualification. The restaurant table. The hospital bedside. The naming ceremony. The school canteen. The hotel minibar. We do not tiered our product. We produce one standard and hold to it.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="bg-azure-600 text-white py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-extrabold mb-4">Ready to Experience Kayora?</h2>
-          <p className="text-azure-100 mb-8">Place an order or contact us for bulk and wholesale enquiries.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-white text-azure-600 font-bold px-8 py-3.5 rounded-full hover:bg-azure-50 transition-colors">
-              Order Now
-            </Link>
-            <Link href="/wholesale" className="inline-flex items-center justify-center gap-2 border-2 border-white/60 text-white font-semibold px-8 py-3.5 rounded-full hover:border-white hover:bg-white/10 transition-all">
-              Wholesale Enquiry
-            </Link>
+      {/* Regulatory section */}
+      <section className="bg-white py-[clamp(4rem,8vw,8rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              Our Certifications
+            </p>
+            <h2 className="font-display text-display-md text-kayora-ink mb-8">
+              Regulated. Inspected. Documented.
+            </h2>
+            <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch] mb-10">
+              <p>
+                We did not apply for NAFDAC registration because we had to. We applied because we wanted consumers to be able to verify, independently, that Kayora is what we say it is. The registration process required physical inspection of our facility, review of our manufacturing processes, and assessment of our water quality records.
+              </p>
+              <p>
+                We passed. Our registration is current. It is printed on every label. You can verify it on the NAFDAC portal using the number below.
+              </p>
+            </div>
+
+            {/* Certification callout */}
+            <div className="bg-kayora-gold-100 border border-kayora-gold-500 rounded-xl p-8 space-y-6">
+              <div>
+                <p className="text-eyebrow uppercase tracking-widest text-kayora-stone mb-2">NAFDAC Registration</p>
+                <p className="font-display text-2xl font-semibold text-kayora-ink">A1-111026</p>
+                <p className="text-kayora-graphite text-sm mt-1">
+                  Valid through April 2031. Covers all four pack sizes (30cl, 50cl, 75cl, 18.9L).
+                </p>
+              </div>
+              <div className="border-t border-kayora-gold-500/40 pt-6">
+                <p className="text-eyebrow uppercase tracking-widest text-kayora-stone mb-2">SON MANCAP Registered</p>
+                <dl className="space-y-1 text-sm text-kayora-graphite">
+                  <div className="flex gap-4">
+                    <dt className="font-semibold">FT-29179</dt>
+                    <dd>PET bottles — 30cl, 50cl, 75cl</dd>
+                  </div>
+                  <div className="flex gap-4">
+                    <dt className="font-semibold">FT-29180</dt>
+                    <dd>18.9L polycarbonate bottle</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* The People Behind the Bottle */}
+      <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              Our Team
+            </p>
+            <h2 className="font-display text-display-md text-kayora-ink mb-8">
+              The People Behind the Bottle
+            </h2>
+            <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
+              <p>
+                Kaybi Beverage Industries is operated by a small, experienced team of production, logistics and customer service staff — most of them from Eket and the surrounding communities. We are not trying to be a mass-market corporation. We are trying to be the most trusted water company in Akwa Ibom.
+              </p>
+              <p>
+                Our production team runs the plant with precision. Our delivery staff know the roads. Our customer-facing team answers calls the same day. This is not accidental — it is the culture we have deliberately built.
+              </p>
+              <p>
+                We are growing. And as we grow, we are committed to maintaining the operational discipline and personal accountability that defines Kayora today.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* A Quiet Commitment */}
+      <section className="bg-white py-[clamp(4rem,8vw,8rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              Our Commitment
+            </p>
+            <h2 className="font-display text-display-md text-kayora-ink mb-8">
+              A Quiet Commitment
+            </h2>
+            <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
+              <p>
+                We do not make grand promises about changing Nigeria. We make a more modest and more actionable commitment: to produce, consistently, the cleanest table water available in Akwa Ibom State — and to earn the trust of every customer, one bottle at a time.
+              </p>
+              <p>
+                If you are a household customer, that means you can trust that every 50cl or 18.9L you buy from us is the same quality as the last. If you are a distributor, it means your reputation is safe with our product. If you are a hotel or restaurant, it means your guests are drinking water that meets Nigeria&rsquo;s highest certification standards.
+              </p>
+              <p>
+                That is the commitment. It is quiet. It is unglamorous. And it is the one we show up to honour every day.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <CTASection
+        headline="Come See For Yourself."
+        body="Our facility welcomes scheduled visits from distributors, partners and large customers. Call ahead and we will have someone ready to walk you through the plant."
+        primaryCTA={{ label: 'Schedule a Visit', href: '/contact' }}
+        variant="blue"
+      />
     </>
   );
 }
