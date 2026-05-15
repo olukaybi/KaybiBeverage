@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'About Us | Kaybi Beverage Industries Limited',
+  title: 'About Kaybi Beverage Industries — Kayora Water',
   description:
     'Kaybi Beverage Industries Limited — the company behind Kayora Premium Purified Water. Born in Eket, Akwa Ibom. NAFDAC Reg. A1-111026. SON MANCAP Registered.',
   alternates: { canonical: 'https://www.kayorawater.com/about' },
@@ -13,13 +13,15 @@ export default function AboutPage() {
   return (
     <>
       <Hero
+        leadBrand
+        leadBrandSub="A product of Kaybi Beverage Industries Limited"
         eyebrow="Our Story"
         headline={'Born in Eket.\nBuilt for Every Table.'}
         subhead="Kaybi Beverage Industries was founded on a stubborn idea — that the water Nigerians drink every day should meet the highest standard, not the lowest acceptable one."
         primaryCTA={{ label: 'Schedule a Visit', href: '/contact' }}
         secondaryCTA={{ label: 'Our Water', href: '/our-water' }}
-        imageSrc="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=1920&q=80"
-        imageAlt="Water production facility — Kaybi Beverage Industries"
+        imageSrc="/images/factory/factory-01.jpg"
+        imageAlt="Kaybi Beverage Industries production facility — Eket, Akwa Ibom"
       />
 
       {/* Why We Built This Company */}
@@ -34,13 +36,16 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
               <p>
-                Akwa Ibom State has no shortage of water. What it has lacked — until now — is a producer who treats the standard as non-negotiable. Too many table water brands in this market are produced under conditions that wouldn&rsquo;t survive a regulator&rsquo;s flashlight. We built Kayora because we were frustrated by that.
+                In too many parts of Nigeria, &ldquo;table water&rdquo; is a category defined by what people are willing to overlook — packaging that bursts, seals that aren&rsquo;t sealed, certifications that don&rsquo;t exist. Families pay anyway, because the alternatives are worse. We disagreed with the premise.
               </p>
               <p>
                 Kaybi Beverage Industries Limited was incorporated with a single operating principle: every bottle that leaves our Eket facility must be something we would hand to our own family, without hesitation. That principle shapes everything from our borehole depth to our ozonisation step to the way we seal and label each unit.
               </p>
               <p>
                 We are not a large conglomerate. We are a focused manufacturing company, producing one product line with exceptional care. We think that focus is a feature, not a limitation.
+              </p>
+              <p>
+                That product is Kayora.
               </p>
             </div>
           </div>
@@ -91,11 +96,7 @@ export default function AboutPage() {
                 <h3 className="font-display text-lg font-semibold text-kayora-ink mb-3">Business Hours</h3>
                 <dl className="space-y-1 text-sm text-kayora-graphite">
                   <div className="flex justify-between">
-                    <dt>Monday – Friday</dt>
-                    <dd className="font-semibold">8:00am – 6:00pm WAT</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt>Saturday</dt>
+                    <dt>Monday – Saturday</dt>
                     <dd className="font-semibold">8:00am – 6:00pm WAT</dd>
                   </div>
                   <div className="flex justify-between text-kayora-stone">
@@ -127,7 +128,7 @@ export default function AboutPage() {
                 This matters because water is not optional. It is the one product a consumer cannot meaningfully inspect before consuming. That invisible trust is one we take seriously. Every batch we produce is traceable. Every label carries a valid NAFDAC registration number. Every bottle is sealed at point of fill.
               </p>
               <p>
-                We say &ldquo;every table&rdquo; because we mean it without qualification. The restaurant table. The hospital bedside. The naming ceremony. The school canteen. The hotel minibar. We do not tiered our product. We produce one standard and hold to it.
+                We say &ldquo;every table&rdquo; because we mean it without qualification. The restaurant table. The hospital bedside. The naming ceremony. The school canteen. The hotel minibar. We do not tier our product. We produce one standard and hold to it.
               </p>
             </div>
           </div>
@@ -150,6 +151,9 @@ export default function AboutPage() {
               </p>
               <p>
                 We passed. Our registration is current. It is printed on every label. You can verify it on the NAFDAC portal using the number below.
+              </p>
+              <p>
+                The numbers are on our bottles. The records are open to inspection. That is the deal.
               </p>
             </div>
 

@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Our Water | Six-Stage Purification Process — Kayora',
+  title: 'Our Water — Six-Stage Purification | Kayora',
   description:
     'The full story of what is in every bottle of Kayora Premium Purified Water. Six engineered purification stages, NAFDAC Reg. A1-111026, SON MANCAP Registered. Detailed product range.',
   alternates: { canonical: 'https://www.kayorawater.com/our-water' },
@@ -59,7 +59,7 @@ const skuDetails = [
     nafdac: 'A1-111026',
     son: 'FT-29179',
     desc: 'The everyday bottle. The 50cl Original is the backbone of our range — the size that goes into school bags, sits on office desks, is sold in supermarkets and kiosks, and is consumed in restaurants and fast-food outlets across Akwa Ibom. It is sized for one glass, chilled well and consumed easily.',
-    caseInfo: 'Standard case: 24 bottles.',
+    caseInfo: 'Standard case: 12 bottles.',
   },
   {
     size: '75cl',
@@ -90,8 +90,8 @@ export default function OurWaterPage() {
         subhead="The long version of the story we tell on the label — without the marketing softness."
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        imageSrc="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80"
-        imageAlt="Crystal clear water — Kayora purification process"
+        imageSrc="/images/products/kayora-front-view.jpeg"
+        imageAlt="Kayora Premium Purified Water — four pack sizes on display"
       />
 
       {/* It Starts Underground */}

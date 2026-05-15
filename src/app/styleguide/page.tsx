@@ -80,7 +80,7 @@ export default function StyleguidePage() {
             </div>
             <div>
               <p className="text-eyebrow uppercase tracking-widest text-kayora-stone mb-2">Eyebrow — font-sans</p>
-              <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500">NAFDAC Certified · Made in Eket</p>
+              <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500">NAFDAC Registered · Made in Eket</p>
             </div>
             <div>
               <p className="text-eyebrow uppercase tracking-widest text-kayora-stone mb-2">Body — font-sans</p>

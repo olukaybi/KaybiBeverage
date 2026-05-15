@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import KayoraWordmark from '@/components/KayoraWordmark';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -49,16 +49,12 @@ export default function SiteHeader() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-md"
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-md"
               aria-label="Kayora Water — Home"
             >
-              <Image
-                src="/kaybi-logo.svg"
-                alt="Kaybi Beverage Industries — Kayora Water"
-                width={140}
-                height={40}
-                priority
-                className="h-10 w-auto"
+              <KayoraWordmark
+                variant={scrolled ? 'dark' : 'light'}
+                className="text-2xl lg:text-[1.75rem]"
               />
             </Link>
 
@@ -125,13 +121,7 @@ export default function SiteHeader() {
         )}
       >
         <div className="flex items-center justify-between p-4 border-b border-kayora-mist">
-          <Image
-            src="/kaybi-logo.svg"
-            alt="Kayora Water"
-            width={120}
-            height={36}
-            className="h-9 w-auto"
-          />
+          <KayoraWordmark variant="dark" className="text-2xl" />
           <button
             type="button"
             aria-label="Close menu"

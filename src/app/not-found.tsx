@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import KayoraWordmark from '@/components/KayoraWordmark';
 
 export const metadata: Metadata = {
   title: 'Page Not Found | Kayora Water',
@@ -9,6 +10,7 @@ export default function NotFound() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center bg-kayora-cream">
       <div className="max-w-lg mx-auto px-4 text-center">
+        <KayoraWordmark variant="dark" className="text-[3rem] block mb-6" />
         <p className="font-display text-display-xl text-kayora-gold-500 mb-4">404</p>
         <h1 className="font-display text-display-md text-kayora-ink mb-4">
           We can&rsquo;t find that page.

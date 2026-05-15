@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.kayorawater.com'),
   title: {
-    default: 'Kayora Premium Purified Water | NAFDAC Certified · Eket, Akwa Ibom',
+    default: 'Kayora Premium Purified Water | NAFDAC Registered · Eket, Akwa Ibom',
     template: '%s | Kayora Water',
   },
   description:
@@ -49,7 +49,6 @@ export const metadata: Metadata = {
     description:
       'Six-stage purified water crafted at our Eket, Akwa Ibom facility. NAFDAC Registered A1-111026. SON MANCAP Registered. 30cl · 50cl · 75cl · 18.9L.',
     url: 'https://www.kayorawater.com/',
-    images: [{ url: '/opengraph.jpg', width: 1200, height: 630 }],
     locale: 'en_NG',
   },
   twitter: {
@@ -69,7 +68,7 @@ const jsonLd = {
       name: 'Kaybi Beverage Industries Limited',
       alternateName: 'Kayora Water',
       url: 'https://www.kayorawater.com',
-      logo: 'https://www.kayorawater.com/kaybi-logo.svg',
+      logo: 'https://www.kayorawater.com/images/logo/kayora-logo.png',
       description:
         'Manufacturer of Kayora Premium Purified Water, six-stage purified table water produced in Eket, Akwa Ibom State, Nigeria.',
       address: {

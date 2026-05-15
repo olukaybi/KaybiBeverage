@@ -13,6 +13,8 @@ interface HeroProps {
   secondaryCTA?: { label: string; href: string };
   imageSrc: string;
   imageAlt: string;
+  leadBrand?: boolean;
+  leadBrandSub?: string;
 }
 
 export default function Hero({
@@ -23,6 +25,8 @@ export default function Hero({
   secondaryCTA,
   imageSrc,
   imageAlt,
+  leadBrand,
+  leadBrandSub,
 }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -45,7 +49,6 @@ export default function Hero({
         className="absolute inset-0"
         style={prefersReducedMotion ? {} : { y: yParallax }}
       >
-        {/* TODO: Replace with real Kayora photography */}
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -62,10 +65,30 @@ export default function Hero({
       {/* Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="max-w-3xl">
+          {leadBrand && (
+            <div className="mb-3">
+              <span
+                className="font-display font-bold text-kayora-cream block leading-none"
+                style={{ fontSize: 'clamp(3.5rem, 6vw, 7rem)', letterSpacing: '-0.025em' }}
+              >
+                Kayora
+                <span
+                  aria-hidden="true"
+                  className="text-kayora-gold-500 inline-block"
+                  style={{ fontSize: '0.3em', marginLeft: '0.08em', verticalAlign: 'baseline', lineHeight: 1 }}
+                >
+                  •
+                </span>
+              </span>
+              {leadBrandSub && (
+                <p className="text-white/60 text-sm font-sans mt-2">{leadBrandSub}</p>
+              )}
+            </div>
+          )}
           <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-6">
             {eyebrow}
           </p>
-          <h1 className="font-display text-display-xl text-white mb-6 whitespace-pre-line">
+          <h1 className={`font-display ${leadBrand ? 'text-display-lg' : 'text-display-xl'} text-white mb-6 whitespace-pre-line`}>
             {headline}
           </h1>
           <p className="text-lg leading-relaxed text-white/80 mb-10 max-w-[65ch]">
