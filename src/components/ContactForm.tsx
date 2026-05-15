@@ -1,105 +1,201 @@
 'use client';
 
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { cn } from '@/lib/utils';
 
-type FormState = 'idle' | 'submitting' | 'success' | 'error';
+const schema = z.object({
+  fullName: z.string().min(2, 'Please enter your full name'),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z.string().optional(),
+  subject: z.enum(
+    [
+      'Placing an order',
+      'Distribution enquiry',
+      'Bulk/event order',
+      'Partnership or sponsorship',
+      'Press or media',
+      'Something else',
+    ],
+    { required_error: 'Please select a subject' }
+  ),
+  message: z.string().min(10, 'Please write at least 10 characters'),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+const inputClass =
+  'w-full h-12 px-4 border border-kayora-mist rounded-md bg-white text-kayora-ink placeholder:text-kayora-stone focus:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 transition';
+
+const labelClass = 'block text-eyebrow uppercase tracking-widest text-kayora-graphite mb-1.5';
 
 export default function ContactForm() {
-  const [state, setState] = useState<FormState>('idle');
+  const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setState('submitting');
-    const data = new FormData(e.currentTarget);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+  });
+
+  async function onSubmit(data: FormValues) {
+    setSubmitState('submitting');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(data.entries())),
+        body: JSON.stringify(data),
       });
-      setState(res.ok ? 'success' : 'error');
+      console.log('Contact form payload:', data);
+      setSubmitState(res.ok ? 'success' : 'error');
     } catch {
-      setState('error');
+      setSubmitState('error');
     }
   }
 
-  if (state === 'success') {
+  if (submitState === 'success') {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-2xl p-10 text-center">
-        <div className="text-4xl mb-3">💧</div>
-        <h3 className="text-xl font-bold text-green-800 mb-2">Message Sent!</h3>
-        <p className="text-green-700 text-sm leading-relaxed">
-          Thank you for reaching out. We'll get back to you within one business day. For urgent orders, call us directly on <strong>09040789918</strong>.
+      <div className="bg-kayora-gold-100 border border-kayora-gold-500 rounded-xl p-10 text-center">
+        <h3 className="font-display text-xl font-semibold text-kayora-ink mb-3">Message received.</h3>
+        <p className="text-kayora-graphite leading-relaxed max-w-[55ch] mx-auto">
+          Thank you. We&rsquo;ve received your message and will respond within one business day. For urgent orders, call{' '}
+          <a href="tel:+2349040789918" className="font-semibold text-kayora-blue-700 hover:underline">
+            0904 078 9918
+          </a>
+          .
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100 space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      {/* Full Name */}
+      <div>
+        <label htmlFor="fullName" className={labelClass}>
+          Full Name <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="fullName"
+          type="text"
+          autoComplete="name"
+          placeholder="Your full name"
+          className={cn(inputClass, errors.fullName && 'border-kayora-danger focus-visible:ring-kayora-danger')}
+          {...register('fullName')}
+        />
+        {errors.fullName && (
+          <p role="alert" className="mt-1 text-xs text-kayora-danger">
+            {errors.fullName.message}
+          </p>
+        )}
+      </div>
+
+      {/* Email + Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="name">Name *</label>
+          <label htmlFor="email" className={labelClass}>
+            Email <span aria-hidden="true">*</span>
+          </label>
           <input
-            id="name" name="name" type="text" required
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-azure-400 focus:border-transparent bg-white"
-            placeholder="Your name"
+            id="email"
+            type="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            className={cn(inputClass, errors.email && 'border-kayora-danger focus-visible:ring-kayora-danger')}
+            {...register('email')}
           />
+          {errors.email && (
+            <p role="alert" className="mt-1 text-xs text-kayora-danger">
+              {errors.email.message}
+            </p>
+          )}
         </div>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="phone">Phone *</label>
+          <label htmlFor="phone" className={labelClass}>
+            Phone <span className="text-kayora-stone">(optional)</span>
+          </label>
           <input
-            id="phone" name="phone" type="tel" required
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-azure-400 focus:border-transparent bg-white"
+            id="phone"
+            type="tel"
+            autoComplete="tel"
             placeholder="08XXXXXXXXX"
+            className={inputClass}
+            {...register('phone')}
           />
         </div>
       </div>
 
+      {/* Subject */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="contactEmail">Email Address</label>
-        <input
-          id="contactEmail" name="email" type="email"
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-azure-400 focus:border-transparent bg-white"
-          placeholder="you@example.com"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="subject">Subject *</label>
+        <label htmlFor="subject" className={labelClass}>
+          Subject <span aria-hidden="true">*</span>
+        </label>
         <select
-          id="subject" name="subject" required
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-azure-400 focus:border-transparent bg-white"
+          id="subject"
+          className={cn(
+            inputClass,
+            'cursor-pointer',
+            errors.subject && 'border-kayora-danger focus-visible:ring-kayora-danger'
+          )}
+          {...register('subject')}
         >
           <option value="">Select a subject…</option>
-          <option value="order">Place an Order</option>
-          <option value="wholesale">Wholesale Enquiry</option>
-          <option value="delivery">Delivery Question</option>
-          <option value="general">General Enquiry</option>
+          <option value="Placing an order">Placing an order</option>
+          <option value="Distribution enquiry">Distribution enquiry</option>
+          <option value="Bulk/event order">Bulk / event order</option>
+          <option value="Partnership or sponsorship">Partnership or sponsorship</option>
+          <option value="Press or media">Press or media</option>
+          <option value="Something else">Something else</option>
         </select>
+        {errors.subject && (
+          <p role="alert" className="mt-1 text-xs text-kayora-danger">
+            {errors.subject.message}
+          </p>
+        )}
       </div>
 
+      {/* Message */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="contactMessage">Message *</label>
+        <label htmlFor="message" className={labelClass}>
+          Message <span aria-hidden="true">*</span>
+        </label>
         <textarea
-          id="contactMessage" name="message" rows={4} required
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-azure-400 focus:border-transparent bg-white resize-none"
+          id="message"
+          rows={5}
           placeholder="Tell us what you need — product size, quantity, delivery location…"
+          className={cn(
+            'w-full px-4 py-3 border border-kayora-mist rounded-md bg-white text-kayora-ink placeholder:text-kayora-stone focus:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 transition resize-none',
+            errors.message && 'border-kayora-danger focus-visible:ring-kayora-danger'
+          )}
+          {...register('message')}
         />
+        {errors.message && (
+          <p role="alert" className="mt-1 text-xs text-kayora-danger">
+            {errors.message.message}
+          </p>
+        )}
       </div>
 
-      {state === 'error' && (
-        <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm">
-          Something went wrong. Please try again or call us directly on 09040789918.
+      {submitState === 'error' && (
+        <div role="alert" className="bg-red-50 border border-kayora-danger text-kayora-danger rounded-md px-4 py-3 text-sm">
+          Something went wrong. Please try again or call us on{' '}
+          <a href="tel:+2349040789918" className="font-semibold underline">
+            0904 078 9918
+          </a>
+          .
         </div>
       )}
 
       <button
         type="submit"
-        disabled={state === 'submitting'}
-        className="w-full bg-azure-500 hover:bg-azure-600 disabled:opacity-60 text-white font-bold py-3 rounded-xl transition-colors text-sm"
+        disabled={submitState === 'submitting'}
+        className="w-full min-h-[48px] bg-kayora-blue-900 hover:bg-kayora-blue-700 disabled:opacity-60 text-kayora-cream font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2"
       >
-        {state === 'submitting' ? 'Sending…' : 'Send Message'}
+        {submitState === 'submitting' ? 'Sending…' : 'Send Message'}
       </button>
     </form>
   );
