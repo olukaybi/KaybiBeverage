@@ -9,22 +9,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        azure: {
-          50:  '#e6f2ff',
-          100: '#bdd9ff',
-          200: '#94c0ff',
-          300: '#6aa7ff',
-          400: '#3d8eff',
-          500: '#007FFF',
-          600: '#0066cc',
-          700: '#004d99',
-          800: '#003366',
-          900: '#001a33',
+        'kayora-blue': {
+          100: '#E0EBF7',
+          500: '#3E82CF',
+          700: '#1A5BA8',
+          900: '#003B7A',
         },
+        'kayora-clay': {
+          300: '#E1A48E',
+          500: '#C45A3E',
+          700: '#A04428',
+        },
+        'kayora-gold': {
+          100: '#F5EBD0',
+          500: '#C9A14A',
+        },
+        'kayora-ink': '#1A1A1A',
+        'kayora-graphite': '#3D3D3D',
+        'kayora-stone': '#6B6B6B',
+        'kayora-mist': '#E8E5DF',
+        'kayora-cream': '#FAF8F4',
+        'kayora-success': '#2D7A4F',
+        'kayora-warning': '#C49A28',
+        'kayora-danger': '#B83A2E',
       },
       fontFamily: {
-        sans: ['Montserrat', 'sans-serif'],
-        serif: ['Lora', 'serif'],
+        display: ['var(--font-fraunces)', 'Georgia', 'serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        'display-xl': ['clamp(3rem, 6vw, 5.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'display-lg': ['clamp(2.5rem, 4.5vw, 4rem)', { lineHeight: '1.08', letterSpacing: '-0.02em' }],
+        'display-md': ['clamp(2rem, 3.5vw, 3rem)', { lineHeight: '1.15', letterSpacing: '-0.015em' }],
+        'eyebrow': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.12em' }],
       },
     },
   },
