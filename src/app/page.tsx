@@ -6,6 +6,7 @@ import SKUCard from '@/components/SKUCard';
 import ProcessSteps from '@/components/ProcessSteps';
 import PillarGrid from '@/components/PillarGrid';
 import CTASection from '@/components/CTASection';
+import SocialProof from '@/components/SocialProof';
 
 export const metadata: Metadata = {
   title: 'Kayora Premium Purified Water | NAFDAC Registered · Eket, Akwa Ibom',
@@ -122,6 +123,8 @@ export default function HomePage() {
         pillars={pillars}
         className="bg-white"
       />
+
+      <SocialProof />
 
       {/* Service Area */}
       <section className="bg-kayora-blue-100 py-[clamp(4rem,8vw,8rem)]">
