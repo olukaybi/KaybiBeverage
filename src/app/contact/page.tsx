@@ -5,7 +5,7 @@ import MapEmbed from '@/components/MapEmbed';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Contact & Order | Kayora Water — Eket, Akwa Ibom',
+  title: 'Contact & Order — Eket, Akwa Ibom | Kayora Water',
   description:
     'Order Kayora Premium Purified Water or get in touch. Call 0904 078 9918, email info@kaybibeverage.com, or fill out our form. Delivery across Eket and Akwa Ibom State.',
   alternates: { canonical: 'https://www.kayorawater.com/contact' },

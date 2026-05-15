@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'About Us | Kaybi Beverage Industries Limited',
+  title: 'About Kaybi Beverage Industries — Kayora Water',
   description:
     'Kaybi Beverage Industries Limited — the company behind Kayora Premium Purified Water. Born in Eket, Akwa Ibom. NAFDAC Reg. A1-111026. SON MANCAP Registered.',
   alternates: { canonical: 'https://www.kayorawater.com/about' },
@@ -36,13 +36,16 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
               <p>
-                Akwa Ibom State has no shortage of water. What it has lacked — until now — is a producer who treats the standard as non-negotiable. Too many table water brands in this market are produced under conditions that wouldn&rsquo;t survive a regulator&rsquo;s flashlight. We built Kayora because we were frustrated by that.
+                In too many parts of Nigeria, &ldquo;table water&rdquo; is a category defined by what people are willing to overlook — packaging that bursts, seals that aren&rsquo;t sealed, certifications that don&rsquo;t exist. Families pay anyway, because the alternatives are worse. We disagreed with the premise.
               </p>
               <p>
                 Kaybi Beverage Industries Limited was incorporated with a single operating principle: every bottle that leaves our Eket facility must be something we would hand to our own family, without hesitation. That principle shapes everything from our borehole depth to our ozonisation step to the way we seal and label each unit.
               </p>
               <p>
                 We are not a large conglomerate. We are a focused manufacturing company, producing one product line with exceptional care. We think that focus is a feature, not a limitation.
+              </p>
+              <p>
+                That product is Kayora.
               </p>
             </div>
           </div>
@@ -148,6 +151,9 @@ export default function AboutPage() {
               </p>
               <p>
                 We passed. Our registration is current. It is printed on every label. You can verify it on the NAFDAC portal using the number below.
+              </p>
+              <p>
+                The numbers are on our bottles. The records are open to inspection. That is the deal.
               </p>
             </div>
 

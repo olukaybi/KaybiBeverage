@@ -49,7 +49,6 @@ export const metadata: Metadata = {
     description:
       'Six-stage purified water crafted at our Eket, Akwa Ibom facility. NAFDAC Registered A1-111026. SON MANCAP Registered. 30cl · 50cl · 75cl · 18.9L.',
     url: 'https://www.kayorawater.com/',
-    images: [{ url: '/opengraph.jpg', width: 1200, height: 630 }],
     locale: 'en_NG',
   },
   twitter: {

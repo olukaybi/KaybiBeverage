@@ -4,7 +4,7 @@ import PillarGrid from '@/components/PillarGrid';
 import DistributorForm from '@/components/DistributorForm';
 
 export const metadata: Metadata = {
-  title: 'Become a Kayora Distributor | Distribution Network',
+  title: 'Become a Kayora Distributor | Kayora Water',
   description:
     'Join the Kayora distribution network across Akwa Ibom and neighbouring states. Strong margins, reliable supply, marketing support. NAFDAC Reg. A1-111026. SON MANCAP Registered.',
   alternates: { canonical: 'https://www.kayorawater.com/distribution' },

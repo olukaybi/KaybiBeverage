@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Our Water | Six-Stage Purification Process — Kayora',
+  title: 'Our Water — Six-Stage Purification | Kayora',
   description:
     'The full story of what is in every bottle of Kayora Premium Purified Water. Six engineered purification stages, NAFDAC Reg. A1-111026, SON MANCAP Registered. Detailed product range.',
   alternates: { canonical: 'https://www.kayorawater.com/our-water' },
