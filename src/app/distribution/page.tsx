@@ -80,8 +80,8 @@ export default function DistributionPage() {
         subhead="Kayora is recruiting distributors across Akwa Ibom and neighbouring states. Strong margins, dependable supply, real marketing support — and a brand customers already trust."
         primaryCTA={{ label: 'Apply to Distribute', href: '#apply' }}
         secondaryCTA={{ label: 'Talk to Our Team', href: '/contact' }}
-        imageSrc="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1920&q=80"
-        imageAlt="Supply chain and distribution — Kayora water distribution network"
+        imageSrc="/images/factory/factory-03.jpg"
+        imageAlt="Kaybi Beverage Industries — Kayora water production and distribution"
       />
 
       <PillarGrid

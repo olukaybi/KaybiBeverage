@@ -90,8 +90,8 @@ export default function OurWaterPage() {
         subhead="The long version of the story we tell on the label — without the marketing softness."
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        imageSrc="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80"
-        imageAlt="Crystal clear water — Kayora purification process"
+        imageSrc="/images/products/kayora-front-view.jpeg"
+        imageAlt="Kayora Premium Purified Water — four pack sizes on display"
       />
 
       {/* It Starts Underground */}

@@ -18,8 +18,8 @@ export default function AboutPage() {
         subhead="Kaybi Beverage Industries was founded on a stubborn idea — that the water Nigerians drink every day should meet the highest standard, not the lowest acceptable one."
         primaryCTA={{ label: 'Schedule a Visit', href: '/contact' }}
         secondaryCTA={{ label: 'Our Water', href: '/our-water' }}
-        imageSrc="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=1920&q=80"
-        imageAlt="Water production facility — Kaybi Beverage Industries"
+        imageSrc="/images/factory/factory-01.jpg"
+        imageAlt="Kaybi Beverage Industries production facility — Eket, Akwa Ibom"
       />
 
       {/* Why We Built This Company */}

@@ -53,8 +53,8 @@ export default function SiteHeader() {
               aria-label="Kayora Water — Home"
             >
               <Image
-                src="/kaybi-logo.svg"
-                alt="Kaybi Beverage Industries — Kayora Water"
+                src="/images/logo/kayora-logo.png"
+                alt="Kayora Premium Purified Water by Kaybi Beverage Industries"
                 width={140}
                 height={40}
                 priority
@@ -126,7 +126,7 @@ export default function SiteHeader() {
       >
         <div className="flex items-center justify-between p-4 border-b border-kayora-mist">
           <Image
-            src="/kaybi-logo.svg"
+            src="/images/logo/kayora-logo.png"
             alt="Kayora Water"
             width={120}
             height={36}

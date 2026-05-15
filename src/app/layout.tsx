@@ -69,7 +69,7 @@ const jsonLd = {
       name: 'Kaybi Beverage Industries Limited',
       alternateName: 'Kayora Water',
       url: 'https://www.kayorawater.com',
-      logo: 'https://www.kayorawater.com/kaybi-logo.svg',
+      logo: 'https://www.kayorawater.com/images/logo/kayora-logo.png',
       description:
         'Manufacturer of Kayora Premium Purified Water, six-stage purified table water produced in Eket, Akwa Ibom State, Nigeria.',
       address: {

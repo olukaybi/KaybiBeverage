@@ -45,7 +45,6 @@ export default function Hero({
         className="absolute inset-0"
         style={prefersReducedMotion ? {} : { y: yParallax }}
       >
-        {/* TODO: Replace with real Kayora photography */}
         <Image
           src={imageSrc}
           alt={imageAlt}

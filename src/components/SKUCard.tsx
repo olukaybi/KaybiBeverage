@@ -33,7 +33,6 @@ export default function SKUCard({
     >
       {/* Image area */}
       <div className="relative aspect-[4/5] bg-kayora-blue-100 overflow-hidden">
-        {/* TODO: Replace with real Kayora photography */}
         <motion.div
           className="absolute inset-0"
           whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
@@ -43,7 +42,7 @@ export default function SKUCard({
             src={imageSrc}
             alt={imageAlt}
             fill
-            className="object-cover"
+            className="object-contain p-4"
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           />
         </motion.div>

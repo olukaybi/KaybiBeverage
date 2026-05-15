@@ -22,8 +22,8 @@ const skus = [
     description:
       'Built for events. Compact, easy to chill, easy to share. The Kayora you reach for at weddings, naming ceremonies and corporate functions.',
     useCase: 'Perfect for events, celebrations and anywhere water is served to guests.',
-    imageSrc: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600&q=80',
-    imageAlt: 'Small water bottle — Kayora 30cl Sharp-sharp',
+    imageSrc: '/images/products/kayora-30cl.png',
+    imageAlt: 'Kayora 30cl Sharp-sharp — small event bottle',
   },
   {
     size: '50cl',
@@ -32,8 +32,8 @@ const skus = [
     description:
       'Everyday hydration, perfected. The bottle that started it all — sized right for school bags, dashboards and desks across Akwa Ibom.',
     useCase: 'Ideal for homes, offices, schools and on-the-go hydration.',
-    imageSrc: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=80',
-    imageAlt: 'Standard water bottle — Kayora 50cl Original',
+    imageSrc: '/images/products/kayora-50cl.png',
+    imageAlt: 'Kayora 50cl Original — everyday bottle',
   },
   {
     size: '75cl',
@@ -42,8 +42,8 @@ const skus = [
     description:
       'A little extra, the way only Nigerians know how. Generous volume for long days, the gym, the road, and anyone who hydrates seriously.',
     useCase: 'Great for fitness, travel and long working days.',
-    imageSrc: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=600&q=80',
-    imageAlt: 'Large water bottle — Kayora 75cl Jara',
+    imageSrc: '/images/products/kayora-75cl.png',
+    imageAlt: 'Kayora 75cl Jara — extra bottle',
   },
   {
     size: '18.9L',
@@ -52,8 +52,8 @@ const skus = [
     description:
       'The dispenser standard. One bottle keeps a household, office or hotel running for days. Clean. Sealed. Tracked from borehole to delivery.',
     useCase: 'The go-to choice for offices, hotels, schools and large households.',
-    imageSrc: 'https://images.unsplash.com/photo-1624302522281-df78e5deb94a?w=600&q=80',
-    imageAlt: 'Large 18.9L dispenser bottle — Kayora Never Finish',
+    imageSrc: '/images/products/kayora-18-9l.png',
+    imageAlt: 'Kayora 18.9L Never Finish — dispenser bottle',
   },
 ];
 
@@ -81,8 +81,8 @@ export default function HomePage() {
         subhead="Six-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        imageSrc="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=1920&q=80"
-        imageAlt="Clear, pure water — Kayora Premium Purified Water"
+        imageSrc="/images/lifestyle/kayora-beach-party.png"
+        imageAlt="Young Nigerians celebrating with Kayora Premium Purified Water"
       />
 
       <TrustStrip />
