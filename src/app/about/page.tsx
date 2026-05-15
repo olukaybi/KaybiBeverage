@@ -13,6 +13,8 @@ export default function AboutPage() {
   return (
     <>
       <Hero
+        leadBrand
+        leadBrandSub="A product of Kaybi Beverage Industries Limited"
         eyebrow="Our Story"
         headline={'Born in Eket.\nBuilt for Every Table.'}
         subhead="Kaybi Beverage Industries was founded on a stubborn idea — that the water Nigerians drink every day should meet the highest standard, not the lowest acceptable one."

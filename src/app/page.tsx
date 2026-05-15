@@ -76,7 +76,8 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="NAFDAC Registered · Made in Eket"
+        leadBrand
+        eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Six-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}

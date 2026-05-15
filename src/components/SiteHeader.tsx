@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import KayoraWordmark from '@/components/KayoraWordmark';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -49,19 +49,13 @@ export default function SiteHeader() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-md"
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-md"
               aria-label="Kayora Water — Home"
             >
-              <span className="inline-flex items-center justify-center bg-white rounded-lg p-1 shadow-sm">
-                <Image
-                  src="/images/logo/kayora-logo.png"
-                  alt="Kayora Premium Purified Water by Kaybi Beverage Industries"
-                  width={48}
-                  height={48}
-                  priority
-                  className="h-10 w-10 object-contain"
-                />
-              </span>
+              <KayoraWordmark
+                variant={scrolled ? 'dark' : 'light'}
+                className="text-2xl lg:text-[1.75rem]"
+              />
             </Link>
 
             {/* Desktop nav */}
@@ -127,15 +121,7 @@ export default function SiteHeader() {
         )}
       >
         <div className="flex items-center justify-between p-4 border-b border-kayora-mist">
-          <span className="inline-flex items-center justify-center bg-white rounded-lg p-1">
-            <Image
-              src="/images/logo/kayora-logo.png"
-              alt="Kayora Water"
-              width={40}
-              height={40}
-              className="h-9 w-9 object-contain"
-            />
-          </span>
+          <KayoraWordmark variant="dark" className="text-2xl" />
           <button
             type="button"
             aria-label="Close menu"

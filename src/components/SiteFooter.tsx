@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import KayoraWordmark from '@/components/KayoraWordmark';
 
 const socialLinks = [
   {
@@ -49,9 +50,13 @@ export default function SiteFooter() {
 
           {/* Column 1: Company */}
           <div>
-            <div className="font-display text-2xl font-bold text-kayora-cream mb-2">Kayora</div>
-            <p className="text-sm text-kayora-cream/70 mb-6 leading-relaxed max-w-[28ch]">
+            <KayoraWordmark variant="light" className="text-[2.5rem] block mb-1" />
+            <p className="text-sm text-kayora-cream/70 mb-5 leading-relaxed max-w-[28ch]">
               Purified to the Highest Standard.<br />Safe for Every Table.
+            </p>
+            <p className="text-xs text-kayora-cream/40 mb-6 leading-relaxed max-w-[28ch]">
+              A product of Kaybi Beverage Industries Limited<br />
+              Eket, Akwa Ibom State, Nigeria
             </p>
             <div className="flex items-center gap-3">
               {socialLinks.map(({ href, label, icon }) => (

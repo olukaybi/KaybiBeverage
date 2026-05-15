@@ -59,7 +59,7 @@ const skuDetails = [
     nafdac: 'A1-111026',
     son: 'FT-29179',
     desc: 'The everyday bottle. The 50cl Original is the backbone of our range — the size that goes into school bags, sits on office desks, is sold in supermarkets and kiosks, and is consumed in restaurants and fast-food outlets across Akwa Ibom. It is sized for one glass, chilled well and consumed easily.',
-    caseInfo: 'Standard case: 24 bottles.',
+    caseInfo: 'Standard case: 12 bottles.',
   },
   {
     size: '75cl',
