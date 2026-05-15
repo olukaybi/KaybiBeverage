@@ -91,11 +91,7 @@ export default function AboutPage() {
                 <h3 className="font-display text-lg font-semibold text-kayora-ink mb-3">Business Hours</h3>
                 <dl className="space-y-1 text-sm text-kayora-graphite">
                   <div className="flex justify-between">
-                    <dt>Monday – Friday</dt>
-                    <dd className="font-semibold">8:00am – 6:00pm WAT</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt>Saturday</dt>
+                    <dt>Monday – Saturday</dt>
                     <dd className="font-semibold">8:00am – 6:00pm WAT</dd>
                   </div>
                   <div className="flex justify-between text-kayora-stone">
@@ -127,7 +123,7 @@ export default function AboutPage() {
                 This matters because water is not optional. It is the one product a consumer cannot meaningfully inspect before consuming. That invisible trust is one we take seriously. Every batch we produce is traceable. Every label carries a valid NAFDAC registration number. Every bottle is sealed at point of fill.
               </p>
               <p>
-                We say &ldquo;every table&rdquo; because we mean it without qualification. The restaurant table. The hospital bedside. The naming ceremony. The school canteen. The hotel minibar. We do not tiered our product. We produce one standard and hold to it.
+                We say &ldquo;every table&rdquo; because we mean it without qualification. The restaurant table. The hospital bedside. The naming ceremony. The school canteen. The hotel minibar. We do not tier our product. We produce one standard and hold to it.
               </p>
             </div>
           </div>

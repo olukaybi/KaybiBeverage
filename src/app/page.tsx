@@ -8,7 +8,7 @@ import PillarGrid from '@/components/PillarGrid';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Kayora Premium Purified Water | NAFDAC Certified · Eket, Akwa Ibom',
+  title: 'Kayora Premium Purified Water | NAFDAC Registered · Eket, Akwa Ibom',
   description:
     'Kayora — six-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Registered, proudly produced in Eket, Akwa Ibom. Pure, crisp hydration for homes, offices, events and distribution.',
   alternates: { canonical: 'https://www.kayorawater.com/' },
@@ -76,7 +76,7 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="NAFDAC Certified · Made in Eket"
+        eyebrow="NAFDAC Registered · Made in Eket"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Six-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}

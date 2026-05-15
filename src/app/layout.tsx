@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.kayorawater.com'),
   title: {
-    default: 'Kayora Premium Purified Water | NAFDAC Certified · Eket, Akwa Ibom',
+    default: 'Kayora Premium Purified Water | NAFDAC Registered · Eket, Akwa Ibom',
     template: '%s | Kayora Water',
   },
   description:
