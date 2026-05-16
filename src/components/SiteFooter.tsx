@@ -34,10 +34,16 @@ const socialLinks = [
 ];
 
 const productLinks = [
-  { label: '30cl — Sharp-sharp', href: '/our-water' },
-  { label: '50cl — Original', href: '/our-water' },
-  { label: '75cl — Jara', href: '/our-water' },
-  { label: '18.9L — Never Finish', href: '/our-water' },
+  { label: '30cl — Sharp-sharp', href: '/shop' },
+  { label: '50cl — Original', href: '/shop' },
+  { label: '75cl — Jara', href: '/shop' },
+  { label: '18.9L — Never Finish', href: '/shop' },
+];
+
+const orderLinks = [
+  { label: 'Order online', href: '/shop' },
+  { label: 'Bulk / event orders', href: '/contact' },
+  { label: 'Become a distributor', href: '/distribution' },
 ];
 
 export default function SiteFooter() {
@@ -77,8 +83,21 @@ export default function SiteFooter() {
           {/* Column 2: Products */}
           <div>
             <h2 className="text-eyebrow uppercase tracking-widest text-kayora-cream/50 mb-4">Products</h2>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mb-6">
               {productLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <Link
+                    href={href}
+                    className="text-sm text-kayora-cream/80 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <h2 className="text-eyebrow uppercase tracking-widest text-kayora-cream/50 mb-4">Order</h2>
+            <ul className="space-y-2">
+              {orderLinks.map(({ label, href }) => (
                 <li key={label}>
                   <Link
                     href={href}
