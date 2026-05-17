@@ -78,13 +78,13 @@ export default function HomePage() {
     <>
       <Hero
         leadBrand
-        eyebrow="NAFDAC Certified · Made in Eket"
+        eyebrow="NAFDAC Registered · Made in Eket"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Six-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
-        primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        imageSrc="/images/lifestyle/kayora-beach-party.png"
-        imageAlt="Young Nigerians celebrating with Kayora Premium Purified Water"
+        productImageSrc="/images/products/kayora-75cl.png"
+        imageAlt="Kayora 75cl Premium Purified Water — upright bottle"
       />
 
       <TrustStrip />
