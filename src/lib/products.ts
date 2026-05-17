@@ -62,10 +62,10 @@ export const DELIVERY_ZONES: DeliveryZone[] = [
 ];
 
 export const PRODUCT_IMAGES: Record<string, string> = {
-  '30cl': '/images/products/kayora-30cl.png',
-  '50cl': '/images/products/kayora-50cl.png',
-  '75cl': '/images/products/kayora-75cl.png',
-  '18.9L': '/images/products/kayora-18-9l.png',
+  '30cl': '/images/products/kayora-30cl-hero-blue.png',
+  '50cl': '/images/products/kayora-50cl-hero-blue.png',
+  '75cl': '/images/products/kayora-75cl-hero-blue.png',
+  '18.9L': '/images/products/kayora-18l-hero-blue.png',
 };
 
 export function formatNaira(amount: number): string {

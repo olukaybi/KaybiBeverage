@@ -1,12 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Hero from '@/components/Hero';
-import TrustStrip from '@/components/TrustStrip';
 import SKUCard from '@/components/SKUCard';
 import ProcessSteps from '@/components/ProcessSteps';
-import PillarGrid from '@/components/PillarGrid';
-import CTASection from '@/components/CTASection';
-import SocialProof from '@/components/SocialProof';
 
 export const metadata: Metadata = {
   title: 'Kayora Premium Purified Water | NAFDAC Registered · Eket, Akwa Ibom',
@@ -23,7 +19,7 @@ const skus = [
     description:
       'Built for events. Compact, easy to chill, easy to share. The Kayora you reach for at weddings, naming ceremonies and corporate functions.',
     useCase: 'Perfect for events, celebrations and anywhere water is served to guests.',
-    imageSrc: '/images/products/kayora-30cl.png',
+    imageSrc: '/images/products/kayora-30cl-hero-blue.png',
     imageAlt: 'Kayora 30cl Sharp-sharp — small event bottle',
   },
   {
@@ -33,7 +29,7 @@ const skus = [
     description:
       'Everyday hydration, perfected. The bottle that started it all — sized right for school bags, dashboards and desks across Akwa Ibom.',
     useCase: 'Ideal for homes, offices, schools and on-the-go hydration.',
-    imageSrc: '/images/products/kayora-50cl.png',
+    imageSrc: '/images/products/kayora-50cl-hero-blue.png',
     imageAlt: 'Kayora 50cl Original — everyday bottle',
   },
   {
@@ -43,7 +39,7 @@ const skus = [
     description:
       'A little extra, the way only Nigerians know how. Generous volume for long days, the gym, the road, and anyone who hydrates seriously.',
     useCase: 'Great for fitness, travel and long working days.',
-    imageSrc: '/images/products/kayora-75cl.png',
+    imageSrc: '/images/products/kayora-75cl-hero-blue.png',
     imageAlt: 'Kayora 75cl Jara — extra bottle',
   },
   {
@@ -53,56 +49,32 @@ const skus = [
     description:
       'The dispenser standard. One bottle keeps a household, office or hotel running for days. Clean. Sealed. Tracked from borehole to delivery.',
     useCase: 'The go-to choice for offices, hotels, schools and large households.',
-    imageSrc: '/images/products/kayora-18-9l.png',
+    imageSrc: '/images/products/kayora-18l-hero-blue.png',
     imageAlt: 'Kayora 18.9L Never Finish — dispenser bottle',
-  },
-];
-
-const pillars = [
-  {
-    title: 'Certified, Not Just Claimed.',
-    body: 'NAFDAC has inspected our facility, our process and our records. Our registration number is printed on every label — and you can verify it.',
-  },
-  {
-    title: 'Local Manufacturing. Real Accountability.',
-    body: 'We are not a distant brand. We are at 173 Eket-Oron Road. Walk in. Meet our team. See the line.',
-  },
-  {
-    title: 'Built for Nigerian Life.',
-    body: 'From the 30cl that pairs with jollof to the 18.9L that anchors an office, every SKU is designed for the way Nigerians actually drink, host and work.',
   },
 ];
 
 export default function HomePage() {
   return (
     <>
+      {/* Section 1 — Hero */}
       <Hero
         leadBrand
-        eyebrow="NAFDAC Registered · Made in Eket"
+        eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Six-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
         primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        productImageSrc="/images/products/kayora-75cl.png"
-        imageAlt="Kayora 75cl Premium Purified Water — upright bottle"
+        productImageSrc="/images/products/kayora-75cl-hero-blue.png"
+        imageAlt="Kayora 75cl Jara — Premium Purified Water, front and back"
       />
 
-      <TrustStrip />
-
-      {/* SKU Showcase */}
-      <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
+      {/* Section 2 — The Range */}
+      <section className="bg-kayora-cream py-[clamp(6rem,10vw,10rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-14">
-            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
-              The Range
-            </p>
-            <h2 className="font-display text-display-lg text-kayora-ink mb-4">
-              Four Sizes. One Standard.
-            </h2>
-            <p className="text-kayora-graphite leading-relaxed max-w-[65ch]">
-              From wedding tables to office floors, there&rsquo;s a Kayora for every moment.
-            </p>
-          </div>
+          <p className="font-display text-xl italic text-kayora-blue-700 mb-16 text-center lg:text-left">
+            Four sizes. One standard.
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {skus.map((sku) => (
               <SKUCard key={sku.size} {...sku} />
@@ -111,69 +83,115 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section 3 — Six-Stage Process */}
       <ProcessSteps
         eyebrow="Six-Stage Purification"
         headline='What "Premium" Really Means'
         intro="We don't bottle ordinary water and call it premium. Every drop of Kayora moves through six engineered stages before it reaches you."
       />
 
-      <PillarGrid
-        eyebrow="Why Kayora"
-        headline="The Standard Akwa Ibom Deserves"
-        pillars={pillars}
-        className="bg-white"
-      />
-
-      <SocialProof />
-
-      {/* Service Area */}
-      <section className="bg-kayora-blue-100 py-[clamp(4rem,8vw,8rem)]">
+      {/* Section 4 — The Standard */}
+      <section className="bg-white py-[clamp(6rem,10vw,10rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-display text-display-md text-kayora-ink mb-4">
-              Where We Deliver — Across Akwa Ibom
+          <div className="max-w-2xl mb-16">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">Why Kayora</p>
+            <h2 className="font-display text-display-lg text-kayora-ink">
+              The Standard Akwa Ibom Deserves.
             </h2>
-            <p className="text-kayora-graphite leading-relaxed mb-8 max-w-[65ch] mx-auto">
-              We currently supply homes, offices, hotels, restaurants, schools and event organisers across Eket, Uyo and the wider Akwa Ibom State. Outside our usual routes? Call us — we often find a way.
-            </p>
-            <Link
-              href="/distribution"
-              className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-900 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2"
-            >
-              See Delivery Areas &rarr;
-            </Link>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Left: Why Kayora pillars */}
+            <div className="space-y-10">
+              {[
+                {
+                  title: 'Certified, Not Just Claimed.',
+                  body: 'NAFDAC has inspected our facility, our process and our records. Our registration number is printed on every label — and you can verify it.',
+                },
+                {
+                  title: 'Local Manufacturing. Real Accountability.',
+                  body: 'We are not a distant brand. We are at 173 Eket-Oron Road. Walk in. Meet our team. See the line.',
+                },
+                {
+                  title: 'Built for Nigerian Life.',
+                  body: 'From the 30cl that pairs with jollof to the 18.9L that anchors an office, every SKU is designed for the way Nigerians actually drink, host and work.',
+                },
+              ].map((pillar) => (
+                <div key={pillar.title}>
+                  <h3 className="font-display text-xl font-semibold text-kayora-ink mb-3">{pillar.title}</h3>
+                  <p className="text-kayora-graphite leading-relaxed">{pillar.body}</p>
+                </div>
+              ))}
+            </div>
+            {/* Right: Trust signals */}
+            <div className="space-y-6">
+              {[
+                {
+                  label: 'NAFDAC Registered',
+                  detail: 'Reg. No. A1-111026',
+                  sub: 'All four pack sizes — 30cl, 50cl, 75cl, 18.9L',
+                },
+                {
+                  label: 'SON MANCAP Registered',
+                  detail: 'FT-29179 · FT-29180',
+                  sub: 'PET bottles and 18.9L polycarbonate dispenser',
+                },
+                {
+                  label: 'Six-Stage Purification',
+                  detail: 'Borehole → Sediment → Carbon → RO → UV → Ozone',
+                  sub: 'Every batch. Every bottle. No exceptions.',
+                },
+                {
+                  label: 'Made in Eket, Akwa Ibom State',
+                  detail: '173 Eket-Oron Road',
+                  sub: 'Nigerian-owned, Nigerian-operated',
+                },
+              ].map((signal) => (
+                <div key={signal.label} className="border border-kayora-mist rounded-xl p-6">
+                  <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">{signal.label}</p>
+                  <p className="font-display text-lg font-semibold text-kayora-ink">{signal.detail}</p>
+                  <p className="text-sm text-kayora-stone mt-1">{signal.sub}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <CTASection
-        variant="blue"
-        headline="For Distributors — Carry the Standard"
-        body="Kayora is actively recruiting distributors across Akwa Ibom and neighbouring states. Strong margins. Reliable supply. Marketing support. And a brand customers already trust."
-        primaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-      />
-
-      {/* Closing CTA */}
-      <section className="bg-kayora-cream py-[clamp(3rem,6vw,6rem)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display text-display-md text-kayora-ink mb-4">Ready to order?</h2>
-          <p className="text-kayora-graphite leading-relaxed mb-8 max-w-[65ch] mx-auto">
-            Call us on{' '}
-            <a href="tel:+2349040789918" className="font-semibold text-kayora-blue-700 hover:underline">
-              0904 078 9918
-            </a>{' '}
-            or email{' '}
-            <a href="mailto:info@kaybibeverage.com" className="font-semibold text-kayora-blue-700 hover:underline">
-              info@kaybibeverage.com
-            </a>
-            . We respond within hours and deliver within days.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-kayora-cream font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2"
-          >
-            Contact Us
-          </Link>
+      {/* Section 5 — For Distributors */}
+      <section className="bg-kayora-blue-900 py-[clamp(6rem,10vw,10rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-4">
+              For Distributors
+            </p>
+            <h2 className="font-display text-display-md text-kayora-cream mb-6">
+              Carry the Standard.<br />Build a Business.
+            </h2>
+            <p className="text-kayora-cream/80 leading-relaxed mb-4 max-w-[65ch]">
+              Kayora is actively recruiting distributors across Akwa Ibom and neighbouring states. Strong margins. Reliable supply. Marketing support. And a brand customers already trust.
+            </p>
+            <p className="text-sm text-kayora-cream/60 mb-10">
+              Currently supplying: Eket · Uyo · Ikot Ekpene · Oron · wider Akwa Ibom State
+              {' — '}
+              <Link href="/distribution" className="text-kayora-cream/80 hover:text-kayora-cream underline underline-offset-2 transition-colors">
+                See full delivery details →
+              </Link>
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/distribution"
+                className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-gold-500 text-white font-semibold rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900"
+              >
+                Become a Distributor
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900"
+              >
+                Talk to Our Team
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </>
