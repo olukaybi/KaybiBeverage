@@ -25,7 +25,7 @@ const pillars = [
   },
   {
     title: 'A Brand That Pulls.',
-    body: 'NAFDAC certified, SON MANCAP Registered, and growing recognition across Akwa Ibom. Customers ask for Kayora by name.',
+    body: 'NAFDAC Registered, SON MANCAP Registered, and growing recognition across Akwa Ibom. Customers ask for Kayora by name.',
   },
 ];
 
@@ -36,7 +36,7 @@ const channels = [
   },
   {
     name: 'Wholesalers',
-    desc: 'Businesses that buy in volume and resell to retailers, market traders, or smaller distributors. Our tiered wholesale pricing rewards volume. We offer flexible case minimum requirements and scheduled delivery for high-volume accounts.',
+    desc: 'Businesses that buy in volume and resell to retailers, market traders, or smaller distributors. Our volume pricing model rewards scale. We offer flexible case minimum requirements and scheduled delivery for high-volume accounts.',
   },
   {
     name: 'Event Suppliers',
