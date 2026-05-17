@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     'Kayora water',
     'Kayora premium water Akwa Ibom',
     'buy purified water Eket',
-    'NAFDAC certified water Eket',
+    'NAFDAC Registered water Eket',
     'wholesale water Akwa Ibom',
     'Kayora 18.9L',
     'table water Eket',

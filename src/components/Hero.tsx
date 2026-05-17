@@ -71,14 +71,14 @@ export default function Hero({
             </div>
             {/* Product image column */}
             <div className="flex items-center justify-center order-first lg:order-last">
-              <div className="relative bg-kayora-cream rounded-3xl p-8 shadow-2xl w-72 h-[26rem] sm:w-80 sm:h-[30rem] flex items-center justify-center">
+              <div className="relative w-full h-[480px] sm:h-[560px] lg:h-[640px]">
                 <Image
                   src={productImageSrc}
                   alt={imageAlt}
                   fill
                   priority
-                  className="object-contain p-8"
-                  sizes="(min-width: 1024px) 35vw, 80vw"
+                  className="object-contain"
+                  sizes="(min-width: 1024px) 45vw, 90vw"
                 />
               </div>
             </div>
