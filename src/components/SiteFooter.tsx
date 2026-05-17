@@ -34,15 +34,14 @@ const socialLinks = [
 ];
 
 const productLinks = [
-  { label: '30cl — Sharp-sharp', href: '/shop' },
-  { label: '50cl — Original', href: '/shop' },
-  { label: '75cl — Jara', href: '/shop' },
-  { label: '18.9L — Never Finish', href: '/shop' },
+  { label: '30cl — Sharp-sharp', href: '/our-water' },
+  { label: '50cl — Original', href: '/our-water' },
+  { label: '75cl — Jara', href: '/our-water' },
+  { label: '18.9L — Never Finish', href: '/our-water' },
 ];
 
 const orderLinks = [
-  { label: 'Order online', href: '/shop' },
-  { label: 'Subscribe (18.9L)', href: '/shop' },
+  { label: 'Order Kayora', href: '/contact' },
   { label: 'Bulk / event orders', href: '/contact' },
   { label: 'Become a distributor', href: '/distribution' },
 ];
@@ -176,6 +175,14 @@ export default function SiteFooter() {
               </li>
               <li className="mt-4">
                 <Link
+                  href="/authentic"
+                  className="text-sm text-kayora-cream/70 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
+                >
+                  Verify Authenticity
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/about"
                   className="text-sm text-kayora-cream/70 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
                 >
@@ -197,9 +204,17 @@ export default function SiteFooter() {
 
       {/* Bottom strip */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-kayora-cream/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-kayora-cream/50">
           <span>&copy; {year} Kaybi Beverage Industries Limited. All rights reserved.</span>
-          <span>Purified to the Highest Standard. Safe for Every Table.</span>
+          <div className="flex items-center gap-4">
+            <Link href="/legal" className="hover:text-kayora-cream/80 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-kayora-blue-500 rounded-sm">
+              Privacy &amp; Terms
+            </Link>
+            <Link href="/authentic" className="hover:text-kayora-cream/80 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-kayora-blue-500 rounded-sm">
+              Verify Authenticity
+            </Link>
+            <span>NAFDAC Reg. A1-111026</span>
+          </div>
         </div>
       </div>
     </footer>
