@@ -158,10 +158,10 @@ export default function SiteFooter() {
             </ul>
           </div>
 
-          {/* Column 4: Legal / Certifications */}
+          {/* Column 4: Certifications + Legal */}
           <div>
             <h2 className="text-eyebrow uppercase tracking-widest text-kayora-cream/50 mb-4">Certifications</h2>
-            <ul className="space-y-3 text-sm text-kayora-cream/80">
+            <ul className="space-y-3 text-sm text-kayora-cream/80 mb-8">
               <li>
                 <span className="font-semibold text-kayora-cream">NAFDAC Reg.</span>{' '}
                 A1-111026
@@ -173,7 +173,7 @@ export default function SiteFooter() {
                 <br />
                 <span className="text-kayora-cream/60 text-xs">FT-29180 (18.9L)</span>
               </li>
-              <li className="mt-4">
+              <li>
                 <Link
                   href="/authentic"
                   className="text-sm text-kayora-cream/70 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
@@ -181,22 +181,23 @@ export default function SiteFooter() {
                   Verify Authenticity
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-sm text-kayora-cream/70 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
-                >
-                  About Kaybi Beverage Industries
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/distribution"
-                  className="text-sm text-kayora-cream/70 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
-                >
-                  Become a Distributor
-                </Link>
-              </li>
+            </ul>
+            <h2 className="text-eyebrow uppercase tracking-widest text-kayora-cream/50 mb-4">Legal</h2>
+            <ul className="space-y-2">
+              {[
+                { label: 'IP & Legal Notices', href: '/legal' },
+                { label: 'Terms of Use', href: '/terms' },
+                { label: 'Privacy Policy', href: '/privacy' },
+              ].map(({ label, href }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-kayora-cream/70 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -204,11 +205,21 @@ export default function SiteFooter() {
 
       {/* Bottom strip */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-kayora-cream/50">
-          <span>&copy; {year} Kaybi Beverage Industries Limited. All rights reserved.</span>
-          <div className="flex items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-3 text-xs text-kayora-cream/50">
+          <p className="leading-relaxed">
+            Kayora&reg; and the Kayora logo are registered trademarks of Kaybi Beverage Industries Limited.
+            &copy; {year} Kaybi Beverage Industries Limited. All rights reserved.
+            All content and imagery on this website is proprietary and may not be reproduced, distributed, or used without written permission.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <Link href="/legal" className="hover:text-kayora-cream/80 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-kayora-blue-500 rounded-sm">
-              Privacy &amp; Terms
+              IP &amp; Legal Notices
+            </Link>
+            <Link href="/terms" className="hover:text-kayora-cream/80 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-kayora-blue-500 rounded-sm">
+              Terms of Use
+            </Link>
+            <Link href="/privacy" className="hover:text-kayora-cream/80 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-kayora-blue-500 rounded-sm">
+              Privacy Policy
             </Link>
             <Link href="/authentic" className="hover:text-kayora-cream/80 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-kayora-blue-500 rounded-sm">
               Verify Authenticity

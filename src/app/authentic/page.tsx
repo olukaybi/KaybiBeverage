@@ -2,11 +2,34 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Verify Authenticity | Kayora Water',
+  title: 'Verify Genuine Kayora — Authenticity Check',
   description:
-    'How to verify that your Kayora water is genuine — NAFDAC registration number A1-111026, SON MANCAP numbers, and what authentic Kayora packaging looks like.',
+    'How to confirm that the Kayora® bottle in your hand is genuine — tamper seal, NAFDAC registration A1-111026, batch code, label, and barcode checks.',
   alternates: { canonical: 'https://www.kayorawater.com/authentic' },
 };
+
+const checklist = [
+  {
+    title: 'The tamper-evident seal.',
+    body: 'Every genuine Kayora bottle is sealed at the plant. If the cap band has separated, the seal is broken, or the cap turns freely without resistance, do not consume it.',
+  },
+  {
+    title: 'The NAFDAC registration number.',
+    body: 'Genuine Kayora carries NAFDAC Registration Number A1-111026. If the number is missing, different, or illegible, treat the product as suspect.',
+  },
+  {
+    title: 'The batch and production code.',
+    body: 'Every batch is coded. A genuine bottle has a clear production date and batch code on the shoulder of the bottle — not smudged, not absent.',
+  },
+  {
+    title: 'The label.',
+    body: 'The Kayora label is crisp, correctly spelled, with the registered logo, "Premium Purified Water", and the correct size (30cl, 50cl, 75cl, or 18.9L). Blurry printing, misspellings, or colour that looks off are warning signs.',
+  },
+  {
+    title: 'The barcode and QR code.',
+    body: 'Genuine Kayora bottles carry a barcode and QR code. A missing or non-functioning code is a red flag.',
+  },
+];
 
 export default function AuthenticPage() {
   return (
@@ -14,119 +37,83 @@ export default function AuthenticPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-14">
           <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
             Authenticity
           </p>
           <h1 className="font-display text-display-md text-kayora-ink mb-6">
-            How to Verify Your Kayora Water
+            How to Know You Have Genuine Kayora
           </h1>
           <p className="text-lg text-kayora-graphite leading-relaxed max-w-[60ch]">
-            Kayora is NAFDAC Registered. Our registration number is printed on every label and can be independently verified. Here is exactly how to check.
+            The Nigerian packaged-water market has a counterfeiting problem. Kayora is built to be verifiable. Here is exactly how to confirm that the bottle in your hand is genuine Kayora, produced at our Eket facility.
           </p>
         </div>
 
-        {/* Registration numbers */}
-        <div className="bg-kayora-blue-900 rounded-2xl p-8 mb-10">
-          <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-6">
-            Our Registration Numbers
-          </p>
-          <div className="space-y-6">
-            <div>
-              <p className="text-xs uppercase tracking-widest text-kayora-cream/50 mb-1">NAFDAC Registration</p>
-              <p className="font-display text-3xl font-bold text-kayora-cream tracking-tight">A1-111026</p>
-              <p className="text-kayora-cream/60 text-sm mt-1">
-                Valid through April 2031. Covers all four pack sizes — 30cl, 50cl, 75cl, 18.9L.
-              </p>
-            </div>
-            <div className="border-t border-white/10 pt-6">
-              <p className="text-xs uppercase tracking-widest text-kayora-cream/50 mb-2">SON MANCAP Registration</p>
-              <div className="space-y-1">
-                <div className="flex items-baseline gap-3">
-                  <span className="font-display font-semibold text-kayora-cream">FT-29179</span>
-                  <span className="text-sm text-kayora-cream/70">PET bottles — 30cl, 50cl, 75cl</span>
-                </div>
-                <div className="flex items-baseline gap-3">
-                  <span className="font-display font-semibold text-kayora-cream">FT-29180</span>
-                  <span className="text-sm text-kayora-cream/70">18.9L polycarbonate dispenser bottle</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* How to verify */}
-        <div className="mb-10">
-          <h2 className="font-display text-display-sm text-kayora-ink mb-6">How to Verify on the NAFDAC Portal</h2>
+        {/* Five-point checklist */}
+        <div className="mb-12">
+          <h2 className="font-display text-xl font-semibold text-kayora-ink mb-6">Five Things to Check</h2>
           <ol className="space-y-5">
-            {[
-              {
-                step: '1',
-                text: 'Visit the NAFDAC product registration portal at nafdac.gov.ng or the NAFDAC e-portal.',
-              },
-              {
-                step: '2',
-                text: 'Select "Product Search" or "Verify Registration."',
-              },
-              {
-                step: '3',
-                text: 'Enter the registration number A1-111026 and search.',
-              },
-              {
-                step: '4',
-                text: 'The result will show Kaybi Beverage Industries Limited as the registrant, the product category, and the registration validity period.',
-              },
-            ].map(({ step, text }) => (
-              <li key={step} className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-kayora-blue-900 text-kayora-cream font-display font-semibold text-sm flex items-center justify-center">
-                  {step}
+            {checklist.map(({ title, body }, i) => (
+              <li key={title} className="flex gap-4">
+                <span className="flex-shrink-0 w-9 h-9 rounded-full bg-kayora-blue-900 text-kayora-cream font-display font-semibold text-sm flex items-center justify-center">
+                  {i + 1}
                 </span>
-                <p className="text-kayora-graphite leading-relaxed pt-1">{text}</p>
+                <div className="pt-1">
+                  <p className="font-semibold text-kayora-ink mb-1">{title}</p>
+                  <p className="text-kayora-graphite leading-relaxed">{body}</p>
+                </div>
               </li>
             ))}
           </ol>
         </div>
 
-        {/* What authentic Kayora looks like */}
-        <div className="bg-white border border-kayora-mist rounded-2xl p-8 mb-10">
-          <h2 className="font-display text-xl font-semibold text-kayora-ink mb-5">What Genuine Kayora Packaging Looks Like</h2>
-          <ul className="space-y-3 text-kayora-graphite">
-            {[
-              'The NAFDAC registration number A1-111026 is printed on every label — on the bottle, not just the cap.',
-              'The tamper-evident seal on the cap is intact and has not been punctured or re-sealed.',
-              'The label shows "Kayora" prominently with the Kaybi Beverage Industries name and our Eket address.',
-              'On the 18.9L dispenser, the neck seal is intact and the cap is clearly marked.',
-              'The water is colourless, odourless and tastes clean — no plastic, no chemical aftertaste.',
-            ].map((item) => (
-              <li key={item} className="flex gap-3">
-                <span className="flex-shrink-0 text-kayora-gold-500 mt-0.5">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </span>
-                <span className="leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Report concern */}
-        <div className="bg-kayora-cream border border-kayora-mist rounded-2xl p-8 mb-10">
-          <h2 className="font-display text-xl font-semibold text-kayora-ink mb-3">
-            Found a Suspect Product?
-          </h2>
-          <p className="text-kayora-graphite leading-relaxed mb-5">
-            If you have purchased a bottle claiming to be Kayora that does not match the above — missing registration number, broken seal, questionable taste — please contact us immediately. We take counterfeiting seriously and will work with NAFDAC where necessary.
+        {/* NAFDAC registration callout */}
+        <div className="bg-kayora-blue-900 rounded-2xl p-8 mb-10">
+          <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-4">
+            NAFDAC Registration
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 bg-kayora-blue-900 text-kayora-cream font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
-          >
-            Contact Our Team &rarr;
-          </Link>
+          <p className="font-display text-3xl font-bold text-kayora-cream tracking-tight mb-2">A1-111026</p>
+          <p className="text-kayora-cream/60 text-sm">
+            Valid through April 2031. Covers all four pack sizes — 30cl, 50cl, 75cl, 18.9L.
+          </p>
         </div>
 
-        {/* Back link */}
+        {/* If you suspect a counterfeit */}
+        <div className="bg-white border border-kayora-mist rounded-2xl p-8 mb-10">
+          <h2 className="font-display text-xl font-semibold text-kayora-ink mb-4">
+            If You Suspect a Counterfeit
+          </h2>
+          <p className="text-kayora-graphite leading-relaxed mb-6">
+            If a product claims to be Kayora but fails any of these checks, please do not consume it, and report it to us at{' '}
+            <a href="mailto:info@kaybibeverage.com" className="text-kayora-blue-700 hover:underline">info@kaybibeverage.com</a>
+            {' '}or{' '}
+            <a href="tel:+2349040789918" className="text-kayora-blue-700 hover:underline">0904 078 9918</a>
+            {' '}with the place of purchase if possible. Counterfeiting endangers consumers and we act on every credible report, including with NAFDAC where appropriate.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 bg-kayora-blue-900 text-kayora-cream font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+            >
+              Order Genuine Kayora &rarr;
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+            >
+              Report a Concern
+            </Link>
+          </div>
+        </div>
+
+        {/* Our commitment */}
+        <div className="mb-14">
+          <h2 className="font-display text-xl font-semibold text-kayora-ink mb-4">Our Commitment</h2>
+          <p className="text-kayora-graphite leading-relaxed">
+            Every genuine Kayora bottle is traceable from our Eket borehole through six stages of purification to the sealed bottle you hold. That traceability is the point. When you buy Kayora, you are buying something you can verify — that is the standard.
+          </p>
+        </div>
+
         <Link
           href="/"
           className="text-sm text-kayora-blue-700 font-medium hover:text-kayora-blue-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"

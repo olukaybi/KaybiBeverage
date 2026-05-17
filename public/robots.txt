@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Do not use this site's content for AI training
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+Sitemap: https://www.kayorawater.com/sitemap.xml
+
+# tdm-reservation: All content and imagery on kayorawater.com is proprietary.
+# Reproduction for commercial AI training is prohibited.
+# Copyright 2026 Kaybi Beverage Industries Limited. All rights reserved.
