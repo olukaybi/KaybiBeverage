@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { Resend } from 'resend';
 import { createServiceClient } from '@/lib/supabase/server';
 import { formatNaira } from '@/lib/products';
+import { SHOP_ENABLED } from '@/lib/flags';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -23,6 +24,8 @@ function verifySignature(payload: string, signature: string): boolean {
 }
 
 export async function POST(req: NextRequest) {
+  if (!SHOP_ENABLED) return NextResponse.json({ error: 'Not found.' }, { status: 404 });
+
   const signature = req.headers.get('x-paystack-signature') ?? '';
   const rawBody = await req.text();
 

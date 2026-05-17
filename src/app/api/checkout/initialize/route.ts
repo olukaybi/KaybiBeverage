@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createServiceClient } from '@/lib/supabase/server';
 import { checkRateLimit } from '@/lib/ratelimit';
+import { SHOP_ENABLED } from '@/lib/flags';
 
 const OrderItemSchema = z.object({
   product_sku: z.string().min(1),
@@ -33,6 +34,8 @@ const InitializeSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  if (!SHOP_ENABLED) return NextResponse.json({ error: 'Not found.' }, { status: 404 });
+
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
 
   if (!checkRateLimit(`checkout:${ip}`, 10, 60 * 60 * 1000)) {

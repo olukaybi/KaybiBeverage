@@ -246,7 +246,7 @@ export default function HydrationClient() {
             </p>
 
             <Link
-              href="/shop"
+              href="/contact"
               className="flex items-center justify-center min-h-[48px] w-full bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-xl hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
             >
               Order {result.weeklyPacks} pack{result.weeklyPacks !== 1 ? 's' : ''} of Kayora &rarr;
