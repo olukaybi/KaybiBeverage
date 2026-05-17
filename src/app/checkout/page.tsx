@@ -1,11 +1,28 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useCartStore } from '@/lib/store/cart';
 import { DELIVERY_ZONES, formatNaira, minDeliveryDate } from '@/lib/products';
 import type { DeliveryZoneId } from '@/lib/types';
+
+declare global {
+  interface Window {
+    PaystackPop: {
+      setup(options: {
+        key: string;
+        email: string;
+        amount: number;
+        currency: string;
+        ref: string;
+        metadata?: Record<string, unknown>;
+        onClose: () => void;
+        callback: (response: { reference: string }) => void;
+      }): { openIframe: () => void };
+    };
+  }
+}
 
 function CheckoutForm() {
   const router = useRouter();
@@ -34,53 +51,140 @@ function CheckoutForm() {
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [payMode, setPayMode] = useState<'card' | 'cod' | null>(null);
   const [error, setError] = useState('');
-  const [showComingSoon, setShowComingSoon] = useState(false);
+  const paystackLoaded = useRef(false);
 
   // Redirect if cart is empty
   useEffect(() => {
     if (items.length === 0) router.replace('/shop');
   }, [items, router]);
 
+  // Load Paystack inline script once
+  useEffect(() => {
+    if (paystackLoaded.current) return;
+    const script = document.createElement('script');
+    script.src = 'https://js.paystack.co/v1/inline.js';
+    script.async = true;
+    script.onload = () => { paystackLoaded.current = true; };
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  function buildOrderPayload() {
+    return {
+      customer: {
+        full_name: form.full_name,
+        email: form.email,
+        phone: form.phone,
+      },
+      address: {
+        street_address: form.street_address,
+        city: form.city,
+        lga: form.lga,
+        delivery_zone: zone,
+      },
+      delivery_zone: zone,
+      delivery_fee_naira: deliveryFee,
+      subtotal_naira: subtotal,
+      total_naira: total,
+      customer_notes: form.notes,
+      scheduled_delivery_date: form.delivery_date,
+      items: items.map((i) => ({
+        product_sku: i.sku,
+        product_name: i.display_name,
+        quantity: i.quantity,
+        unit_price_naira: i.price_naira,
+        line_total_naira: i.price_naira * i.quantity,
+      })),
+    };
+  }
+
+  async function handlePayWithCard(e: React.FormEvent) {
     e.preventDefault();
     setError('');
     setSubmitting(true);
+    setPayMode('card');
+
+    try {
+      const res = await fetch('/api/checkout/initialize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildOrderPayload()),
+      });
+
+      const initData = await res.json();
+
+      if (!res.ok) {
+        setError(initData.error ?? 'Something went wrong. Please try again.');
+        setSubmitting(false);
+        return;
+      }
+
+      if (!window.PaystackPop) {
+        setError('Payment provider failed to load. Please refresh and try again.');
+        setSubmitting(false);
+        return;
+      }
+
+      const handler = window.PaystackPop.setup({
+        key: initData.public_key,
+        email: initData.email,
+        amount: initData.amount_kobo,
+        currency: 'NGN',
+        ref: initData.reference,
+        metadata: { order_number: initData.order_number },
+        onClose: () => {
+          setSubmitting(false);
+          setPayMode(null);
+        },
+        callback: async (response) => {
+          try {
+            const verifyRes = await fetch('/api/checkout/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                reference: response.reference,
+                order_id: initData.order_id,
+              }),
+            });
+            const verifyData = await verifyRes.json();
+            if (!verifyRes.ok) {
+              setError(verifyData.error ?? 'Payment verification failed. Call us on 0904 078 9918.');
+              setSubmitting(false);
+              return;
+            }
+            clearCart();
+            router.push(`/order-confirmation/${verifyData.order_number}?paid=true`);
+          } catch {
+            setError('Network error during verification. Call us on 0904 078 9918.');
+            setSubmitting(false);
+          }
+        },
+      });
+
+      handler.openIframe();
+    } catch {
+      setError('Network error. Please check your connection and try again.');
+      setSubmitting(false);
+    }
+  }
+
+  async function handleCOD(e: React.FormEvent) {
+    e.preventDefault();
+    setError('');
+    setSubmitting(true);
+    setPayMode('cod');
 
     try {
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          customer: {
-            full_name: form.full_name,
-            email: form.email,
-            phone: form.phone,
-          },
-          address: {
-            street_address: form.street_address,
-            city: form.city,
-            lga: form.lga,
-            delivery_zone: zone,
-          },
-          delivery_zone: zone,
-          delivery_fee_naira: deliveryFee,
-          subtotal_naira: subtotal,
-          total_naira: total,
-          customer_notes: form.notes,
-          scheduled_delivery_date: form.delivery_date,
-          items: items.map((i) => ({
-            product_sku: i.sku,
-            product_name: i.display_name,
-            quantity: i.quantity,
-            unit_price_naira: i.price_naira,
-            line_total_naira: i.price_naira * i.quantity,
-          })),
-        }),
+        body: JSON.stringify(buildOrderPayload()),
       });
 
       const data = await res.json();
@@ -104,13 +208,6 @@ function CheckoutForm() {
   return (
     <main className="min-h-screen bg-kayora-cream pt-28 pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Coming soon toast */}
-        {showComingSoon && (
-          <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-kayora-blue-900 text-kayora-cream px-6 py-3 rounded-xl shadow-xl text-sm font-medium animate-fade-in">
-            Online payment coming soon — your order is noted and our team will be in touch.
-          </div>
-        )}
-
         <div className="mb-8">
           <Link
             href="/cart"
@@ -120,242 +217,241 @@ function CheckoutForm() {
           </Link>
           <h1 className="font-display text-display-md text-kayora-ink mt-4 mb-2">Checkout</h1>
           <p className="text-kayora-graphite text-sm">
-            Fill in your details and we&rsquo;ll confirm your order and arrange delivery.
+            Fill in your details, then choose to pay by card or arrange payment on delivery.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-            {/* Left: Form fields */}
-            <div className="lg:col-span-2 space-y-8">
+          {/* Left: Form fields */}
+          <div className="lg:col-span-2 space-y-8">
 
-              {/* Contact */}
-              <section className="bg-white border border-kayora-mist rounded-xl p-6">
-                <h2 className="font-display text-lg font-semibold text-kayora-ink mb-5">
-                  Contact details
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="full_name">
-                      Full name *
-                    </label>
-                    <input
-                      id="full_name"
-                      name="full_name"
-                      type="text"
-                      required
-                      value={form.full_name}
-                      onChange={handleChange}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
-                      placeholder="e.g. Uduak Essien"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="email">
-                      Email address *
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={handleChange}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="phone">
-                      Phone / WhatsApp *
-                    </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      required
-                      value={form.phone}
-                      onChange={handleChange}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
-                      placeholder="080 000 0000"
-                    />
-                  </div>
+            {/* Contact */}
+            <section className="bg-white border border-kayora-mist rounded-xl p-6">
+              <h2 className="font-display text-lg font-semibold text-kayora-ink mb-5">Contact details</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="sm:col-span-2">
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="full_name">
+                    Full name *
+                  </label>
+                  <input
+                    id="full_name"
+                    name="full_name"
+                    type="text"
+                    required
+                    value={form.full_name}
+                    onChange={handleChange}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
+                    placeholder="e.g. Uduak Essien"
+                  />
                 </div>
-              </section>
-
-              {/* Delivery */}
-              <section className="bg-white border border-kayora-mist rounded-xl p-6">
-                <h2 className="font-display text-lg font-semibold text-kayora-ink mb-5">
-                  Delivery details
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="street_address">
-                      Street address *
-                    </label>
-                    <input
-                      id="street_address"
-                      name="street_address"
-                      type="text"
-                      required
-                      value={form.street_address}
-                      onChange={handleChange}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
-                      placeholder="House no. / street name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="city">
-                      City / Town *
-                    </label>
-                    <input
-                      id="city"
-                      name="city"
-                      type="text"
-                      required
-                      value={form.city}
-                      onChange={handleChange}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
-                      placeholder="e.g. Eket"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="lga">
-                      LGA
-                    </label>
-                    <input
-                      id="lga"
-                      name="lga"
-                      type="text"
-                      value={form.lga}
-                      onChange={handleChange}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
-                      placeholder="e.g. Eket LGA"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="zone-checkout">
-                      Delivery area *
-                    </label>
-                    <select
-                      id="zone-checkout"
-                      name="zone"
-                      value={zone}
-                      onChange={(e) => setZone(e.target.value as DeliveryZoneId)}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink bg-white focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
-                    >
-                      {DELIVERY_ZONES.filter((z) => z.active).map((z) => (
-                        <option key={z.id} value={z.id}>
-                          {z.display_name} — {formatNaira(z.fee_naira)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="delivery_date">
-                      Preferred delivery date *
-                    </label>
-                    <input
-                      id="delivery_date"
-                      name="delivery_date"
-                      type="date"
-                      required
-                      min={minDate}
-                      value={form.delivery_date}
-                      onChange={handleChange}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink bg-white focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="notes">
-                      Delivery notes (optional)
-                    </label>
-                    <textarea
-                      id="notes"
-                      name="notes"
-                      rows={3}
-                      value={form.notes}
-                      onChange={handleChange}
-                      className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500 resize-none"
-                      placeholder="Any landmark, gate instructions, or special requests"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="email">
+                    Email address *
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
+                    placeholder="you@example.com"
+                  />
                 </div>
-              </section>
-
-              {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
-                  {error}
+                <div>
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="phone">
+                    Phone / WhatsApp *
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    value={form.phone}
+                    onChange={handleChange}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
+                    placeholder="080 000 0000"
+                  />
                 </div>
-              )}
-            </div>
+              </div>
+            </section>
 
-            {/* Right: Summary */}
-            <div className="lg:col-span-1">
-              <div className="bg-white border border-kayora-mist rounded-xl p-6 sticky top-24">
-                <h2 className="font-display text-lg font-semibold text-kayora-ink mb-5">
-                  Order summary
-                </h2>
-
-                <div className="space-y-2 mb-5">
-                  {items.map((item) => (
-                    <div key={item.sku} className="flex justify-between text-sm">
-                      <span className="text-kayora-graphite">
-                        {item.display_name} × {item.quantity}
-                      </span>
-                      <span className="font-medium text-kayora-ink">
-                        {formatNaira(item.price_naira * item.quantity)}
-                      </span>
-                    </div>
-                  ))}
+            {/* Delivery */}
+            <section className="bg-white border border-kayora-mist rounded-xl p-6">
+              <h2 className="font-display text-lg font-semibold text-kayora-ink mb-5">Delivery details</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="sm:col-span-2">
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="street_address">
+                    Street address *
+                  </label>
+                  <input
+                    id="street_address"
+                    name="street_address"
+                    type="text"
+                    required
+                    value={form.street_address}
+                    onChange={handleChange}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
+                    placeholder="House no. / street name"
+                  />
                 </div>
-
-                <div className="border-t border-kayora-mist pt-4 space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-kayora-graphite">Subtotal</span>
-                    <span className="font-medium">{formatNaira(subtotal)}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-kayora-graphite">Delivery</span>
-                    <span className="font-medium">{formatNaira(deliveryFee)}</span>
-                  </div>
-                  <div className="flex justify-between text-base font-semibold pt-2 border-t border-kayora-mist">
-                    <span>Total</span>
-                    <span>{formatNaira(total)}</span>
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="city">
+                    City / Town *
+                  </label>
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    required
+                    value={form.city}
+                    onChange={handleChange}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
+                    placeholder="e.g. Eket"
+                  />
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="lga">
+                    LGA
+                  </label>
+                  <input
+                    id="lga"
+                    name="lga"
+                    type="text"
+                    value={form.lga}
+                    onChange={handleChange}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
+                    placeholder="e.g. Eket LGA"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="zone-checkout">
+                    Delivery area *
+                  </label>
+                  <select
+                    id="zone-checkout"
+                    name="zone"
+                    value={zone}
+                    onChange={(e) => setZone(e.target.value as DeliveryZoneId)}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink bg-white focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
+                  >
+                    {DELIVERY_ZONES.filter((z) => z.active).map((z) => (
+                      <option key={z.id} value={z.id}>
+                        {z.display_name} — {formatNaira(z.fee_naira)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="delivery_date">
+                    Preferred delivery date *
+                  </label>
+                  <input
+                    id="delivery_date"
+                    name="delivery_date"
+                    type="date"
+                    required
+                    min={minDate}
+                    value={form.delivery_date}
+                    onChange={handleChange}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink bg-white focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="notes">
+                    Delivery notes (optional)
+                  </label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    rows={3}
+                    value={form.notes}
+                    onChange={handleChange}
+                    className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500 resize-none"
+                    placeholder="Any landmark, gate instructions, or special requests"
+                  />
+                </div>
+              </div>
+            </section>
 
-                <div className="mt-6 space-y-3">
-                  {/* Primary CTA: Place order (creates stub, no payment yet) */}
+            {error && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                {error}
+              </div>
+            )}
+          </div>
+
+          {/* Right: Summary + payment */}
+          <div className="lg:col-span-1">
+            <div className="bg-white border border-kayora-mist rounded-xl p-6 sticky top-24">
+              <h2 className="font-display text-lg font-semibold text-kayora-ink mb-5">Order summary</h2>
+
+              <div className="space-y-2 mb-5">
+                {items.map((item) => (
+                  <div key={item.sku} className="flex justify-between text-sm">
+                    <span className="text-kayora-graphite">
+                      {item.display_name} × {item.quantity}
+                    </span>
+                    <span className="font-medium text-kayora-ink">
+                      {formatNaira(item.price_naira * item.quantity)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="border-t border-kayora-mist pt-4 space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-kayora-graphite">Subtotal</span>
+                  <span className="font-medium">{formatNaira(subtotal)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-kayora-graphite">Delivery</span>
+                  <span className="font-medium">{formatNaira(deliveryFee)}</span>
+                </div>
+                <div className="flex justify-between text-base font-semibold pt-2 border-t border-kayora-mist">
+                  <span>Total</span>
+                  <span>{formatNaira(total)}</span>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-3">
+                {/* Primary: Pay by card */}
+                <form onSubmit={handlePayWithCard}>
                   <button
                     type="submit"
                     disabled={submitting}
                     className="w-full inline-flex items-center justify-center min-h-[48px] px-5 py-3 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2 disabled:opacity-60"
                   >
-                    {submitting ? 'Placing order…' : 'Place order'}
+                    {submitting && payMode === 'card' ? 'Opening payment…' : 'Pay with card'}
                   </button>
+                </form>
 
-                  {/* Coming soon: online payment */}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowComingSoon(true);
-                      setTimeout(() => setShowComingSoon(false), 4000);
-                    }}
-                    className="w-full inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 border-2 border-kayora-blue-900 text-kayora-blue-900 text-sm font-semibold rounded-lg hover:bg-kayora-blue-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
-                  >
-                    Pay online (coming soon)
-                  </button>
+                <div className="flex items-center gap-2 text-kayora-stone text-xs">
+                  <hr className="flex-1 border-kayora-mist" />
+                  <span>or</span>
+                  <hr className="flex-1 border-kayora-mist" />
                 </div>
 
-                <p className="mt-4 text-xs text-kayora-stone text-center leading-relaxed">
-                  After placing your order, our team will confirm via WhatsApp or phone and arrange payment.
-                </p>
+                {/* Secondary: COD / bank transfer */}
+                <form onSubmit={handleCOD}>
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 border border-kayora-blue-900 text-kayora-blue-900 text-sm font-semibold rounded-lg hover:bg-kayora-blue-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 disabled:opacity-60"
+                  >
+                    {submitting && payMode === 'cod' ? 'Placing order…' : 'Place order — pay later'}
+                  </button>
+                </form>
               </div>
+
+              <p className="mt-4 text-xs text-kayora-stone text-center leading-relaxed">
+                Card payments are processed securely via Paystack. &ldquo;Pay later&rdquo; orders are confirmed by our team via call or WhatsApp.
+              </p>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </main>
   );

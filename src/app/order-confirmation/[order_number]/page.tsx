@@ -9,10 +9,14 @@ export const metadata: Metadata = {
 
 export default async function OrderConfirmationPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ order_number: string }>;
+  searchParams: Promise<{ paid?: string }>;
 }) {
   const { order_number } = await params;
+  const { paid } = await searchParams;
+  const isPaid = paid === 'true';
 
   return (
     <main className="min-h-screen bg-kayora-cream flex items-center justify-center px-4 py-20">
@@ -29,7 +33,7 @@ export default async function OrderConfirmationPage({
         </div>
 
         <h1 className="font-display text-display-md text-kayora-ink mb-3">
-          Order placed!
+          {isPaid ? 'Payment confirmed!' : 'Order placed!'}
         </h1>
         <p className="text-kayora-graphite mb-2">
           Your order reference is:
@@ -40,20 +44,37 @@ export default async function OrderConfirmationPage({
 
         <div className="bg-white border border-kayora-mist rounded-2xl p-6 text-left mb-8 space-y-4">
           <h2 className="font-semibold text-kayora-ink">What happens next?</h2>
-          <ol className="space-y-3 text-sm text-kayora-graphite">
-            <li className="flex gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-kayora-blue-100 text-kayora-blue-900 text-xs font-bold flex items-center justify-center">1</span>
-              <span>Our team will review your order and call or WhatsApp you within a few hours to confirm the delivery details.</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-kayora-blue-100 text-kayora-blue-900 text-xs font-bold flex items-center justify-center">2</span>
-              <span>Payment can be made via bank transfer or cash on delivery — our team will advise you on the options.</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-kayora-blue-100 text-kayora-blue-900 text-xs font-bold flex items-center justify-center">3</span>
-              <span>Your Kayora water will be delivered fresh from our Eket facility on your preferred date.</span>
-            </li>
-          </ol>
+          {isPaid ? (
+            <ol className="space-y-3 text-sm text-kayora-graphite">
+              <li className="flex gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-700 text-xs font-bold flex items-center justify-center">✓</span>
+                <span>Payment received. A confirmation email is on its way to you.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-kayora-blue-100 text-kayora-blue-900 text-xs font-bold flex items-center justify-center">2</span>
+                <span>Our team will contact you via WhatsApp or phone to confirm your delivery date and logistics.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-kayora-blue-100 text-kayora-blue-900 text-xs font-bold flex items-center justify-center">3</span>
+                <span>Your Kayora water will be delivered fresh from our Eket facility on your preferred date.</span>
+              </li>
+            </ol>
+          ) : (
+            <ol className="space-y-3 text-sm text-kayora-graphite">
+              <li className="flex gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-kayora-blue-100 text-kayora-blue-900 text-xs font-bold flex items-center justify-center">1</span>
+                <span>Our team will review your order and call or WhatsApp you within a few hours to confirm the delivery details.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-kayora-blue-100 text-kayora-blue-900 text-xs font-bold flex items-center justify-center">2</span>
+                <span>Payment can be made via bank transfer or cash on delivery — our team will advise you on the options.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-kayora-blue-100 text-kayora-blue-900 text-xs font-bold flex items-center justify-center">3</span>
+                <span>Your Kayora water will be delivered fresh from our Eket facility on your preferred date.</span>
+              </li>
+            </ol>
+          )}
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
