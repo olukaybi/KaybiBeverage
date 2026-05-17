@@ -63,7 +63,7 @@ export default function HomePage() {
         eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Six-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
-        primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         productImageSrc="/images/products/kayora-75cl-hero-blue.png"
         imageAlt="Kayora 75cl Jara — Premium Purified Water, front and back"
