@@ -42,8 +42,14 @@ const productLinks = [
 
 const orderLinks = [
   { label: 'Order online', href: '/shop' },
+  { label: 'Subscribe (18.9L)', href: '/shop' },
   { label: 'Bulk / event orders', href: '/contact' },
   { label: 'Become a distributor', href: '/distribution' },
+];
+
+const toolLinks = [
+  { label: 'Hydration Calculator', href: '/tools/hydration' },
+  { label: 'Event Water Estimator', href: '/tools/event-water' },
 ];
 
 export default function SiteFooter() {
@@ -96,8 +102,21 @@ export default function SiteFooter() {
               ))}
             </ul>
             <h2 className="text-eyebrow uppercase tracking-widest text-kayora-cream/50 mb-4">Order</h2>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mb-6">
               {orderLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <Link
+                    href={href}
+                    className="text-sm text-kayora-cream/80 hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <h2 className="text-eyebrow uppercase tracking-widest text-kayora-cream/50 mb-4">Tools</h2>
+            <ul className="space-y-2">
+              {toolLinks.map(({ label, href }) => (
                 <li key={label}>
                   <Link
                     href={href}

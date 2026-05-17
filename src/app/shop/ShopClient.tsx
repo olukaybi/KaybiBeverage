@@ -99,7 +99,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <p className="font-display text-3xl font-bold text-kayora-ink">
           {formatNaira(product.price_naira)}
           <span className="font-sans text-base font-normal text-kayora-stone ml-1">
-            / {product.unit_of_sale}
+            RRP / {product.unit_of_sale}
           </span>
         </p>
 
