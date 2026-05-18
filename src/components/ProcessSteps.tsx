@@ -12,32 +12,42 @@ const steps: Step[] = [
   {
     number: '01',
     title: 'Deep Borehole Source',
-    body: 'Water is drawn from a protected deep borehole, far below the reach of surface contamination. Starting clean means finishing cleaner.',
+    body: 'Water is drawn from a protected deep borehole on our Eket site, far below the reach of surface contamination. Starting clean means finishing cleaner.',
   },
   {
     number: '02',
     title: 'Sediment Filtration',
-    body: 'Multi-layer sediment filters capture suspended particles, fine debris, and sediment before deeper treatment begins.',
+    body: 'Multi-layer sediment filters capture suspended particles, fine debris, sand and silt before deeper treatment begins.',
   },
   {
     number: '03',
     title: 'Activated Carbon Filtration',
-    body: 'Activated carbon adsorption eliminates chlorine, organic compounds, unwanted odours, and taste impurities.',
+    body: 'Activated carbon adsorption strips chlorine, organic compounds, unwanted odours and taste impurities from the water.',
   },
   {
     number: '04',
-    title: 'Reverse Osmosis',
-    body: 'High-pressure RO membranes remove dissolved solids, heavy metals, and residual bacteria to deliver exceptionally pure water.',
+    title: 'Ion Exchange Resin',
+    body: 'An ion exchange resin bed removes dissolved hardness ions and other charged contaminants, conditioning the water and protecting the RO membrane downstream.',
   },
   {
     number: '05',
-    title: 'UV Sterilisation',
-    body: 'Ultraviolet light irradiation destroys any remaining microbial life — without adding chemicals or altering taste.',
+    title: 'Precision Filtration (5µm → 1µm)',
+    body: 'A cascade of progressively finer cartridge filters captures the finest remaining particulates before reverse osmosis — the last mechanical barrier before the membrane.',
   },
   {
     number: '06',
-    title: 'Ozonisation',
-    body: 'A final ozone treatment preserves freshness, extends shelf-life, and ensures the water that reaches your table is clean as it left the plant.',
+    title: 'Reverse Osmosis',
+    body: 'High-pressure RO membranes — with pores measured in fractions of a nanometre — remove dissolved solids, heavy metals and residual microbial contaminants.',
+  },
+  {
+    number: '07',
+    title: 'UV Sterilisation',
+    body: 'High-intensity ultraviolet light at 254 nm destroys the DNA of any remaining bacteria, viruses and protozoa. No chemicals. No taste change. Purely physical.',
+  },
+  {
+    number: '08',
+    title: 'Ozonation',
+    body: 'A final dose of dissolved ozone neutralises anything remaining and persists briefly inside the sealed bottle, providing residual protection until the seal is broken.',
   },
 ];
 
@@ -48,9 +58,9 @@ interface ProcessStepsProps {
 }
 
 export default function ProcessSteps({
-  eyebrow = 'Six-Stage Purification',
+  eyebrow = 'Eight-Stage Purification',
   headline = 'What "Premium" Really Means',
-  intro = 'We don\'t bottle ordinary water and call it premium. Every drop of Kayora moves through six engineered stages before it reaches you.',
+  intro = 'We don\'t bottle ordinary water and call it premium. Every drop of Kayora moves through eight engineered stages before it reaches you.',
 }: ProcessStepsProps) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -69,7 +79,7 @@ export default function ProcessSteps({
         </div>
 
         {/* Steps grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}

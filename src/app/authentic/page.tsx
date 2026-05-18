@@ -110,7 +110,7 @@ export default function AuthenticPage() {
         <div className="mb-14">
           <h2 className="font-display text-xl font-semibold text-kayora-ink mb-4">Our Commitment</h2>
           <p className="text-kayora-graphite leading-relaxed">
-            Every genuine Kayora bottle is traceable from our Eket borehole through six stages of purification to the sealed bottle you hold. That traceability is the point. When you buy Kayora, you are buying something you can verify — that is the standard.
+            Every genuine Kayora bottle is traceable from our Eket borehole through eight stages of purification to the sealed bottle you hold. That traceability is the point. When you buy Kayora, you are buying something you can verify — that is the standard.
           </p>
         </div>
 

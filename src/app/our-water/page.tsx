@@ -3,9 +3,9 @@ import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Our Water — Six-Stage Purification | Kayora',
+  title: 'Our Water — Eight-Stage Purification | Kayora',
   description:
-    'The full story of what is in every bottle of Kayora Premium Purified Water. Six engineered purification stages, NAFDAC Reg. A1-111026, SON MANCAP Registered. Detailed product range.',
+    'The full story of what is in every bottle of Kayora Premium Purified Water. Eight engineered purification stages, NAFDAC Reg. A1-111026, SON MANCAP Registered. Detailed product range.',
   alternates: { canonical: 'https://www.kayorawater.com/our-water' },
 };
 
@@ -13,32 +13,42 @@ const stages = [
   {
     number: '01',
     title: 'Deep Borehole Source',
-    body: 'Water begins its journey in a protected deep borehole, sourced far below the level where surface contaminants — agricultural run-off, faecal matter, dissolved pollutants — typically exist. The borehole is sealed, maintained and tested regularly. Starting clean is non-negotiable.',
+    body: 'Raw water is drawn from a dedicated borehole on our Eket site into stainless steel holding tanks. The borehole is sealed, maintained and tested on every production day before water enters the line. Starting clean is non-negotiable.',
   },
   {
     number: '02',
     title: 'Sediment Filtration',
-    body: 'The water passes through multi-layer sediment filters designed to capture suspended particles, fine debris, sand, silt and other physical impurities. Multiple filter layers with progressively finer porosity ensure that nothing visible or tactile survives this stage.',
+    body: 'A multi-grade sediment filter removes suspended particles — sand, silt, rust, anything mechanical the pipeline might carry. By the time water leaves this stage it is visually crystal clear. This stage also protects every piece of equipment downstream from premature wear.',
   },
   {
     number: '03',
     title: 'Activated Carbon Filtration',
-    body: 'Activated carbon is one of the most effective water treatment media available. At this stage, it adsorbs chlorine (often present in borehole water from geological sources), organic compounds, pesticide residues, and the taste- and odour-causing substances that make water unpleasant even when it is technically safe.',
+    body: 'Activated carbon adsorbs chlorine, residual organic compounds, taste and odour molecules. This is the stage that makes the difference between water that is technically safe and water that is genuinely pleasant to drink — cool, neutral, faintly sweet.',
   },
   {
     number: '04',
-    title: 'Reverse Osmosis',
-    body: 'This is the core technical step. High-pressure reverse osmosis membranes — with pore sizes measured in nanometres — remove dissolved solids, heavy metals (lead, arsenic, mercury), nitrates, pharmaceutical residues, and any bacteria not already captured upstream. RO is the gold standard in water purification and the step that most producers either skip or undersize. We did not.',
+    title: 'Ion Exchange Resin',
+    body: 'The water passes through an ion exchange resin bed that removes dissolved hardness ions and other charged contaminants. This conditions the water, improves the final taste profile, and protects the reverse osmosis membrane downstream from scaling and premature failure.',
   },
   {
     number: '05',
-    title: 'UV Sterilisation',
-    body: 'After RO, the water is exposed to ultraviolet light at precisely calibrated wavelengths. UV irradiation destroys the DNA of any microbial life — bacteria, viruses, protozoa — that may have survived earlier stages. It adds no chemicals, leaves no by-products, and does not alter taste or mineral content. It simply kills what should not be in drinking water.',
+    title: 'Precision Filtration (5µm → 1µm)',
+    body: 'A cascade of cartridge filters takes the water down progressively — five microns, then one micron — capturing the finest remaining particulates. This is the last mechanical barrier before the membrane, and it is what keeps the reverse osmosis stage performing at specification.',
   },
   {
     number: '06',
-    title: 'Ozonisation',
-    body: 'The final stage. Ozone is a naturally occurring, powerful oxidising agent that destroys any remaining organic compounds, provides an additional disinfection layer, and extends shelf-life without the use of artificial preservatives. After ozonisation, the water is sealed immediately. Nothing touches it between the last treatment step and the sealed bottle in your hand.',
+    title: 'Reverse Osmosis',
+    body: 'The water is pushed through a semi-permeable membrane at high pressure. The pores are measured in fractions of a nanometre — fine enough to reject dissolved salts, heavy metals, microbial contaminants and trace organic compounds. The reject stream is flushed. Only the permeate continues.',
+  },
+  {
+    number: '07',
+    title: 'UV Sterilisation',
+    body: 'The water is exposed to high-intensity ultraviolet light at 254 nanometres — the wavelength that disrupts the DNA of bacteria, viruses and protozoa, rendering them incapable of reproducing. No chemicals are added. No taste is altered. The process is purely physical.',
+  },
+  {
+    number: '08',
+    title: 'Ozonation',
+    body: 'A final dose of dissolved ozone is introduced before bottling. Ozone is a powerful oxidiser that neutralises anything that may have slipped through earlier stages — and, critically, it persists briefly inside the sealed bottle, providing residual protection until the seal is broken.',
   },
 ];
 
@@ -125,7 +135,7 @@ export default function OurWaterPage() {
               The Process
             </p>
             <h2 className="font-display text-display-lg text-kayora-ink mb-4">
-              Six Engineered Stages
+              Eight Engineered Stages
             </h2>
             <p className="text-kayora-graphite leading-relaxed max-w-[65ch]">
               These stages are not marketing bullet points. They are sequential, interdependent steps that each address a specific category of contamination. Skipping or underinvesting in any one of them produces an inferior product. We have not skipped any.
@@ -156,10 +166,10 @@ export default function OurWaterPage() {
             <h2 className="font-display text-display-md text-kayora-ink mb-8">Sealed at the Source</h2>
             <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
               <p>
-                After ozonisation, the water moves directly to filling under controlled conditions. The interval between the final treatment step and bottle sealing is measured in seconds, not minutes. Bottles are filled, capped and sealed without manual handling in the fill zone.
+                After ozonation, the water moves directly to filling under controlled conditions. The interval between the final treatment step and bottle sealing is measured in seconds, not minutes. Bottles are filled, capped and sealed without manual handling in the fill zone.
               </p>
               <p>
-                Caps are tamper-evident. Labels are applied immediately after sealing, carrying the batch number, production date and NAFDAC registration. Every bottle that leaves our facility is a traceable unit.
+                Caps are steam-sterilised before capping and are tamper-evident by design. Cap integrity is tested on samples from every batch. Labels are applied immediately after sealing, carrying the batch number, production date and NAFDAC registration. Every bottle that leaves our facility is a traceable unit.
               </p>
               <p>
                 We do not produce water that sits in open tanks. We do not refill bottles that have been returned without sanitisation. Every bottle of Kayora that you open has been sealed since it left our plant.
@@ -178,7 +188,7 @@ export default function OurWaterPage() {
             </p>
             <h2 className="font-display text-display-lg text-kayora-ink mb-4">The Range — In Detail</h2>
             <p className="text-kayora-graphite leading-relaxed max-w-[65ch]">
-              Four sizes. The same water. The same six-stage process. Every unit carries a valid NAFDAC registration number and SON MANCAP registration.
+              Four sizes. The same water. The same eight-stage process. Every unit carries a valid NAFDAC registration number and SON MANCAP registration.
             </p>
           </div>
 
@@ -271,7 +281,7 @@ export default function OurWaterPage() {
 
       <CTASection
         headline="Now You Know What's in the Bottle."
-        body="You can order Kayora for your home, office, event or business directly. We deliver across Akwa Ibom and respond to enquiries within hours."
+        body="You can order Kayora for your home, office, event or business directly. We deliver directly across Akwa Ibom State. Beyond Akwa Ibom, Kayora is available through our distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. We respond to enquiries within hours."
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         variant="blue"

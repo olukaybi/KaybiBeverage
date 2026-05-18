@@ -6,14 +6,14 @@ import DistributorForm from '@/components/DistributorForm';
 export const metadata: Metadata = {
   title: 'Become a Kayora Distributor | Kayora Water',
   description:
-    'Join the Kayora distribution network across Akwa Ibom and neighbouring states. Strong margins, reliable supply, marketing support. NAFDAC Reg. A1-111026. SON MANCAP Registered.',
+    'Join the Kayora distribution network across Akwa Ibom and our live South-South and South-East states. Attractive rebates, reliable supply, marketing support. NAFDAC Reg. A1-111026. SON MANCAP Registered.',
   alternates: { canonical: 'https://www.kayorawater.com/distribution' },
 };
 
 const pillars = [
   {
-    title: 'Margins That Make Sense.',
-    body: 'Distributor pricing is structured to give you genuine room on every case — not the thin margins that make table water a volume-only game.',
+    title: 'Attractive Rebates and Incentives.',
+    body: 'Distributor terms are structured to reward growth — meaningful rebates on volume, performance incentives, and a partnership model designed for serious operators.',
   },
   {
     title: 'Supply You Can Count On.',
@@ -25,7 +25,7 @@ const pillars = [
   },
   {
     title: 'A Brand That Pulls.',
-    body: 'NAFDAC Registered, SON MANCAP Registered, and growing recognition across Akwa Ibom. Customers ask for Kayora by name.',
+    body: 'NAFDAC Registered, SON MANCAP Registered, and growing recognition across Akwa Ibom and the South-South and South-East. Customers ask for Kayora by name.',
   },
 ];
 
@@ -77,7 +77,7 @@ export default function DistributionPage() {
       <Hero
         eyebrow="Distribution Network"
         headline={'Carry the Standard.\nBuild a Business.'}
-        subhead="Kayora is recruiting distributors across Akwa Ibom and neighbouring states. Strong margins, dependable supply, real marketing support — and a brand customers already trust."
+        subhead="Kayora is recruiting distributors across Akwa Ibom and our live South-South and South-East states — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives, dependable supply, real marketing support — and a brand customers already trust."
         primaryCTA={{ label: 'Apply to Distribute', href: '#apply' }}
         secondaryCTA={{ label: 'Talk to Our Team', href: '/contact' }}
         imageSrc="/images/factory/factory-03.jpg"
@@ -102,13 +102,13 @@ export default function DistributionPage() {
               Where We Operate
             </h2>
             <p className="text-kayora-graphite leading-relaxed max-w-[65ch]">
-              We currently serve Akwa Ibom State and are actively expanding into neighbouring states. If your location is not listed below, contact us — we may still be able to work together.
+              We deliver directly across Akwa Ibom State. Beyond Akwa Ibom, Kayora is available today through our distributor network — live distribution, not a roadmap. If you can move volume in or beyond these areas, we want to hear from you.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl">
             <div className="border border-kayora-mist rounded-xl p-6">
-              <h3 className="font-display text-lg font-semibold text-kayora-ink mb-4">Currently Serving</h3>
+              <h3 className="font-display text-lg font-semibold text-kayora-ink mb-4">Direct Delivery — Akwa Ibom</h3>
               <ul className="space-y-2 text-kayora-graphite text-sm">
                 {['Eket (HQ)', 'Uyo', 'Ikot Ekpene', 'Oron', 'Abak', 'Itu', 'Wider Akwa Ibom State'].map((place) => (
                   <li key={place} className="flex items-center gap-2">
@@ -119,18 +119,25 @@ export default function DistributionPage() {
               </ul>
             </div>
             <div className="border border-kayora-mist rounded-xl p-6 bg-kayora-blue-100">
-              <h3 className="font-display text-lg font-semibold text-kayora-ink mb-4">Expanding Into</h3>
+              <h3 className="font-display text-lg font-semibold text-kayora-ink mb-4">Via Distributor Network</h3>
               <ul className="space-y-2 text-kayora-graphite text-sm">
-                {['Cross River State', 'Rivers State', 'Abia State', 'Edo State'].map((place) => (
+                {[
+                  'Cross River State',
+                  'Rivers State',
+                  'Bayelsa State',
+                  'Delta State',
+                  'Edo State',
+                  'Enugu State',
+                  'Anambra State',
+                  'Abia State',
+                  'Imo State',
+                ].map((place) => (
                   <li key={place} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-kayora-blue-500 shrink-0" aria-hidden="true" />
                     {place}
                   </li>
                 ))}
               </ul>
-              <p className="text-kayora-stone text-xs mt-4">
-                Expansion territories — contact us to register early interest.
-              </p>
             </div>
           </div>
         </div>
