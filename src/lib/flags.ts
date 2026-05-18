@@ -5,3 +5,11 @@
  * Set to "true" only in preview/staging deployments for QA.
  */
 export const SHOP_ENABLED = process.env.NEXT_PUBLIC_SHOP_ENABLED === 'true';
+
+/**
+ * NEXT_PUBLIC_LEGAL_ENABLED controls the Sprint 3 legal/IP pages.
+ * Unset (production default) → /legal, /terms, /privacy, /authentic
+ * return true 404s until Sprint 3 ships and attorney review is complete.
+ * Set to "true" only in preview/staging deployments for Sprint 3 QA.
+ */
+export const LEGAL_ENABLED = process.env.NEXT_PUBLIC_LEGAL_ENABLED === 'true';
