@@ -7,7 +7,7 @@ import ProcessSteps from '@/components/ProcessSteps';
 export const metadata: Metadata = {
   title: 'Kayora Premium Purified Water | NAFDAC Registered · Eket, Akwa Ibom',
   description:
-    'Kayora — six-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Registered, proudly produced in Eket, Akwa Ibom. Pure, crisp hydration for homes, offices, events and distribution.',
+    'Kayora — eight-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Registered, proudly produced in Eket, Akwa Ibom. Pure, crisp hydration for homes, offices, events and distribution.',
   alternates: { canonical: 'https://www.kayorawater.com/' },
 };
 
@@ -62,7 +62,7 @@ export default function HomePage() {
         leadBrand
         eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
-        subhead="Six-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
+        subhead="Eight-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         productImageSrc="/images/products/kayora-75cl-hero-blue.png"
@@ -83,12 +83,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Section 3 — Six-Stage Process */}
-      <ProcessSteps
-        eyebrow="Six-Stage Purification"
-        headline='What "Premium" Really Means'
-        intro="We don't bottle ordinary water and call it premium. Every drop of Kayora moves through six engineered stages before it reaches you."
-      />
+      {/* Section 3 — Eight-Stage Process */}
+      <ProcessSteps />
 
       {/* Section 4 — The Standard */}
       <section className="bg-white py-[clamp(6rem,10vw,10rem)]">
@@ -136,8 +132,8 @@ export default function HomePage() {
                   sub: 'PET bottles and 18.9L polycarbonate dispenser',
                 },
                 {
-                  label: 'Six-Stage Purification',
-                  detail: 'Borehole → Sediment → Carbon → RO → UV → Ozone',
+                  label: 'Eight-Stage Purification',
+                  detail: 'Borehole → Sediment → Carbon → Ion Exchange → Precision → RO → UV → Ozonation',
                   sub: 'Every batch. Every bottle. No exceptions.',
                 },
                 {
@@ -168,11 +164,10 @@ export default function HomePage() {
               Carry the Standard.<br />Build a Business.
             </h2>
             <p className="text-kayora-cream/80 leading-relaxed mb-4 max-w-[65ch]">
-              Kayora is actively recruiting distributors across Akwa Ibom and neighbouring states. Strong margins. Reliable supply. Marketing support. And a brand customers already trust.
+              Kayora is actively recruiting distributors across Akwa Ibom and our live South-South and South-East states — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives. Reliable supply. Marketing support. And a brand customers already trust.
             </p>
             <p className="text-sm text-kayora-cream/60 mb-10">
-              Currently supplying: Eket · Uyo · Ikot Ekpene · Oron · wider Akwa Ibom State
-              {' — '}
+              Direct delivery across Akwa Ibom State · Distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo{' — '}
               <Link href="/distribution" className="text-kayora-cream/80 hover:text-kayora-cream underline underline-offset-2 transition-colors">
                 See full delivery details →
               </Link>

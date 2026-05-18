@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient, createServiceClient } from '@/lib/supabase/server';
+import { SHOP_ENABLED } from '@/lib/flags';
 
 const BodySchema = z.object({
   status: z.enum(['pending_payment', 'paid', 'scheduled', 'dispatched', 'delivered', 'cancelled']),
@@ -10,6 +11,8 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!SHOP_ENABLED) return NextResponse.json({ error: 'Not found.' }, { status: 404 });
+
   const { id } = await params;
 
   // Verify admin session

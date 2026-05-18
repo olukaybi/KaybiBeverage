@@ -39,7 +39,7 @@ export default function AboutPage() {
                 In too many parts of Nigeria, &ldquo;table water&rdquo; is a category defined by what people are willing to overlook — packaging that bursts, seals that aren&rsquo;t sealed, certifications that don&rsquo;t exist. Families pay anyway, because the alternatives are worse. We disagreed with the premise.
               </p>
               <p>
-                Kaybi Beverage Industries Limited was incorporated with a single operating principle: every bottle that leaves our Eket facility must be something we would hand to our own family, without hesitation. That principle shapes everything from our borehole depth to our ozonisation step to the way we seal and label each unit.
+                Kaybi Beverage Industries Limited was incorporated with a single operating principle: every bottle that leaves our Eket facility must be something we would hand to our own family, without hesitation. That principle shapes everything from our borehole depth to our ozonation step to the way we seal and label each unit.
               </p>
               <p>
                 We are not a large conglomerate. We are a focused manufacturing company, producing one product line with exceptional care. We think that focus is a feature, not a limitation.

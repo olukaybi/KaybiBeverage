@@ -2,7 +2,7 @@ export default function TrustStrip() {
   const items = [
     'NAFDAC Reg. A1-111026',
     'SON MANCAP Registered',
-    'Six-Stage Purification',
+    'Eight-Stage Purification',
     'Proudly Made in Eket',
   ];
 

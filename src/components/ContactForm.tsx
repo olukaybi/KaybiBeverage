@@ -50,7 +50,6 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      console.log('Contact form payload:', data);
       setSubmitState(res.ok ? 'success' : 'error');
     } catch {
       setSubmitState('error');

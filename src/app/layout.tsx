@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: '%s | Kayora Water',
   },
   description:
-    'Kayora Premium Purified Water — six-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Registered, proudly produced in Eket, Akwa Ibom. Pure, crisp hydration for homes, offices, events and distribution.',
+    'Kayora Premium Purified Water — eight-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Registered, proudly produced in Eket, Akwa Ibom. Pure, crisp hydration for homes, offices, events and distribution.',
   keywords: [
     'Kayora water',
     'Kayora premium water Akwa Ibom',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: 'Kayora Premium Purified Water',
     title: 'Kayora Premium Purified Water — Purified to the Highest Standard. Safe for Every Table.',
     description:
-      'Six-stage purified water crafted at our Eket, Akwa Ibom facility. NAFDAC Registered A1-111026. SON MANCAP Registered. 30cl · 50cl · 75cl · 18.9L.',
+      'Eight-stage purified water crafted at our Eket, Akwa Ibom facility. NAFDAC Registered A1-111026. SON MANCAP Registered. 30cl · 50cl · 75cl · 18.9L.',
     url: 'https://www.kayorawater.com/',
     locale: 'en_NG',
   },
@@ -70,7 +70,7 @@ const jsonLd = {
       url: 'https://www.kayorawater.com',
       logo: 'https://www.kayorawater.com/images/logo/kayora-logo.png',
       description:
-        'Manufacturer of Kayora Premium Purified Water, six-stage purified table water produced in Eket, Akwa Ibom State, Nigeria.',
+        'Manufacturer of Kayora Premium Purified Water, eight-stage purified table water produced in Eket, Akwa Ibom State, Nigeria.',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '173 Eket-Oron Road',

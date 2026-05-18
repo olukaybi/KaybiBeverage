@@ -49,7 +49,6 @@ export default function DistributorForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      console.log('Distributor application payload:', data);
       setSubmitState(res.ok ? 'success' : 'error');
     } catch {
       setSubmitState('error');
