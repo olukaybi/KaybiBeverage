@@ -19,7 +19,7 @@ const schema = z.object({
     'Something else',
   ]),
   message: z.string().min(10).max(2000).trim(),
-  _hp: z.string().max(0).optional(),
+  _hp: z.string().optional(),
 });
 
 function hashEmail(email: string): string {
@@ -116,20 +116,20 @@ ${message}
 ---
 Reply-To is set to the submitter's address.`;
 
-  try {
-    await resend.emails.send({
-      from: 'Kayora Water <noreply@kayorawater.com>',
-      to: 'info@kaybibeverage.com',
-      replyTo: email,
-      subject: `[Kayora] Contact form — ${subject}`,
-      html: htmlBody,
-      text: textBody,
-    });
+  const { error: sendError } = await resend.emails.send({
+    from: 'Kayora Water <noreply@kayorawater.com>',
+    to: 'info@kaybibeverage.com',
+    replyTo: email,
+    subject: `[Kayora] Contact form — ${subject}`,
+    html: htmlBody,
+    text: textBody,
+  });
 
-    console.log(`[contact-message] sent ok email=${hashEmail(email)}`);
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error(`[contact-message] send failed email=${hashEmail(email)}`, err);
+  if (sendError) {
+    console.error(`[contact-message] send failed email=${hashEmail(email)}`, sendError);
     return NextResponse.json({ error: 'Email delivery failed.' }, { status: 500 });
   }
+
+  console.log(`[contact-message] sent ok email=${hashEmail(email)}`);
+  return NextResponse.json({ success: true });
 }

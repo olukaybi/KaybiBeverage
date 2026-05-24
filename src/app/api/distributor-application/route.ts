@@ -19,7 +19,7 @@ const schema = z.object({
   monthlyVolume: z.string().min(1).max(200).trim(),
   yearsInBusiness: z.string().max(100).optional(),
   anythingElse: z.string().max(2000).optional(),
-  _hp: z.string().max(0).optional(),
+  _hp: z.string().optional(),
 });
 
 function hashEmail(email: string): string {
@@ -142,20 +142,20 @@ ${anythingElse || '(none provided)'}
 ---
 Reply-To is set to the applicant's address.`;
 
-  try {
-    await resend.emails.send({
-      from: 'Kayora Water <noreply@kayorawater.com>',
-      to: 'info@kaybibeverage.com',
-      replyTo: email,
-      subject: `[Kayora] Distributor application — ${fullName}, ${state}`,
-      html: htmlBody,
-      text: textBody,
-    });
+  const { error: sendError } = await resend.emails.send({
+    from: 'Kayora Water <noreply@kayorawater.com>',
+    to: 'info@kaybibeverage.com',
+    replyTo: email,
+    subject: `[Kayora] Distributor application — ${fullName}, ${state}`,
+    html: htmlBody,
+    text: textBody,
+  });
 
-    console.log(`[distributor-application] sent ok email=${hashEmail(email)}`);
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error(`[distributor-application] send failed email=${hashEmail(email)}`, err);
+  if (sendError) {
+    console.error(`[distributor-application] send failed email=${hashEmail(email)}`, sendError);
     return NextResponse.json({ error: 'Email delivery failed.' }, { status: 500 });
   }
+
+  console.log(`[distributor-application] sent ok email=${hashEmail(email)}`);
+  return NextResponse.json({ success: true });
 }
