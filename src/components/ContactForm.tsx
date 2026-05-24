@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -22,6 +22,7 @@ const schema = z.object({
     { required_error: 'Please select a subject' }
   ),
   message: z.string().min(10, 'Please write at least 10 characters'),
+  _hp: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -33,6 +34,8 @@ const labelClass = 'block text-eyebrow uppercase tracking-widest text-kayora-gra
 
 export default function ContactForm() {
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const successRef = useRef<HTMLDivElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
 
   const {
     register,
@@ -42,10 +45,15 @@ export default function ContactForm() {
     resolver: zodResolver(schema),
   });
 
+  useEffect(() => {
+    if (submitState === 'success') successRef.current?.focus();
+    else if (submitState === 'error') errorRef.current?.focus();
+  }, [submitState]);
+
   async function onSubmit(data: FormValues) {
     setSubmitState('submitting');
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('/api/contact-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -58,10 +66,16 @@ export default function ContactForm() {
 
   if (submitState === 'success') {
     return (
-      <div className="bg-kayora-gold-100 border border-kayora-gold-500 rounded-xl p-10 text-center">
+      <div
+        ref={successRef}
+        tabIndex={-1}
+        className="bg-kayora-gold-100 border border-kayora-gold-500 rounded-xl p-10 text-center outline-none"
+        aria-live="polite"
+      >
         <h3 className="font-display text-xl font-semibold text-kayora-ink mb-3">Message received.</h3>
         <p className="text-kayora-graphite leading-relaxed max-w-[55ch] mx-auto">
-          Thank you. We&rsquo;ve received your message and will respond within one business day. For urgent orders, call{' '}
+          Thank you. We&rsquo;ve received your message and will respond within one business day. For
+          urgent orders, call{' '}
           <a href="tel:+2349040789918" className="font-semibold text-kayora-blue-700 hover:underline">
             0904 078 9918
           </a>
@@ -73,6 +87,18 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      {/* Honeypot — hidden from real users, catches bots that fill every field */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+        <label htmlFor="contact_website">Website</label>
+        <input
+          id="contact_website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register('_hp')}
+        />
+      </div>
+
       {/* Full Name */}
       <div>
         <label htmlFor="fullName" className={labelClass}>
@@ -180,12 +206,24 @@ export default function ContactForm() {
       </div>
 
       {submitState === 'error' && (
-        <div role="alert" className="bg-red-50 border border-kayora-danger text-kayora-danger rounded-md px-4 py-3 text-sm">
-          Something went wrong. Please try again or call us on{' '}
-          <a href="tel:+2349040789918" className="font-semibold underline">
-            0904 078 9918
-          </a>
-          .
+        <div
+          ref={errorRef}
+          role="alert"
+          tabIndex={-1}
+          className="bg-red-50 border border-kayora-danger text-kayora-danger rounded-md px-4 py-3 text-sm outline-none"
+        >
+          <p className="font-semibold mb-1">Message not sent — please try again.</p>
+          <p>
+            If the problem continues, reach us directly:{' '}
+            <a href="tel:+2349040789918" className="font-semibold underline">
+              0904 078 9918
+            </a>{' '}
+            or{' '}
+            <a href="mailto:info@kaybibeverage.com" className="font-semibold underline">
+              info@kaybibeverage.com
+            </a>
+            .
+          </p>
         </div>
       )}
 
