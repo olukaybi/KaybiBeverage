@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 const checklist = [
   {
-    title: 'The tamper-evident seal.',
-    body: 'Every genuine Kayora bottle is sealed at the plant. If the cap band has separated, the seal is broken, or the cap turns freely without resistance, do not consume it.',
+    title: 'The steam-sterilised, tamper-evident cap.',
+    body: 'Every genuine Kayora cap is steam-sterilised before it is applied and sealed at the plant. If the cap band has separated, the seal is broken, or the cap turns freely without resistance, do not consume it.',
   },
   {
     title: 'The NAFDAC registration number.',
