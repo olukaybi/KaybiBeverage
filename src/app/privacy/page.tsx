@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import ManageCookiePreferences from '@/components/ManageCookiePreferences';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Kayora Water',
@@ -50,6 +51,25 @@ export default function PrivacyPage() {
             <h2 className="font-display text-xl font-semibold text-kayora-ink mb-3">What We Collect</h2>
             <p>
               Information you provide through our contact form, distributor enquiry form, and (where applicable) orders: name, email address, phone number, business or organisation details, delivery address, and the content of your message or order. Basic technical data (for example, device type, browser, pages visited) may be collected for site operation and security.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-xl font-semibold text-kayora-ink mb-3">Cookies and Analytics</h2>
+            <p className="mb-3">
+              We use cookies and similar technologies to understand how visitors use this site. Specifically, we use Google Analytics 4 to collect anonymised usage data — pages visited, session duration, and general device/browser type. No personally identifiable data is sent to Google Analytics.
+            </p>
+            <p className="mb-3">
+              We do not load analytics until you actively accept cookies via the banner shown on your first visit. If you decline, no analytics cookies are set and Google Analytics is not loaded. If your browser or device sends a Do Not Track (DNT) or Global Privacy Control (GPC) signal, we treat that as a decline automatically.
+            </p>
+            <p className="mb-3">
+              Your choice is stored in your browser&rsquo;s local storage under the key <code className="text-sm bg-kayora-mist px-1 rounded">kayora-consent-v1</code>. You can withdraw consent or change your choice at any time:
+            </p>
+            <p>
+              <ManageCookiePreferences />
+            </p>
+            <p className="mt-3 text-sm text-kayora-stone">
+              Withdrawing consent re-shows the cookie banner. If you had previously accepted, reloading after withdrawal stops further GA4 data collection for that browser session (data already collected cannot be retroactively deleted from Google&rsquo;s servers).
             </p>
           </section>
 
