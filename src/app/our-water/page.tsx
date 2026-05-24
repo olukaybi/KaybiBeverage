@@ -5,7 +5,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Eight-Stage Purification Process | Kayora Water',
+  title: 'Eight-Stage Purification Process',
   description:
     "Kayora's eight-stage purification: deep borehole, sediment, activated carbon, ion exchange, precision filtration, reverse osmosis, UV, ozonation. NAFDAC Registered.",
   alternates: { canonical: 'https://www.kayorawater.com/our-water' },
