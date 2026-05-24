@@ -2,10 +2,19 @@ import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.kayorawater.com/' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: 'https://www.kayorawater.com/about' },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: 'About Kaybi Beverage Industries — Kayora Water',
+  title: 'About Kayora & Kaybi Beverage Industries | Eket, Akwa Ibom',
   description:
-    'Kaybi Beverage Industries Limited — the company behind Kayora Premium Purified Water. Born in Eket, Akwa Ibom. NAFDAC Reg. A1-111026. SON MANCAP Registered.',
+    'Kaybi Beverage Industries Limited produces Kayora premium purified water in Eket, Akwa Ibom. NAFDAC Registered, eight-stage purification, locally manufactured.',
   alternates: { canonical: 'https://www.kayorawater.com/about' },
 };
 
@@ -239,6 +248,10 @@ export default function AboutPage() {
         body="Our facility welcomes scheduled visits from distributors, partners and large customers. Call ahead and we will have someone ready to walk you through the plant."
         primaryCTA={{ label: 'Schedule a Visit', href: '/contact' }}
         variant="blue"
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
     </>
   );

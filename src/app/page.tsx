@@ -5,9 +5,9 @@ import SKUCard from '@/components/SKUCard';
 import ProcessSteps from '@/components/ProcessSteps';
 
 export const metadata: Metadata = {
-  title: 'Kayora Premium Purified Water | NAFDAC Registered · Eket, Akwa Ibom',
+  title: 'Kayora Premium Purified Water | NAFDAC Registered, Eket',
   description:
-    'Kayora — eight-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Registered, proudly produced in Eket, Akwa Ibom. Pure, crisp hydration for homes, offices, events and distribution.',
+    'Premium eight-stage purified water from Eket, Akwa Ibom. NAFDAC Registered (A1-111026). Direct delivery across Akwa Ibom; distributors across the South-South and South-East.',
   alternates: { canonical: 'https://www.kayorawater.com/' },
 };
 

@@ -64,14 +64,16 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': ['Organization', 'LocalBusiness'],
+      '@type': ['Organization', 'LocalBusiness', 'FoodEstablishment'],
       '@id': 'https://www.kayorawater.com/#organization',
       name: 'Kaybi Beverage Industries Limited',
+      legalName: 'Kaybi Beverage Industries Limited',
       alternateName: 'Kayora Water',
+      brand: { '@type': 'Brand', name: 'Kayora' },
       url: 'https://www.kayorawater.com',
       logo: 'https://www.kayorawater.com/images/logo/kayora-logo.png',
       description:
-        'Manufacturer of Kayora Premium Purified Water, eight-stage purified table water produced in Eket, Akwa Ibom State, Nigeria.',
+        'Manufacturer of Kayora Premium Purified Water, eight-stage purified table water produced in Eket, Akwa Ibom State, Nigeria. NAFDAC Registered A1-111026.',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '173 Eket-Oron Road',
@@ -87,6 +89,33 @@ const jsonLd = {
       },
       telephone: '+2349040789918',
       email: 'info@kaybibeverage.com',
+      priceRange: '₦₦',
+      areaServed: [
+        'Akwa Ibom State',
+        'Cross River State',
+        'Rivers State',
+        'Bayelsa State',
+        'Delta State',
+        'Edo State',
+        'Enugu State',
+        'Anambra State',
+        'Abia State',
+        'Imo State',
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+2349040789918',
+        email: 'info@kaybibeverage.com',
+        contactType: 'customer service',
+        areaServed: 'NG',
+        availableLanguage: ['English', 'Ibibio'],
+        hoursAvailable: {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          opens: '08:00',
+          closes: '18:00',
+        },
+      },
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',

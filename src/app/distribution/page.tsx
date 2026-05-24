@@ -3,10 +3,19 @@ import Hero from '@/components/Hero';
 import PillarGrid from '@/components/PillarGrid';
 import DistributorForm from '@/components/DistributorForm';
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.kayorawater.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Distribution', item: 'https://www.kayorawater.com/distribution' },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: 'Become a Kayora Distributor | Kayora Water',
+  title: 'Kayora Distributor Programme | South-South & East Nigeria',
   description:
-    'Join the Kayora distribution network across Akwa Ibom and our live South-South and South-East states. Attractive rebates, reliable supply, marketing support. NAFDAC Reg. A1-111026. SON MANCAP Registered.',
+    'Join the Kayora distributor network across Akwa Ibom, Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives.',
   alternates: { canonical: 'https://www.kayorawater.com/distribution' },
 };
 
@@ -211,6 +220,10 @@ export default function DistributionPage() {
           <DistributorForm />
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
     </>
   );
 }

@@ -4,10 +4,19 @@ import ContactForm from '@/components/ContactForm';
 import MapEmbed from '@/components/MapEmbed';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.kayorawater.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://www.kayorawater.com/contact' },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: 'Contact & Order — Eket, Akwa Ibom | Kayora Water',
+  title: 'Contact Kayora Water | Order & Delivery in Akwa Ibom',
   description:
-    'Order Kayora Premium Purified Water or get in touch. Call 0904 078 9918, email info@kaybibeverage.com, or fill out our form. Delivery across Eket and Akwa Ibom State.',
+    'Order Kayora premium purified water for home, office, or events. Direct delivery in Akwa Ibom; enquiries welcome. 173 Eket-Oron Road, Eket, Akwa Ibom State, Nigeria.',
   alternates: { canonical: 'https://www.kayorawater.com/contact' },
 };
 
@@ -135,6 +144,10 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
     </>
   );
 }

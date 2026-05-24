@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
+import FAQAccordion from '@/components/FAQAccordion';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Our Water — Eight-Stage Purification | Kayora',
+  title: 'Eight-Stage Purification Process | Kayora Water',
   description:
-    'The full story of what is in every bottle of Kayora Premium Purified Water. Eight engineered purification stages, NAFDAC Reg. A1-111026, SON MANCAP Registered. Detailed product range.',
+    "Kayora's eight-stage purification: deep borehole, sediment, activated carbon, ion exchange, precision filtration, reverse osmosis, UV, ozonation. NAFDAC Registered.",
   alternates: { canonical: 'https://www.kayorawater.com/our-water' },
 };
 
@@ -90,6 +92,139 @@ const skuDetails = [
     caseInfo: 'Sold per unit. Scheduled delivery and return/replacement service available.',
   },
 ];
+
+const faqItems = [
+  {
+    id: 'faq-nafdac',
+    question: 'Is Kayora water NAFDAC approved?',
+    answer:
+      'Yes. Kayora is NAFDAC Registered under number A1-111026, covering all four pack sizes (30cl, 50cl, 75cl, and 18.9L). It also carries SON MANCAP registration — FT-29179 for the PET bottles and FT-29180 for the 18.9L dispenser. The NAFDAC number is printed on every label.',
+  },
+  {
+    id: 'faq-process',
+    question: 'What is the eight-stage purification process?',
+    answer:
+      'Every bottle of Kayora passes through eight engineered stages: a deep borehole source, sediment filtration, activated carbon filtration, ion exchange resin, precision filtration (5 µm down to 1 µm), reverse osmosis, UV sterilisation, and a final ozonation polish that leaves residual protection inside the sealed bottle until you open it.',
+  },
+  {
+    id: 'faq-location',
+    question: 'Where is Kayora water manufactured?',
+    answer:
+      'Kayora is produced at our dedicated facility at 173 Eket-Oron Road, Eket, Akwa Ibom State, Nigeria. The plant is owned and operated by Kaybi Beverage Industries Limited. Water is drawn from a deep on-site borehole and bottled within the same facility — short, traceable, and entirely local to Akwa Ibom.',
+  },
+  {
+    id: 'faq-sizes',
+    question: 'What pack sizes does Kayora come in?',
+    answer:
+      'Kayora is available in four sizes: 30cl ("Sharp-sharp," cases of 24), 50cl ("Original," cases of 12), 75cl ("Jara," cases of 12), and the 18.9L dispenser bottle ("Never Finish"). The same water, the same eight-stage process, the same standard — regardless of which size you choose.',
+  },
+  {
+    id: 'faq-outside-akwa-ibom',
+    question: 'Where can I buy Kayora outside Akwa Ibom?',
+    answer:
+      'Kayora is served through our distributor network across the South-South and South-East — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia, and Imo States. Contact us and we\'ll connect you with your local distributor. Within Akwa Ibom we also deliver directly to homes, offices, and events.',
+  },
+  {
+    id: 'faq-verify',
+    question: 'How do I verify a genuine Kayora bottle?',
+    answer:
+      'Check five things: the steam-sterilised, tamper-evident cap (the band should not have separated); the NAFDAC Registration Number A1-111026 on the label; the clear batch and production code on the shoulder; the crisp Kayora label with the correct size and food-safe printing; and the working barcode and QR code.',
+  },
+  {
+    id: 'faq-distributor',
+    question: 'How do I become a Kayora distributor?',
+    answer:
+      'We are actively recruiting distributors across Akwa Ibom, the South-South, and the South-East. Distributors receive attractive rebates and other incentives, dependable supply, marketing materials, and a brand customers ask for by name. Visit our Distribution page or contact us at info@kaybibeverage.com to start the conversation.',
+  },
+  {
+    id: 'faq-delivery',
+    question: 'Does Kayora deliver to my office or event?',
+    answer:
+      'Yes — within Akwa Ibom (Eket, Uyo, Ikot Ekpene, Oron, Abak, Itu, and the wider state), we deliver directly to homes, offices, hotels, restaurants, schools, and events. Outside Akwa Ibom, your local distributor handles fulfillment. Reach us at info@kaybibeverage.com or 0904 078 9918 to plan a delivery.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+const productJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Kayora Premium Purified Water — Product Range',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      item: {
+        '@type': 'Product',
+        name: 'Kayora 30cl Sharp-sharp',
+        brand: { '@type': 'Brand', name: 'Kayora' },
+        manufacturer: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' },
+        description: 'Compact 30cl purified water bottle — the event SKU. Cases of 24.',
+        image: 'https://www.kayorawater.com/images/products/kayora-30cl-hero-blue.png',
+        offers: { '@type': 'Offer', priceCurrency: 'NGN', availability: 'https://schema.org/InStock' },
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      item: {
+        '@type': 'Product',
+        name: 'Kayora 50cl Original',
+        brand: { '@type': 'Brand', name: 'Kayora' },
+        manufacturer: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' },
+        description: 'Flagship 50cl purified water bottle — everyday hydration. Cases of 12.',
+        image: 'https://www.kayorawater.com/images/products/kayora-50cl-hero-blue.png',
+        offers: { '@type': 'Offer', priceCurrency: 'NGN', availability: 'https://schema.org/InStock' },
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      item: {
+        '@type': 'Product',
+        name: 'Kayora 75cl Jara',
+        brand: { '@type': 'Brand', name: 'Kayora' },
+        manufacturer: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' },
+        description: 'Generous 75cl purified water bottle — for long days and serious hydrators. Cases of 12.',
+        image: 'https://www.kayorawater.com/images/products/kayora-75cl-hero-blue.png',
+        offers: { '@type': 'Offer', priceCurrency: 'NGN', availability: 'https://schema.org/InStock' },
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      item: {
+        '@type': 'Product',
+        name: 'Kayora 18.9L Never Finish',
+        brand: { '@type': 'Brand', name: 'Kayora' },
+        manufacturer: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' },
+        description: '18.9L polycarbonate dispenser bottle — the standard for homes, offices and hotels.',
+        image: 'https://www.kayorawater.com/images/products/kayora-18l-hero-blue.png',
+        offers: { '@type': 'Offer', priceCurrency: 'NGN', availability: 'https://schema.org/InStock' },
+      },
+    },
+  ],
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.kayorawater.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Our Water', item: 'https://www.kayorawater.com/our-water' },
+  ],
+};
 
 export default function OurWaterPage() {
   return (
@@ -285,6 +420,44 @@ export default function OurWaterPage() {
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         variant="blue"
+      />
+
+      {/* FAQ */}
+      <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              FAQ
+            </p>
+            <h2 className="font-display text-display-md text-kayora-ink mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-kayora-graphite leading-relaxed max-w-[60ch]">
+              The questions customers and distributors ask us most.
+            </p>
+          </div>
+          <FAQAccordion items={faqItems} />
+          <div className="mt-8 pt-6 border-t border-kayora-mist text-sm text-kayora-stone">
+            More questions?{' '}
+            <Link href="/contact" className="text-kayora-blue-700 font-medium hover:underline">
+              Contact our team →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Page-level JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
     </>
   );
