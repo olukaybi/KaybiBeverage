@@ -15,19 +15,6 @@ export default function PrivacyPage() {
     <div className="bg-kayora-cream min-h-screen pt-32 pb-24">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Attorney-review gate */}
-        <div className="bg-kayora-gold-100 border border-kayora-gold-500 rounded-xl p-5 mb-12 flex gap-4">
-          <svg className="w-5 h-5 text-kayora-gold-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-          </svg>
-          <div>
-            <p className="font-semibold text-kayora-ink text-sm mb-1">Under Legal Review</p>
-            <p className="text-kayora-graphite text-sm leading-relaxed">
-              This policy is in draft, published for transparency. It is currently under review by a Nigerian commercial attorney and should not be relied upon until this notice is removed. Last updated: May 2026.
-            </p>
-          </div>
-        </div>
-
         {/* Header */}
         <div className="mb-14">
           <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">Legal</p>

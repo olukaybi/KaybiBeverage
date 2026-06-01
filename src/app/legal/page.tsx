@@ -4,31 +4,15 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Legal & Intellectual Property Notices — Kayora',
   description:
-    'Trademark, copyright, and permitted-use notices for Kayora® Premium Purified Water — a product of Kaybi Beverage Industries Limited, Eket, Akwa Ibom, Nigeria.',
+    'Trademark, copyright, and permitted-use notices for Kayora™ Premium Purified Water — a product of Kaybi Beverage Industries Limited, Eket, Akwa Ibom, Nigeria.',
   alternates: { canonical: 'https://www.kayorawater.com/legal' },
   robots: { index: true, follow: true },
 };
-
-const reviewGate = (
-  <div className="bg-kayora-gold-100 border border-kayora-gold-500 rounded-xl p-5 mb-12 flex gap-4">
-    <svg className="w-5 h-5 text-kayora-gold-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-    </svg>
-    <div>
-      <p className="font-semibold text-kayora-ink text-sm mb-1">Under Legal Review</p>
-      <p className="text-kayora-graphite text-sm leading-relaxed">
-        This page is published for transparency and is undergoing review by a qualified Nigerian intellectual-property attorney. It should not be relied upon until this notice is removed. Last updated: May 2026.
-      </p>
-    </div>
-  </div>
-);
 
 export default function LegalPage() {
   return (
     <div className="bg-kayora-cream min-h-screen pt-32 pb-24">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {reviewGate}
 
         {/* Header */}
         <div className="mb-14">
@@ -49,7 +33,7 @@ export default function LegalPage() {
               Trademarks
             </h2>
             <p className="text-kayora-graphite leading-relaxed">
-              &ldquo;Kayora&reg;&rdquo;, the Kayora logo, &ldquo;Sharp-sharp&rdquo;, &ldquo;Original&rdquo;, &ldquo;Jara&rdquo;, &ldquo;Never Finish&rdquo;, and &ldquo;Purified to the Highest Standard. Safe for Every Table.&rdquo; are registered trademarks of Kaybi Beverage Industries Limited. Unauthorised use of these marks, or of any mark confusingly similar to them, in connection with any product or service is prohibited and may constitute trademark infringement and passing-off under Nigerian law.
+              &ldquo;Kayora&#x2122;&rdquo;, the Kayora logo, &ldquo;Sharp-sharp&rdquo;, &ldquo;Original&rdquo;, &ldquo;Jara&rdquo;, &ldquo;Never Finish&rdquo;, and &ldquo;Purified to the Highest Standard. Safe for Every Table.&rdquo; are trademarks of Kaybi Beverage Industries Limited. The Kayora mark has been accepted for registration in Nigeria under application number NG/TM/O/2025/377015 (Class 32) and is pending issuance of the Certificate of Registration. Unauthorised use of these marks, or of any mark confusingly similar to them, in connection with any product or service is prohibited and may constitute trademark infringement and passing-off under Nigerian law.
             </p>
           </section>
 
@@ -122,7 +106,7 @@ export default function LegalPage() {
 
         {/* Page footer note */}
         <p className="mt-14 text-xs text-kayora-stone leading-relaxed border-t border-kayora-mist pt-6">
-          This page is provided for information and does not constitute legal advice. It should be reviewed and finalised by a qualified Nigerian intellectual-property attorney before reliance.
+          This page is provided for information and does not constitute legal advice.
         </p>
 
         <Link

@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Verify Genuine Kayora — Authenticity Check',
   description:
-    'How to confirm that the Kayora® bottle in your hand is genuine — tamper seal, NAFDAC registration A1-111026, batch code, label, and barcode checks.',
+    'How to confirm that the Kayora™ bottle in your hand is genuine — tamper seal, NAFDAC registration A1-111026, batch code, label, and barcode checks.',
   alternates: { canonical: 'https://www.kayorawater.com/authentic' },
 };
 
@@ -97,12 +97,12 @@ export default function AuthenticPage() {
             >
               Order Genuine Kayora &rarr;
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href="mailto:info@kaybibeverage.com?subject=Counterfeit%20Report%20%E2%80%94%20Kayora"
               className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
             >
-              Report a Concern
-            </Link>
+              Report a Counterfeit
+            </a>
           </div>
         </div>
 

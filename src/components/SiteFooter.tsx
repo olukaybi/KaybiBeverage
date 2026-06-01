@@ -207,7 +207,7 @@ export default function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-3 text-xs text-kayora-cream/50">
           <p className="leading-relaxed">
-            Kayora&reg; and the Kayora logo are registered trademarks of Kaybi Beverage Industries Limited.
+            Kayora&#x2122; and the Kayora logo are trademarks of Kaybi Beverage Industries Limited.
             &copy; {year} Kaybi Beverage Industries Limited. All rights reserved.
             All content and imagery on this website is proprietary and may not be reproduced, distributed, or used without written permission.
           </p>
