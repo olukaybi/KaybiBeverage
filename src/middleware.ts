@@ -6,7 +6,7 @@ const SHOP_PAGE_PREFIXES = ['/shop', '/cart', '/checkout', '/admin'];
  * Legal/IP pages are gated behind NEXT_PUBLIC_LEGAL_ENABLED until
  * Sprint 3 is approved and attorney review is complete.
  */
-const LEGAL_PAGE_PREFIXES = ['/legal', '/terms', '/privacy', '/authentic'];
+const LEGAL_PAGE_PREFIXES = ['/legal', '/terms', '/privacy', '/authentic', '/distributor-policy'];
 
 /**
  * When NEXT_PUBLIC_SHOP_ENABLED is not "true", all e-commerce page routes
@@ -54,5 +54,7 @@ export const config = {
     '/privacy',
     '/authentic/:path*',
     '/authentic',
+    '/distributor-policy/:path*',
+    '/distributor-policy',
   ],
 };

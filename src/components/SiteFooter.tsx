@@ -188,6 +188,7 @@ export default function SiteFooter() {
                 { label: 'IP & Legal Notices', href: '/legal' },
                 { label: 'Terms of Use', href: '/terms' },
                 { label: 'Privacy Policy', href: '/privacy' },
+                { label: 'Distributor Policy', href: '/distributor-policy' },
               ].map(({ label, href }) => (
                 <li key={href}>
                   <Link

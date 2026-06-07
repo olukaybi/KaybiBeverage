@@ -141,6 +141,7 @@ export default function LegalPage() {
               <li><Link href="/terms" className="text-kayora-blue-700 hover:underline">Terms of Use &rarr;</Link></li>
               <li><Link href="/privacy" className="text-kayora-blue-700 hover:underline">Privacy Policy &rarr;</Link></li>
               <li><Link href="/authentic" className="text-kayora-blue-700 hover:underline">Verify Authenticity &rarr;</Link></li>
+              <li><Link href="/distributor-policy" className="text-kayora-blue-700 hover:underline">Authorized Distributor Policy &rarr;</Link></li>
             </ul>
           </section>
 
