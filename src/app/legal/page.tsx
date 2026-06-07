@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Legal & Intellectual Property Notices — Kayora',
   description:
-    'Trademark, copyright, and permitted-use notices for Kayora™ Premium Purified Water — a product of Kaybi Beverage Industries Limited, Eket, Akwa Ibom, Nigeria.',
+    'Trademark, trade dress, copyright, anti-counterfeiting, and permitted-use notices for Kayora™ Premium Purified Water — a product of Kaybi Beverage Industries Limited, Eket, Akwa Ibom, Nigeria.',
   alternates: { canonical: 'https://www.kayorawater.com/legal' },
   robots: { index: true, follow: true },
 };
@@ -21,7 +21,7 @@ export default function LegalPage() {
             Intellectual Property &amp; Legal Notices
           </h1>
           <p className="text-kayora-graphite leading-relaxed max-w-[60ch]">
-            This page sets out the ownership of the trademarks, content, and materials on this website. Kayora Premium Purified Water is a product of Kaybi Beverage Industries Limited, Eket, Akwa Ibom State, Nigeria.
+            This page sets out the ownership of the trademarks, trade dress, content, and materials on this website, and the prohibitions on counterfeiting, refilling, and relabeling. Kayora Premium Purified Water is a product of Kaybi Beverage Industries Limited, Eket, Akwa Ibom State, Nigeria.
           </p>
         </div>
 
@@ -34,6 +34,16 @@ export default function LegalPage() {
             </h2>
             <p className="text-kayora-graphite leading-relaxed">
               &ldquo;Kayora&#x2122;&rdquo;, the Kayora logo, &ldquo;Sharp-sharp&rdquo;, &ldquo;Original&rdquo;, &ldquo;Jara&rdquo;, &ldquo;Never Finish&rdquo;, and &ldquo;Purified to the Highest Standard. Safe for Every Table.&rdquo; are trademarks of Kaybi Beverage Industries Limited. The Kayora mark has been accepted for registration in Nigeria under application number NG/TM/O/2025/377015 (Class 32) and is pending issuance of the Certificate of Registration. Unauthorised use of these marks, or of any mark confusingly similar to them, in connection with any product or service is prohibited and may constitute trademark infringement and passing-off under Nigerian law.
+            </p>
+          </section>
+
+          {/* Trade Dress */}
+          <section>
+            <h2 className="font-display text-xl font-semibold text-kayora-ink mb-4 pb-3 border-b border-kayora-mist">
+              Trade Dress &amp; Packaging Appearance
+            </h2>
+            <p className="text-kayora-graphite leading-relaxed">
+              The distinctive visual appearance of Kayora products — including the bottle shape, label layout, colour scheme (aqua blue and white), typography, and overall presentation — constitutes protectable trade dress owned by Kaybi Beverage Industries Limited. This trade dress has been developed to distinguish genuine Kayora products in the marketplace. Any product, packaging, or labelling that imitates or is confusingly similar to the Kayora trade dress, regardless of the brand name used, is prohibited and may constitute passing-off and unfair competition under Nigerian law.
             </p>
           </section>
 
@@ -64,6 +74,38 @@ export default function LegalPage() {
             </h2>
             <p className="text-kayora-graphite leading-relaxed">
               Product images on this website are provided for general illustration. They may not be used by third parties for resale listings, advertising, or any commercial purpose without written authorisation. The depiction of the Kayora label, logo, and packaging in these images is protected by trademark.
+            </p>
+          </section>
+
+          {/* Anti-counterfeiting */}
+          <section>
+            <h2 className="font-display text-xl font-semibold text-kayora-ink mb-4 pb-3 border-b border-kayora-mist">
+              Anti-Counterfeiting, Refilling &amp; Relabeling
+            </h2>
+            <p className="text-kayora-graphite leading-relaxed mb-4">
+              The following acts are strictly prohibited and will be pursued under applicable Nigerian law, including the Trade Marks Act, the Federal Competition and Consumer Protection Act, and NAFDAC regulations:
+            </p>
+            <ul className="space-y-3 text-kayora-graphite">
+              {[
+                'Producing, distributing, or selling any product bearing the Kayora name, logo, or trade dress without authorisation from Kaybi Beverage Industries Limited.',
+                'Refilling genuine Kayora bottles with any other liquid, whether water or otherwise, and presenting them for sale as genuine Kayora product.',
+                'Removing, altering, or replacing the original Kayora label on any bottle — whether to substitute another brand or to reuse the container.',
+                'Distributing or reselling Kayora product through any channel not authorised by Kaybi Beverage Industries Limited.',
+                'Any act designed to deceive consumers into believing they are purchasing genuine Kayora product when they are not.',
+              ].map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="flex-shrink-0 text-kayora-gold-500 mt-1">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-kayora-graphite leading-relaxed mt-4">
+              Kaybi Beverage Industries Limited works with NAFDAC and other regulatory authorities to identify and act on suspected counterfeit product. We act on every credible report. If you suspect a counterfeit, see{' '}
+              <Link href="/authentic" className="text-kayora-blue-700 hover:underline">Verify Authenticity</Link>.
             </p>
           </section>
 
