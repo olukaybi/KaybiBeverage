@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ManageCookiePreferences from '@/components/ManageCookiePreferences';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Kayora Water',
+  title: 'Privacy Policy',
   description:
     'Privacy policy for kayorawater.com — how Kaybi Beverage Industries Limited collects, uses, and protects your personal data under the Nigeria Data Protection Act 2023.',
   alternates: { canonical: 'https://www.kayorawater.com/privacy' },

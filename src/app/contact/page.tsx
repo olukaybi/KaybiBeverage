@@ -14,7 +14,7 @@ const breadcrumbJsonLd = {
 };
 
 export const metadata: Metadata = {
-  title: 'Contact Kayora Water | Order & Delivery in Akwa Ibom',
+  title: 'Contact Kayora | Order & Delivery in Akwa Ibom',
   description:
     'Order Kayora premium purified water for home, office, or events. Direct delivery in Akwa Ibom; enquiries welcome. 173 Eket-Oron Road, Eket, Akwa Ibom State, Nigeria.',
   alternates: { canonical: 'https://www.kayorawater.com/contact' },

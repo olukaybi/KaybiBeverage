@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use | Kayora Water',
+  title: 'Terms of Use',
   description:
     'Terms governing use of kayorawater.com, operated by Kaybi Beverage Industries Limited, Eket, Akwa Ibom, Nigeria.',
   alternates: { canonical: 'https://www.kayorawater.com/terms' },
