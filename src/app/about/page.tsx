@@ -74,7 +74,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
                 <p>
-                  Our plant is at 173 Eket-Oron Road, Eket. That address is not incidental. Eket is where our founders live. It is where our staff come from. It is where our first customers trusted us. Grounding the business here, in the community we serve, keeps us accountable in ways that a distant corporate structure cannot replicate.
+                  Our plant is at 173 Eket Oron Road, Eket. That address is not incidental. Eket is where our founders live. It is where our staff come from. It is where our first customers trusted us. Grounding the business here, in the community we serve, keeps us accountable in ways that a distant corporate structure cannot replicate.
                 </p>
                 <p>
                   Akwa Ibom State is one of Nigeria&rsquo;s most economically active states — oil and gas, agriculture, hospitality, education. Every one of those sectors needs clean water. Hotels need it for guests. Offices need it for staff. Schools need it for children. We see our role as supplying a critical utility, not just a commodity.
@@ -88,7 +88,7 @@ export default function AboutPage() {
               <div className="bg-kayora-blue-100 rounded-xl p-6">
                 <h3 className="font-display text-lg font-semibold text-kayora-ink mb-2">Our Facility</h3>
                 <address className="not-italic text-kayora-graphite text-sm leading-relaxed">
-                  173 Eket-Oron Road<br />
+                  173 Eket Oron Road<br />
                   Eket, Akwa Ibom State<br />
                   Nigeria (Postal Code 524101)
                 </address>

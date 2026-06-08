@@ -29,7 +29,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-display text-xl font-semibold text-kayora-ink mb-3">Who We Are</h2>
             <p>
-              Kaybi Beverage Industries Limited (&ldquo;Kaybi&rdquo;, &ldquo;we&rdquo;), 173 Eket-Oron Road, Eket, Akwa Ibom State, Nigeria 524101, is the data controller for personal data collected through kayorawater.com. Contact for data matters:{' '}
+              Kaybi Beverage Industries Limited (&ldquo;Kaybi&rdquo;, &ldquo;we&rdquo;), 173 Eket Oron Road, Eket, Akwa Ibom State, Nigeria 524101, is the data controller for personal data collected through kayorawater.com. Contact for data matters:{' '}
               <a href="mailto:info@kaybibeverage.com" className="text-kayora-blue-700 hover:underline">info@kaybibeverage.com</a>.
             </p>
           </section>

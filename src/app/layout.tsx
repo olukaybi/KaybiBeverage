@@ -54,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@KayoraWater',
-    creator: '@KayoraWater',
+    site: '@kayorawaterng',
+    creator: '@kayorawaterng',
   },
   robots: { index: true, follow: true },
 };
@@ -76,7 +76,7 @@ const jsonLd = {
         'Manufacturer of Kayora Premium Purified Water, eight-stage purified table water produced in Eket, Akwa Ibom State, Nigeria. NAFDAC Registered A1-111026.',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: '173 Eket-Oron Road',
+        streetAddress: '173 Eket Oron Road',
         addressLocality: 'Eket',
         addressRegion: 'Akwa Ibom State',
         postalCode: '524101',
@@ -125,9 +125,9 @@ const jsonLd = {
         },
       ],
       sameAs: [
-        'https://www.instagram.com/KayoraWater',
-        'https://www.facebook.com/KayoraWater',
-        'https://www.tiktok.com/@KayoraWater',
+        'https://www.instagram.com/kayorawaterng',
+        'https://www.facebook.com/kayorawaterng',
+        'https://www.tiktok.com/@kayorawaterng',
       ],
     },
     {

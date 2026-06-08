@@ -16,8 +16,9 @@ const breadcrumbJsonLd = {
 export const metadata: Metadata = {
   title: 'Contact Kayora | Order & Delivery in Akwa Ibom',
   description:
-    'Order Kayora premium purified water for home, office, or events. Direct delivery in Akwa Ibom; enquiries welcome. 173 Eket-Oron Road, Eket, Akwa Ibom State, Nigeria.',
+    'Order Kayora premium purified water for home, office, or events. Direct delivery in Akwa Ibom; enquiries welcome. 173 Eket Oron Road, Eket, Akwa Ibom State, Nigeria.',
   alternates: { canonical: 'https://www.kayorawater.com/contact' },
+  openGraph: { url: 'https://www.kayorawater.com/contact' },
 };
 
 const contactCards = [
@@ -41,7 +42,7 @@ const contactCards = [
     icon: MapPin,
     title: 'Visit Us',
     lines: [
-      { text: '173 Eket-Oron Road, Eket', href: 'https://maps.google.com/?q=4.6420,7.9288' },
+      { text: '173 Eket Oron Road, Eket', href: 'https://maps.google.com/?q=4.6420,7.9288' },
       { text: 'Akwa Ibom State, Nigeria 524101', href: null },
     ],
     note: 'Facility visits by appointment.',
@@ -58,7 +59,7 @@ export default function ContactPage() {
         primaryCTA={{ label: 'Call 0904 078 9918', href: 'tel:+2349040789918' }}
         secondaryCTA={{ label: 'Email Us', href: 'mailto:info@kaybibeverage.com' }}
         imageSrc="/images/factory/factory-02.jpg"
-        imageAlt="Kaybi Beverage Industries facility — 173 Eket-Oron Road, Eket"
+        imageAlt="Kaybi Beverage Industries facility — 173 Eket Oron Road, Eket"
       />
 
       <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">

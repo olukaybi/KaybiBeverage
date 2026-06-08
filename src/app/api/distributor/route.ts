@@ -109,7 +109,7 @@ Or email: info@kaybibeverage.com
 
 —
 Kayora Premium Purified Water
-173 Eket-Oron Road, Eket, Akwa Ibom State, Nigeria
+173 Eket Oron Road, Eket, Akwa Ibom State, Nigeria
 kayorawater.com
 
 Purified to the Highest Standard. Safe for Every Table.

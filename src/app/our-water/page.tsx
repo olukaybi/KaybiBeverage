@@ -110,7 +110,7 @@ const faqItems = [
     id: 'faq-location',
     question: 'Where is Kayora water manufactured?',
     answer:
-      'Kayora is produced at our dedicated facility at 173 Eket-Oron Road, Eket, Akwa Ibom State, Nigeria. The plant is owned and operated by Kaybi Beverage Industries Limited. Water is drawn from a deep on-site borehole and bottled within the same facility — short, traceable, and entirely local to Akwa Ibom.',
+      'Kayora is produced at our dedicated facility at 173 Eket Oron Road, Eket, Akwa Ibom State, Nigeria. The plant is owned and operated by Kaybi Beverage Industries Limited. Water is drawn from a deep on-site borehole and bottled within the same facility — short, traceable, and entirely local to Akwa Ibom.',
   },
   {
     id: 'faq-sizes',

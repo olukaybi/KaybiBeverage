@@ -105,7 +105,7 @@ export default function HomePage() {
                 },
                 {
                   title: 'Local Manufacturing. Real Accountability.',
-                  body: 'We are not a distant brand. We are at 173 Eket-Oron Road. Walk in. Meet our team. See the line.',
+                  body: 'We are not a distant brand. We are at 173 Eket Oron Road. Walk in. Meet our team. See the line.',
                 },
                 {
                   title: 'Built for Nigerian Life.',
@@ -138,7 +138,7 @@ export default function HomePage() {
                 },
                 {
                   label: 'Made in Eket, Akwa Ibom State',
-                  detail: '173 Eket-Oron Road',
+                  detail: '173 Eket Oron Road',
                   sub: 'Nigerian-owned, Nigerian-operated',
                 },
               ].map((signal) => (

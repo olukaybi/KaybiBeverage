@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
           <p>Our team will be in touch shortly to confirm your delivery schedule.</p>
           <p style="margin-top:24px">Questions? Call us on <a href="tel:+2349040789918">0904 078 9918</a>.</p>
           <hr style="border:none;border-top:1px solid #e5e5e5;margin:24px 0">
-          <p style="font-size:12px;color:#888">Kaybi Beverage Industries Limited · 173 Eket-Oron Road, Eket, Akwa Ibom</p>
+          <p style="font-size:12px;color:#888">Kaybi Beverage Industries Limited · 173 Eket Oron Road, Eket, Akwa Ibom</p>
         </div>
       `,
     });

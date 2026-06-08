@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Authorized Distributor Policy — Kayora',
+  title: 'Authorized Distributor Policy',
   description:
     'Who qualifies as an authorized Kayora distributor, what they may and may not do with the brand, and how to identify unauthorized sellers of Kayora Premium Purified Water.',
   alternates: { canonical: 'https://www.kayorawater.com/distributor-policy' },

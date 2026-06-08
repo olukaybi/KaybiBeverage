@@ -23,7 +23,7 @@ const checklist = [
   },
   {
     title: 'The label.',
-    body: 'The Kayora label is crisp, correctly spelled, with the registered logo, "Premium Purified Water", and the correct size (30cl, 50cl, 75cl, or 18.9L). Blurry printing, misspellings, or colour that looks off are warning signs.',
+    body: 'The Kayora label is crisp, correctly spelled, with the Kayora logo, "Premium Purified Water", and the correct size (30cl, 50cl, 75cl, or 18.9L). Blurry printing, misspellings, or colour that looks off are warning signs.',
   },
   {
     title: 'The barcode and QR code.',

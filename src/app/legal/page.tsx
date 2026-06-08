@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Legal & Intellectual Property Notices — Kayora',
+  title: 'Legal & Intellectual Property Notices',
   description:
     'Trademark, trade dress, copyright, anti-counterfeiting, and permitted-use notices for Kayora™ Premium Purified Water — a product of Kaybi Beverage Industries Limited, Eket, Akwa Ibom, Nigeria.',
   alternates: { canonical: 'https://www.kayorawater.com/legal' },
