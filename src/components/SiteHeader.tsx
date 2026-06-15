@@ -69,7 +69,7 @@ export default function SiteHeader() {
               aria-label="Kayora Water — Home"
             >
               <Image
-                src="/kayora-logo.svg"
+                src="/kayora-logo.png"
                 alt="Kayora Water"
                 width={120}
                 height={36}
@@ -186,7 +186,7 @@ export default function SiteHeader() {
       >
         <div className="flex items-center justify-between p-4 border-b border-kayora-mist">
           <Image
-            src="/kayora-logo.svg"
+            src="/kayora-logo.png"
             alt="Kayora Water"
             width={108}
             height={32}

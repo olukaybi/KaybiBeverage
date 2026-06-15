@@ -60,7 +60,7 @@ export default function HomePage() {
       {/* Section 1 — Hero */}
       <Hero
         leadBrand
-        logoSrc="/kayora-logo.svg"
+        logoSrc="/kayora-logo.png"
         logoTagline="Wellness in every drop!"
         logoWidth={180}
         logoHeight={54}
