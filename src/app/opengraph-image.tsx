@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'Kayora Premium Purified Water — Purified to the Highest Standard. Safe for Every Table.';
+export const alt = 'Kayora Premium Purified Water — Wellness in every drop!';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -82,26 +82,26 @@ export default function Image() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <div
             style={{
-              fontSize: '52px',
-              fontWeight: 700,
-              color: '#FAF8F4',
-              lineHeight: 1.08,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Purified to the Highest Standard.
-          </div>
-          <div
-            style={{
-              fontSize: '42px',
+              fontSize: '56px',
               fontWeight: 400,
               fontStyle: 'italic',
-              color: 'rgba(250, 248, 244, 0.65)',
-              lineHeight: 1.15,
+              color: '#FAF8F4',
+              lineHeight: 1.08,
               letterSpacing: '-0.01em',
             }}
           >
-            Safe for Every Table.
+            Wellness in every drop!
+          </div>
+          <div
+            style={{
+              fontSize: '32px',
+              fontWeight: 400,
+              color: 'rgba(250, 248, 244, 0.55)',
+              lineHeight: 1.2,
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Purified to the Highest Standard. Safe for Every Table.
           </div>
         </div>
 

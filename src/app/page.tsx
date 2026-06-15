@@ -7,7 +7,7 @@ import ProcessSteps from '@/components/ProcessSteps';
 export const metadata: Metadata = {
   title: 'Kayora Premium Purified Water | NAFDAC Registered, Eket',
   description:
-    'Premium eight-stage purified water from Eket, Akwa Ibom. NAFDAC Registered (A1-111026). Direct delivery across Akwa Ibom; distributors across the South-South and South-East.',
+    'Wellness in every drop! Premium eight-stage purified water from Eket, Akwa Ibom. NAFDAC Registered (A1-111026). Direct delivery across Akwa Ibom; distributors across the South-South and South-East.',
   alternates: { canonical: 'https://www.kayorawater.com/' },
 };
 
@@ -60,6 +60,10 @@ export default function HomePage() {
       {/* Section 1 — Hero */}
       <Hero
         leadBrand
+        logoSrc="/kayora-logo.svg"
+        logoTagline="Wellness in every drop!"
+        logoWidth={180}
+        logoHeight={54}
         eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Eight-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."

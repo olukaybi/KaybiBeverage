@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
 
@@ -14,7 +15,7 @@ const breadcrumbJsonLd = {
 export const metadata: Metadata = {
   title: 'About Kayora & Kaybi Beverage Industries | Eket, Akwa Ibom',
   description:
-    'Kaybi Beverage Industries Limited produces Kayora premium purified water in Eket, Akwa Ibom. NAFDAC Registered, eight-stage purification, locally manufactured.',
+    'Wellness in every drop! Kaybi Beverage Industries Limited produces Kayora premium purified water in Eket, Akwa Ibom. NAFDAC Registered, eight-stage purification, locally manufactured.',
   alternates: { canonical: 'https://www.kayorawater.com/about' },
 };
 
@@ -26,6 +27,10 @@ export default function AboutPage() {
         leadBrandSub="A product of Kaybi Beverage Industries Limited"
         eyebrow="Our Story"
         headline={'Born in Eket.\nBuilt for Every Table.'}
+        logoSrc="/kayora-logo.svg"
+        logoWidth={240}
+        logoHeight={72}
+        logoAfterH1
         subhead="Kaybi Beverage Industries was founded on a stubborn idea — that the water Nigerians drink every day should meet the highest standard, not the lowest acceptable one."
         primaryCTA={{ label: 'Schedule a Visit', href: '/contact' }}
         secondaryCTA={{ label: 'Our Water', href: '/our-water' }}
@@ -212,6 +217,36 @@ export default function AboutPage() {
               </p>
               <p>
                 We are growing. And as we grow, we are committed to maintaining the operational discipline and personal accountability that defines Kayora today.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Producers of Kayora */}
+      <section className="bg-kayora-blue-900 py-[clamp(4rem,8vw,8rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-5">
+              Producers of Kayora
+            </p>
+            <Image
+              src="/kaybi-logo.svg"
+              alt="Kaybi Beverage Industries Limited"
+              width={224}
+              height={48}
+              className="w-[160px] lg:w-[224px] h-auto mb-6"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
+            <div className="space-y-4 text-kayora-cream/80 leading-relaxed max-w-[65ch]">
+              <p>
+                Kayora is a product of Kaybi Beverage Industries Limited, a Nigerian manufacturing company incorporated and headquartered in Eket, Akwa Ibom State.
+              </p>
+              <p>
+                Kaybi Beverage Industries owns the Kayora brand, operates the Eket production facility, and holds all NAFDAC and SON MANCAP registrations. Every bottle of Kayora — from the 30cl Sharp-sharp to the 18.9L Never Finish — is manufactured, sealed and tracked under Kaybi Beverage Industries&rsquo; direct supervision.
+              </p>
+              <p>
+                When you buy Kayora, you buy from a company with a physical address, a local team, and a name on the certificate.
               </p>
             </div>
           </div>

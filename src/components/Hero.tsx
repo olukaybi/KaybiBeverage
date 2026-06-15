@@ -16,6 +16,11 @@ interface HeroProps {
   leadBrand?: boolean;
   leadBrandSub?: string;
   productImageSrc?: string;
+  logoSrc?: string;
+  logoTagline?: string;
+  logoWidth?: number;
+  logoHeight?: number;
+  logoAfterH1?: boolean;
 }
 
 export default function Hero({
@@ -29,6 +34,11 @@ export default function Hero({
   leadBrand,
   leadBrandSub,
   productImageSrc,
+  logoSrc,
+  logoTagline,
+  logoWidth,
+  logoHeight,
+  logoAfterH1,
 }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -50,13 +60,32 @@ export default function Hero({
             <div>
               {leadBrand && (
                 <div className="mb-4">
-                  <span
-                    className="font-display font-bold text-kayora-cream block leading-none"
-                    style={{ fontSize: 'clamp(3.5rem, 6vw, 7rem)', letterSpacing: '-0.025em' }}
-                  >
-                    Kayora
-                    <span aria-hidden="true" className="text-kayora-gold-500 inline-block" style={{ fontSize: '0.3em', marginLeft: '0.08em', verticalAlign: 'baseline', lineHeight: 1 }}>•</span>
-                  </span>
+                  {logoSrc ? (
+                    <>
+                      <Image
+                        src={logoSrc}
+                        alt="Kayora Water"
+                        width={logoWidth ?? 180}
+                        height={logoHeight ?? 54}
+                        className="w-[140px] lg:w-[180px] h-auto"
+                        style={{ filter: 'brightness(0) invert(1)' }}
+                        priority
+                      />
+                      {logoTagline && (
+                        <p className="font-display italic text-kayora-cream/80 text-lg lg:text-xl mt-2">
+                          {logoTagline}
+                        </p>
+                      )}
+                    </>
+                  ) : (
+                    <span
+                      className="font-display font-bold text-kayora-cream block leading-none"
+                      style={{ fontSize: 'clamp(3.5rem, 6vw, 7rem)', letterSpacing: '-0.025em' }}
+                    >
+                      Kayora
+                      <span aria-hidden="true" className="text-kayora-gold-500 inline-block" style={{ fontSize: '0.3em', marginLeft: '0.08em', verticalAlign: 'baseline', lineHeight: 1 }}>•</span>
+                    </span>
+                  )}
                 </div>
               )}
               <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-6">{eyebrow}</p>
@@ -147,6 +176,18 @@ export default function Hero({
           <h1 className={`font-display ${leadBrand ? 'text-display-lg' : 'text-display-xl'} text-white mb-6 whitespace-pre-line`}>
             {headline}
           </h1>
+          {logoSrc && logoAfterH1 && (
+            <div className="mb-6">
+              <Image
+                src={logoSrc}
+                alt="Kayora Water"
+                width={logoWidth ?? 240}
+                height={logoHeight ?? 72}
+                className="w-[180px] lg:w-[240px] h-auto"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+            </div>
+          )}
           <p className="text-lg leading-relaxed text-white/80 mb-10 max-w-[65ch]">
             {subhead}
           </p>

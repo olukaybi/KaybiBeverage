@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import KayoraWordmark from '@/components/KayoraWordmark';
+import Image from 'next/image';
 
 const socialLinks = [
   {
@@ -61,13 +61,19 @@ export default function SiteFooter() {
 
           {/* Column 1: Company */}
           <div>
-            <KayoraWordmark variant="light" className="text-[2.5rem] block mb-1" />
+            <Image
+              src="/kayora-logo.svg"
+              alt="Kayora Water"
+              width={160}
+              height={48}
+              className="w-[130px] h-auto mb-2"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
             <p className="text-sm text-kayora-cream/70 mb-5 leading-relaxed max-w-[28ch]">
-              Purified to the Highest Standard.<br />Safe for Every Table.
+              Wellness in every drop!
             </p>
-            <p className="text-xs text-kayora-cream/40 mb-6 leading-relaxed max-w-[28ch]">
-              A product of Kaybi Beverage Industries Limited<br />
-              Eket, Akwa Ibom State, Nigeria
+            <p className="text-xs text-kayora-cream/50 mb-6 leading-relaxed max-w-[28ch]">
+              Purified to the Highest Standard.<br />Safe for Every Table.
             </p>
             <div className="flex items-center gap-3">
               {socialLinks.map(({ href, label, icon }) => (
@@ -201,6 +207,23 @@ export default function SiteFooter() {
               ))}
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* Kaybi parent-company attribution */}
+      <div className="border-t border-white/10 px-4 sm:px-6 lg:px-8 py-5">
+        <div className="max-w-7xl mx-auto flex items-center gap-4">
+          <Image
+            src="/kaybi-logo.svg"
+            alt="Kaybi Beverage Industries Limited"
+            width={140}
+            height={30}
+            className="w-[110px] h-auto flex-shrink-0"
+            style={{ filter: 'brightness(0) invert(0.55)' }}
+          />
+          <p className="text-xs text-kayora-cream/40 leading-relaxed">
+            A product of Kaybi Beverage Industries Limited
+          </p>
         </div>
       </div>
 
