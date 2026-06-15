@@ -27,7 +27,7 @@ export default function AboutPage() {
         leadBrandSub="A product of Kaybi Beverage Industries Limited"
         eyebrow="Our Story"
         headline={'Born in Eket.\nBuilt for Every Table.'}
-        logoSrc="/kayora-logo.svg"
+        logoSrc="/kayora-logo.png"
         logoWidth={240}
         logoHeight={72}
         logoAfterH1
@@ -231,7 +231,7 @@ export default function AboutPage() {
               Producers of Kayora
             </p>
             <Image
-              src="/kaybi-logo.svg"
+              src="/kaybi-logo.png"
               alt="Kaybi Beverage Industries Limited"
               width={224}
               height={48}

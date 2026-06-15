@@ -62,7 +62,7 @@ export default function SiteFooter() {
           {/* Column 1: Company */}
           <div>
             <Image
-              src="/kayora-logo.svg"
+              src="/kayora-logo.png"
               alt="Kayora Water"
               width={160}
               height={48}
@@ -214,7 +214,7 @@ export default function SiteFooter() {
       <div className="border-t border-white/10 px-4 sm:px-6 lg:px-8 py-5">
         <div className="max-w-7xl mx-auto flex items-center gap-4">
           <Image
-            src="/kaybi-logo.svg"
+            src="/kaybi-logo.png"
             alt="Kaybi Beverage Industries Limited"
             width={140}
             height={30}
