@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import KayoraWordmark from '@/components/KayoraWordmark';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -68,9 +68,14 @@ export default function SiteHeader() {
               className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-md"
               aria-label="Kayora Water — Home"
             >
-              <KayoraWordmark
-                variant={scrolled ? 'dark' : 'light'}
-                className="text-2xl lg:text-[1.75rem]"
+              <Image
+                src="/kayora-logo.svg"
+                alt="Kayora Water"
+                width={120}
+                height={36}
+                className="w-[90px] lg:w-[120px] h-auto"
+                style={{ filter: scrolled ? 'none' : 'brightness(0) invert(1)' }}
+                priority
               />
             </Link>
 
@@ -180,7 +185,13 @@ export default function SiteHeader() {
         )}
       >
         <div className="flex items-center justify-between p-4 border-b border-kayora-mist">
-          <KayoraWordmark variant="dark" className="text-2xl" />
+          <Image
+            src="/kayora-logo.svg"
+            alt="Kayora Water"
+            width={108}
+            height={32}
+            className="w-[90px] h-auto"
+          />
           <button
             type="button"
             aria-label="Close menu"
