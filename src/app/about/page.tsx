@@ -23,8 +23,6 @@ export default function AboutPage() {
   return (
     <>
       <Hero
-        leadBrand
-        leadBrandSub="A product of Kaybi Beverage Industries Limited"
         eyebrow="Our Story"
         headline={'Born in Eket.\nBuilt for Every Table.'}
         logoSrc="/kayora-logo.png"
