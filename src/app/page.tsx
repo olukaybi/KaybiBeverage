@@ -62,8 +62,8 @@ export default function HomePage() {
         leadBrand
         logoSrc="/kayora-logo.png"
         logoTagline="Wellness in every drop!"
-        logoWidth={180}
-        logoHeight={54}
+        logoWidth={400}
+        logoHeight={400}
         eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Eight-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."

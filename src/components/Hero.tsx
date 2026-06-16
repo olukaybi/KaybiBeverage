@@ -67,12 +67,12 @@ export default function Hero({
                         alt="Kayora Water"
                         width={logoWidth ?? 180}
                         height={logoHeight ?? 54}
-                        className="w-[140px] lg:w-[180px] h-auto"
+                        className="w-[220px] lg:w-[320px] h-auto"
                         style={{ filter: 'brightness(0) invert(1)' }}
                         priority
                       />
                       {logoTagline && (
-                        <p className="font-display italic text-kayora-cream/80 text-lg lg:text-xl mt-2">
+                        <p className="font-display italic text-kayora-cream/80 text-xl lg:text-2xl mt-3">
                           {logoTagline}
                         </p>
                       )}
@@ -183,7 +183,7 @@ export default function Hero({
                 alt="Kayora Water"
                 width={logoWidth ?? 240}
                 height={logoHeight ?? 72}
-                className="w-[180px] lg:w-[240px] h-auto"
+                className="w-[260px] lg:w-[360px] h-auto"
                 style={{ filter: 'brightness(0) invert(1)' }}
               />
             </div>
