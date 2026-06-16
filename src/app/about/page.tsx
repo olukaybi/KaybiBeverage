@@ -28,8 +28,8 @@ export default function AboutPage() {
         eyebrow="Our Story"
         headline={'Born in Eket.\nBuilt for Every Table.'}
         logoSrc="/kayora-logo.png"
-        logoWidth={240}
-        logoHeight={72}
+        logoWidth={400}
+        logoHeight={400}
         logoAfterH1
         subhead="Kaybi Beverage Industries was founded on a stubborn idea — that the water Nigerians drink every day should meet the highest standard, not the lowest acceptable one."
         primaryCTA={{ label: 'Schedule a Visit', href: '/contact' }}
