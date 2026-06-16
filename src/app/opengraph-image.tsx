@@ -78,7 +78,7 @@ export default function Image() {
           </div>
         </div>
 
-        {/* Middle: taglines */}
+        {/* Middle: tagline primary, USP secondary */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <div
             style={{
