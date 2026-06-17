@@ -59,18 +59,13 @@ export default function HomePage() {
     <>
       {/* Section 1 — Hero */}
       <Hero
-        leadBrand
-        logoSrc="/kayora-logo.png"
-        logoTagline="Wellness in every drop!"
-        logoWidth={400}
-        logoHeight={400}
+        backgroundImage="/01_kayora_homepage_banner.png"
         eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Eight-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
         primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        productImageSrc="/images/products/kayora-75cl-hero-blue.png"
-        imageAlt="Kayora 75cl Jara — Premium Purified Water, front and back"
+        imageAlt="Kayora studio banner — premium purified water, produced in Eket, Akwa Ibom"
       />
 
       {/* Section 2 — The Range */}
