@@ -21,6 +21,7 @@ interface HeroProps {
   logoWidth?: number;
   logoHeight?: number;
   logoAfterH1?: boolean;
+  backgroundImage?: string;
 }
 
 export default function Hero({
@@ -39,6 +40,7 @@ export default function Hero({
   logoWidth,
   logoHeight,
   logoAfterH1,
+  backgroundImage,
 }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -49,6 +51,49 @@ export default function Hero({
   });
 
   const yParallax = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
+
+  // Banner-background layout (photo carries the visual; text overlays right side)
+  if (backgroundImage) {
+    return (
+      <section className="relative min-h-[600px] lg:min-h-[680px] flex items-center overflow-hidden" aria-label="Hero">
+        <Image
+          src={backgroundImage}
+          alt={imageAlt}
+          fill
+          priority
+          className="object-cover"
+          style={{ objectPosition: 'left center' }}
+          sizes="100vw"
+        />
+        <div className="relative z-10 flex w-full">
+          <div className="w-full lg:ml-auto lg:max-w-2xl px-6 lg:px-10 py-16 lg:py-20 lg:mr-[8%] bg-kayora-cream/85 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none">
+            <p className="text-xs uppercase tracking-wide text-kayora-gold-500 font-sans mb-4">{eyebrow}</p>
+            <h1 className="font-display text-display-md text-kayora-blue-900 mb-4 whitespace-pre-line">{headline}</h1>
+            {logoTagline && (
+              <p className="font-display italic text-kayora-blue-700 text-xl lg:text-2xl mb-5">{logoTagline}</p>
+            )}
+            <p className="text-base lg:text-lg leading-relaxed text-slate-700 mb-8 max-w-[55ch]">{subhead}</p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href={primaryCTA.href}
+                className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-white font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
+              >
+                {primaryCTA.label}
+              </Link>
+              {secondaryCTA && (
+                <Link
+                  href={secondaryCTA.href}
+                  className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-900/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
+                >
+                  {secondaryCTA.label}
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   // Product-forward split layout
   if (productImageSrc) {
