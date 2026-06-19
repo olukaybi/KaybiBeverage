@@ -68,6 +68,21 @@ export default function HomePage() {
         imageAlt="Kayora studio banner — premium purified water, produced in Eket, Akwa Ibom"
       />
 
+      {/* Trust Strip */}
+      <section className="bg-kayora-blue-900 py-4 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xs text-kayora-cream/60 uppercase tracking-widest font-sans">
+            <span>NAFDAC Reg. A1-111026</span>
+            <span className="text-kayora-gold-500" aria-hidden="true">·</span>
+            <span>SON MANCAP Registered</span>
+            <span className="text-kayora-gold-500" aria-hidden="true">·</span>
+            <span>Eight-Stage Purification</span>
+            <span className="text-kayora-gold-500" aria-hidden="true">·</span>
+            <span>Made in Eket, Akwa Ibom</span>
+          </div>
+        </div>
+      </section>
+
       {/* Section 2 — The Range */}
       <section className="bg-kayora-cream py-[clamp(6rem,10vw,10rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,6 +99,26 @@ export default function HomePage() {
 
       {/* Section 3 — Eight-Stage Process */}
       <ProcessSteps />
+
+      {/* Section 3b — Social Proof */}
+      <section className="bg-kayora-cream py-[clamp(4rem,7vw,7rem)] border-t border-kayora-mist">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { stat: '4', label: 'Pack sizes', sub: '30cl · 50cl · 75cl · 18.9L' },
+              { stat: '8', label: 'Purification stages', sub: 'Borehole to bottle' },
+              { stat: '2', label: 'Regulatory bodies', sub: 'NAFDAC + SON MANCAP' },
+              { stat: '9+', label: 'States covered', sub: 'Akwa Ibom & beyond' },
+            ].map(({ stat, label, sub }) => (
+              <div key={label} className="text-center">
+                <p className="font-display text-5xl font-bold text-kayora-blue-900 mb-1">{stat}</p>
+                <p className="font-semibold text-kayora-ink text-sm mb-1">{label}</p>
+                <p className="text-xs text-kayora-stone">{sub}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Section 4 — The Standard */}
       <section className="bg-white py-[clamp(6rem,10vw,10rem)]">

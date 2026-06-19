@@ -62,7 +62,7 @@ export default function Hero({
           fill
           priority
           className="object-cover"
-          style={{ objectPosition: 'left center' }}
+          style={{ objectPosition: 'left top' }}
           sizes="100vw"
         />
         <div className="relative z-10 flex w-full px-4 sm:px-6 lg:px-0">

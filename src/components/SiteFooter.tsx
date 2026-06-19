@@ -31,24 +31,36 @@ const socialLinks = [
       </svg>
     ),
   },
+  {
+    href: 'https://wa.me/2349040789918',
+    label: 'WhatsApp',
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+    ),
+  },
 ];
 
 const productLinks = [
-  { label: '30cl — Sharp-sharp', href: '/our-water' },
-  { label: '50cl — Original', href: '/our-water' },
-  { label: '75cl — Jara', href: '/our-water' },
-  { label: '18.9L — Never Finish', href: '/our-water' },
+  { label: '30cl — Sharp-sharp', href: '/products/30cl' },
+  { label: '50cl — Original', href: '/products/50cl' },
+  { label: '75cl — Jara', href: '/products/75cl' },
+  { label: '18.9L — Never Finish', href: '/products/18-9l' },
 ];
 
 const orderLinks = [
   { label: 'Order Kayora', href: '/contact' },
   { label: 'Bulk / event orders', href: '/contact' },
   { label: 'Become a distributor', href: '/distribution' },
+  { label: 'Delivery areas', href: '/delivery-areas' },
 ];
 
 const toolLinks = [
   { label: 'Hydration Calculator', href: '/tools/hydration' },
   { label: 'Event Water Estimator', href: '/tools/event-water' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Quality & Certifications', href: '/quality-and-certifications' },
 ];
 
 export default function SiteFooter() {
@@ -139,11 +151,21 @@ export default function SiteFooter() {
             <h2 className="text-eyebrow uppercase tracking-widest text-kayora-cream/50 mb-4">Get in Touch</h2>
             <ul className="space-y-3 text-sm text-kayora-cream/80">
               <li>
+                <p className="text-kayora-cream/50 text-xs uppercase tracking-widest mb-0.5">Customer line</p>
                 <a
                   href="tel:+2349040789918"
                   className="hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
                 >
                   0904 078 9918
+                </a>
+              </li>
+              <li>
+                <p className="text-kayora-cream/50 text-xs uppercase tracking-widest mb-0.5">Distributor inquiries</p>
+                <a
+                  href="tel:+23407070238028"
+                  className="hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
+                >
+                  07070 238028
                 </a>
               </li>
               <li>
@@ -211,19 +233,19 @@ export default function SiteFooter() {
       </div>
 
       {/* Kaybi parent-company attribution */}
-      <div className="border-t border-white/10 px-4 sm:px-6 lg:px-8 py-5">
+      <div className="bg-kayora-blue-950 border-t border-white/10 px-4 sm:px-6 lg:px-8 py-5">
         <div className="max-w-7xl mx-auto flex items-center gap-4">
           <Image
             src="/kaybi-logo.png"
             alt="Kaybi Beverage Industries Limited"
-            width={140}
-            height={30}
-            className="w-[110px] h-auto flex-shrink-0"
-            style={{ filter: 'brightness(0) invert(0.55)' }}
+            width={512}
+            height={512}
+            className="w-12 h-12 shrink-0"
           />
-          <p className="text-xs text-kayora-cream/40 leading-relaxed">
-            A product of Kaybi Beverage Industries Limited
-          </p>
+          <div className="min-w-0">
+            <p className="text-xs text-kayora-cream/70 leading-snug">A product of Kaybi Beverage Industries Limited</p>
+            <p className="text-xs text-kayora-cream/40 leading-snug mt-0.5">173 Eket Oron Road, Eket, Akwa Ibom · NAFDAC Reg. A1-111026 · SON MANCAP Registered</p>
+          </div>
         </div>
       </div>
 
