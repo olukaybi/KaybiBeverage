@@ -223,19 +223,19 @@ export default function SiteFooter() {
       </div>
 
       {/* Kaybi parent-company attribution */}
-      <div className="border-t border-white/10 px-4 sm:px-6 lg:px-8 py-5">
+      <div className="bg-kayora-blue-950 border-t border-white/10 px-4 sm:px-6 lg:px-8 py-5">
         <div className="max-w-7xl mx-auto flex items-center gap-4">
           <Image
             src="/kaybi-logo.png"
             alt="Kaybi Beverage Industries Limited"
-            width={140}
-            height={30}
-            className="w-[110px] h-auto flex-shrink-0"
-            style={{ filter: 'brightness(0) invert(0.55)' }}
+            width={512}
+            height={512}
+            className="w-12 h-12 shrink-0"
           />
-          <p className="text-xs text-kayora-cream/40 leading-relaxed">
-            A product of Kaybi Beverage Industries Limited
-          </p>
+          <div className="min-w-0">
+            <p className="text-xs text-kayora-cream/70 leading-snug">A product of Kaybi Beverage Industries Limited</p>
+            <p className="text-xs text-kayora-cream/40 leading-snug mt-0.5">173 Eket Oron Road, Eket, Akwa Ibom · NAFDAC Reg. A1-111026 · SON MANCAP Registered</p>
+          </div>
         </div>
       </div>
 
