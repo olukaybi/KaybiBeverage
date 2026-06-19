@@ -151,11 +151,21 @@ export default function SiteFooter() {
             <h2 className="text-eyebrow uppercase tracking-widest text-kayora-cream/50 mb-4">Get in Touch</h2>
             <ul className="space-y-3 text-sm text-kayora-cream/80">
               <li>
+                <p className="text-kayora-cream/50 text-xs uppercase tracking-widest mb-0.5">Customer line</p>
                 <a
                   href="tel:+2349040789918"
                   className="hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
                 >
                   0904 078 9918
+                </a>
+              </li>
+              <li>
+                <p className="text-kayora-cream/50 text-xs uppercase tracking-widest mb-0.5">Distributor inquiries</p>
+                <a
+                  href="tel:+23407070238028"
+                  className="hover:text-kayora-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
+                >
+                  07070 238028
                 </a>
               </li>
               <li>

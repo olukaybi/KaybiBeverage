@@ -219,6 +219,24 @@ export default function DistributionPage() {
             </p>
           </div>
           <DistributorForm />
+
+          <div className="mt-12 pt-10 border-t border-kayora-mist">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-4">Prefer to call?</p>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <div>
+                <p className="text-xs text-kayora-stone uppercase tracking-widest mb-1">Corporate / distributor inquiries</p>
+                <a href="tel:+23407070238028" className="text-kayora-ink font-semibold hover:text-kayora-blue-700 transition-colors">
+                  07070 238028
+                </a>
+              </div>
+              <div>
+                <p className="text-xs text-kayora-stone uppercase tracking-widest mb-1">General / customer line</p>
+                <a href="tel:+2349040789918" className="text-kayora-ink font-semibold hover:text-kayora-blue-700 transition-colors">
+                  0904 078 9918
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <script

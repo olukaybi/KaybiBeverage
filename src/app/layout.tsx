@@ -71,7 +71,7 @@ const jsonLd = {
       alternateName: 'Kayora Water',
       brand: { '@type': 'Brand', name: 'Kayora' },
       url: 'https://www.kayorawater.com',
-      logo: 'https://www.kayorawater.com/images/logo/kayora-logo.png',
+      logo: 'https://www.kayorawater.com/kayora-logo.png',
       description:
         'Manufacturer of Kayora Premium Purified Water, eight-stage purified table water produced in Eket, Akwa Ibom State, Nigeria. NAFDAC Registered A1-111026.',
       address: {

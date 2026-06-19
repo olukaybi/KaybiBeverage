@@ -60,7 +60,7 @@ export default function DistributorPolicyPage() {
             </h2>
             <p className="text-kayora-graphite leading-relaxed">
               An authorized Kayora distributor is a business or individual that has entered into a current, written distributor agreement with Kaybi Beverage Industries Limited and purchases genuine Kayora product directly through supply channels designated by Kaybi. Authorization is specific to a territory, channel, and term — it is not transferable and does not automatically renew. If you are unsure whether a supplier is authorized, contact us directly at{' '}
-              <a href="mailto:info@kaybibeverage.com" className="text-kayora-blue-700 hover:underline">info@kaybibeverage.com</a>.
+              <a href="mailto:info@kaybibeverage.com" className="text-kayora-blue-700 hover:underline">info@kaybibeverage.com</a> or call our corporate line on <a href="tel:+23407070238028" className="text-kayora-blue-700 hover:underline">07070 238028</a> (distributor inquiries).
             </p>
           </section>
 
