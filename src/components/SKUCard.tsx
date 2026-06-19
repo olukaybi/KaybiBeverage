@@ -60,11 +60,11 @@ export default function SKUCard({
         </p>
         <p className="text-xs text-kayora-stone italic mb-4">{useCase}</p>
         <Link
-          href="/our-water"
+          href={`/products/${size === '18.9L' ? '18-9l' : size}`}
           className="text-sm font-semibold text-kayora-blue-700 hover:text-kayora-blue-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm inline-flex items-center gap-1 min-h-[48px] items-center"
           aria-label={`Learn more about Kayora ${size} ${name}`}
         >
-          Learn more &rarr;
+          See Details &rarr;
         </Link>
       </div>
     </motion.div>
