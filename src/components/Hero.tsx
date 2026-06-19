@@ -65,8 +65,8 @@ export default function Hero({
           style={{ objectPosition: 'left top' }}
           sizes="100vw"
         />
-        <div className="relative z-10 flex w-full px-4 sm:px-6 lg:px-0">
-          <div className="w-full lg:w-auto mx-auto lg:ml-auto lg:max-w-lg px-7 lg:px-9 py-9 lg:py-11 lg:mr-[6%] my-auto bg-kayora-cream/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/40">
+        <div className="relative z-10 flex w-full overflow-hidden">
+          <div className="relative z-10 ml-auto max-w-sm md:max-w-md lg:max-w-lg mx-4 lg:mr-12 px-7 lg:px-9 py-8 lg:py-10 my-auto bg-kayora-cream/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/40">
             <p className="text-xs uppercase tracking-wide text-kayora-gold-500 font-sans mb-4">{eyebrow}</p>
             <h1 className="font-display text-display-md text-kayora-blue-900 mb-4 whitespace-pre-line">{headline}</h1>
             {logoTagline && (
