@@ -6,7 +6,6 @@ import { checkRateLimit } from '@/lib/ratelimit';
 import { formatNaira } from '@/lib/products';
 import { SHOP_ENABLED } from '@/lib/flags';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const VerifySchema = z.object({
   reference: z.string().min(1).max(200),
@@ -27,6 +26,7 @@ interface PaystackVerifyResponse {
 }
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   if (!SHOP_ENABLED) return NextResponse.json({ error: 'Not found.' }, { status: 404 });
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
