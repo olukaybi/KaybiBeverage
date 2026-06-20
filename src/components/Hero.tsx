@@ -22,6 +22,7 @@ interface HeroProps {
   logoHeight?: number;
   logoAfterH1?: boolean;
   backgroundImage?: string;
+  backgroundPosition?: string;
 }
 
 export default function Hero({
@@ -41,6 +42,7 @@ export default function Hero({
   logoHeight,
   logoAfterH1,
   backgroundImage,
+  backgroundPosition = 'left top',
 }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -62,7 +64,7 @@ export default function Hero({
           fill
           priority
           className="object-cover"
-          style={{ objectPosition: 'left top' }}
+          style={{ objectPosition: backgroundPosition }}
           sizes="100vw"
         />
         <div className="relative z-10 flex w-full overflow-hidden">
