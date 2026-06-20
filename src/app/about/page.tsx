@@ -25,15 +25,12 @@ export default function AboutPage() {
       <Hero
         eyebrow="Our Story"
         headline={'Born in Eket.\nBuilt for Every Table.'}
-        logoSrc="/kayora-logo.png"
-        logoWidth={400}
-        logoHeight={400}
-        logoAfterH1
         subhead="Kaybi Beverage Industries was founded on a stubborn idea — that the water Nigerians drink every day should meet the highest standard, not the lowest acceptable one."
         primaryCTA={{ label: 'Schedule a Visit', href: '/contact' }}
         secondaryCTA={{ label: 'Our Water', href: '/our-water' }}
-        imageSrc="/images/factory/factory-01.jpg"
-        imageAlt="Kaybi Beverage Industries production facility — Eket, Akwa Ibom"
+        backgroundImage="/02_kayora_hero_trio.png"
+        backgroundPosition="center top"
+        imageAlt="Kayora 30cl, 50cl and 75cl studio shot — premium purified water, produced in Eket, Akwa Ibom"
       />
 
       {/* Why We Built This Company */}
