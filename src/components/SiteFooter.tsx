@@ -233,18 +233,24 @@ export default function SiteFooter() {
       </div>
 
       {/* Kaybi parent-company attribution */}
-      <div className="bg-kayora-blue-950 border-t border-white/10 px-4 sm:px-6 lg:px-8 py-5">
+      <div className="bg-kayora-blue-950 border-t border-white/10 px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-7xl mx-auto flex items-center gap-4">
           <Image
             src="/kaybi-logo.png"
             alt="Kaybi Beverage Industries Limited"
             width={512}
             height={512}
-            className="w-12 h-12 shrink-0"
+            className="w-16 h-16 shrink-0"
           />
           <div className="min-w-0">
             <p className="text-xs text-kayora-cream/70 leading-snug">A product of Kaybi Beverage Industries Limited</p>
-            <p className="text-xs text-kayora-cream/40 leading-snug mt-0.5">173 Eket Oron Road, Eket, Akwa Ibom · NAFDAC Reg. A1-111026 · SON MANCAP Registered</p>
+            <div className="flex flex-wrap gap-x-2 gap-y-0.5 mt-0.5">
+              <span className="text-xs text-kayora-cream/40 leading-snug">173 Eket Oron Road, Eket, Akwa Ibom</span>
+              <span className="text-xs text-kayora-cream/30 leading-snug" aria-hidden="true">·</span>
+              <span className="text-xs text-kayora-cream/40 leading-snug">NAFDAC Reg. A1-111026</span>
+              <span className="text-xs text-kayora-cream/30 leading-snug" aria-hidden="true">·</span>
+              <span className="text-xs text-kayora-cream/40 leading-snug">SON MANCAP Registered</span>
+            </div>
           </div>
         </div>
       </div>

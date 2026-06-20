@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { createHash } from 'crypto';
 import { checkRateLimit } from '@/lib/ratelimit';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const schema = z.object({
   fullName: z.string().min(2).max(100).trim(),
@@ -45,6 +44,7 @@ function htmlRow(label: string, value: string): string {
 }
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
   if (!checkRateLimit(ip, 5, 10 * 60 * 1000)) {
     return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
