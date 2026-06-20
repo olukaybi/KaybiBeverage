@@ -90,8 +90,9 @@ export default function DistributionPage() {
         subhead="Kayora is recruiting distributors across Akwa Ibom and our live South-South and South-East states — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives, dependable supply, real marketing support — and a brand customers already trust."
         primaryCTA={{ label: 'Apply to Distribute', href: '#apply' }}
         secondaryCTA={{ label: 'Talk to Our Team', href: '/contact' }}
-        imageSrc="/images/factory/factory-03.jpg"
-        imageAlt="Kaybi Beverage Industries — Kayora water production and distribution"
+        backgroundImage="/09_kayora_warehouse_banner.png"
+        backgroundPosition="center center"
+        imageAlt="Kayora water palletised at the Eket warehouse — ready for distribution across Akwa Ibom and South-South Nigeria"
       />
 
       <PillarGrid
