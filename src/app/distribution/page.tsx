@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import PillarGrid from '@/components/PillarGrid';
 import DistributorForm from '@/components/DistributorForm';
@@ -201,6 +202,83 @@ export default function DistributionPage() {
                 <p className="text-kayora-graphite text-sm leading-relaxed">{step.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Case-pack B2B section */}
+      <section className="bg-white py-[clamp(4rem,8vw,8rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Left: case-pack image */}
+            <div className="lg:col-span-6">
+              <Image
+                src="/08_kayora_12_pack_case.png"
+                alt="Kayora water cases palletised for distribution — 12 bottles per shrink-wrapped case"
+                width={1200}
+                height={800}
+                className="w-full h-auto rounded-2xl shadow-2xl"
+                sizes="(min-width: 1024px) 45vw, 90vw"
+              />
+            </div>
+
+            {/* Right: B2B content */}
+            <div className="lg:col-span-6">
+              <p className="text-xs uppercase tracking-wide text-kayora-gold-500 font-sans mb-3">
+                Wholesale &amp; Bulk
+              </p>
+              <h2 className="font-display text-3xl lg:text-4xl text-kayora-blue-900 mb-5">
+                Built for trade.
+              </h2>
+              <p className="text-base lg:text-lg leading-relaxed text-kayora-graphite mb-8">
+                Kayora ships in shrink-wrapped 12-bottle cases from our Eket facility, palletised for warehouse and last-mile efficiency. Hotels, restaurants, and authorised distributors order direct — attractive rebates and other incentives on consistent volume.
+              </p>
+
+              <div className="space-y-5 mb-8">
+                <div className="flex gap-4">
+                  <span className="flex-shrink-0 w-2 h-2 rounded-full bg-kayora-gold-500 mt-2" aria-hidden="true" />
+                  <div>
+                    <p className="font-semibold text-kayora-ink mb-0.5">Case pack</p>
+                    <p className="text-kayora-graphite text-sm leading-relaxed">
+                      Twelve bottles per shrink-wrapped case. Available across our 30cl, 50cl and 75cl pack sizes. The 18.9L dispenser bottle ships individually.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <span className="flex-shrink-0 w-2 h-2 rounded-full bg-kayora-gold-500 mt-2" aria-hidden="true" />
+                  <div>
+                    <p className="font-semibold text-kayora-ink mb-0.5">Delivery</p>
+                    <p className="text-kayora-graphite text-sm leading-relaxed">
+                      Our Eket plant runs daily production. Orders placed Monday are on the road by Wednesday. We deliver directly across Akwa Ibom and through our distributor network into South-South and South-East states.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <span className="flex-shrink-0 w-2 h-2 rounded-full bg-kayora-gold-500 mt-2" aria-hidden="true" />
+                  <div>
+                    <p className="font-semibold text-kayora-ink mb-0.5">Authorised distributors</p>
+                    <p className="text-kayora-graphite text-sm leading-relaxed">
+                      NAFDAC Registered A1-111026, SON MANCAP Registered. The regulatory credentials your hospitality or retail operation needs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#apply"
+                  className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-white font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
+                >
+                  Apply to distribute
+                </a>
+                <a
+                  href="tel:+2347070238028"
+                  className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-900/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
+                >
+                  Call corporate: 07070&nbsp;238028
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
