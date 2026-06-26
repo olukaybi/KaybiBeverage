@@ -6,7 +6,7 @@ import CTASection from '@/components/CTASection';
 export const metadata: Metadata = {
   title: 'Kayora Products — 30cl, 50cl, 75cl & 18.9L | Premium Purified Water',
   description:
-    'Kayora Premium Purified Water in four sizes: 30cl Sharp-sharp (events), 50cl Original (everyday), 75cl Jara (premium dining), 18.9L Never Finish (homes & offices). NAFDAC Registered A1-111026.',
+    'Kayora Premium Purified Water in four sizes: 30cl Sharp-sharp (events), 50cl Original (everyday), 75cl Jara (premium dining), 18.9L Never Finish (homes & offices). Plus an 18.9L refill service at ₦1,000. NAFDAC Registered A1-111026.',
   alternates: { canonical: 'https://www.kayorawater.com/products' },
   openGraph: { url: 'https://www.kayorawater.com/products' },
 };
@@ -193,6 +193,48 @@ export default function ProductsPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Refill Service */}
+      <section className="bg-white py-[clamp(4rem,8vw,8rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-10">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              Refill Service
+            </p>
+            <h2 className="font-display text-display-sm text-kayora-ink">
+              Already Have a Kayora Bottle?
+            </h2>
+          </div>
+          <div className="max-w-sm">
+            <div className="flex flex-col bg-kayora-cream border border-kayora-mist rounded-2xl overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="relative h-60 bg-kayora-blue-900/5">
+                <Image
+                  src="/07_kayora_18_9l_single_corrected.png"
+                  alt="Kayora 18.9L Never Finish — refill service for Kayora-branded bottles"
+                  fill
+                  className="object-contain p-6"
+                  sizes="(min-width: 640px) 384px, 100vw"
+                />
+              </div>
+              <div className="flex flex-col flex-1 p-6">
+                <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">Refill Service</p>
+                <h3 className="font-display text-2xl font-semibold text-kayora-ink mb-1">Never Finish Refill</h3>
+                <p className="text-sm text-kayora-stone mb-4">Bring your empty Kayora bottle. Get clean water back.</p>
+                <p className="font-semibold text-kayora-ink mb-1">₦1,000 per refill</p>
+                <p className="text-sm text-kayora-graphite leading-relaxed mb-6">
+                  For customers with a Kayora-branded empty 18.9L bottle.
+                </p>
+                <Link
+                  href="/products/18-9l-refill"
+                  className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+                >
+                  Order refill →
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

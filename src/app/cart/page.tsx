@@ -20,6 +20,7 @@ export default function CartPage() {
   // Minimum order: ₦15,000 subtotal (to ensure minimum for dispatch)
   const MIN_SUBTOTAL = 15000;
   const belowMin = subtotal < MIN_SUBTOTAL && items.length > 0;
+  const isRefillOnly = items.length > 0 && items.every((i) => i.sku === '18.9L-refill');
 
   if (items.length === 0) {
     return (
@@ -74,6 +75,8 @@ export default function CartPage() {
                         <p className="text-xs text-kayora-stone mt-0.5">
                           {item.unit_of_sale === 'case'
                             ? `Case of ${item.bottles_per_unit}`
+                            : item.unit_of_sale === 'refill'
+                            ? 'Refill service — bring your empty Kayora bottle'
                             : 'Bottle'}{' '}
                           · {formatNaira(item.price_naira)} each
                         </p>
@@ -117,7 +120,7 @@ export default function CartPage() {
 
                     {belowItemMin && (
                       <p className="text-xs text-amber-700 mt-2">
-                        Minimum {item.min_order_quantity} {item.unit_of_sale === 'case' ? 'cases' : 'bottles'} for this product
+                        Minimum {item.min_order_quantity} {item.unit_of_sale === 'case' ? 'cases' : item.unit_of_sale === 'refill' ? 'refills' : 'bottles'} for this product
                       </p>
                     )}
                   </div>
@@ -178,10 +181,16 @@ export default function CartPage() {
 
               {belowMin && (
                 <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                  <p className="text-xs text-amber-800">
-                    Minimum order is {formatNaira(MIN_SUBTOTAL)}. Add{' '}
-                    {formatNaira(MIN_SUBTOTAL - subtotal)} more to continue.
-                  </p>
+                  {isRefillOnly ? (
+                    <p className="text-xs text-amber-800">
+                      Refill orders under {formatNaira(MIN_SUBTOTAL)} are not available for home delivery. Bring your empty Kayora bottle to our Eket factory at 173 Eket Oron Road, or to any authorised dealer, for direct exchange. For delivery, your refill order must total {formatNaira(MIN_SUBTOTAL)} or more.
+                    </p>
+                  ) : (
+                    <p className="text-xs text-amber-800">
+                      Minimum order is {formatNaira(MIN_SUBTOTAL)}. Add{' '}
+                      {formatNaira(MIN_SUBTOTAL - subtotal)} more to continue.
+                    </p>
+                  )}
                 </div>
               )}
 

@@ -57,7 +57,11 @@ export async function POST(req: NextRequest) {
   const data = parse.data;
 
   if (data.subtotal_naira < 15000) {
-    return NextResponse.json({ error: 'Minimum order subtotal is ₦15,000.' }, { status: 422 });
+    const refillOnly = data.items.every((item) => item.product_sku === '18.9L-refill');
+    const error = refillOnly
+      ? 'Refill orders under ₦15,000 are not available for home delivery. Bring your empty Kayora bottle to our Eket factory at 173 Eket Oron Road, or to any authorised dealer, for direct exchange. For delivery, your refill order must total ₦15,000 or more.'
+      : 'Minimum order subtotal is ₦15,000.';
+    return NextResponse.json({ error }, { status: 422 });
   }
 
   const supabase = await createServiceClient();

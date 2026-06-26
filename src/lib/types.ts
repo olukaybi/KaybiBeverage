@@ -1,5 +1,5 @@
-export type ProductSku = '30cl' | '50cl' | '75cl' | '18.9L';
-export type UnitOfSale = 'case' | 'bottle';
+export type ProductSku = '30cl' | '50cl' | '75cl' | '18.9L' | '18.9L-refill';
+export type UnitOfSale = 'case' | 'bottle' | 'refill';
 export type DeliveryZoneId = 'eket_city' | 'uyo' | 'wider_akwa_ibom';
 export type OrderStatus = 'pending_payment' | 'paid' | 'scheduled' | 'dispatched' | 'delivered' | 'cancelled';
 export type SubscriptionFrequency = 'weekly' | 'biweekly' | 'monthly';
@@ -13,8 +13,9 @@ export interface Product {
   bottles_per_unit: number;
   price_naira: number;
   min_order_quantity: number;
-  category: 'pet' | 'pc';
+  category: 'pet' | 'pc' | 'refill';
   in_stock: boolean;
+  requires_empty_bottle?: boolean;
   active: boolean;
   display_order: number;
   zoho_item_id?: string;
