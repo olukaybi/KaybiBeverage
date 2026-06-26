@@ -7,7 +7,7 @@ export const PRODUCTS: Product[] = [
     nickname: 'Sharp-sharp',
     unit_of_sale: 'case',
     bottles_per_unit: 24,
-    price_naira: 2100,
+    price_naira: 2300,
     min_order_quantity: 10,
     category: 'pet',
     in_stock: true,
@@ -20,7 +20,7 @@ export const PRODUCTS: Product[] = [
     nickname: 'Original',
     unit_of_sale: 'case',
     bottles_per_unit: 12,
-    price_naira: 1600,
+    price_naira: 1670,
     min_order_quantity: 10,
     category: 'pet',
     in_stock: true,
@@ -33,7 +33,7 @@ export const PRODUCTS: Product[] = [
     nickname: 'Jara',
     unit_of_sale: 'case',
     bottles_per_unit: 12,
-    price_naira: 1900,
+    price_naira: 1800,
     min_order_quantity: 10,
     category: 'pet',
     in_stock: true,
@@ -53,6 +53,20 @@ export const PRODUCTS: Product[] = [
     active: true,
     display_order: 4,
   },
+  {
+    sku: '18.9L-refill',
+    display_name: '18.9L Refill',
+    nickname: 'Never Finish Refill',
+    unit_of_sale: 'refill',
+    bottles_per_unit: 1,
+    price_naira: 1000,
+    min_order_quantity: 1,
+    category: 'refill',
+    in_stock: true,
+    active: true,
+    display_order: 5,
+    requires_empty_bottle: true,
+  },
 ];
 
 export const DELIVERY_ZONES: DeliveryZone[] = [
@@ -66,6 +80,7 @@ export const PRODUCT_IMAGES: Record<string, string> = {
   '50cl': '/images/products/kayora-50cl-hero-blue.png',
   '75cl': '/images/products/kayora-75cl-hero-blue.png',
   '18.9L': '/images/products/kayora-18l-hero-blue.png',
+  '18.9L-refill': '/07_kayora_18_9l_single_corrected.png',
 };
 
 export function formatNaira(amount: number): string {
