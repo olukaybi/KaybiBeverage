@@ -22,6 +22,7 @@ interface HeroProps {
   logoHeight?: number;
   logoAfterH1?: boolean;
   backgroundImage?: string;
+  mobileBackgroundImage?: string;
   backgroundPosition?: string;
 }
 
@@ -42,6 +43,7 @@ export default function Hero({
   logoHeight,
   logoAfterH1,
   backgroundImage,
+  mobileBackgroundImage,
   backgroundPosition = 'left top',
 }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
@@ -62,15 +64,25 @@ export default function Hero({
       <section className="overflow-hidden lg:relative lg:min-h-[680px] lg:flex lg:items-center" aria-label="Hero">
         {/* Image: own block on mobile, absolute background on lg+ */}
         <div
-          className="relative w-full aspect-[1792/1004] bg-[#E6F2F4] lg:bg-transparent lg:absolute lg:inset-0 lg:aspect-auto lg:h-auto"
+          className="relative w-full aspect-[1600/1531] bg-[#E6F2F4] lg:bg-transparent lg:absolute lg:inset-0 lg:aspect-auto lg:h-auto"
           style={{ '--desktop-obj-pos': backgroundPosition } as React.CSSProperties}
         >
+          {/* Mobile asset — shown below lg breakpoint */}
           <Image
-            src={backgroundImage}
+            src={mobileBackgroundImage ?? backgroundImage!}
             alt={imageAlt}
             fill
             priority
-            className="object-contain object-center lg:object-cover lg:[object-position:var(--desktop-obj-pos)]"
+            className="object-cover object-center lg:hidden"
+            sizes="100vw"
+          />
+          {/* Desktop asset — shown at lg and above */}
+          <Image
+            src={backgroundImage!}
+            alt={imageAlt}
+            fill
+            priority
+            className="hidden object-cover lg:block lg:[object-position:var(--desktop-obj-pos)]"
             sizes="100vw"
           />
         </div>
