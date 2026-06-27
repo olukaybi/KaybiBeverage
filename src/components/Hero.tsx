@@ -55,20 +55,29 @@ export default function Hero({
   const yParallax = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
 
   // Banner-background layout (photo carries the visual; text overlays right side)
+  // Mobile: image block at top, content card flows below.
+  // lg+: image is absolute background, card overlays the right side.
   if (backgroundImage) {
     return (
-      <section className="relative min-h-[600px] lg:min-h-[680px] flex items-center overflow-hidden" aria-label="Hero">
-        <Image
-          src={backgroundImage}
-          alt={imageAlt}
-          fill
-          priority
-          className="object-cover"
-          style={{ objectPosition: backgroundPosition }}
-          sizes="100vw"
-        />
-        <div className="relative z-10 flex w-full overflow-hidden">
-          <div className="relative z-10 ml-auto max-w-sm md:max-w-md lg:max-w-lg mx-4 lg:mr-12 px-7 lg:px-9 py-8 lg:py-10 my-auto bg-kayora-cream/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/40">
+      <section className="overflow-hidden lg:relative lg:min-h-[680px] lg:flex lg:items-center" aria-label="Hero">
+        {/* Image: own block on mobile, absolute background on lg+ */}
+        <div
+          className="relative h-[55vw] min-h-[280px] max-h-[420px] lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 lg:max-h-none"
+          style={{ '--desktop-obj-pos': backgroundPosition } as React.CSSProperties}
+        >
+          <Image
+            src={backgroundImage}
+            alt={imageAlt}
+            fill
+            priority
+            className="object-cover object-center lg:[object-position:var(--desktop-obj-pos)]"
+            sizes="100vw"
+          />
+        </div>
+        {/* Content card: full-width cream section below image on mobile,
+            floating overlay on the right at lg+ */}
+        <div className="relative z-10 lg:flex lg:w-full lg:overflow-hidden">
+          <div className="px-6 py-10 bg-kayora-cream lg:ml-auto lg:max-w-lg lg:mx-4 lg:mr-12 lg:px-9 lg:py-10 lg:my-auto lg:bg-kayora-cream/95 lg:backdrop-blur-sm lg:rounded-2xl lg:shadow-2xl lg:border lg:border-white/40">
             <p className="text-xs uppercase tracking-wide text-kayora-gold-500 font-sans mb-4">{eyebrow}</p>
             <h1 className="font-display text-display-md text-kayora-blue-900 mb-4 whitespace-pre-line">{headline}</h1>
             {logoTagline && (
