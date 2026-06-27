@@ -70,7 +70,7 @@ export default function Hero({
             alt={imageAlt}
             fill
             priority
-            className="object-cover object-center lg:[object-position:var(--desktop-obj-pos)]"
+            className="object-cover object-top lg:[object-position:var(--desktop-obj-pos)]"
             sizes="100vw"
           />
         </div>
