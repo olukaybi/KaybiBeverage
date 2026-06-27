@@ -60,6 +60,7 @@ export default function HomePage() {
       {/* Section 1 — Hero */}
       <Hero
         backgroundImage="/01_kayora_homepage_banner.png"
+        mobileBackgroundImage="/01_kayora_homepage_banner_mobile.jpg"
         eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Eight-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
