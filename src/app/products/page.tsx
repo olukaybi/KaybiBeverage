@@ -105,7 +105,7 @@ export default function ProductsPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/contact"
+                  href="/cart"
                   className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-gold-500 text-white font-semibold rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500"
                 >
                   Order Kayora
@@ -278,7 +278,7 @@ export default function ProductsPage() {
       <CTASection
         headline="Ready to Order?"
         body="Direct delivery across Akwa Ibom State. Distributor network across the South-South and South-East. Reach us and we will have water to you within 24–48 hours."
-        primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/cart' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         variant="blue"
       />

@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SHOP_ENABLED } from '@/lib/flags';
+import CartBadge from './CartBadge';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -139,8 +141,13 @@ export default function SiteHeader() {
                   </Link>
                 )
               ))}
+              {SHOP_ENABLED && (
+                <span className={scrolled ? 'text-kayora-graphite' : 'text-white'}>
+                  <CartBadge />
+                </span>
+              )}
               <Link
-                href="/contact"
+                href="/products"
                 className="inline-flex items-center justify-center min-h-[48px] px-5 py-2 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2"
               >
                 Order Kayora
@@ -228,9 +235,21 @@ export default function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="p-4 border-t border-kayora-mist">
+        <div className="p-4 border-t border-kayora-mist space-y-3">
+          {SHOP_ENABLED && (
+            <Link
+              href="/cart"
+              onClick={() => setDrawerOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 text-kayora-graphite font-medium rounded-lg hover:bg-kayora-blue-100 hover:text-kayora-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 transition-colors"
+            >
+              <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg>
+              View Cart
+            </Link>
+          )}
           <Link
-            href="/contact"
+            href="/products"
             onClick={() => setDrawerOpen(false)}
             className="flex items-center justify-center min-h-[48px] w-full px-5 py-3 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
           >

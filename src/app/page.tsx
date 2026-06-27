@@ -64,7 +64,7 @@ export default function HomePage() {
         eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
         headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
         subhead="Eight-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
-        primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/products' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         imageAlt="Kayora studio banner — premium purified water, produced in Eket, Akwa Ibom"
       />

@@ -210,7 +210,7 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/contact"
+                  href="/cart"
                   className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-gold-500 text-white font-semibold rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500"
                 >
                   Order Kayora
@@ -334,7 +334,7 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
       <CTASection
         headline={`Order the Kayora ${sku.size} ${sku.name}`}
         body="Direct delivery across Akwa Ibom State. Distributor network across the South-South and South-East. Call, email or message us and we will respond within hours."
-        primaryCTA={{ label: 'Order Kayora', href: '/contact' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/cart' }}
         secondaryCTA={{ label: 'Distributor Enquiry', href: '/distribution' }}
         variant="cream"
       />
