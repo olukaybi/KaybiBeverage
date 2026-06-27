@@ -62,7 +62,7 @@ export default function Hero({
       <section className="overflow-hidden lg:relative lg:min-h-[680px] lg:flex lg:items-center" aria-label="Hero">
         {/* Image: own block on mobile, absolute background on lg+ */}
         <div
-          className="relative h-[55vw] min-h-[280px] max-h-[420px] lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 lg:max-h-none"
+          className="relative h-[55vw] min-h-[280px] max-h-[420px] bg-[#E6F2F4] lg:bg-transparent lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 lg:max-h-none"
           style={{ '--desktop-obj-pos': backgroundPosition } as React.CSSProperties}
         >
           <Image
@@ -70,7 +70,7 @@ export default function Hero({
             alt={imageAlt}
             fill
             priority
-            className="object-cover object-top lg:[object-position:var(--desktop-obj-pos)]"
+            className="object-contain object-center lg:object-cover lg:[object-position:var(--desktop-obj-pos)]"
             sizes="100vw"
           />
         </div>
