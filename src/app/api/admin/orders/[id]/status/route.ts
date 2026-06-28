@@ -35,7 +35,7 @@ export async function PATCH(
     return NextResponse.json({ error: 'Invalid status.' }, { status: 422 });
   }
 
-  const serviceSupabase = await createServiceClient();
+  const serviceSupabase = createServiceClient();
   const { error } = await serviceSupabase
     .from('orders')
     .update({ status: parse.data.status })

@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Payment not completed.' }, { status: 402 });
   }
 
-  const supabase = await createServiceClient();
+  const supabase = createServiceClient();
 
   // Fetch order to validate amount and current status
   const { data: order, error: fetchError } = await supabase

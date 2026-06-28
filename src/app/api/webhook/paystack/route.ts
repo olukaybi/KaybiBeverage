@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
 
   const { reference, amount: paidKobo } = event.data;
 
-  const supabase = await createServiceClient();
+  const supabase = createServiceClient();
 
   const { data: order, error } = await supabase
     .from('orders')
