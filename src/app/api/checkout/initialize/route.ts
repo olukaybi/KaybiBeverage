@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error }, { status: 422 });
   }
 
-  const supabase = await createServiceClient();
+  const supabase = createServiceClient();
 
   // Upsert customer
   const { data: customerData, error: customerError } = await supabase

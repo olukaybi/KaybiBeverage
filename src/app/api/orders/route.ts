@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Minimum order subtotal is ₦15,000.' }, { status: 422 });
   }
 
-  const supabase = await createServiceClient();
+  const supabase = createServiceClient();
 
   // Upsert customer by email (create or find)
   const { data: customerData, error: customerError } = await supabase
