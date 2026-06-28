@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Hero from '@/components/Hero';
+import HeroSlider from '@/components/HeroSlider';
 import SKUCard from '@/components/SKUCard';
 import ProcessSteps from '@/components/ProcessSteps';
 
@@ -57,17 +57,8 @@ const skus = [
 export default function HomePage() {
   return (
     <>
-      {/* Section 1 — Hero */}
-      <Hero
-        backgroundImage="/01_kayora_homepage_banner.png"
-        mobileBackgroundImage="/01_kayora_homepage_banner_mobile.jpg"
-        eyebrow="Premium Purified Water · NAFDAC Reg. A1-111026"
-        headline={'Purified to the Highest Standard.\nSafe for Every Table.'}
-        subhead="Eight-stage purified water from the heart of Akwa Ibom — for the homes, offices, hotels and celebrations that won't settle for less."
-        primaryCTA={{ label: 'Order Kayora', href: '/products' }}
-        secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        imageAlt="Kayora studio banner — premium purified water, produced in Eket, Akwa Ibom"
-      />
+      {/* Section 1 — Hero Slider */}
+      <HeroSlider />
 
       {/* Trust Strip */}
       <section className="bg-kayora-blue-900 py-4 border-t border-white/10">
