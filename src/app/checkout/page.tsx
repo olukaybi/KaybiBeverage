@@ -54,10 +54,11 @@ function CheckoutForm() {
   const [payMode, setPayMode] = useState<'card' | 'cod' | null>(null);
   const [error, setError] = useState('');
   const paystackLoaded = useRef(false);
+  const orderPlacedRef = useRef(false);
 
-  // Redirect if cart is empty
+  // Redirect if cart is empty — but not after a successful order placement
   useEffect(() => {
-    if (items.length === 0) router.replace('/shop');
+    if (items.length === 0 && !orderPlacedRef.current) router.replace('/shop');
   }, [items, router]);
 
   // Load Paystack inline script once
@@ -110,6 +111,7 @@ function CheckoutForm() {
     setSubmitting(true);
     setPayMode('card');
 
+    let handler: { openIframe: () => void };
     try {
       const res = await fetch('/api/checkout/initialize', {
         method: 'POST',
@@ -131,7 +133,7 @@ function CheckoutForm() {
         return;
       }
 
-      const handler = window.PaystackPop.setup({
+      handler = window.PaystackPop.setup({
         key: initData.public_key,
         email: initData.email,
         amount: initData.amount_kobo,
@@ -158,6 +160,7 @@ function CheckoutForm() {
               setSubmitting(false);
               return;
             }
+            orderPlacedRef.current = true;
             clearCart();
             router.push(`/order-confirmation/${verifyData.order_number}?paid=true`);
           } catch {
@@ -166,12 +169,15 @@ function CheckoutForm() {
           }
         },
       });
-
-      handler.openIframe();
     } catch {
       setError('Network error. Please check your connection and try again.');
       setSubmitting(false);
+      return;
     }
+
+    // openIframe is called outside the try block so a successful popup
+    // opening never triggers the "Network error" catch above
+    handler.openIframe();
   }
 
   async function handleCOD(e: React.FormEvent) {
@@ -195,6 +201,7 @@ function CheckoutForm() {
         return;
       }
 
+      orderPlacedRef.current = true;
       clearCart();
       router.push(`/order-confirmation/${data.order_number}`);
     } catch {
