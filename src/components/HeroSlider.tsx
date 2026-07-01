@@ -17,6 +17,7 @@ interface Slide {
   objectFit: 'cover' | 'contain';
   objectPosition?: string;
   bgColor?: string;
+  contentAlign?: 'left' | 'right';
 }
 
 const slides: Slide[] = [
@@ -31,6 +32,7 @@ const slides: Slide[] = [
     overlayStrength: 0.35,
     objectFit: 'cover',
     objectPosition: 'left top',
+    contentAlign: 'right',
   },
   {
     id: 'sharp-sharp',
@@ -172,7 +174,7 @@ export default function HeroSlider() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-              className={`max-w-xl ${lightBg ? 'lg:ml-auto' : ''}`}
+              className={`max-w-xl ${(lightBg || slide.contentAlign === 'right') ? 'lg:ml-auto' : ''}`}
             >
               <p className={`text-xs uppercase tracking-widest font-sans mb-4 ${eyebrowColor}`}>
                 {slide.eyebrow}
