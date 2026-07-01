@@ -111,7 +111,7 @@ function CheckoutForm() {
     setSubmitting(true);
     setPayMode('card');
 
-    let handler: { openIframe: () => void };
+    let handler: { openIframe: () => void } | undefined;
     try {
       const res = await fetch('/api/checkout/initialize', {
         method: 'POST',
@@ -169,15 +169,24 @@ function CheckoutForm() {
           }
         },
       });
-    } catch {
-      setError('Network error. Please check your connection and try again.');
+    } catch (err) {
+      console.error('[checkout/pay-with-card] caught error:', err);
+      // Only surface the error to the user if setup() never ran — i.e. the
+      // handler was never assigned.  If setup() succeeded the popup will open
+      // and showing an error banner would be misleading.
+      if (!handler) {
+        setError('Network error. Please check your connection and try again.');
+      }
       setSubmitting(false);
-      return;
+      // No early return: if handler somehow exists despite the error, fall
+      // through so openIframe() still fires below.
     }
 
-    // openIframe is called outside the try block so a successful popup
-    // opening never triggers the "Network error" catch above
-    handler.openIframe();
+    if (handler) {
+      handler.openIframe();
+    } else {
+      console.error('[checkout/pay-with-card] handler never created — popup will not open');
+    }
   }
 
   async function handleCOD(e: React.FormEvent) {
