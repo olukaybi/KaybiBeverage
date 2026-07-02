@@ -105,7 +105,7 @@ function CheckoutForm() {
     };
   }
 
-  async function handlePayWithCard(e: React.FormEvent) {
+  async function handlePayWithCard(e: React.MouseEvent) {
     e.preventDefault();
     setError('');
     setSubmitting(true);
@@ -180,7 +180,7 @@ function CheckoutForm() {
     handler.openIframe();
   }
 
-  async function handleCOD(e: React.FormEvent) {
+  async function handleCOD(e: React.MouseEvent) {
     e.preventDefault();
     setError('');
     setSubmitting(true);
@@ -424,16 +424,18 @@ function CheckoutForm() {
               </div>
 
               <div className="mt-6 space-y-3">
-                {/* Primary: Pay by card */}
-                <form onSubmit={handlePayWithCard}>
+                {/* Primary: Pay by card — plain button, no <form>, so no
+                    native submit/navigation can race the fetch flow */}
+                <div>
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={handlePayWithCard}
                     disabled={submitting}
                     className="w-full inline-flex items-center justify-center min-h-[48px] px-5 py-3 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2 disabled:opacity-60"
                   >
                     {submitting && payMode === 'card' ? 'Opening payment…' : 'Pay with card'}
                   </button>
-                </form>
+                </div>
 
                 <div className="flex items-center gap-2 text-kayora-stone text-xs">
                   <hr className="flex-1 border-kayora-mist" />
@@ -441,16 +443,17 @@ function CheckoutForm() {
                   <hr className="flex-1 border-kayora-mist" />
                 </div>
 
-                {/* Secondary: COD / bank transfer */}
-                <form onSubmit={handleCOD}>
+                {/* Secondary: COD / bank transfer — plain button, no <form> */}
+                <div>
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={handleCOD}
                     disabled={submitting}
                     className="w-full inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 border border-kayora-blue-900 text-kayora-blue-900 text-sm font-semibold rounded-lg hover:bg-kayora-blue-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 disabled:opacity-60"
                   >
                     {submitting && payMode === 'cod' ? 'Placing order…' : 'Place order — pay later'}
                   </button>
-                </form>
+                </div>
               </div>
 
               <p className="mt-4 text-xs text-kayora-stone text-center leading-relaxed">
