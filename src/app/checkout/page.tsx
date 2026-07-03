@@ -111,28 +111,45 @@ function CheckoutForm() {
     setSubmitting(true);
     setPayMode('card');
 
-    let handler: { openIframe: () => void };
+    // Step 1: Fetch initialize response
+    let initData: {
+      error?: string;
+      order_id: string;
+      order_number: string;
+      reference: string;
+      amount_kobo: number;
+      email: string;
+      public_key: string;
+    };
     try {
       const res = await fetch('/api/checkout/initialize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(buildOrderPayload()),
       });
-
-      const initData = await res.json();
-
+      initData = await res.json();
       if (!res.ok) {
         setError(initData.error ?? 'Something went wrong. Please try again.');
         setSubmitting(false);
         return;
       }
+    } catch (err) {
+      console.error('[checkout] initialize fetch failed:', err);
+      setError('Network error. Please check your connection and try again.');
+      setSubmitting(false);
+      return;
+    }
 
-      if (!window.PaystackPop) {
-        setError('Payment provider failed to load. Please refresh and try again.');
-        setSubmitting(false);
-        return;
-      }
+    // Step 2: Confirm PaystackPop is loaded
+    if (!window.PaystackPop) {
+      setError('Payment provider failed to load. Please refresh and try again.');
+      setSubmitting(false);
+      return;
+    }
 
+    // Step 3: Set up Paystack handler in ISOLATED try/catch with logging
+    let handler: { openIframe: () => void } | null = null;
+    try {
       handler = window.PaystackPop.setup({
         key: initData.public_key,
         email: initData.email,
@@ -144,7 +161,7 @@ function CheckoutForm() {
           setSubmitting(false);
           setPayMode(null);
         },
-        callback: async (response) => {
+        callback: async (response: { reference: string }) => {
           try {
             const verifyRes = await fetch('/api/checkout/verify', {
               method: 'POST',
@@ -163,21 +180,35 @@ function CheckoutForm() {
             orderPlacedRef.current = true;
             clearCart();
             router.push(`/order-confirmation/${verifyData.order_number}?paid=true`);
-          } catch {
+          } catch (err) {
+            console.error('[checkout] verify fetch failed:', err);
             setError('Network error during verification. Call us on 0904 078 9918.');
             setSubmitting(false);
           }
         },
       });
-    } catch {
-      setError('Network error. Please check your connection and try again.');
-      setSubmitting(false);
-      return;
+      console.log('[checkout] Paystack handler created successfully');
+    } catch (err) {
+      console.error('[checkout] Paystack.setup() threw:', err);
+      // Do NOT block the flow — if handler was assigned despite the throw,
+      // openIframe below will still attempt to run
     }
 
-    // openIframe is called outside the try block so a successful popup
-    // opening never triggers the "Network error" catch above
-    handler.openIframe();
+    // Step 4: Open the popup if we have a handler
+    if (handler) {
+      try {
+        handler.openIframe();
+        console.log('[checkout] openIframe() called');
+      } catch (err) {
+        console.error('[checkout] openIframe() threw:', err);
+        setError('Could not open payment window. Please refresh and try again.');
+        setSubmitting(false);
+      }
+    } else {
+      console.error('[checkout] No handler was created; popup cannot open');
+      setError('Payment window could not be prepared. Please refresh and try again.');
+      setSubmitting(false);
+    }
   }
 
   async function handleCOD(e: React.MouseEvent) {
