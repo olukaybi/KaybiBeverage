@@ -133,6 +133,7 @@ function CheckoutForm() {
         setSubmitting(false);
         return;
       }
+      console.log('[checkout] initialize succeeded, reference:', initData.reference);
     } catch (err) {
       console.error('[checkout] initialize fetch failed:', err);
       setError('Network error. Please check your connection and try again.');
@@ -142,6 +143,7 @@ function CheckoutForm() {
 
     // Step 2: Confirm PaystackPop is loaded
     if (!window.PaystackPop) {
+      console.error('[checkout] window.PaystackPop is undefined');
       setError('Payment provider failed to load. Please refresh and try again.');
       setSubmitting(false);
       return;
@@ -158,10 +160,12 @@ function CheckoutForm() {
         ref: initData.reference,
         metadata: { order_number: initData.order_number },
         onClose: () => {
+          console.log('[checkout] Paystack popup closed by user');
           setSubmitting(false);
           setPayMode(null);
         },
         callback: async (response: { reference: string }) => {
+          console.log('[checkout] Paystack callback fired, reference:', response.reference);
           try {
             const verifyRes = await fetch('/api/checkout/verify', {
               method: 'POST',
@@ -187,7 +191,7 @@ function CheckoutForm() {
           }
         },
       });
-      console.log('[checkout] Paystack handler created successfully');
+      console.log('[checkout] Paystack handler created successfully:', handler);
     } catch (err) {
       console.error('[checkout] Paystack.setup() threw:', err);
       // Do NOT block the flow — if handler was assigned despite the throw,
@@ -198,7 +202,7 @@ function CheckoutForm() {
     if (handler) {
       try {
         handler.openIframe();
-        console.log('[checkout] openIframe() called');
+        console.log('[checkout] handler.openIframe() called');
       } catch (err) {
         console.error('[checkout] openIframe() threw:', err);
         setError('Could not open payment window. Please refresh and try again.');
