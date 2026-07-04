@@ -120,9 +120,11 @@ export default function HeroSlider() {
 
   // Text is dark for light-bg product slides, white for photo slides
   const lightBg = !!slide.bgColor;
+  const isBrandSlide = slide.id === 'brand';
   const textColor = lightBg ? 'text-kayora-blue-900' : 'text-white';
   const subColor = lightBg ? 'text-slate-700' : 'text-white/80';
-  const eyebrowColor = 'text-kayora-gold-500';
+  // Brand slide sits on the dark studio banner — brighter gold + semibold for legibility
+  const eyebrowColor = isBrandSlide ? 'font-semibold text-kayora-gold-300' : 'text-kayora-gold-500';
 
   return (
     <section
@@ -174,7 +176,7 @@ export default function HeroSlider() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-              className={`max-w-xl ${(lightBg || slide.contentAlign === 'right') ? 'lg:ml-auto' : ''}`}
+              className={`${isBrandSlide ? 'max-w-lg lg:mr-0 lg:pr-4' : 'max-w-xl'} ${(lightBg || slide.contentAlign === 'right') ? 'lg:ml-auto' : ''}`}
             >
               <p className={`text-xs uppercase tracking-widest font-sans mb-4 ${eyebrowColor}`}>
                 {slide.eyebrow}

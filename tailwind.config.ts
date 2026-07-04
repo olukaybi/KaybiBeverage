@@ -22,6 +22,7 @@ const config: Config = {
         },
         'kayora-gold': {
           100: '#F5EBD0',
+          300: '#DFC68D',
           500: '#C9A14A',
         },
         'kayora-ink': '#1A1A1A',
