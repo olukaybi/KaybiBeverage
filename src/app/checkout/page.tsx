@@ -164,31 +164,36 @@ function CheckoutForm() {
           setSubmitting(false);
           setPayMode(null);
         },
-        callback: async (response: { reference: string }) => {
+        // Paystack inline v1 rejects async functions here ("Attribute
+        // callback must be a valid function"), so this must stay a plain
+        // function with the async work wrapped inside.
+        callback: (response: { reference: string }) => {
           console.log('[checkout] Paystack callback fired, reference:', response.reference);
-          try {
-            const verifyRes = await fetch('/api/checkout/verify', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                reference: response.reference,
-                order_id: initData.order_id,
-              }),
-            });
-            const verifyData = await verifyRes.json();
-            if (!verifyRes.ok) {
-              setError(verifyData.error ?? 'Payment verification failed. Call us on 0904 078 9918.');
+          void (async () => {
+            try {
+              const verifyRes = await fetch('/api/checkout/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  reference: response.reference,
+                  order_id: initData.order_id,
+                }),
+              });
+              const verifyData = await verifyRes.json();
+              if (!verifyRes.ok) {
+                setError(verifyData.error ?? 'Payment verification failed. Call us on 0904 078 9918.');
+                setSubmitting(false);
+                return;
+              }
+              orderPlacedRef.current = true;
+              clearCart();
+              router.push(`/order-confirmation/${verifyData.order_number}?paid=true`);
+            } catch (err) {
+              console.error('[checkout] verify fetch failed:', err);
+              setError('Network error during verification. Call us on 0904 078 9918.');
               setSubmitting(false);
-              return;
             }
-            orderPlacedRef.current = true;
-            clearCart();
-            router.push(`/order-confirmation/${verifyData.order_number}?paid=true`);
-          } catch (err) {
-            console.error('[checkout] verify fetch failed:', err);
-            setError('Network error during verification. Call us on 0904 078 9918.');
-            setSubmitting(false);
-          }
+          })();
         },
       });
       console.log('[checkout] Paystack handler created successfully:', handler);
