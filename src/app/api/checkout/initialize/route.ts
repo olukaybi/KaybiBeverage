@@ -141,8 +141,9 @@ export async function POST(req: NextRequest) {
     console.error('Order items insert error:', itemsError);
   }
 
-  // Generate a stable reference tied to the order
-  const reference = `KAY-${orderData.order_number}-${Date.now()}`;
+  // Generate a stable reference tied to the order.
+  // order_number already carries the KAY- prefix, so use it as-is.
+  const reference = `${orderData.order_number}-${Date.now()}`;
 
   // Store the reference in the order row for webhook reconciliation
   await supabase
