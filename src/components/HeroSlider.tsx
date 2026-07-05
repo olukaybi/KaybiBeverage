@@ -16,6 +16,7 @@ interface Slide {
   overlayStrength: number;
   objectFit: 'cover' | 'contain';
   objectPosition?: string;
+  imageTransform?: string;
   bgColor?: string;
   contentAlign?: 'left' | 'right';
 }
@@ -43,7 +44,8 @@ const slides: Slide[] = [
     primaryCTA: { label: 'Order Sharp-sharp', href: '/products/30cl' },
     overlayStrength: 0.25,
     objectFit: 'contain',
-    objectPosition: 'left center',
+    objectPosition: 'left top',
+    imageTransform: 'translateY(16px) scale(1.15)',
     bgColor: '#dceef2',
   },
   {
@@ -55,7 +57,8 @@ const slides: Slide[] = [
     primaryCTA: { label: 'Order Original', href: '/products/50cl' },
     overlayStrength: 0.2,
     objectFit: 'contain',
-    objectPosition: 'left center',
+    objectPosition: 'left top',
+    imageTransform: 'translateY(60px) scale(1.10)',
     bgColor: '#e8f4f7',
   },
   {
@@ -67,7 +70,8 @@ const slides: Slide[] = [
     primaryCTA: { label: 'Order Jara', href: '/products/75cl' },
     overlayStrength: 0.2,
     objectFit: 'contain',
-    objectPosition: 'left center',
+    objectPosition: 'left top',
+    imageTransform: 'translateY(60px) scale(1.10)',
     bgColor: '#e8f4f7',
   },
   {
@@ -79,7 +83,8 @@ const slides: Slide[] = [
     primaryCTA: { label: 'Order Never Finish', href: '/products/18-9l' },
     overlayStrength: 0.2,
     objectFit: 'contain',
-    objectPosition: 'left center',
+    objectPosition: 'left top',
+    imageTransform: 'translateY(72px) scale(1.05)',
     bgColor: '#e8f4f7',
   },
   {
@@ -168,6 +173,8 @@ export default function HeroSlider() {
             style={{
               objectFit: slide.objectFit,
               objectPosition: slide.objectPosition ?? 'center',
+              transform: slide.imageTransform,
+              transformOrigin: 'left top',
             }}
             sizes="100vw"
           />
