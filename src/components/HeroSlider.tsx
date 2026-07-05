@@ -131,8 +131,22 @@ export default function HeroSlider() {
       className="relative w-full overflow-hidden"
       style={{ minHeight: 'clamp(560px, 80vh, 860px)' }}
       aria-label="Hero slider"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onPointerEnter={(e) => {
+        // Only pause for genuine mouse hover — not touch or pen, where the
+        // emulated mouseleave may never fire and autoplay would freeze
+        if (e.pointerType === 'mouse') setPaused(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === 'mouse') setPaused(false);
+      }}
+      onFocus={() => setPaused(true)}
+      onBlur={(e) => {
+        // Only unpause when focus leaves the section entirely,
+        // not when it moves between children within the section
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+          setPaused(false);
+        }
+      }}
     >
       {/* Background */}
       <AnimatePresence mode="sync">
