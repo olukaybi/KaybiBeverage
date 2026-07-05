@@ -36,7 +36,7 @@ const slides: Slide[] = [
   },
   {
     id: 'sharp-sharp',
-    backgroundImage: '/images/slider/sharp-sharp.png',
+    backgroundImage: '/images/products/kayora-30cl-hero-blue.png',
     eyebrow: 'Sharp-sharp · 30cl',
     headline: 'Built for Events.\nEasy to Chill. Easy to Share.',
     subhead: 'The Kayora you reach for at weddings, naming ceremonies and corporate functions. Compact, sleek, refreshing.',
@@ -48,7 +48,7 @@ const slides: Slide[] = [
   },
   {
     id: 'original',
-    backgroundImage: '/images/slider/original.png',
+    backgroundImage: '/images/products/kayora-50cl-hero-blue.png',
     eyebrow: 'Original · 50cl',
     headline: 'Everyday Hydration,\nPerfected.',
     subhead: 'Sized right for school bags, dashboards and desks across Akwa Ibom. The bottle that started it all.',
@@ -60,7 +60,7 @@ const slides: Slide[] = [
   },
   {
     id: 'jara',
-    backgroundImage: '/images/slider/jara.png',
+    backgroundImage: '/images/products/kayora-75cl-hero-blue.png',
     eyebrow: 'Jara · 75cl',
     headline: 'A Little Extra — The Way\nOnly Nigerians Know How.',
     subhead: 'Generous volume for long days, the gym and the road. For anyone who hydrates seriously.',
@@ -72,7 +72,7 @@ const slides: Slide[] = [
   },
   {
     id: 'never-finish',
-    backgroundImage: '/images/slider/never-finish.png',
+    backgroundImage: '/images/products/kayora-18l-hero-blue.png',
     eyebrow: 'Never Finish · 18.9L',
     headline: 'Keeps Homes, Offices\nand Hotels Running.',
     subhead: 'Clean. Sealed. Tracked from borehole to delivery. The dispenser standard for those who demand the best.',
@@ -84,7 +84,7 @@ const slides: Slide[] = [
   },
   {
     id: 'factory',
-    backgroundImage: '/images/slider/factory.png',
+    backgroundImage: '/images/slider/09_kayora_warehouse_banner.png',
     eyebrow: 'Made in Eket, Akwa Ibom',
     headline: 'Where Quality Begins.\nEight Stages. Zero Compromise.',
     subhead: 'State-of-the-art production at 173 Eket Oron Road — where steam-cleaned caps, ozone sterilisation and NAFDAC compliance meet.',
