@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createServiceClient } from '@/lib/supabase/server';
 import { checkRateLimit } from '@/lib/ratelimit';
+import {
+  sendCustomerCodConfirmation,
+  sendInternalOrderNotification,
+} from '@/lib/email/order-notifications';
 import { SHOP_ENABLED } from '@/lib/flags';
 
 const OrderItemSchema = z.object({
@@ -138,6 +142,24 @@ export async function POST(req: NextRequest) {
     console.error('Order items insert error:', itemsError);
     // Order already created — don't fail, just log
   }
+
+  // Notify customer + team about the pay-later order (never throws —
+  // the order is already written, so an email outage must not 500 this)
+  const emailInfo = {
+    orderNumber: orderData.order_number,
+    totalNaira: data.total_naira,
+    customerName: data.customer.full_name,
+    customerEmail: data.customer.email.toLowerCase(),
+    items: data.items.map((i) => ({
+      product_name: i.product_name,
+      quantity: i.quantity,
+      line_total_naira: i.line_total_naira,
+    })),
+    addressText: `${data.address.street_address}, ${data.address.city}${data.address.lga ? `, ${data.address.lga}` : ''} (${data.delivery_zone})`,
+    scheduledDeliveryDate: data.scheduled_delivery_date,
+  };
+  await sendCustomerCodConfirmation(emailInfo);
+  await sendInternalOrderNotification(emailInfo, 'cod');
 
   return NextResponse.json({ order_number: orderData.order_number }, { status: 201 });
 }
