@@ -27,7 +27,14 @@ declare global {
 function CheckoutForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const zoneParam = (searchParams.get('zone') ?? 'eket_city') as DeliveryZoneId;
+  // Only accept known active zones from the URL — anything else falls
+  // back to the default instead of being stored verbatim
+  const rawZone = searchParams.get('zone');
+  const zoneParam: DeliveryZoneId = DELIVERY_ZONES.some(
+    (z) => z.id === rawZone && z.active
+  )
+    ? (rawZone as DeliveryZoneId)
+    : 'eket_city';
 
   const items = useCartStore((s) => s.items);
   const subtotal = useCartStore((s) => s.subtotal());
@@ -76,6 +83,8 @@ function CheckoutForm() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   }
 
+  // SKUs, quantities and zone only — the server recomputes all prices
+  // from the canonical catalogue and rejects payloads with price fields
   function buildOrderPayload() {
     return {
       customer: {
@@ -87,26 +96,29 @@ function CheckoutForm() {
         street_address: form.street_address,
         city: form.city,
         lga: form.lga,
-        delivery_zone: zone,
       },
       delivery_zone: zone,
-      delivery_fee_naira: deliveryFee,
-      subtotal_naira: subtotal,
-      total_naira: total,
       customer_notes: form.notes,
       scheduled_delivery_date: form.delivery_date,
       items: items.map((i) => ({
         product_sku: i.sku,
-        product_name: i.display_name,
         quantity: i.quantity,
-        unit_price_naira: i.price_naira,
-        line_total_naira: i.price_naira * i.quantity,
       })),
     };
   }
 
+  // Runs the browser's native validation UI (highlights and scrolls to
+  // the first invalid field). The buttons are type="button", so this
+  // never triggers a native form submission.
+  function validateForm(e: React.MouseEvent): boolean {
+    const formEl = (e.currentTarget as HTMLElement).closest('form');
+    if (formEl && !formEl.reportValidity()) return false;
+    return true;
+  }
+
   async function handlePayWithCard(e: React.MouseEvent) {
     e.preventDefault();
+    if (!validateForm(e)) return;
     setError('');
     setSubmitting(true);
     setPayMode('card');
@@ -222,6 +234,7 @@ function CheckoutForm() {
 
   async function handleCOD(e: React.MouseEvent) {
     e.preventDefault();
+    if (!validateForm(e)) return;
     setError('');
     setSubmitting(true);
     setPayMode('cod');
@@ -268,7 +281,11 @@ function CheckoutForm() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* A real <form> so `required` and reportValidity() work again.
+            Both payment buttons are type="button" with onClick handlers,
+            so no native submission can race the fetch flow (Sprint 5.5),
+            and with no submit button, Enter cannot implicitly submit. */}
+        <form className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
           {/* Left: Form fields */}
           <div className="lg:col-span-2 space-y-8">
@@ -315,6 +332,8 @@ function CheckoutForm() {
                     id="phone"
                     name="phone"
                     type="tel"
+                    pattern="[0-9+\(\)\- ]{7,20}"
+                    title="Enter a valid phone number, e.g. 0904 078 9918"
                     required
                     value={form.phone}
                     onChange={handleChange}
@@ -361,12 +380,13 @@ function CheckoutForm() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-kayora-graphite mb-1.5" htmlFor="lga">
-                    LGA
+                    LGA *
                   </label>
                   <input
                     id="lga"
                     name="lga"
                     type="text"
+                    required
                     value={form.lga}
                     onChange={handleChange}
                     className="w-full border border-kayora-mist rounded-lg px-4 py-2.5 text-sm text-kayora-ink placeholder-kayora-stone focus:outline-none focus:ring-2 focus:ring-kayora-blue-500"
@@ -501,7 +521,7 @@ function CheckoutForm() {
               </p>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </main>
   );

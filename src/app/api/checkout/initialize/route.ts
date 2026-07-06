@@ -2,36 +2,42 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createServiceClient } from '@/lib/supabase/server';
 import { checkRateLimit } from '@/lib/ratelimit';
+import { priceOrder, checkMinimumOrder, isPricingRejection } from '@/lib/pricing';
 import { SHOP_ENABLED } from '@/lib/flags';
 
-const OrderItemSchema = z.object({
-  product_sku: z.string().min(1),
-  product_name: z.string().min(1),
-  quantity: z.number().int().positive(),
-  unit_price_naira: z.number().int().positive(),
-  line_total_naira: z.number().int().positive(),
-});
+// Strict schemas: the client sends SKUs, quantities and a zone id only.
+// Any client-supplied price field (unit_price, subtotal, total, fee, …)
+// is an unrecognized key and rejects the request outright — all amounts
+// are recomputed server-side from the canonical catalogue.
+const OrderItemSchema = z
+  .object({
+    product_sku: z.string().min(1).max(50),
+    quantity: z.number().int().positive().max(1000),
+  })
+  .strict();
 
-const InitializeSchema = z.object({
-  customer: z.object({
-    full_name: z.string().min(2).max(100),
-    email: z.string().email(),
-    phone: z.string().min(7).max(20),
-  }),
-  address: z.object({
-    street_address: z.string().min(3).max(300),
-    city: z.string().min(2).max(100),
-    lga: z.string().max(100).optional(),
-    delivery_zone: z.enum(['eket_city', 'uyo', 'wider_akwa_ibom']),
-  }),
-  delivery_zone: z.enum(['eket_city', 'uyo', 'wider_akwa_ibom']),
-  delivery_fee_naira: z.number().int().nonnegative(),
-  subtotal_naira: z.number().int().positive(),
-  total_naira: z.number().int().positive(),
-  customer_notes: z.string().max(1000).optional(),
-  scheduled_delivery_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-  items: z.array(OrderItemSchema).min(1).max(20),
-});
+const InitializeSchema = z
+  .object({
+    customer: z
+      .object({
+        full_name: z.string().min(2).max(100),
+        email: z.string().email(),
+        phone: z.string().min(7).max(20),
+      })
+      .strict(),
+    address: z
+      .object({
+        street_address: z.string().min(3).max(300),
+        city: z.string().min(2).max(100),
+        lga: z.string().max(100).optional(),
+      })
+      .strict(),
+    delivery_zone: z.string().min(1).max(50),
+    customer_notes: z.string().max(1000).optional(),
+    scheduled_delivery_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    items: z.array(OrderItemSchema).min(1).max(20),
+  })
+  .strict();
 
 export async function POST(req: NextRequest) {
   if (!SHOP_ENABLED) return NextResponse.json({ error: 'Not found.' }, { status: 404 });
@@ -56,12 +62,15 @@ export async function POST(req: NextRequest) {
 
   const data = parse.data;
 
-  if (data.subtotal_naira < 15000) {
-    const refillOnly = data.items.every((item) => item.product_sku === '18.9L-refill');
-    const error = refillOnly
-      ? 'Refill orders under ₦15,000 are not available for home delivery. Bring your empty Kayora bottle to our Eket factory at 173 Eket Oron Road, or to any authorised dealer, for direct exchange. For delivery, your refill order must total ₦15,000 or more.'
-      : 'Minimum order subtotal is ₦15,000.';
-    return NextResponse.json({ error }, { status: 422 });
+  // Recompute every amount server-side from the canonical catalogue
+  const priced = priceOrder(data.items, data.delivery_zone);
+  if (isPricingRejection(priced)) {
+    return NextResponse.json({ error: priced.error }, { status: priced.status });
+  }
+
+  const minOrder = checkMinimumOrder(priced);
+  if (minOrder) {
+    return NextResponse.json({ error: minOrder.error }, { status: minOrder.status });
   }
 
   const supabase = createServiceClient();
@@ -93,7 +102,7 @@ export async function POST(req: NextRequest) {
       street_address: data.address.street_address,
       city: data.address.city,
       lga: data.address.lga ?? null,
-      delivery_zone: data.address.delivery_zone,
+      delivery_zone: priced.zone.id,
     })
     .select('id')
     .single();
@@ -109,11 +118,11 @@ export async function POST(req: NextRequest) {
     .insert({
       customer_id: customerData.id,
       address_id: addressData.id,
-      delivery_zone: data.delivery_zone,
+      delivery_zone: priced.zone.id,
       status: 'pending_payment',
-      subtotal_naira: data.subtotal_naira,
-      delivery_fee_naira: data.delivery_fee_naira,
-      total_naira: data.total_naira,
+      subtotal_naira: priced.subtotal_naira,
+      delivery_fee_naira: priced.delivery_fee_naira,
+      total_naira: priced.total_naira,
       customer_notes: data.customer_notes ?? null,
       scheduled_delivery_date: data.scheduled_delivery_date ?? null,
     })
@@ -127,7 +136,7 @@ export async function POST(req: NextRequest) {
 
   // Insert order items
   const { error: itemsError } = await supabase.from('order_items').insert(
-    data.items.map((item) => ({
+    priced.items.map((item) => ({
       order_id: orderData.id,
       product_sku: item.product_sku,
       product_name: item.product_name,
@@ -156,7 +165,9 @@ export async function POST(req: NextRequest) {
       order_id: orderData.id,
       order_number: orderData.order_number,
       reference,
-      amount_kobo: data.total_naira * 100,
+      // Server-computed total — Paystack charges what we computed,
+      // never what the client sent
+      amount_kobo: priced.total_naira * 100,
       email: data.customer.email.toLowerCase(),
       public_key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY ?? '',
     },
