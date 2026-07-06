@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { Resend } from 'resend';
 import { createServiceClient } from '@/lib/supabase/server';
 import { checkRateLimit } from '@/lib/ratelimit';
-import { formatNaira } from '@/lib/products';
+import {
+  sendCustomerPaidConfirmation,
+  sendInternalOrderNotification,
+} from '@/lib/email/order-notifications';
 import { SHOP_ENABLED } from '@/lib/flags';
 
 
@@ -26,7 +28,6 @@ interface PaystackVerifyResponse {
 }
 
 export async function POST(req: NextRequest) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
   if (!SHOP_ENABLED) return NextResponse.json({ error: 'Not found.' }, { status: 404 });
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
@@ -97,15 +98,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Payment amount does not match order total.' }, { status: 409 });
   }
 
-  // If already confirmed (idempotent), return success
-  if (order.status === 'confirmed') {
+  // If already paid (idempotent), return success
+  if (order.status === 'paid') {
     return NextResponse.json({ order_number: order.order_number });
   }
 
-  // Update order to confirmed
+  // Update order to paid ('paid' is the DB enum value — there is no 'confirmed')
   const { error: updateError } = await supabase
     .from('orders')
-    .update({ status: 'confirmed', paid_at: new Date().toISOString() })
+    .update({ status: 'paid', paid_at: new Date().toISOString() })
     .eq('id', order_id);
 
   if (updateError) {
@@ -113,42 +114,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to update order status.' }, { status: 500 });
   }
 
-  // Send confirmation email
+  // Send confirmation emails (never throws — a Resend failure must not
+  // report a successful payment as failed)
   const customer = Array.isArray(order.customers) ? order.customers[0] : order.customers;
-  const customerEmail = customer?.email ?? '';
-  const customerName = customer?.full_name ?? 'Customer';
-
-  if (customerEmail) {
-    await resend.emails.send({
-      from: 'Kayora Water <noreply@kayorawater.com>',
-      to: customerEmail,
-      subject: `Payment confirmed — Order ${order.order_number}`,
-      html: `
-        <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#1a1a1a">
-          <h1 style="font-size:24px;margin-bottom:8px">Payment confirmed</h1>
-          <p>Hi ${customerName},</p>
-          <p>We've received your payment for <strong>Order ${order.order_number}</strong> — ${formatNaira(order.total_naira)}.</p>
-          <p>Our team will be in touch shortly to confirm your delivery schedule.</p>
-          <p style="margin-top:24px">Questions? Call us on <a href="tel:+2349040789918">0904 078 9918</a> or reply to this email.</p>
-          <hr style="border:none;border-top:1px solid #e5e5e5;margin:24px 0">
-          <p style="font-size:12px;color:#888">Kaybi Beverage Industries Limited · 173 Eket Oron Road, Eket, Akwa Ibom</p>
-        </div>
-      `,
-    });
-
-    // Internal notification
-    await resend.emails.send({
-      from: 'Kayora Orders <noreply@kayorawater.com>',
-      to: 'info@kaybibeverage.com',
-      subject: `[PAID] Order ${order.order_number} — ${formatNaira(order.total_naira)}`,
-      html: `
-        <p>Payment confirmed for order <strong>${order.order_number}</strong>.</p>
-        <p>Customer: ${customerName} (${customerEmail})</p>
-        <p>Amount: ${formatNaira(order.total_naira)}</p>
-        <p>Paystack reference: ${reference}</p>
-      `,
-    });
-  }
+  const emailInfo = {
+    orderNumber: order.order_number,
+    totalNaira: order.total_naira,
+    customerName: customer?.full_name ?? 'Customer',
+    customerEmail: customer?.email ?? '',
+    reference,
+  };
+  await sendCustomerPaidConfirmation(emailInfo);
+  await sendInternalOrderNotification(emailInfo, 'paid');
 
   return NextResponse.json({ order_number: order.order_number });
 }

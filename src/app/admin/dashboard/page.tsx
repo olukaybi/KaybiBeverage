@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, createServiceClient } from '@/lib/supabase/server';
 import AdminDashboardClient from './AdminDashboardClient';
 
 export const metadata = {
@@ -15,8 +15,11 @@ export default async function AdminDashboardPage() {
     redirect('/admin/login');
   }
 
-  // Fetch recent orders with customer + items
-  const { data: orders, error } = await supabase
+  // Fetch recent orders with customer + items.
+  // RLS on these tables only grants service_role, so the data query must
+  // use the service client — the cookie/anon client above is auth-only.
+  const serviceSupabase = createServiceClient();
+  const { data: orders, error } = await serviceSupabase
     .from('orders')
     .select(`
       id,
