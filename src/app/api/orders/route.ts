@@ -2,40 +2,45 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createServiceClient } from '@/lib/supabase/server';
 import { checkRateLimit } from '@/lib/ratelimit';
+import { priceOrder, checkMinimumOrder, isPricingRejection } from '@/lib/pricing';
 import {
   sendCustomerCodConfirmation,
   sendInternalOrderNotification,
 } from '@/lib/email/order-notifications';
 import { SHOP_ENABLED } from '@/lib/flags';
 
-const OrderItemSchema = z.object({
-  product_sku: z.string().min(1),
-  product_name: z.string().min(1),
-  quantity: z.number().int().positive(),
-  unit_price_naira: z.number().int().positive(),
-  line_total_naira: z.number().int().positive(),
-});
+// Strict schemas: the client sends SKUs, quantities and a zone id only.
+// Any client-supplied price field is an unrecognized key and rejects the
+// request — all amounts are recomputed server-side (see @/lib/pricing).
+const OrderItemSchema = z
+  .object({
+    product_sku: z.string().min(1).max(50),
+    quantity: z.number().int().positive().max(1000),
+  })
+  .strict();
 
-const OrderSchema = z.object({
-  customer: z.object({
-    full_name: z.string().min(2).max(100),
-    email: z.string().email(),
-    phone: z.string().min(7).max(20),
-  }),
-  address: z.object({
-    street_address: z.string().min(3).max(300),
-    city: z.string().min(2).max(100),
-    lga: z.string().max(100).optional(),
-    delivery_zone: z.enum(['eket_city', 'uyo', 'wider_akwa_ibom']),
-  }),
-  delivery_zone: z.enum(['eket_city', 'uyo', 'wider_akwa_ibom']),
-  delivery_fee_naira: z.number().int().nonnegative(),
-  subtotal_naira: z.number().int().positive(),
-  total_naira: z.number().int().positive(),
-  customer_notes: z.string().max(1000).optional(),
-  scheduled_delivery_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-  items: z.array(OrderItemSchema).min(1).max(20),
-});
+const OrderSchema = z
+  .object({
+    customer: z
+      .object({
+        full_name: z.string().min(2).max(100),
+        email: z.string().email(),
+        phone: z.string().min(7).max(20),
+      })
+      .strict(),
+    address: z
+      .object({
+        street_address: z.string().min(3).max(300),
+        city: z.string().min(2).max(100),
+        lga: z.string().max(100).optional(),
+      })
+      .strict(),
+    delivery_zone: z.string().min(1).max(50),
+    customer_notes: z.string().max(1000).optional(),
+    scheduled_delivery_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    items: z.array(OrderItemSchema).min(1).max(20),
+  })
+  .strict();
 
 export async function POST(req: NextRequest) {
   if (!SHOP_ENABLED) return NextResponse.json({ error: 'Not found.' }, { status: 404 });
@@ -60,9 +65,15 @@ export async function POST(req: NextRequest) {
 
   const data = parse.data;
 
-  // Validate minimum order: ₦15,000 subtotal
-  if (data.subtotal_naira < 15000) {
-    return NextResponse.json({ error: 'Minimum order subtotal is ₦15,000.' }, { status: 422 });
+  // Recompute every amount server-side from the canonical catalogue
+  const priced = priceOrder(data.items, data.delivery_zone);
+  if (isPricingRejection(priced)) {
+    return NextResponse.json({ error: priced.error }, { status: priced.status });
+  }
+
+  const minOrder = checkMinimumOrder(priced);
+  if (minOrder) {
+    return NextResponse.json({ error: minOrder.error }, { status: minOrder.status });
   }
 
   const supabase = createServiceClient();
@@ -94,7 +105,7 @@ export async function POST(req: NextRequest) {
       street_address: data.address.street_address,
       city: data.address.city,
       lga: data.address.lga ?? null,
-      delivery_zone: data.address.delivery_zone,
+      delivery_zone: priced.zone.id,
     })
     .select('id')
     .single();
@@ -110,11 +121,11 @@ export async function POST(req: NextRequest) {
     .insert({
       customer_id: customerData.id,
       address_id: addressData.id,
-      delivery_zone: data.delivery_zone,
+      delivery_zone: priced.zone.id,
       status: 'pending_payment',
-      subtotal_naira: data.subtotal_naira,
-      delivery_fee_naira: data.delivery_fee_naira,
-      total_naira: data.total_naira,
+      subtotal_naira: priced.subtotal_naira,
+      delivery_fee_naira: priced.delivery_fee_naira,
+      total_naira: priced.total_naira,
       customer_notes: data.customer_notes ?? null,
       scheduled_delivery_date: data.scheduled_delivery_date ?? null,
     })
@@ -128,7 +139,7 @@ export async function POST(req: NextRequest) {
 
   // Insert order items
   const { error: itemsError } = await supabase.from('order_items').insert(
-    data.items.map((item) => ({
+    priced.items.map((item) => ({
       order_id: orderData.id,
       product_sku: item.product_sku,
       product_name: item.product_name,
@@ -147,15 +158,15 @@ export async function POST(req: NextRequest) {
   // the order is already written, so an email outage must not 500 this)
   const emailInfo = {
     orderNumber: orderData.order_number,
-    totalNaira: data.total_naira,
+    totalNaira: priced.total_naira,
     customerName: data.customer.full_name,
     customerEmail: data.customer.email.toLowerCase(),
-    items: data.items.map((i) => ({
+    items: priced.items.map((i) => ({
       product_name: i.product_name,
       quantity: i.quantity,
       line_total_naira: i.line_total_naira,
     })),
-    addressText: `${data.address.street_address}, ${data.address.city}${data.address.lga ? `, ${data.address.lga}` : ''} (${data.delivery_zone})`,
+    addressText: `${data.address.street_address}, ${data.address.city}${data.address.lga ? `, ${data.address.lga}` : ''} (${priced.zone.display_name})`,
     scheduledDeliveryDate: data.scheduled_delivery_date,
   };
   await sendCustomerCodConfirmation(emailInfo);
