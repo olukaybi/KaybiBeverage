@@ -83,6 +83,31 @@ export function checkMinimumOrder(priced: PricedOrder): PricingRejection | null 
   return { error, status: 422 };
 }
 
+/**
+ * Per-SKU minimum-quantity check. Every line must meet that product's
+ * min_order_quantity (e.g. 10 cases for the 30cl / 50cl / 75cl PET range).
+ * The cart UI enforces this too, but this guarantees the rule for any
+ * request that reaches the API directly. Returns null when all lines clear.
+ */
+export function checkItemMinimums(priced: PricedOrder): PricingRejection | null {
+  for (const item of priced.items) {
+    const product = PRODUCTS.find((p) => p.sku === item.product_sku);
+    if (product && item.quantity < product.min_order_quantity) {
+      const unit =
+        product.unit_of_sale === 'case'
+          ? 'cases'
+          : product.unit_of_sale === 'refill'
+            ? 'refills'
+            : 'bottles';
+      return {
+        error: `Minimum order for ${product.display_name} is ${product.min_order_quantity} ${unit}.`,
+        status: 422,
+      };
+    }
+  }
+  return null;
+}
+
 export function isPricingRejection(
   result: PricedOrder | PricingRejection
 ): result is PricingRejection {

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createServiceClient } from '@/lib/supabase/server';
 import { checkRateLimit } from '@/lib/ratelimit';
-import { priceOrder, checkMinimumOrder, isPricingRejection } from '@/lib/pricing';
+import { priceOrder, checkMinimumOrder, checkItemMinimums, isPricingRejection } from '@/lib/pricing';
 import { SHOP_ENABLED } from '@/lib/flags';
 
 // Strict schemas: the client sends SKUs, quantities and a zone id only.
@@ -71,6 +71,11 @@ export async function POST(req: NextRequest) {
   const minOrder = checkMinimumOrder(priced);
   if (minOrder) {
     return NextResponse.json({ error: minOrder.error }, { status: minOrder.status });
+  }
+
+  const itemMin = checkItemMinimums(priced);
+  if (itemMin) {
+    return NextResponse.json({ error: itemMin.error }, { status: itemMin.status });
   }
 
   const supabase = createServiceClient();
