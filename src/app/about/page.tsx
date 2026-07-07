@@ -176,7 +176,7 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="border-t border-kayora-gold-500/40 pt-6">
-                <p className="text-eyebrow uppercase tracking-widest text-kayora-stone mb-2">SON MANCAP Registered</p>
+                <p className="text-eyebrow uppercase tracking-widest text-kayora-stone mb-2">SON MANCAP Certified</p>
                 <dl className="space-y-1 text-sm text-kayora-graphite">
                   <div className="flex gap-4">
                     <dt className="font-semibold">FT-29179</dt>
@@ -238,7 +238,7 @@ export default function AboutPage() {
                 Kayora is a product of Kaybi Beverage Industries Limited, a Nigerian manufacturing company incorporated and headquartered in Eket, Akwa Ibom State.
               </p>
               <p>
-                Kaybi Beverage Industries owns the Kayora brand, operates the Eket production facility, and holds all NAFDAC and SON MANCAP registrations. Every bottle of Kayora — from the 30cl Sharp-sharp to the 18.9L Never Finish — is manufactured, sealed and tracked under Kaybi Beverage Industries&rsquo; direct supervision.
+                Kaybi Beverage Industries owns the Kayora brand, operates the Eket production facility, and holds all NAFDAC registrations and SON MANCAP certifications. Every bottle of Kayora — from the 30cl Sharp-sharp to the 18.9L Never Finish — is manufactured, sealed and tracked under Kaybi Beverage Industries&rsquo; direct supervision.
               </p>
               <p>
                 When you buy Kayora, you buy from a company with a physical address, a local team, and a name on the certificate.

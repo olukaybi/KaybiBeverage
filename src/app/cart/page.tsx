@@ -220,7 +220,7 @@ export default function CartPage() {
               </Link>
 
               <p className="mt-4 text-xs text-kayora-stone text-center">
-                NAFDAC A1-111026 · SON MANCAP certified
+                NAFDAC A1-111026 · SON MANCAP Certified
               </p>
             </div>
           </div>

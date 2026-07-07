@@ -195,7 +195,7 @@ export default function SiteFooter() {
                 A1-111026
               </li>
               <li>
-                <span className="font-semibold text-kayora-cream">SON MANCAP Registered</span>
+                <span className="font-semibold text-kayora-cream">SON MANCAP Certified</span>
                 <br />
                 <span className="text-kayora-cream/60 text-xs">FT-29179 (30cl / 50cl / 75cl)</span>
                 <br />
@@ -249,7 +249,7 @@ export default function SiteFooter() {
               <span className="text-xs text-kayora-cream/30 leading-snug" aria-hidden="true">·</span>
               <span className="text-xs text-kayora-cream/40 leading-snug">NAFDAC Reg. A1-111026</span>
               <span className="text-xs text-kayora-cream/30 leading-snug" aria-hidden="true">·</span>
-              <span className="text-xs text-kayora-cream/40 leading-snug">SON MANCAP Registered</span>
+              <span className="text-xs text-kayora-cream/40 leading-snug">SON MANCAP Certified</span>
             </div>
           </div>
         </div>

@@ -98,7 +98,7 @@ const faqItems = [
     id: 'faq-nafdac',
     question: 'Is Kayora water NAFDAC approved?',
     answer:
-      'Yes. Kayora is NAFDAC Registered under number A1-111026, covering all four pack sizes (30cl, 50cl, 75cl, and 18.9L). It also carries SON MANCAP registration — FT-29179 for the PET bottles and FT-29180 for the 18.9L dispenser. The NAFDAC number is printed on every label.',
+      'Yes. Kayora is NAFDAC Registered under number A1-111026, covering all four pack sizes (30cl, 50cl, 75cl, and 18.9L). It also carries SON MANCAP certification — FT-29179 for the PET bottles and FT-29180 for the 18.9L dispenser. The NAFDAC number is printed on every label.',
   },
   {
     id: 'faq-process',
@@ -323,7 +323,7 @@ export default function OurWaterPage() {
             </p>
             <h2 className="font-display text-display-lg text-kayora-ink mb-4">The Range — In Detail</h2>
             <p className="text-kayora-graphite leading-relaxed max-w-[65ch]">
-              Four sizes. The same water. The same eight-stage process. Every unit carries a valid NAFDAC registration number and SON MANCAP registration.
+              Four sizes. The same water. The same eight-stage process. Every unit carries a valid NAFDAC registration number and SON MANCAP certification.
             </p>
           </div>
 
