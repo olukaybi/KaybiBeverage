@@ -22,6 +22,10 @@ export default function CartPage() {
   const belowMin = subtotal < MIN_SUBTOTAL && items.length > 0;
   const isRefillOnly = items.length > 0 && items.every((i) => i.sku === '18.9L-refill');
 
+  // Per-SKU minimum (e.g. 10 cases for 30cl/50cl/75cl). Blocks checkout, not just a warning.
+  const belowAnyItemMin = items.some((i) => i.quantity < i.min_order_quantity);
+  const checkoutBlocked = belowMin || belowAnyItemMin;
+
   if (items.length === 0) {
     return (
       <main className="min-h-screen bg-kayora-cream pt-28 pb-20">
@@ -194,15 +198,23 @@ export default function CartPage() {
                 </div>
               )}
 
+              {belowAnyItemMin && !belowMin && (
+                <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                  <p className="text-xs text-amber-800">
+                    One or more items are below the minimum order quantity. Adjust the highlighted quantities above to continue.
+                  </p>
+                </div>
+              )}
+
               <Link
                 href={`/checkout?zone=${zone}`}
                 className={`mt-5 flex items-center justify-center min-h-[48px] w-full px-5 py-3 text-sm font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2 ${
-                  belowMin
+                  checkoutBlocked
                     ? 'bg-kayora-mist text-kayora-stone cursor-not-allowed pointer-events-none'
                     : 'bg-kayora-blue-900 text-kayora-cream hover:bg-kayora-blue-700'
                 }`}
-                aria-disabled={belowMin}
-                tabIndex={belowMin ? -1 : 0}
+                aria-disabled={checkoutBlocked}
+                tabIndex={checkoutBlocked ? -1 : 0}
               >
                 Proceed to checkout →
               </Link>
