@@ -126,7 +126,7 @@ export default function Image() {
               display: 'flex',
             }}
           >
-            NAFDAC Reg. A1-111026 · SON MANCAP Registered
+            NAFDAC Reg. A1-111026 · SON MANCAP Certified
           </div>
           <div
             style={{

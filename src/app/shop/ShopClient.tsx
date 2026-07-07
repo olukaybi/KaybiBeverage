@@ -143,7 +143,7 @@ export default function ShopClient() {
           </h1>
           <p className="text-kayora-graphite max-w-2xl leading-relaxed">
             Fresh from our Eket facility. Delivered to your door across Akwa Ibom State.
-            All products are NAFDAC-certified (A1-111026) and SON MANCAP-registered.
+            All products are NAFDAC Registered (A1-111026) and SON MANCAP Certified.
           </p>
         </div>
 

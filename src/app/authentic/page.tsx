@@ -38,7 +38,7 @@ const labelCallouts = [
     body: 'Printed clearly on every genuine label. This is the number you can verify independently on the NAFDAC portal.',
   },
   {
-    label: 'SON MANCAP Registered',
+    label: 'SON MANCAP Certified',
     body: 'FT-29179 (30cl / 50cl / 75cl) and FT-29180 (18.9L) — both visible on label and independent of NAFDAC.',
   },
   {
@@ -76,7 +76,7 @@ export default function AuthenticPage() {
           <div className="lg:col-span-5">
             <Image
               src="/06_kayora_75cl_back_label.png"
-              alt="Back label of a genuine Kayora 75cl bottle — showing NAFDAC Reg. A1-111026, SON MANCAP registration, batch code, and QR code"
+              alt="Back label of a genuine Kayora 75cl bottle — showing NAFDAC Reg. A1-111026, SON MANCAP certification, batch code, and QR code"
               width={1328}
               height={1760}
               className="w-full h-auto rounded-2xl shadow-2xl"

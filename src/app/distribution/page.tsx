@@ -36,7 +36,7 @@ const pillars = [
   },
   {
     title: 'A Brand That Pulls.',
-    body: 'NAFDAC Registered, SON MANCAP Registered, and growing recognition across Akwa Ibom and the South-South and South-East. Customers ask for Kayora by name.',
+    body: 'NAFDAC Registered, SON MANCAP Certified, and growing recognition across Akwa Ibom and the South-South and South-East. Customers ask for Kayora by name.',
   },
 ];
 
@@ -55,7 +55,7 @@ const channels = [
   },
   {
     name: 'HoReCa',
-    desc: 'Hotels, restaurants and catering operations. Kayora&rsquo;s regulatory credentials (NAFDAC, SON MANCAP Registered) are exactly what hospitality operators need when serving international guests or operating under hospitality compliance frameworks. Both 75cl and 18.9L are strong in this channel.',
+    desc: 'Hotels, restaurants and catering operations. Kayora&rsquo;s regulatory credentials (NAFDAC, SON MANCAP Certified) are exactly what hospitality operators need when serving international guests or operating under hospitality compliance frameworks. Both 75cl and 18.9L are strong in this channel.',
   },
 ];
 
@@ -258,7 +258,7 @@ export default function DistributionPage() {
                   <div>
                     <p className="font-semibold text-kayora-ink mb-0.5">Authorised distributors</p>
                     <p className="text-kayora-graphite text-sm leading-relaxed">
-                      NAFDAC Registered A1-111026, SON MANCAP Registered. The regulatory credentials your hospitality or retail operation needs.
+                      NAFDAC Registered A1-111026, SON MANCAP Certified. The regulatory credentials your hospitality or retail operation needs.
                     </p>
                   </div>
                 </div>

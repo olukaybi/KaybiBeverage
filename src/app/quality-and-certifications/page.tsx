@@ -23,7 +23,7 @@ const certifications = [
     fullName: 'Standards Organisation of Nigeria — Mandatory Conformity Assessment Programme',
     number: 'FT-29179 (30cl / 50cl / 75cl) · FT-29180 (18.9L)',
     scope: 'PET bottle sizes and 18.9L polycarbonate dispenser',
-    detail: 'SON MANCAP registration verifies that Kayora\'s bottles and production processes conform to the relevant Nigerian Industrial Standards (NIS). FT-29179 covers our PET bottle range and FT-29180 covers the 18.9L polycarbonate dispenser bottle.',
+    detail: 'SON MANCAP certification verifies that Kayora\'s bottles and production processes conform to the relevant Nigerian Industrial Standards (NIS). FT-29179 covers our PET bottle range and FT-29180 covers the 18.9L polycarbonate dispenser bottle.',
   },
 ];
 
@@ -53,8 +53,8 @@ const organizationJsonLd = {
   },
   hasCredential: [
     { '@type': 'EducationalOccupationalCredential', credentialCategory: 'NAFDAC Registration', identifier: 'A1-111026' },
-    { '@type': 'EducationalOccupationalCredential', credentialCategory: 'SON MANCAP Registration', identifier: 'FT-29179' },
-    { '@type': 'EducationalOccupationalCredential', credentialCategory: 'SON MANCAP Registration', identifier: 'FT-29180' },
+    { '@type': 'EducationalOccupationalCredential', credentialCategory: 'SON MANCAP Certification', identifier: 'FT-29179' },
+    { '@type': 'EducationalOccupationalCredential', credentialCategory: 'SON MANCAP Certification', identifier: 'FT-29180' },
   ],
 };
 

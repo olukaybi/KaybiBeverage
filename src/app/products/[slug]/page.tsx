@@ -80,7 +80,7 @@ const skuData = {
     description: [
       'The 75cl Jara was created for two categories of use that share a common need: people who hydrate seriously, and establishments where presentation matters. Gym-goers, long-haul travellers, fieldworkers and professionals with demanding schedules reach for the Jara because 50cl simply runs out too quickly. Hotels and restaurants use it as a premium table water option for diners who want more than the standard serve.',
       'At 75cl, the bottle is generous without being impractical. It is weighted for one-handed drinking, sized to stay cold for a meal, and visually distinct enough to communicate quality on a table setting without explanation.',
-      'For hospitality buyers, the Jara is the correct specification. NAFDAC Registered, SON MANCAP Registered, and available in cases of 12.',
+      'For hospitality buyers, the Jara is the correct specification. NAFDAC Registered, SON MANCAP Certified, and available in cases of 12.',
     ],
     useCases: [
       { title: 'Hotels & Fine Dining', body: 'Premium table water that communicates quality through size and presentation.' },
@@ -316,7 +316,7 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
                   <p className="text-kayora-cream/60 text-sm mt-1">National Agency for Food and Drug Administration and Control</p>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-                  <p className="text-xs uppercase tracking-widest text-kayora-cream/50 mb-1">SON MANCAP Registration</p>
+                  <p className="text-xs uppercase tracking-widest text-kayora-cream/50 mb-1">SON MANCAP Certification</p>
                   <p className="text-kayora-cream font-display text-2xl font-semibold">{sku.specs.son}</p>
                   <p className="text-kayora-cream/60 text-sm mt-1">Standards Organisation of Nigeria</p>
                 </div>

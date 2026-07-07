@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: '%s | Kayora Water',
   },
   description:
-    'Kayora Premium Purified Water — eight-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Registered, proudly produced in Eket, Akwa Ibom. Pure, crisp hydration for homes, offices, events and distribution.',
+    'Kayora Premium Purified Water — eight-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Certified, proudly produced in Eket, Akwa Ibom. Pure, crisp hydration for homes, offices, events and distribution.',
   keywords: [
     'Kayora water',
     'Kayora premium water Akwa Ibom',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: 'Kayora Premium Purified Water',
     title: 'Kayora Premium Purified Water — Purified to the Highest Standard. Safe for Every Table.',
     description:
-      'Eight-stage purified water crafted at our Eket, Akwa Ibom facility. NAFDAC Registered A1-111026. SON MANCAP Registered. 30cl · 50cl · 75cl · 18.9L.',
+      'Eight-stage purified water crafted at our Eket, Akwa Ibom facility. NAFDAC Registered A1-111026. SON MANCAP Certified. 30cl · 50cl · 75cl · 18.9L.',
     url: 'https://www.kayorawater.com/',
     locale: 'en_NG',
   },

@@ -24,7 +24,7 @@ const faqs = [
       },
       {
         q: 'Is Kayora SON MANCAP certified?',
-        a: 'Yes. Kayora holds SON MANCAP registration FT-29179 for our PET bottle sizes (30cl, 50cl and 75cl) and FT-29180 for our 18.9L polycarbonate dispenser bottle. SON MANCAP is the Standards Organisation of Nigeria\'s mandatory conformity assessment programme.',
+        a: 'Yes. Kayora holds SON MANCAP certification FT-29179 for our PET bottle sizes (30cl, 50cl and 75cl) and FT-29180 for our 18.9L polycarbonate dispenser bottle. SON MANCAP is the Standards Organisation of Nigeria\'s mandatory conformity assessment programme.',
       },
       {
         q: 'Where is Kayora made?',
