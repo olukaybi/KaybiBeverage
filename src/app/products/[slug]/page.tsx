@@ -152,7 +152,18 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `Kayora ${sku.size} ${sku.name} | ${sku.tagline} — Premium Purified Water`,
     description: `Kayora ${sku.size} ${sku.name}: ${sku.subhead} NAFDAC Registered A1-111026. Produced by Kaybi Beverage Industries Limited, Eket, Akwa Ibom.`,
     alternates: { canonical: `https://www.kayorawater.com/products/${params.slug}` },
-    openGraph: { url: `https://www.kayorawater.com/products/${params.slug}` },
+    openGraph: {
+      url: `https://www.kayorawater.com/products/${params.slug}`,
+      images: [
+        {
+          url: '/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: 'Kayora Premium Purified Water — Wellness in every drop!',
+          type: 'image/png',
+        },
+      ],
+    },
   };
 }
 

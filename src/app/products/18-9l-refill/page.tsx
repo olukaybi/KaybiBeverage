@@ -8,7 +8,18 @@ export const metadata: Metadata = {
   description:
     'Refill your genuine Kayora-branded 18.9L bottle at ₦1,000. Same eight-stage purified water, new tamper-evident cap, bottle verification at point of refill. Minimum ₦15,000 for home delivery.',
   alternates: { canonical: 'https://www.kayorawater.com/products/18-9l-refill' },
-  openGraph: { url: 'https://www.kayorawater.com/products/18-9l-refill' },
+  openGraph: {
+    url: 'https://www.kayorawater.com/products/18-9l-refill',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kayora Premium Purified Water — Wellness in every drop!',
+        type: 'image/png',
+      },
+    ],
+  },
 };
 
 const breadcrumbJsonLd = {

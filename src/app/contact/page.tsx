@@ -18,7 +18,18 @@ export const metadata: Metadata = {
   description:
     'Order Kayora premium purified water for home, office, or events. Direct delivery in Akwa Ibom; enquiries welcome. 173 Eket Oron Road, Eket, Akwa Ibom State, Nigeria.',
   alternates: { canonical: 'https://www.kayorawater.com/contact' },
-  openGraph: { url: 'https://www.kayorawater.com/contact' },
+  openGraph: {
+    url: 'https://www.kayorawater.com/contact',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kayora Premium Purified Water — Wellness in every drop!',
+        type: 'image/png',
+      },
+    ],
+  },
 };
 
 const contactCards = [
