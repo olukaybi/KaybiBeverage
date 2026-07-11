@@ -7,7 +7,18 @@ export const metadata: Metadata = {
   description:
     'Frequently asked questions about Kayora Premium Purified Water: NAFDAC registration, purification process, sizes, ordering, delivery, and distribution. NAFDAC Reg. A1-111026.',
   alternates: { canonical: 'https://www.kayorawater.com/faq' },
-  openGraph: { url: 'https://www.kayorawater.com/faq' },
+  openGraph: {
+    url: 'https://www.kayorawater.com/faq',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kayora Premium Purified Water — Wellness in every drop!',
+        type: 'image/png',
+      },
+    ],
+  },
 };
 
 const faqs = [

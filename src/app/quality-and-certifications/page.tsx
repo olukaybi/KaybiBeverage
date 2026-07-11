@@ -7,7 +7,18 @@ export const metadata: Metadata = {
   description:
     'Kayora\'s full quality and certification profile: NAFDAC Reg. A1-111026, SON MANCAP FT-29179 and FT-29180, eight-stage purification, and manufacturing standards at our Eket facility.',
   alternates: { canonical: 'https://www.kayorawater.com/quality-and-certifications' },
-  openGraph: { url: 'https://www.kayorawater.com/quality-and-certifications' },
+  openGraph: {
+    url: 'https://www.kayorawater.com/quality-and-certifications',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kayora Premium Purified Water — Wellness in every drop!',
+        type: 'image/png',
+      },
+    ],
+  },
 };
 
 const certifications = [

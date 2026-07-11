@@ -8,7 +8,18 @@ export const metadata: Metadata = {
   description:
     'Kayora Premium Purified Water in four sizes: 30cl Sharp-sharp (events), 50cl Original (everyday), 75cl Jara (premium dining), 18.9L Never Finish (homes & offices). Plus an 18.9L refill service at ₦1,000. NAFDAC Registered A1-111026.',
   alternates: { canonical: 'https://www.kayorawater.com/products' },
-  openGraph: { url: 'https://www.kayorawater.com/products' },
+  openGraph: {
+    url: 'https://www.kayorawater.com/products',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kayora Premium Purified Water — Wellness in every drop!',
+        type: 'image/png',
+      },
+    ],
+  },
 };
 
 const skus = [
