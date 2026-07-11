@@ -66,7 +66,7 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xs text-kayora-cream/60 uppercase tracking-widest font-sans">
             <span>NAFDAC Reg. A1-111026</span>
             <span className="text-kayora-gold-500" aria-hidden="true">·</span>
-            <span>SON MANCAP Registered</span>
+            <span>SON MANCAP Certified</span>
             <span className="text-kayora-gold-500" aria-hidden="true">·</span>
             <span>Eight-Stage Purification</span>
             <span className="text-kayora-gold-500" aria-hidden="true">·</span>
@@ -153,7 +153,7 @@ export default function HomePage() {
                   sub: 'All four pack sizes — 30cl, 50cl, 75cl, 18.9L',
                 },
                 {
-                  label: 'SON MANCAP Registered',
+                  label: 'SON MANCAP Certified',
                   detail: 'FT-29179 · FT-29180',
                   sub: 'PET bottles and 18.9L polycarbonate dispenser',
                 },

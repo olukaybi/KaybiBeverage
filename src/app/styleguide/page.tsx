@@ -170,7 +170,7 @@ export default function StyleguidePage() {
         <Section title="Trust Strip">
           <div className="bg-kayora-cream border-y border-kayora-mist py-4">
             <ul className="flex items-center justify-center gap-0">
-              {['NAFDAC Reg. A1-111026', 'SON MANCAP Registered', 'Eight-Stage Purification', 'Proudly Made in Eket'].map((item, i, arr) => (
+              {['NAFDAC Reg. A1-111026', 'SON MANCAP Certified', 'Eight-Stage Purification', 'Proudly Made in Eket'].map((item, i, arr) => (
                 <li key={item} className="flex items-center">
                   <span className="text-eyebrow uppercase tracking-widest text-kayora-stone px-4">{item}</span>
                   {i < arr.length - 1 && <span className="w-1 h-1 rounded-full bg-kayora-stone/40" aria-hidden="true" />}
