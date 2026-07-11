@@ -51,11 +51,24 @@ export const metadata: Metadata = {
       'Eight-stage purified water crafted at our Eket, Akwa Ibom facility. NAFDAC Registered A1-111026. SON MANCAP Certified. 30cl · 50cl · 75cl · 18.9L.',
     url: 'https://www.kayorawater.com/',
     locale: 'en_NG',
+    // Static file is the primary og:image — social scrapers (Facebook,
+    // WhatsApp, LinkedIn) fail intermittently on the dynamic
+    // /opengraph-image route; app/opengraph-image.tsx remains as fallback
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kayora Premium Purified Water — Wellness in every drop!',
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@kayorawaterng',
     creator: '@kayorawaterng',
+    images: ['/og-image.png'],
   },
   robots: { index: true, follow: true },
 };

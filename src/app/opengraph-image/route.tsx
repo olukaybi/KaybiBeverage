@@ -1,11 +1,14 @@
 import { ImageResponse } from 'next/og';
 
+// Explicit route handler (not the opengraph-image file convention) so the
+// URL keeps serving a PNG as a fallback WITHOUT overriding the static
+// /og-image.png declared in the root layout metadata — the file convention
+// always wins over config metadata, which is exactly what broke Facebook.
 export const runtime = 'edge';
-export const alt = 'Kayora Premium Purified Water — Wellness in every drop!';
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
 
-export default function Image() {
+const size = { width: 1200, height: 630 };
+
+export function GET() {
   return new ImageResponse(
     (
       <div
