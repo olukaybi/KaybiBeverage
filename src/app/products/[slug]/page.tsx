@@ -153,6 +153,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: `Kayora ${sku.size} ${sku.name}: ${sku.subhead} NAFDAC Registered A1-111026. Produced by Kaybi Beverage Industries Limited, Eket, Akwa Ibom.`,
     alternates: { canonical: `https://www.kayorawater.com/products/${params.slug}` },
     openGraph: {
+      type: 'website',
       url: `https://www.kayorawater.com/products/${params.slug}`,
       images: [
         {

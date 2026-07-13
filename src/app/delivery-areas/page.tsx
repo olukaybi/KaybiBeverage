@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     'Kayora delivers directly across Akwa Ibom State within 24–48 hours. Distributor network covers Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo States.',
   alternates: { canonical: 'https://www.kayorawater.com/delivery-areas' },
   openGraph: {
+    type: 'website',
     url: 'https://www.kayorawater.com/delivery-areas',
     images: [
       {
