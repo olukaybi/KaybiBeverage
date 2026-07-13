@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/products/50cl`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/products/75cl`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/products/18-9l`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/products/18-9l-refill`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/our-water`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${base}/quality-and-certifications`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/distribution`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
