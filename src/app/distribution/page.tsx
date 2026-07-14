@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     'Join the Kayora distributor network across Akwa Ibom, Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives.',
   alternates: { canonical: 'https://www.kayorawater.com/distribution' },
   openGraph: {
+    type: 'website',
     url: 'https://www.kayorawater.com/distribution',
     images: [
       {
