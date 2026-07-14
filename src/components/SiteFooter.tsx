@@ -47,6 +47,7 @@ const productLinks = [
   { label: '50cl — Original', href: '/products/50cl' },
   { label: '75cl — Jara', href: '/products/75cl' },
   { label: '18.9L — Never Finish', href: '/products/18-9l' },
+  { label: '18.9L — Never Finish Refill', href: '/products/18-9l-refill' },
 ];
 
 const orderLinks = [

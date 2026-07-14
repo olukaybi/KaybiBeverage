@@ -95,6 +95,9 @@ export default function RefillPage() {
                   Buy a new bottle
                 </Link>
               </div>
+              <p className="text-kayora-cream/60 text-sm mt-4 max-w-[52ch]">
+                Because we verify your bottle and coordinate collection or delivery, refill orders are placed through our team. Message us and we&rsquo;ll set it up.
+              </p>
             </div>
             <div className="order-1 lg:order-2 flex items-center justify-center">
               <div className="relative w-full h-[320px] lg:h-[440px]">
@@ -237,11 +240,12 @@ export default function RefillPage() {
           <h2 className="font-display text-display-sm text-kayora-ink mb-10">
             The Rest of the Kayora Range
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { slug: '18-9l', size: '18.9L', name: 'Never Finish' },
-              { slug: '50cl', size: '50cl', name: 'Original' },
               { slug: '75cl', size: '75cl', name: 'Jara' },
+              { slug: '50cl', size: '50cl', name: 'Original' },
+              { slug: '30cl', size: '30cl', name: 'Sharp-sharp' },
             ].map((rel) => (
               <Link
                 key={rel.slug}
