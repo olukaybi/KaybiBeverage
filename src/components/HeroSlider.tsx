@@ -24,7 +24,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 'brand',
-    backgroundImage: '/01_kayora_homepage_banner.png',
+    backgroundImage: '/01_kayora_homepage_banner.webp',
     eyebrow: 'Premium Purified Water · NAFDAC Reg. A1-111026',
     headline: 'Purified to the Highest\nStandard. Safe for Every Table.',
     subhead: 'Eight-stage purified water from the heart of Akwa Ibom — for homes, offices, hotels and celebrations that won’t settle for less.',
@@ -37,7 +37,7 @@ const slides: Slide[] = [
   },
   {
     id: 'sharp-sharp',
-    backgroundImage: '/05_kayora_30cl_single.png',
+    backgroundImage: '/05_kayora_30cl_single.webp',
     eyebrow: 'Sharp-sharp · 30cl',
     headline: 'Built for Events.\nEasy to Chill. Easy to Share.',
     subhead: 'The Kayora you reach for at weddings, naming ceremonies and corporate functions. Compact, sleek, refreshing.',
@@ -50,7 +50,7 @@ const slides: Slide[] = [
   },
   {
     id: 'original',
-    backgroundImage: '/04_kayora_50cl_single.png',
+    backgroundImage: '/04_kayora_50cl_single.webp',
     eyebrow: 'Original · 50cl',
     headline: 'Everyday Hydration,\nPerfected.',
     subhead: 'Sized right for school bags, dashboards and desks across Akwa Ibom. The bottle that started it all.',
@@ -63,7 +63,7 @@ const slides: Slide[] = [
   },
   {
     id: 'jara',
-    backgroundImage: '/03_kayora_75cl_single.png',
+    backgroundImage: '/03_kayora_75cl_single.webp',
     eyebrow: 'Jara · 75cl',
     headline: 'A Little Extra — The Way\nOnly Nigerians Know How.',
     subhead: 'Generous volume for long days, the gym and the road. For anyone who hydrates seriously.',
@@ -76,7 +76,7 @@ const slides: Slide[] = [
   },
   {
     id: 'never-finish',
-    backgroundImage: '/07_kayora_18_9l_single_corrected.png',
+    backgroundImage: '/07_kayora_18_9l_single_corrected.webp',
     eyebrow: 'Never Finish · 18.9L',
     headline: 'Keeps Homes, Offices\nand Hotels Running.',
     subhead: 'Clean. Sealed. Tracked from borehole to delivery. The dispenser standard for those who demand the best.',
@@ -89,7 +89,7 @@ const slides: Slide[] = [
   },
   {
     id: 'factory',
-    backgroundImage: '/images/slider/09_kayora_warehouse_banner.png',
+    backgroundImage: '/09_kayora_warehouse_banner.webp',
     eyebrow: 'Made in Eket, Akwa Ibom',
     headline: 'Where Quality Begins.\nEight Stages. Zero Compromise.',
     subhead: 'State-of-the-art production at 173 Eket Oron Road — where steam-cleaned caps, ozone sterilisation and NAFDAC compliance meet.',
@@ -169,6 +169,7 @@ export default function HeroSlider() {
             alt=""
             fill
             priority={current === 0}
+            loading={current === 0 ? undefined : 'lazy'}
             className="w-full h-full"
             style={{
               objectFit: slide.objectFit,

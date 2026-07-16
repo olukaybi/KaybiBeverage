@@ -103,7 +103,7 @@ export default function RefillPage() {
             <div className="order-1 lg:order-2 flex items-center justify-center">
               <div className="relative w-full h-[320px] lg:h-[440px]">
                 <Image
-                  src="/07_kayora_18_9l_single_corrected.png"
+                  src="/07_kayora_18_9l_single_corrected.webp"
                   alt="Kayora 18.9L Never Finish — refill service for Kayora-branded bottles"
                   fill
                   priority
