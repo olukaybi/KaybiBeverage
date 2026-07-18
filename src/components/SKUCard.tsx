@@ -1,8 +1,5 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
 
 interface SKUCardProps {
   name: string;
@@ -23,21 +20,11 @@ export default function SKUCard({
   imageAlt,
   size,
 }: SKUCardProps) {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
-    <motion.div
-      className="bg-white border border-kayora-mist rounded-xl overflow-hidden flex flex-col"
-      whileHover={prefersReducedMotion ? {} : { y: -4 }}
-      transition={{ duration: 0.2 }}
-    >
+    <div className="bg-white border border-kayora-mist rounded-xl overflow-hidden flex flex-col transition-transform duration-200 ease-in-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
       {/* Image area */}
       <div className="relative aspect-[4/5] bg-kayora-blue-900 overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
-          transition={{ duration: 0.4 }}
-        >
+        <div className="absolute inset-0 transition-transform duration-[400ms] ease-in-out hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -45,7 +32,7 @@ export default function SKUCard({
             className="object-cover"
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           />
-        </motion.div>
+        </div>
       </div>
 
       {/* Content */}
@@ -67,6 +54,6 @@ export default function SKUCard({
           See Details &rarr;
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 }

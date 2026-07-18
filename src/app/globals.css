@@ -26,3 +26,53 @@
     text-wrap: balance;
   }
 }
+
+/* CSS replacements for the homepage framer-motion animations.
+   Timings mirror the original motion values exactly:
+   bg crossfade 0.9s ease-in-out; content 0.6s ease-out + 0.2s delay
+   (exit y -16px, enter y 24px); progress bar linear over the autoplay
+   interval (duration set inline); reveal 0.4s with per-step delay. */
+@keyframes hero-bg-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes hero-bg-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes hero-content-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-content-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-16px); }
+}
+@keyframes hero-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.hero-bg-in { animation: hero-bg-in 0.9s ease-in-out both; }
+.hero-bg-out { animation: hero-bg-out 0.9s ease-in-out both; }
+.hero-content-in { animation: hero-content-in 0.6s ease-out 0.2s both; }
+.hero-content-out { animation: hero-content-out 0.6s ease-out 0.2s both; }
+.hero-progress { animation-name: hero-progress; animation-timing-function: linear; animation-fill-mode: both; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
