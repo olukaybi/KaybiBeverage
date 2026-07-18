@@ -1,9 +1,6 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
-import { useScroll, useTransform, motion, useReducedMotion } from 'framer-motion';
+import ParallaxBg from '@/components/ParallaxBg';
 
 interface HeroProps {
   eyebrow: string;
@@ -46,16 +43,6 @@ export default function Hero({
   mobileBackgroundImage,
   backgroundPosition = 'left top',
 }: HeroProps) {
-  const ref = useRef<HTMLElement>(null);
-  const prefersReducedMotion = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  });
-
-  const yParallax = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
-
   // Banner-background layout (photo carries the visual; text overlays right side)
   // Mobile: image block at top, content card flows below.
   // lg+: image is absolute background, card overlays the right side.
@@ -193,15 +180,11 @@ export default function Hero({
   // Original full-bleed photo layout (inner pages)
   return (
     <section
-      ref={ref}
       className="relative min-h-[90vh] flex items-center overflow-hidden"
       aria-label="Hero"
     >
       {/* Background image with parallax */}
-      <motion.div
-        className="absolute inset-0"
-        style={prefersReducedMotion ? {} : { y: yParallax }}
-      >
+      <ParallaxBg className="absolute inset-0">
         <Image
           src={imageSrc!}
           alt={imageAlt}
@@ -210,7 +193,7 @@ export default function Hero({
           className="object-cover"
           sizes="100vw"
         />
-      </motion.div>
+      </ParallaxBg>
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-kayora-blue-900/60" aria-hidden="true" />
