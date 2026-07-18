@@ -1,6 +1,4 @@
-'use client';
-
-import { motion, useReducedMotion } from 'framer-motion';
+import Reveal from '@/components/Reveal';
 
 interface Step {
   number: string;
@@ -62,8 +60,6 @@ export default function ProcessSteps({
   headline = 'What "Premium" Really Means',
   intro = 'We don\'t bottle ordinary water and call it premium. Every drop of Kayora moves through eight engineered stages before it reaches you.',
 }: ProcessStepsProps) {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
     <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,20 +77,13 @@ export default function ProcessSteps({
         {/* Steps grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
-              whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="relative"
-            >
+            <Reveal key={step.number} delaySeconds={i * 0.08} className="relative">
               <p className="font-display text-display-md text-kayora-gold-500 leading-none mb-3">
                 {step.number}
               </p>
               <h3 className="font-sans font-semibold text-kayora-ink text-lg mb-2">{step.title}</h3>
               <p className="text-kayora-graphite text-sm leading-relaxed max-w-[65ch]">{step.body}</p>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>

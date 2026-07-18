@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface Slide {
   id: string;
@@ -102,11 +101,22 @@ const slides: Slide[] = [
 ];
 
 const AUTOPLAY_INTERVAL = 6000;
+// mode="wait" sequencing from the framer version: outgoing content animates
+// 0.6s after a 0.2s delay, then the incoming content mounts and plays its
+// own 0.2s-delayed entrance; the backgrounds crossfade over 0.9s in parallel
+const CONTENT_EXIT_MS = 800;
+const BG_FADE_MS = 900;
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
+  const [prevBg, setPrevBg] = useState<number | null>(null);
+  const [contentIndex, setContentIndex] = useState(0);
+  const [contentPhase, setContentPhase] = useState<'in' | 'out'>('in');
   const [paused, setPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const lastIndexRef = useRef(0);
+  const bgTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const contentTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const goTo = useCallback((index: number) => {
     setCurrent((index + slides.length) % slides.length);
@@ -121,11 +131,36 @@ export default function HeroSlider() {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [paused, next]);
 
+  useEffect(() => {
+    if (current === lastIndexRef.current) return;
+    const from = lastIndexRef.current;
+    lastIndexRef.current = current;
+
+    // keep the outgoing background mounted while it fades under the new one
+    setPrevBg(from);
+    if (bgTimeoutRef.current) clearTimeout(bgTimeoutRef.current);
+    bgTimeoutRef.current = setTimeout(() => setPrevBg(null), BG_FADE_MS);
+
+    // fade the old content block out, then swap in the new one
+    setContentPhase('out');
+    if (contentTimeoutRef.current) clearTimeout(contentTimeoutRef.current);
+    contentTimeoutRef.current = setTimeout(() => {
+      setContentIndex(current);
+      setContentPhase('in');
+    }, CONTENT_EXIT_MS);
+  }, [current]);
+
+  useEffect(() => () => {
+    if (bgTimeoutRef.current) clearTimeout(bgTimeoutRef.current);
+    if (contentTimeoutRef.current) clearTimeout(contentTimeoutRef.current);
+  }, []);
+
   const slide = slides[current];
+  const contentSlide = slides[contentIndex];
 
   // Text is dark for light-bg product slides, white for photo slides
-  const lightBg = !!slide.bgColor;
-  const isBrandSlide = slide.id === 'brand';
+  const lightBg = !!contentSlide.bgColor;
+  const isBrandSlide = contentSlide.id === 'brand';
   const textColor = lightBg ? 'text-kayora-blue-900' : 'text-white';
   const subColor = lightBg ? 'text-slate-700' : 'text-white/80';
   // Brand slide sits on the dark studio banner — brighter gold + semibold for legibility
@@ -153,84 +188,80 @@ export default function HeroSlider() {
         }
       }}
     >
-      {/* Background */}
-      <AnimatePresence mode="sync">
-        <motion.div
-          key={slide.id + '-bg'}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.9, ease: 'easeInOut' }}
-          className="absolute inset-0"
-          style={{ backgroundColor: slide.bgColor ?? '#0a1c36' }}
-        >
-          <Image
-            src={slide.backgroundImage}
-            alt=""
-            fill
-            priority={current === 0}
-            loading={current === 0 ? undefined : 'lazy'}
-            className="w-full h-full"
-            style={{
-              objectFit: slide.objectFit,
-              objectPosition: slide.objectPosition ?? 'center',
-              transform: slide.imageTransform,
-              transformOrigin: 'left top',
-            }}
-            sizes="100vw"
-          />
-          {/* Overlay — lighter for product slides so bottles stay vivid */}
+      {/* Background — outgoing slide fades under the incoming one */}
+      {[
+        ...(prevBg !== null ? [{ index: prevBg, out: true }] : []),
+        { index: current, out: false },
+      ].map(({ index, out }) => {
+        const bg = slides[index];
+        return (
           <div
-            className="absolute inset-0"
-            style={{ background: `rgba(10,28,54,${slide.overlayStrength})` }}
-            aria-hidden="true"
-          />
-        </motion.div>
-      </AnimatePresence>
+            key={bg.id + (out ? '-bg-out' : '-bg')}
+            className={`absolute inset-0 ${out ? 'hero-bg-out' : 'hero-bg-in'}`}
+            style={{ backgroundColor: bg.bgColor ?? '#0a1c36' }}
+          >
+            <Image
+              src={bg.backgroundImage}
+              alt=""
+              fill
+              priority={index === 0}
+              loading={index === 0 ? undefined : 'lazy'}
+              className="w-full h-full"
+              style={{
+                objectFit: bg.objectFit,
+                objectPosition: bg.objectPosition ?? 'center',
+                transform: bg.imageTransform,
+                transformOrigin: 'left top',
+              }}
+              sizes="100vw"
+            />
+            {/* Overlay — lighter for product slides so bottles stay vivid */}
+            <div
+              className="absolute inset-0"
+              style={{ background: `rgba(10,28,54,${bg.overlayStrength})` }}
+              aria-hidden="true"
+            />
+          </div>
+        );
+      })}
 
       {/* Content — right side for product slides, left for photo slides */}
       <div className="relative z-10 flex h-full items-center" style={{ minHeight: 'inherit' }}>
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={slide.id + '-content'}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-              className={`${isBrandSlide ? 'max-w-lg lg:mr-0 lg:pr-4' : 'max-w-xl'} ${(lightBg || slide.contentAlign === 'right') ? 'lg:ml-auto' : ''}`}
-            >
-              <p className={`text-xs uppercase tracking-widest font-sans mb-4 ${eyebrowColor}`}>
-                {slide.eyebrow}
-              </p>
-              <h1 className={`font-display text-display-lg mb-5 whitespace-pre-line leading-tight ${textColor}`}>
-                {slide.headline}
-              </h1>
-              <p className={`text-base lg:text-lg leading-relaxed mb-8 max-w-[50ch] ${subColor}`}>
-                {slide.subhead}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+          <div
+            key={contentSlide.id + '-content'}
+            className={`${contentPhase === 'in' ? 'hero-content-in' : 'hero-content-out'} ${isBrandSlide ? 'max-w-lg lg:mr-0 lg:pr-4' : 'max-w-xl'} ${(lightBg || contentSlide.contentAlign === 'right') ? 'lg:ml-auto' : ''}`}
+          >
+            <p className={`text-xs uppercase tracking-widest font-sans mb-4 ${eyebrowColor}`}>
+              {contentSlide.eyebrow}
+            </p>
+            <h1 className={`font-display text-display-lg mb-5 whitespace-pre-line leading-tight ${textColor}`}>
+              {contentSlide.headline}
+            </h1>
+            <p className={`text-base lg:text-lg leading-relaxed mb-8 max-w-[50ch] ${subColor}`}>
+              {contentSlide.subhead}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href={contentSlide.primaryCTA.href}
+                className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-white font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
+              >
+                {contentSlide.primaryCTA.label}
+              </Link>
+              {contentSlide.secondaryCTA && (
                 <Link
-                  href={slide.primaryCTA.href}
-                  className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-white font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
+                  href={contentSlide.secondaryCTA.href}
+                  className={`inline-flex items-center justify-center min-h-[48px] px-8 py-3 font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                    lightBg
+                      ? 'border border-kayora-blue-900 text-kayora-blue-900 hover:bg-kayora-blue-900/10 focus-visible:ring-kayora-blue-900'
+                      : 'border border-white/60 text-white hover:bg-white/10 focus-visible:ring-white'
+                  }`}
                 >
-                  {slide.primaryCTA.label}
+                  {contentSlide.secondaryCTA.label}
                 </Link>
-                {slide.secondaryCTA && (
-                  <Link
-                    href={slide.secondaryCTA.href}
-                    className={`inline-flex items-center justify-center min-h-[48px] px-8 py-3 font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-                      lightBg
-                        ? 'border border-kayora-blue-900 text-kayora-blue-900 hover:bg-kayora-blue-900/10 focus-visible:ring-kayora-blue-900'
-                        : 'border border-white/60 text-white hover:bg-white/10 focus-visible:ring-white'
-                    }`}
-                  >
-                    {slide.secondaryCTA.label}
-                  </Link>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -259,12 +290,10 @@ export default function HeroSlider() {
       {/* Progress bar */}
       {!paused && (
         <div className="absolute bottom-0 left-0 z-20 h-[3px] bg-kayora-gold-500/30 w-full">
-          <motion.div
+          <div
             key={slide.id + '-progress'}
-            className="h-full bg-kayora-gold-500"
-            initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
-            transition={{ duration: AUTOPLAY_INTERVAL / 1000, ease: 'linear' }}
+            className="h-full bg-kayora-gold-500 hero-progress"
+            style={{ animationDuration: `${AUTOPLAY_INTERVAL}ms` }}
           />
         </div>
       )}
