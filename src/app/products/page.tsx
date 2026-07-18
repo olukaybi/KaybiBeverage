@@ -32,7 +32,7 @@ const skus = [
     description:
       'Compact, easy to chill in volume, and purpose-built for weddings, naming ceremonies, corporate functions and conferences. Cases of 24.',
     useCases: ['Weddings & naming ceremonies', 'Corporate events & conferences', 'Catering & hospitality', 'Quick-serve occasions'],
-    imageSrc: '/05_kayora_30cl_single.png',
+    imageSrc: '/05_kayora_30cl_single.webp',
     imageAlt: 'Kayora 30cl Sharp-sharp — event bottle',
   },
   {
@@ -43,7 +43,7 @@ const skus = [
     description:
       'The backbone of the range. Goes into school bags, sits on office desks, lines supermarket shelves and is served in restaurants across Akwa Ibom. Cases of 12.',
     useCases: ['Home & daily hydration', 'Offices & co-working spaces', 'Schools & education', 'Retail & kiosks'],
-    imageSrc: '/04_kayora_50cl_single.png',
+    imageSrc: '/04_kayora_50cl_single.webp',
     imageAlt: 'Kayora 50cl Original — everyday bottle',
   },
   {
@@ -54,7 +54,7 @@ const skus = [
     description:
       'A little extra, the way only Nigerians know how. For gym-goers, travellers, hotels and restaurants that want a premium table water. Cases of 12.',
     useCases: ['Hotels & fine dining', 'Gyms & fitness', 'Travel & fieldwork', 'Premium gifting & events'],
-    imageSrc: '/03_kayora_75cl_single.png',
+    imageSrc: '/03_kayora_75cl_single.webp',
     imageAlt: 'Kayora 75cl Jara — premium bottle',
   },
   {
@@ -65,7 +65,7 @@ const skus = [
     description:
       'One bottle serves a household for days or a small office for a week. Fits all standard floor-standing and countertop dispensers available in Nigeria.',
     useCases: ['Homes & family households', 'Offices & institutions', 'Hotels & guesthouses', 'Schools & clinics'],
-    imageSrc: '/07_kayora_18_9l_single_corrected.png',
+    imageSrc: '/07_kayora_18_9l_single_corrected.webp',
     imageAlt: 'Kayora 18.9L Never Finish — dispenser bottle',
   },
 ];
@@ -132,7 +132,7 @@ export default function ProductsPage() {
             </div>
             <div className="relative h-[320px] lg:h-[400px]">
               <Image
-                src="/10_kayora_full_family_lineup.png"
+                src="/10_kayora_full_family_lineup.webp"
                 alt="Kayora Premium Purified Water — full product range: 30cl, 50cl, 75cl and 18.9L"
                 fill
                 priority
@@ -224,7 +224,7 @@ export default function ProductsPage() {
             <div className="flex flex-col bg-kayora-cream border border-kayora-mist rounded-2xl overflow-hidden hover:shadow-lg transition-shadow">
               <div className="relative h-60 bg-kayora-blue-900/5">
                 <Image
-                  src="/07_kayora_18_9l_single_corrected.png"
+                  src="/07_kayora_18_9l_single_corrected.webp"
                   alt="Kayora 18.9L Never Finish — refill service for Kayora-branded bottles"
                   fill
                   className="object-contain p-6"

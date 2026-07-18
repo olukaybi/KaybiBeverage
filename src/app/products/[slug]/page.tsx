@@ -30,7 +30,7 @@ const skuData = {
       son: 'FT-29179',
       cap: 'Steam-cleaned, ozone-sterilised, tamper-evident',
     },
-    imageSrc: '/05_kayora_30cl_single.png',
+    imageSrc: '/05_kayora_30cl_single.webp',
     imageAlt: 'Kayora 30cl Sharp-sharp — premium purified water event bottle',
     related: [
       { slug: '50cl', size: '50cl', name: 'Original' },
@@ -63,7 +63,7 @@ const skuData = {
       son: 'FT-29179',
       cap: 'Steam-cleaned, ozone-sterilised, tamper-evident',
     },
-    imageSrc: '/04_kayora_50cl_single.png',
+    imageSrc: '/04_kayora_50cl_single.webp',
     imageAlt: 'Kayora 50cl Original — everyday premium purified water bottle',
     related: [
       { slug: '30cl', size: '30cl', name: 'Sharp-sharp' },
@@ -96,7 +96,7 @@ const skuData = {
       son: 'FT-29179',
       cap: 'Steam-cleaned, ozone-sterilised, tamper-evident',
     },
-    imageSrc: '/03_kayora_75cl_single.png',
+    imageSrc: '/03_kayora_75cl_single.webp',
     imageAlt: 'Kayora 75cl Jara — premium purified water for hospitality and active use',
     related: [
       { slug: '30cl', size: '30cl', name: 'Sharp-sharp' },
@@ -129,7 +129,7 @@ const skuData = {
       son: 'FT-29180',
       cap: 'Triple-locked at fill; tamper-evident',
     },
-    imageSrc: '/07_kayora_18_9l_single_corrected.png',
+    imageSrc: '/07_kayora_18_9l_single_corrected.webp',
     imageAlt: 'Kayora 18.9L Never Finish — dispenser water for homes and offices',
     related: [
       { slug: '30cl', size: '30cl', name: 'Sharp-sharp' },

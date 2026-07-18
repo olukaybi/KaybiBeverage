@@ -80,7 +80,7 @@ export const PRODUCT_IMAGES: Record<string, string> = {
   '50cl': '/images/products/kayora-50cl-hero-blue.png',
   '75cl': '/images/products/kayora-75cl-hero-blue.png',
   '18.9L': '/images/products/kayora-18l-hero-blue.png',
-  '18.9L-refill': '/07_kayora_18_9l_single_corrected.png',
+  '18.9L-refill': '/07_kayora_18_9l_single_corrected.webp',
 };
 
 export function formatNaira(amount: number): string {
