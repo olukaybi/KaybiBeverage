@@ -233,7 +233,7 @@ export default function OurWaterPage() {
         eyebrow="Our Water"
         headline={"What's Actually\nin the Bottle."}
         subhead="The long version of the story we tell on the label — without the marketing softness."
-        primaryCTA={{ label: 'Order Kayora', href: '/products' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         imageSrc="/images/products/kayora-front-view.jpeg"
         imageAlt="Kayora Premium Purified Water — four pack sizes on display"
@@ -417,7 +417,7 @@ export default function OurWaterPage() {
       <CTASection
         headline="Now You Know What's in the Bottle."
         body="You can order Kayora for your home, office, event or business directly. We deliver directly across Akwa Ibom State. Beyond Akwa Ibom, Kayora is available through our distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. We respond to enquiries within hours."
-        primaryCTA={{ label: 'Order Kayora', href: '/products' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         variant="blue"
       />
