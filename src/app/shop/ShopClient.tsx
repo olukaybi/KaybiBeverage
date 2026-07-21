@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Reveal from '@/components/Reveal';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
 import { useCartStore } from '@/lib/store/cart';
 import { PRODUCTS, PRODUCT_IMAGES, formatNaira } from '@/lib/products';
 import type { Product } from '@/lib/types';
@@ -50,7 +50,6 @@ function AddToCartButton({ product }: { product: Product }) {
 }
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
-  const prefersReducedMotion = useReducedMotion();
   const imageSrc = PRODUCT_IMAGES[product.sku] ?? '';
 
   const unitLabel =
@@ -59,12 +58,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       : 'Bottle';
 
   return (
-    <motion.div
+    <Reveal
       className="bg-white border border-kayora-mist rounded-2xl overflow-hidden flex flex-col"
-      initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
-      whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
+      delaySeconds={index * 0.08}
+      margin="-40px"
     >
       <div className="relative aspect-[4/5] bg-kayora-blue-100">
         <Image
@@ -122,7 +119,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           )}
         </div>
       </div>
-    </motion.div>
+    </Reveal>
   );
 }
 

@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { motion, useReducedMotion } from 'framer-motion';
 import { PRODUCTS } from '@/lib/products';
 
 type EventType = 'wedding' | 'corporate' | 'religious' | 'birthday' | 'outdoor' | 'funeral';
@@ -141,7 +140,6 @@ function buildWhatsAppMessage(r: Result): string {
 }
 
 export default function EventWaterClient() {
-  const prefersReducedMotion = useReducedMotion();
   const searchParams = useSearchParams();
 
   const [eventType, setEventType] = useState<EventType>('wedding');
@@ -328,11 +326,8 @@ export default function EventWaterClient() {
 
         {/* Result card */}
         {result && (
-          <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
-            animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="mt-8 bg-kayora-cream border border-kayora-mist rounded-2xl p-8 border-l-4 border-l-kayora-gold-500"
+          <div
+            className="result-reveal mt-8 bg-kayora-cream border border-kayora-mist rounded-2xl p-8 border-l-4 border-l-kayora-gold-500"
           >
             <h2 className="font-display text-xl font-semibold text-kayora-ink mb-2">
               Estimated requirement for your event
@@ -416,7 +411,7 @@ export default function EventWaterClient() {
                 Request delivery quote
               </Link>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* FAQ */}
