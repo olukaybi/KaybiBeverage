@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
 
 type ActivityLevel = 'sedentary' | 'active' | 'athlete';
 type Climate = 'cool' | 'temperate' | 'hot';
@@ -36,7 +35,6 @@ function calculate(weightKg: number, activity: ActivityLevel, climate: Climate):
 }
 
 export default function HydrationClient() {
-  const prefersReducedMotion = useReducedMotion();
 
   const [weightKg, setWeightKg] = useState(70);
   const [unit, setUnit] = useState<'kg' | 'lbs'>('kg');
@@ -201,11 +199,8 @@ export default function HydrationClient() {
 
         {/* Result card */}
         {result && (
-          <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
-            animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="mt-8 bg-kayora-cream border border-kayora-mist rounded-2xl p-8 border-l-4 border-l-kayora-gold-500"
+          <div
+            className="result-reveal mt-8 bg-kayora-cream border border-kayora-mist rounded-2xl p-8 border-l-4 border-l-kayora-gold-500"
           >
             <h2 className="font-display text-xl font-semibold text-kayora-ink mb-6">
               Your daily hydration estimate
@@ -251,7 +246,7 @@ export default function HydrationClient() {
             >
               Order {result.weeklyPacks} pack{result.weeklyPacks !== 1 ? 's' : ''} of Kayora &rarr;
             </Link>
-          </motion.div>
+          </div>
         )}
 
         {/* FAQ schema content */}

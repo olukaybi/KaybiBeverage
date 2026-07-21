@@ -6,6 +6,8 @@ interface RevealProps {
   children: ReactNode;
   /** Stagger offset in seconds, applied as transition-delay */
   delaySeconds?: number;
+  /** IntersectionObserver rootMargin, e.g. '-40px' (framer viewport.margin) */
+  margin?: string;
   className?: string;
 }
 
@@ -15,22 +17,25 @@ interface RevealProps {
  * the .reveal styles in globals.css carry the timing and the
  * prefers-reduced-motion opt-out.
  */
-export default function Reveal({ children, delaySeconds = 0, className = '' }: RevealProps) {
+export default function Reveal({ children, delaySeconds = 0, margin, className = '' }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        setVisible(true);
-        observer.disconnect();
-      }
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      margin ? { rootMargin: margin } : undefined
+    );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [margin]);
 
   return (
     <div
