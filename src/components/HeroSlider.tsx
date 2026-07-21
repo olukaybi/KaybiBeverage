@@ -27,7 +27,7 @@ const slides: Slide[] = [
     eyebrow: 'Premium Purified Water · NAFDAC Reg. A1-111026',
     headline: 'Purified to the Highest\nStandard. Safe for Every Table.',
     subhead: 'Eight-stage purified water from the heart of Akwa Ibom — for homes, offices, hotels and celebrations that won’t settle for less.',
-    primaryCTA: { label: 'Order Kayora', href: '/products' },
+    primaryCTA: { label: 'Order Kayora', href: '/shop' },
     secondaryCTA: { label: 'Become a Distributor', href: '/distribution' },
     overlayStrength: 0.35,
     objectFit: 'cover',

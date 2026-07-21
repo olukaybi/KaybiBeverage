@@ -186,7 +186,7 @@ export default function FAQPage() {
       <CTASection
         headline="Ready to Order?"
         body="Direct delivery across Akwa Ibom State. Reach us and we will have water to you within 24–48 hours."
-        primaryCTA={{ label: 'Order Kayora', href: '/products' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         variant="blue"
       />

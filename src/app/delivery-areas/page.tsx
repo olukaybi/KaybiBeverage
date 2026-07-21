@@ -152,7 +152,7 @@ export default function DeliveryAreasPage() {
       <CTASection
         headline="Ready to Order?"
         body="Place your order today and we will confirm delivery details and timing within hours. Call, email or fill in the form on our Contact page."
-        primaryCTA={{ label: 'Order Kayora', href: '/products' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
         secondaryCTA={{ label: 'Find a Distributor', href: '/distribution' }}
         variant="blue"
       />

@@ -49,7 +49,7 @@ const productLinks = [
 ];
 
 const orderLinks = [
-  { label: 'Order Kayora', href: '/products' },
+  { label: 'Order Kayora', href: '/shop' },
   { label: 'Bulk / event orders', href: '/contact' },
   { label: 'Become a distributor', href: '/distribution' },
   { label: 'Delivery areas', href: '/delivery-areas' },

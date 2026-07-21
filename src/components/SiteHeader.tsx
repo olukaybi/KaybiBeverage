@@ -147,7 +147,7 @@ export default function SiteHeader() {
                 </span>
               )}
               <Link
-                href="/products"
+                href="/shop"
                 className="inline-flex items-center justify-center min-h-[48px] px-5 py-2 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2"
               >
                 Order Kayora
@@ -249,7 +249,7 @@ export default function SiteHeader() {
             </Link>
           )}
           <Link
-            href="/products"
+            href="/shop"
             onClick={() => setDrawerOpen(false)}
             className="flex items-center justify-center min-h-[48px] w-full px-5 py-3 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
           >
