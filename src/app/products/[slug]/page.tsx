@@ -3,6 +3,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import CTASection from '@/components/CTASection';
+import { PRODUCTS } from '@/lib/products';
+import { MERCHANT_RETURN_POLICY, MERCHANT_SHIPPING_DETAILS } from '@/lib/merchantSchema';
+
+// skuData keys (30cl/50cl/75cl/18-9l) use a different string than the
+// PRODUCTS canonical SKU for the 18.9L bottle ('18.9L') — map explicitly
+// rather than string-transform, so a typo fails loud instead of pricing 0.
+const PRODUCTS_SKU_BY_SLUG: Record<string, string> = {
+  '30cl': '30cl',
+  '50cl': '50cl',
+  '75cl': '75cl',
+  '18-9l': '18.9L',
+};
 
 const skuData = {
   '30cl': {
@@ -172,19 +184,39 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
   const sku = skuData[params.slug as Slug];
   if (!sku) notFound();
 
+  // Canonical per-unit price: PRODUCTS.price_naira is the price of the
+  // actual sellable unit (a case for PET SKUs, a bottle for 18.9L) — the
+  // same number shown to customers on /shop. Never hardcode a price here.
+  const product = PRODUCTS.find((p) => p.sku === PRODUCTS_SKU_BY_SLUG[params.slug]);
+
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: `Kayora ${sku.size} ${sku.name}`,
     description: sku.subhead,
-    image: `https://www.kayorawater.com${sku.imageSrc}`,
+    image: [`https://www.kayorawater.com${sku.imageSrc}`],
     brand: { '@type': 'Brand', name: 'Kayora' },
     manufacturer: {
       '@type': 'Organization',
       name: 'Kaybi Beverage Industries Limited',
       address: { '@type': 'PostalAddress', streetAddress: '173 Eket Oron Road', addressLocality: 'Eket', addressRegion: 'Akwa Ibom State', addressCountry: 'NG' },
     },
-    offers: { '@type': 'Offer', priceCurrency: 'NGN', availability: 'https://schema.org/InStock', seller: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' } },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'NGN',
+      price: product ? String(product.price_naira) : undefined,
+      availability: 'https://schema.org/InStock',
+      seller: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' },
+      // Return policy reflects Kaybi's actual Delivery, Quality Guarantee
+      // & Return Policy (effective July 2026): doorstep inspection + 24-hour
+      // post-delivery defect claim window, resolved by replacement
+      // (refund/store credit if replacement not feasible). This is a
+      // defect/damage warranty, not a general change-of-mind return
+      // policy — schema.org's return vocabulary is a close but imperfect
+      // fit; update this block if Kaybi's terms are revised.
+      hasMerchantReturnPolicy: MERCHANT_RETURN_POLICY,
+      shippingDetails: MERCHANT_SHIPPING_DETAILS,
+    },
   };
 
   const breadcrumbJsonLd = {
