@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import CTASection from '@/components/CTASection';
+import { PRODUCTS } from '@/lib/products';
+import { MERCHANT_RETURN_POLICY, MERCHANT_SHIPPING_DETAILS } from '@/lib/merchantSchema';
 
 export const metadata: Metadata = {
   title: 'Kayora 18.9L Refill Service — Never Finish Refill | ₦1,000 per Refill',
@@ -20,6 +22,45 @@ export const metadata: Metadata = {
         type: 'image/png',
       },
     ],
+  },
+};
+
+// This page previously carried no Product JSON-LD at all (breadcrumb
+// only) — Sprint 5.20 adds it as the 5th Merchant Listings surface,
+// alongside products/page.tsx and products/[slug]/page.tsx.
+const refillProduct = PRODUCTS.find((p) => p.sku === '18.9L-refill');
+
+const productJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Kayora 18.9L Never Finish Refill',
+  description:
+    'Refill service for genuine Kayora-branded 18.9L bottles. Same eight-stage purified water, new tamper-evident cap, bottle verification at point of refill.',
+  image: ['https://www.kayorawater.com/07_kayora_18_9l_single_corrected.webp'],
+  brand: { '@type': 'Brand', name: 'Kayora' },
+  manufacturer: {
+    '@type': 'Organization',
+    name: 'Kaybi Beverage Industries Limited',
+    address: { '@type': 'PostalAddress', streetAddress: '173 Eket Oron Road', addressLocality: 'Eket', addressRegion: 'Akwa Ibom State', addressCountry: 'NG' },
+  },
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'NGN',
+    // Canonical per-unit price: PRODUCTS.price_naira for '18.9L-refill'
+    // is the ₦1,000-per-refill price shown to customers on this page and
+    // on /shop. Never hardcode a price here.
+    price: refillProduct ? String(refillProduct.price_naira) : undefined,
+    availability: 'https://schema.org/InStock',
+    seller: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' },
+    // Return policy reflects Kaybi's actual Delivery, Quality Guarantee
+    // & Return Policy (effective July 2026): doorstep inspection + 24-hour
+    // post-delivery defect claim window, resolved by replacement
+    // (refund/store credit if replacement not feasible). This is a
+    // defect/damage warranty, not a general change-of-mind return
+    // policy — schema.org's return vocabulary is a close but imperfect
+    // fit; update this block if Kaybi's terms are revised.
+    hasMerchantReturnPolicy: MERCHANT_RETURN_POLICY,
+    shippingDetails: MERCHANT_SHIPPING_DETAILS,
   },
 };
 
@@ -267,6 +308,10 @@ export default function RefillPage() {
         </div>
       </section>
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

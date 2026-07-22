@@ -2,6 +2,18 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import CTASection from '@/components/CTASection';
+import { PRODUCTS } from '@/lib/products';
+import { MERCHANT_RETURN_POLICY, MERCHANT_SHIPPING_DETAILS } from '@/lib/merchantSchema';
+
+// slug ('18-9l') differs from the PRODUCTS canonical SKU ('18.9L') for
+// the 18.9L bottle — map explicitly, same convention as
+// products/[slug]/page.tsx.
+const PRODUCTS_SKU_BY_SLUG: Record<string, string> = {
+  '30cl': '30cl',
+  '50cl': '50cl',
+  '75cl': '75cl',
+  '18-9l': '18.9L',
+};
 
 export const metadata: Metadata = {
   title: 'Kayora Products — 30cl, 50cl, 75cl & 18.9L | Premium Purified Water',
@@ -74,19 +86,41 @@ const productListJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Kayora Premium Purified Water — Product Range',
-  itemListElement: skus.map((sku, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    item: {
-      '@type': 'Product',
-      name: `Kayora ${sku.size} ${sku.name}`,
-      description: sku.description,
-      url: `https://www.kayorawater.com/products/${sku.slug}`,
-      brand: { '@type': 'Brand', name: 'Kayora' },
-      manufacturer: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' },
-      offers: { '@type': 'Offer', priceCurrency: 'NGN', availability: 'https://schema.org/InStock' },
-    },
-  })),
+  itemListElement: skus.map((sku, i) => {
+    // Canonical per-unit price: PRODUCTS.price_naira is the price of the
+    // actual sellable unit (a case for PET SKUs, a bottle for 18.9L) — the
+    // same number shown to customers on /shop. Never hardcode a price here.
+    const product = PRODUCTS.find((p) => p.sku === PRODUCTS_SKU_BY_SLUG[sku.slug]);
+    return {
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Product',
+        name: `Kayora ${sku.size} ${sku.name}`,
+        description: sku.description,
+        url: `https://www.kayorawater.com/products/${sku.slug}`,
+        image: [`https://www.kayorawater.com${sku.imageSrc}`],
+        brand: { '@type': 'Brand', name: 'Kayora' },
+        manufacturer: { '@type': 'Organization', name: 'Kaybi Beverage Industries Limited' },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'NGN',
+          price: product ? String(product.price_naira) : undefined,
+          availability: 'https://schema.org/InStock',
+          // Return policy reflects Kaybi's actual Delivery, Quality
+          // Guarantee & Return Policy (effective July 2026): doorstep
+          // inspection + 24-hour post-delivery defect claim window,
+          // resolved by replacement (refund/store credit if replacement
+          // not feasible). This is a defect/damage warranty, not a
+          // general change-of-mind return policy — schema.org's return
+          // vocabulary is a close but imperfect fit; update this block
+          // if Kaybi's terms are revised.
+          hasMerchantReturnPolicy: MERCHANT_RETURN_POLICY,
+          shippingDetails: MERCHANT_SHIPPING_DETAILS,
+        },
+      },
+    };
+  }),
 };
 
 const breadcrumbJsonLd = {
