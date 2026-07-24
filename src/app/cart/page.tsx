@@ -67,6 +67,7 @@ export default function CartPage() {
                       src={item.image_src}
                       alt={item.display_name}
                       fill
+                      sizes="80px"
                       className="object-contain p-2"
                     />
                   </div>

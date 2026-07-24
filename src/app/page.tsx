@@ -1,8 +1,28 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import fs from 'node:fs';
+import path from 'node:path';
+import { ShieldCheck, ImageOff, Video as VideoIcon } from 'lucide-react';
 import HeroSlider from '@/components/HeroSlider';
 import SKUCard from '@/components/SKUCard';
 import ProcessSteps from '@/components/ProcessSteps';
+
+// Inauguration photo/video assets aren't in the repo yet (see Sprint CRO
+// PR notes) — check for them at render time so the section degrades to a
+// clean placeholder instead of a broken <img>/<video>, and upgrades
+// automatically the moment the real files are dropped into place.
+const INAUGURATION_PHOTO = '/images/inauguration/inauguration-1.jpg';
+const INAUGURATION_VIDEO = '/media/inauguration-highlight.mp4';
+const INAUGURATION_POSTER = '/media/inauguration-poster.jpg';
+
+function publicAssetExists(webPath: string): boolean {
+  try {
+    return fs.existsSync(path.join(process.cwd(), 'public', webPath));
+  } catch {
+    return false;
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Kayora Premium Purified Water | NAFDAC Registered, Eket',
@@ -55,6 +75,10 @@ const skus = [
 ];
 
 export default function HomePage() {
+  const hasPhoto = publicAssetExists(INAUGURATION_PHOTO);
+  const hasVideo = publicAssetExists(INAUGURATION_VIDEO);
+  const hasPoster = publicAssetExists(INAUGURATION_POSTER);
+
   return (
     <>
       {/* Section 1 — Hero Slider */}
@@ -85,6 +109,88 @@ export default function HomePage() {
             {skus.map((sku) => (
               <SKUCard key={sku.size} {...sku} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 2b — Inauguration Social Proof */}
+      <section className="bg-white py-[clamp(5rem,9vw,9rem)] border-t border-kayora-mist">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-14">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              Recognition
+            </p>
+            <h2 className="font-display text-display-lg text-kayora-ink">
+              Trusted at the Highest Level
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Card 1 — Governor's Commissioning */}
+            <div className="bg-kayora-cream border border-kayora-mist rounded-2xl p-8 flex flex-col">
+              <span className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-4">
+                June 2026 · Eket, Akwa Ibom
+              </span>
+              <h3 className="font-display text-xl font-semibold text-kayora-ink mb-3">
+                Commissioned by the Governor of Akwa Ibom State
+              </h3>
+              <p className="text-kayora-graphite leading-relaxed">
+                On 24 June 2026, Executive Governor Pastor Umo Eno commissioned the Kayora manufacturing facility at our Eket site — a recognition of the standard we hold ourselves to.
+              </p>
+            </div>
+
+            {/* Card 2 — Photo */}
+            <div className="relative rounded-2xl overflow-hidden border border-kayora-mist bg-kayora-blue-100 aspect-[4/3] lg:aspect-auto flex flex-col">
+              <div className="relative flex-1 min-h-[220px] bg-kayora-blue-900/5">
+                {hasPhoto ? (
+                  <Image
+                    src={INAUGURATION_PHOTO}
+                    alt="Governor of Akwa Ibom State at the Kayora facility commissioning, June 2026"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-kayora-stone p-6 text-center">
+                    <ImageOff className="w-8 h-8" aria-hidden="true" />
+                    <p className="text-sm">Commissioning photos coming soon</p>
+                  </div>
+                )}
+              </div>
+              <p className="text-sm text-kayora-stone bg-white px-4 py-3 border-t border-kayora-mist">
+                Our Eket facility — commissioned June 2026
+              </p>
+            </div>
+
+            {/* Card 3 — Video */}
+            <div className="relative rounded-2xl overflow-hidden border border-kayora-mist bg-kayora-blue-100 flex flex-col">
+              <div className="relative flex-1 min-h-[220px] bg-kayora-blue-900/5">
+                {hasVideo ? (
+                  <video
+                    src={INAUGURATION_VIDEO}
+                    poster={hasPoster ? INAUGURATION_POSTER : undefined}
+                    controls
+                    preload="none"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-kayora-stone p-6 text-center">
+                    <VideoIcon className="w-8 h-8" aria-hidden="true" />
+                    <p className="text-sm">Facility video coming soon</p>
+                  </div>
+                )}
+              </div>
+              <p className="text-sm text-kayora-stone bg-white px-4 py-3 border-t border-kayora-mist">
+                Inside the Kayora production line
+              </p>
+            </div>
+          </div>
+
+          {/* Callout strip */}
+          <div className="mt-8 bg-kayora-gold-100 rounded-xl px-6 py-5 text-center">
+            <p className="text-kayora-ink font-medium">
+              Walk-in visits welcome. 173 Eket Oron Road, Eket — Mon–Sat, 8 am–6 pm.
+            </p>
           </div>
         </div>
       </section>
@@ -174,6 +280,17 @@ export default function HomePage() {
                   <p className="text-sm text-kayora-stone mt-1">{signal.sub}</p>
                 </div>
               ))}
+              <Link
+                href="/authentic"
+                className="flex items-start gap-3 border border-kayora-mist rounded-xl p-6 hover:border-kayora-blue-500 hover:bg-kayora-blue-100/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+              >
+                <ShieldCheck className="w-6 h-6 text-kayora-gold-500 shrink-0 mt-0.5" aria-hidden="true" />
+                <div>
+                  <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">Verify Your Bottle</p>
+                  <p className="font-display text-lg font-semibold text-kayora-ink">Scan or check online</p>
+                  <p className="text-sm text-kayora-stone mt-1">Confirm your Kayora is genuine →</p>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
