@@ -13,8 +13,22 @@ import ProcessSteps from '@/components/ProcessSteps';
 // clean placeholder instead of a broken <img>/<video>, and upgrades
 // automatically the moment the real files are dropped into place.
 const INAUGURATION_PHOTO = '/images/inauguration/inauguration-1.jpg';
-const INAUGURATION_VIDEO = '/media/inauguration-highlight.mp4';
-const INAUGURATION_POSTER = '/media/inauguration-poster.jpg';
+const INAUGURATION_VIDEOS = [
+  {
+    key: 'ceremony',
+    src: '/media/inauguration-ceremony.mp4',
+    poster: '/media/inauguration-ceremony-poster.jpg',
+    caption: "Governor's commissioning — 24 June 2026",
+    placeholder: 'Ceremony video coming soon',
+  },
+  {
+    key: 'facility',
+    src: '/media/inauguration-facility.mp4',
+    poster: '/media/inauguration-facility-poster.jpg',
+    caption: 'Inside the Kayora production line — Eket, Akwa Ibom',
+    placeholder: 'Facility video coming soon',
+  },
+] as const;
 
 function publicAssetExists(webPath: string): boolean {
   try {
@@ -22,6 +36,46 @@ function publicAssetExists(webPath: string): boolean {
   } catch {
     return false;
   }
+}
+
+function InaugurationVideoCard({
+  src,
+  poster,
+  caption,
+  placeholder,
+  hasVideo,
+  hasPoster,
+}: {
+  src: string;
+  poster: string;
+  caption: string;
+  placeholder: string;
+  hasVideo: boolean;
+  hasPoster: boolean;
+}) {
+  return (
+    <div className="relative rounded-2xl overflow-hidden border border-kayora-mist bg-kayora-blue-100 flex flex-col">
+      <div className="relative aspect-video bg-kayora-blue-900/5">
+        {hasVideo ? (
+          <video
+            src={src}
+            poster={hasPoster ? poster : undefined}
+            controls
+            preload="none"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-kayora-stone p-6 text-center">
+            <VideoIcon className="w-8 h-8" aria-hidden="true" />
+            <p className="text-sm">{placeholder}</p>
+          </div>
+        )}
+      </div>
+      <p className="text-sm text-kayora-stone bg-white px-4 py-3 border-t border-kayora-mist">
+        {caption}
+      </p>
+    </div>
+  );
 }
 
 export const metadata: Metadata = {
@@ -76,8 +130,11 @@ const skus = [
 
 export default function HomePage() {
   const hasPhoto = publicAssetExists(INAUGURATION_PHOTO);
-  const hasVideo = publicAssetExists(INAUGURATION_VIDEO);
-  const hasPoster = publicAssetExists(INAUGURATION_POSTER);
+  const videoAvailability = INAUGURATION_VIDEOS.map((v) => ({
+    ...v,
+    hasVideo: publicAssetExists(v.src),
+    hasPoster: publicAssetExists(v.poster),
+  }));
 
   return (
     <>
@@ -125,7 +182,7 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Card 1 — Governor's Commissioning */}
             <div className="bg-kayora-cream border border-kayora-mist rounded-2xl p-8 flex flex-col">
               <span className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-4">
@@ -148,7 +205,7 @@ export default function HomePage() {
                     alt="Governor of Akwa Ibom State at the Kayora facility commissioning, June 2026"
                     fill
                     className="object-cover"
-                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-kayora-stone p-6 text-center">
@@ -162,28 +219,18 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Card 3 — Video */}
-            <div className="relative rounded-2xl overflow-hidden border border-kayora-mist bg-kayora-blue-100 flex flex-col">
-              <div className="relative flex-1 min-h-[220px] bg-kayora-blue-900/5">
-                {hasVideo ? (
-                  <video
-                    src={INAUGURATION_VIDEO}
-                    poster={hasPoster ? INAUGURATION_POSTER : undefined}
-                    controls
-                    preload="none"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-kayora-stone p-6 text-center">
-                    <VideoIcon className="w-8 h-8" aria-hidden="true" />
-                    <p className="text-sm">Facility video coming soon</p>
-                  </div>
-                )}
-              </div>
-              <p className="text-sm text-kayora-stone bg-white px-4 py-3 border-t border-kayora-mist">
-                Inside the Kayora production line
-              </p>
-            </div>
+            {/* Cards 3 & 4 — Ceremony + Facility videos */}
+            {videoAvailability.map((v) => (
+              <InaugurationVideoCard
+                key={v.key}
+                src={v.src}
+                poster={v.poster}
+                caption={v.caption}
+                placeholder={v.placeholder}
+                hasVideo={v.hasVideo}
+                hasPoster={v.hasPoster}
+              />
+            ))}
           </div>
 
           {/* Callout strip */}
