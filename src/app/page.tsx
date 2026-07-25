@@ -202,7 +202,10 @@ export default function HomePage() {
                 {hasPhoto ? (
                   <Image
                     src={INAUGURATION_PHOTO}
-                    alt="Governor of Akwa Ibom State at the Kayora facility commissioning, June 2026"
+                    // NOTE: pending confirmation of who is pictured (see PR
+                    // notes) — kept identity-neutral rather than naming the
+                    // Governor without being certain he's the person shown.
+                    alt="Inside the Kayora production facility during the commissioning ceremony, 22 June 2026"
                     fill
                     className="object-cover"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -215,7 +218,7 @@ export default function HomePage() {
                 )}
               </div>
               <p className="text-sm text-kayora-stone bg-white px-4 py-3 border-t border-kayora-mist">
-                Our Eket facility — commissioned June 2026
+                Our Eket facility — commissioned 22 June 2026
               </p>
             </div>
 
