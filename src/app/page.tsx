@@ -202,10 +202,7 @@ export default function HomePage() {
                 {hasPhoto ? (
                   <Image
                     src={INAUGURATION_PHOTO}
-                    // NOTE: pending confirmation of who is pictured (see PR
-                    // notes) — kept identity-neutral rather than naming the
-                    // Governor without being certain he's the person shown.
-                    alt="Inside the Kayora production facility during the commissioning ceremony, 22 June 2026"
+                    alt="Executive Governor Pastor Umo Eno, PhD, operating the bottle-filling monobloc at the Kayora facility commissioning, 22 June 2026"
                     fill
                     className="object-cover"
                     sizes="(min-width: 1024px) 50vw, 100vw"
@@ -218,7 +215,7 @@ export default function HomePage() {
                 )}
               </div>
               <p className="text-sm text-kayora-stone bg-white px-4 py-3 border-t border-kayora-mist">
-                Our Eket facility — commissioned 22 June 2026
+                Governor Umo Eno at our Eket facility — commissioned 22 June 2026
               </p>
             </div>
 
