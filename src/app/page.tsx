@@ -18,7 +18,7 @@ const INAUGURATION_VIDEOS = [
     key: 'ceremony',
     src: '/media/inauguration-ceremony.mp4',
     poster: '/media/inauguration-ceremony-poster.jpg',
-    caption: "Governor's commissioning — 24 June 2026",
+    caption: "Governor's commissioning — 22 June 2026",
     placeholder: 'Ceremony video coming soon',
   },
   {
@@ -192,7 +192,7 @@ export default function HomePage() {
                 Commissioned by the Governor of Akwa Ibom State
               </h3>
               <p className="text-kayora-graphite leading-relaxed">
-                On 24 June 2026, Executive Governor Pastor Umo Eno commissioned the Kayora manufacturing facility at our Eket site — a recognition of the standard we hold ourselves to.
+                On 22 June 2026, Executive Governor Pastor Umo Eno, PhD, commissioned the Kayora manufacturing facility at our Eket site — a recognition of the standard we hold ourselves to.
               </p>
             </div>
 
