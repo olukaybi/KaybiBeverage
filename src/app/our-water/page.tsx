@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import CTASection from '@/components/CTASection';
 import FAQAccordion from '@/components/FAQAccordion';
+import ScrollPlayVideo from '@/components/ScrollPlayVideo';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -287,6 +288,35 @@ export default function OurWaterPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Factory Tour Video */}
+      <section className="bg-white py-[clamp(4rem,8vw,8rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-10">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              See It For Yourself
+            </p>
+            <h2 className="font-display text-display-md text-kayora-ink mb-4">
+              Inside Our Eket Facility
+            </h2>
+            <p className="text-kayora-graphite leading-relaxed max-w-[65ch]">
+              A look at the real process behind every bottle, filmed on our production floor.
+            </p>
+          </div>
+
+          <div className="max-w-[420px] mx-auto">
+            <ScrollPlayVideo
+              src="/videos/kayora-factory-tour.mp4"
+              poster="/videos/kayora-factory-poster.jpg"
+              aria-label="Kayora Eket facility bottling line, silent video"
+              className="w-full aspect-[9/16] rounded-xl shadow-lg object-cover"
+            />
+            <span className="sr-only">
+              Video: staff preparing bottles and packaging finished cases on the Kayora production line at Eket.
+            </span>
           </div>
         </div>
       </section>
