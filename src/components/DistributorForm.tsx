@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 const schema = z.object({
   fullName: z.string().min(2, 'Please enter your full name'),
   businessName: z.string().min(2, 'Please enter your business name'),
-  businessType: z.enum(['Retailer', 'Wholesaler', 'Event Supplier', 'HoReCa', 'Other'], {
+  businessType: z.enum(['Distributor', 'Retailer', 'Wholesaler', 'Event Supplier', 'HoReCa', 'Other'], {
     required_error: 'Please select a business type',
   }),
   city: z.string().min(2, 'Please enter your city'),
@@ -144,6 +144,7 @@ export default function DistributorForm() {
           {...register('businessType')}
         >
           <option value="">Select type…</option>
+          <option value="Distributor">Distributor</option>
           <option value="Retailer">Retailer</option>
           <option value="Wholesaler">Wholesaler</option>
           <option value="Event Supplier">Event Supplier</option>

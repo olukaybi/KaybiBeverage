@@ -8,7 +8,7 @@ import { checkRateLimit } from '@/lib/ratelimit';
 const schema = z.object({
   fullName: z.string().min(2).max(100).trim(),
   businessName: z.string().min(2).max(150).trim(),
-  businessType: z.enum(['Retailer', 'Wholesaler', 'Event Supplier', 'HoReCa', 'Other']),
+  businessType: z.enum(['Distributor', 'Retailer', 'Wholesaler', 'Event Supplier', 'HoReCa', 'Other']),
   city: z.string().min(2).max(100).trim(),
   lga: z.string().min(2).max(100).trim(),
   state: z.string().min(2).max(100).trim(),
