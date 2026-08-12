@@ -4,6 +4,7 @@ import './globals.css';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import CookieConsent from '@/components/CookieConsent';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -168,6 +169,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1">{children}</main>
         <SiteFooter />
         <CookieConsent />
+        <WhatsAppFloat />
       </body>
     </html>
   );

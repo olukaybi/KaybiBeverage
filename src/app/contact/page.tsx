@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Hero from '@/components/Hero';
 import ContactForm from '@/components/ContactForm';
+import BulkQuoteForm from '@/components/BulkQuoteForm';
 import MapEmbed from '@/components/MapEmbed';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
@@ -73,6 +75,16 @@ export default function ContactPage() {
         imageSrc="/images/factory/factory-02.jpg"
         imageAlt="Kaybi Beverage Industries facility — 173 Eket Oron Road, Eket"
       />
+
+      {/* Bulk / event quote — above the generic contact form so
+          high-intent event and institutional buyers see it first */}
+      <section id="bulk-quote" className="bg-white py-[clamp(4rem,8vw,6rem)] scroll-mt-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Suspense fallback={<div className="h-96" />}>
+            <BulkQuoteForm />
+          </Suspense>
+        </div>
+      </section>
 
       <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
