@@ -74,6 +74,15 @@ export default function ContactPage() {
         imageAlt="Kaybi Beverage Industries facility — 173 Eket Oron Road, Eket"
       />
 
+      <div className="lg:hidden bg-kayora-cream px-4 pt-6 text-center">
+        <a
+          href="#send-message"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-kayora-blue-700 hover:text-kayora-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
+        >
+          Prefer to write? Jump to the message form ↓
+        </a>
+      </div>
+
       <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
@@ -145,7 +154,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right: Contact form */}
-            <div>
+            <div id="send-message" className="scroll-mt-24">
               <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
                 Send a Message
               </p>

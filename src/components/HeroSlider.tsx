@@ -266,15 +266,15 @@ export default function HeroSlider() {
       </div>
 
       {/* Prev / Next */}
-      <button onClick={prev} aria-label="Previous slide" className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors backdrop-blur-sm">
+      <button onClick={prev} aria-label="Previous slide" className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors backdrop-blur-sm">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M13 4l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </button>
-      <button onClick={next} aria-label="Next slide" className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors backdrop-blur-sm">
+      <button onClick={next} aria-label="Next slide" className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors backdrop-blur-sm">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2" role="tablist" aria-label="Slide indicators">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex" role="tablist" aria-label="Slide indicators">
         {slides.map((s, i) => (
           <button
             key={s.id}
@@ -282,8 +282,12 @@ export default function HeroSlider() {
             aria-selected={i === current}
             aria-label={`Go to slide ${i + 1}`}
             onClick={() => goTo(i)}
-            className={`transition-all duration-300 rounded-full ${i === current ? 'w-6 h-2 bg-kayora-gold-500' : 'w-2 h-2 bg-white/40 hover:bg-white/70'}`}
-          />
+            className="flex items-center justify-center w-11 h-11 -my-[18px]"
+          >
+            <span
+              className={`block transition-all duration-300 rounded-full ${i === current ? 'w-6 h-2 bg-kayora-gold-500' : 'w-2 h-2 bg-white/40 hover:bg-white/70'}`}
+            />
+          </button>
         ))}
       </div>
 
