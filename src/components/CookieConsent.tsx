@@ -72,9 +72,9 @@ export default function CookieConsent() {
       role="dialog"
       aria-label="Cookie preferences"
       aria-live="polite"
-      className="fixed bottom-0 left-0 right-0 z-50 bg-kayora-ink/95 backdrop-blur-sm border-t border-white/10 px-4 py-4 sm:px-6"
+      className="fixed bottom-0 left-0 right-0 z-50 bg-kayora-ink/95 backdrop-blur-sm border-t border-white/10 px-4 py-3 sm:px-6 sm:py-4"
     >
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 justify-between">
         <p className="text-sm text-white/80 leading-relaxed max-w-[70ch]">
           We use cookies to understand how visitors use this site. You can change your choice
           at any time in our{' '}
@@ -89,13 +89,13 @@ export default function CookieConsent() {
         <div className="flex items-center gap-3 flex-shrink-0">
           <button
             onClick={decline}
-            className="text-sm text-white/70 hover:text-white transition-colors px-4 py-2 rounded-lg border border-white/20 hover:border-white/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            className="min-h-[44px] text-sm text-white/70 hover:text-white transition-colors px-4 py-2 rounded-lg border border-white/20 hover:border-white/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
           >
             Decline
           </button>
           <button
             onClick={accept}
-            className="text-sm bg-kayora-gold-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-ink"
+            className="min-h-[44px] text-sm bg-kayora-gold-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-ink"
           >
             Accept
           </button>
