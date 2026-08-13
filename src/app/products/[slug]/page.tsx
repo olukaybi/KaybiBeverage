@@ -6,6 +6,9 @@ import CTASection from '@/components/CTASection';
 import TrackedLink from '@/components/TrackedLink';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import PageViewTracker from '@/components/PageViewTracker';
+import LeadCaptureSection from '@/components/leadforms/LeadCaptureSection';
+import { OFFICE_18L_FIELDS } from '@/lib/leadForms/office18l';
+import { EVENT_QUOTE_FIELDS } from '@/lib/leadForms/events';
 import { PRODUCTS } from '@/lib/products';
 import { MERCHANT_RETURN_POLICY, MERCHANT_SHIPPING_DETAILS } from '@/lib/merchantSchema';
 import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
@@ -417,6 +420,48 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
         secondaryCTA={{ label: 'Distributor Enquiry', href: '/distribution', event: 'cta_click_become_distributor', eventParams: { page_name: `product_${params.slug}`, sku: sku.size, cta_location: 'bottom' } }}
         variant="cream"
       />
+
+      {params.slug === '18-9l' && (
+        <LeadCaptureSection
+          id="supply-enquiry"
+          eyebrow="Set Up Supply"
+          headline="Request 18.9L Supply Details"
+          body="Tell us about your home, office or institution and we will confirm pricing, delivery schedule and bottle-return terms within one business day."
+          segment="18_9l_supply"
+          apiEndpoint="/api/leads/18-9l-supply"
+          fields={OFFICE_18L_FIELDS}
+          submitLabel="Request Supply Details"
+          thankYou={{
+            heading: 'Request received.',
+            body: 'Thank you — we have received your supply enquiry and will confirm pricing and delivery within one business day. For an urgent request, message us on WhatsApp.',
+            whatsappHref: 'https://wa.me/2349040789918?text=' + encodeURIComponent('Hi Kayora, I just submitted an 18.9L supply enquiry and would like to follow up.'),
+          }}
+          formName="office_18_9l_supply"
+          sourcePage={`products/${params.slug}`}
+          className="bg-kayora-cream"
+        />
+      )}
+
+      {(params.slug === '30cl' || params.slug === '50cl') && (
+        <LeadCaptureSection
+          id="event-quote"
+          eyebrow="Request a Quote"
+          headline="Get an Event Water Quote"
+          body="Tell us your event date, headcount and preferred size and we will confirm quantities, pricing and delivery timing within one business day."
+          segment="events"
+          apiEndpoint="/api/leads/event-quote"
+          fields={EVENT_QUOTE_FIELDS}
+          submitLabel="Request an Event Quote"
+          thankYou={{
+            heading: 'Quote request received.',
+            body: 'Thank you — we have received your event details and will confirm your quote within one business day. If your event is coming up soon, message us on WhatsApp for a faster response.',
+            whatsappHref: 'https://wa.me/2349040789918?text=' + encodeURIComponent('Hi Kayora, I just submitted an event quote request and would like to follow up.'),
+          }}
+          formName="event_quote"
+          sourcePage={`products/${params.slug}`}
+          className="bg-kayora-cream"
+        />
+      )}
 
       {/* Related Products */}
       <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">

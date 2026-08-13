@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
-import { createHash } from 'crypto';
 import { checkRateLimit } from '@/lib/ratelimit';
-
+import { hashEmail, watTimestamp, esc, htmlRow, EMAIL_STYLES, storeLeadBestEffort } from '@/lib/leadEmail';
+import { LEAD_SEGMENTS } from '@/lib/leadSegments';
 
 const schema = z.object({
   fullName: z.string().min(2).max(100).trim(),
@@ -16,37 +16,21 @@ const schema = z.object({
   whatsapp: z.string().max(30).optional(),
   email: z.string().email().max(200).trim(),
   monthlyVolume: z.string().min(1).max(200).trim(),
+  currentFootprint: z.string().min(2).max(300).trim(),
+  storageLogistics: z.string().min(2).max(300).trim(),
   yearsInBusiness: z.string().max(100).optional(),
+  websiteOrSocial: z.string().max(200).optional(),
+  existingBrands: z.string().max(300).optional(),
+  preferredTerritory: z.string().max(200).optional(),
   anythingElse: z.string().max(2000).optional(),
   utm_source: z.string().max(100).optional(),
   utm_medium: z.string().max(100).optional(),
   utm_campaign: z.string().max(100).optional(),
   utm_content: z.string().max(100).optional(),
   utm_term: z.string().max(100).optional(),
+  source_page: z.string().max(100).optional(),
   _hp: z.string().optional(),
 });
-
-function hashEmail(email: string): string {
-  return createHash('sha256').update(email.toLowerCase().trim()).digest('hex').slice(0, 12);
-}
-
-function watTimestamp(): string {
-  return (
-    new Date().toLocaleString('en-NG', {
-      timeZone: 'Africa/Lagos',
-      dateStyle: 'full',
-      timeStyle: 'short',
-    }) + ' WAT'
-  );
-}
-
-function esc(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function htmlRow(label: string, value: string): string {
-  return `<tr><td class="lbl">${label}</td><td class="val">${value}</td></tr>`;
-}
 
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -71,8 +55,9 @@ export async function POST(req: NextRequest) {
     fullName, businessName, businessType,
     city, lga, state,
     phone, whatsapp, email,
-    monthlyVolume, yearsInBusiness, anythingElse,
-    utm_source, utm_medium, utm_campaign,
+    monthlyVolume, currentFootprint, storageLogistics,
+    yearsInBusiness, websiteOrSocial, existingBrands, preferredTerritory, anythingElse,
+    utm_source, utm_medium, utm_campaign, utm_content, utm_term, source_page,
     _hp,
   } = result.data;
   const campaignLabel = [utm_source, utm_medium, utm_campaign].filter(Boolean).join(' / ');
@@ -80,27 +65,30 @@ export async function POST(req: NextRequest) {
   // Honeypot: filled means bot — silently succeed
   if (_hp) return NextResponse.json({ success: true });
 
+  const segmentConfig = LEAD_SEGMENTS.distributor;
   const ts = watTimestamp();
   console.log(`[distributor-application] received name="${fullName}" state="${state}" email=${hashEmail(email)}`);
 
+  await storeLeadBestEffort({
+    segment: 'distributor',
+    source_page: source_page ?? 'distribution',
+    email,
+    full_name: fullName,
+    phone,
+    location: `${city}, ${lga} LGA, ${state} State`,
+    enquiry_type: businessType,
+    lifecycle_stage: segmentConfig.lifecycleStage,
+    utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+    payload: result.data,
+  });
+
   const htmlBody = `<!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<style>
-  body{font-family:Arial,sans-serif;font-size:14px;color:#1a1a2e;line-height:1.6;margin:0;padding:24px}
-  table{border-collapse:collapse;width:100%;max-width:580px}
-  td{padding:9px 14px;border-bottom:1px solid #e8edf0;vertical-align:top}
-  .lbl{font-weight:600;color:#555;width:140px;white-space:nowrap}
-  .val{color:#1a1a2e}
-  .section{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#888;
-           background:#f5f7f9;padding:10px 14px 6px;font-weight:600}
-  .msg{white-space:pre-wrap;font-family:inherit}
-  h2{font-size:16px;margin:0 0 4px}
-  .meta{font-size:12px;color:#888;margin:0 0 24px}
-</style>
+<style>${EMAIL_STYLES}</style>
 </head>
 <body>
 <h2>Distributor application — kayorawater.com</h2>
-<p class="meta">Received: ${ts}</p>
+<p class="meta">Received: ${ts} · Segment: distributor · Lifecycle: ${segmentConfig.lifecycleStage}</p>
 <table>
   <tr><td class="section" colspan="2">Applicant</td></tr>
   ${htmlRow('Name', esc(fullName))}
@@ -112,6 +100,11 @@ export async function POST(req: NextRequest) {
   ${htmlRow('Business Name', esc(businessName))}
   ${htmlRow('Business Type', esc(businessType))}
   ${htmlRow('Location', esc(`${city}, ${lga} LGA, ${state} State`))}
+  ${htmlRow('Current Footprint', esc(currentFootprint))}
+  ${htmlRow('Storage / Logistics', esc(storageLogistics))}
+  ${websiteOrSocial ? htmlRow('Website / Social', esc(websiteOrSocial)) : ''}
+  ${existingBrands ? htmlRow('Existing FMCG Brands', esc(existingBrands)) : ''}
+  ${preferredTerritory ? htmlRow('Preferred Territory', esc(preferredTerritory)) : ''}
 
   <tr><td class="section" colspan="2">Distribution</td></tr>
   ${htmlRow('Est. Monthly Volume', esc(monthlyVolume))}
@@ -139,6 +132,8 @@ BUSINESS
   Business Name:     ${businessName}
   Business Type:     ${businessType}
   Location:          ${city}, ${lga} LGA, ${state} State
+  Current Footprint: ${currentFootprint}
+  Storage/Logistics: ${storageLogistics}
 
 DISTRIBUTION
   Est. Monthly Vol:  ${monthlyVolume}
@@ -152,7 +147,7 @@ Reply-To is set to the applicant's address.`;
 
   const { error: sendError } = await resend.emails.send({
     from: 'Kayora Water <noreply@kayorawater.com>',
-    to: 'info@kaybibeverage.com',
+    to: segmentConfig.notifyEmail,
     replyTo: email,
     subject: `[Kayora] Distributor application — ${fullName}, ${state}`,
     html: htmlBody,

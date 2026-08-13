@@ -6,6 +6,8 @@ import CTASection from '@/components/CTASection';
 import TrackedLink from '@/components/TrackedLink';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import PageViewTracker from '@/components/PageViewTracker';
+import LeadCaptureSection from '@/components/leadforms/LeadCaptureSection';
+import { EVENT_QUOTE_FIELDS } from '@/lib/leadForms/events';
 import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 export const metadata: Metadata = {
@@ -82,7 +84,7 @@ export default function ForEventsPage() {
         eyebrow="For Events"
         headline={'Water That Shows Up\nRight for Your Event'}
         subhead="Weddings, naming ceremonies, corporate functions, conferences and church programmes — the 30cl Sharp-sharp and 50cl Original, delivered on schedule and ready to serve."
-        primaryCTA={{ label: 'Request a Bulk Quote', href: '/contact', event: 'cta_click_bulk_quote', eventParams: { page_name: 'for-events', audience_type: 'event' } }}
+        primaryCTA={{ label: 'Request an Event Quote', href: '#event-quote', event: 'cta_click_bulk_quote', eventParams: { page_name: 'for-events', audience_type: 'event' } }}
         secondaryCTA={{ label: 'Order Kayora', href: '/shop', event: 'cta_click_order_kayora', eventParams: { page_name: 'for-events', audience_type: 'event' } }}
         productImageSrc="/images/products/kayora-30cl-hero-blue.png"
         imageAlt="Kayora 30cl Sharp-sharp — the event bottle"
@@ -116,6 +118,25 @@ export default function ForEventsPage() {
           </div>
         </div>
       </section>
+
+      <LeadCaptureSection
+        id="event-quote"
+        eyebrow="Request a Quote"
+        headline="Get an Event Water Quote"
+        body="Tell us your event date, headcount and preferred size and we will confirm quantities, pricing and delivery timing within one business day."
+        segment="events"
+        apiEndpoint="/api/leads/event-quote"
+        fields={EVENT_QUOTE_FIELDS}
+        submitLabel="Request an Event Quote"
+        thankYou={{
+          heading: 'Quote request received.',
+          body: 'Thank you — we have received your event details and will confirm your quote within one business day. If your event is coming up soon, message us on WhatsApp for a faster response.',
+          whatsappHref: 'https://wa.me/2349040789918?text=' + encodeURIComponent('Hi Kayora, I just submitted an event quote request and would like to follow up.'),
+        }}
+        formName="event_quote"
+        sourcePage="for-events"
+        className="bg-white"
+      />
 
       {/* Mini FAQ */}
       <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">

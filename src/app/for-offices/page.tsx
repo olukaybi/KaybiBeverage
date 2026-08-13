@@ -6,6 +6,8 @@ import CTASection from '@/components/CTASection';
 import TrackedLink from '@/components/TrackedLink';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import PageViewTracker from '@/components/PageViewTracker';
+import LeadCaptureSection from '@/components/leadforms/LeadCaptureSection';
+import { OFFICE_18L_FIELDS } from '@/lib/leadForms/office18l';
 import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 export const metadata: Metadata = {
@@ -82,7 +84,7 @@ export default function ForOfficesPage() {
         eyebrow="For Offices"
         headline={'Reliable Water Supply\nfor Your Office'}
         subhead="Scheduled 18.9L delivery for offices and institutions across Akwa Ibom State — the same eight-stage purified water, NAFDAC Registered A1-111026, without the daily bottle runs."
-        primaryCTA={{ label: 'Talk to Our Team', href: '/contact', event: 'cta_click_talk_to_team', eventParams: { page_name: 'for-offices', audience_type: 'office' } }}
+        primaryCTA={{ label: 'Request Supply Details', href: '#supply-enquiry', event: 'cta_click_talk_to_team', eventParams: { page_name: 'for-offices', audience_type: 'office' } }}
         secondaryCTA={{ label: 'Order Kayora', href: '/shop', event: 'cta_click_order_kayora', eventParams: { page_name: 'for-offices', audience_type: 'office' } }}
         backgroundImage="/09_kayora_warehouse_banner.webp"
         backgroundPosition="center center"
@@ -117,6 +119,25 @@ export default function ForOfficesPage() {
           </div>
         </div>
       </section>
+
+      <LeadCaptureSection
+        id="supply-enquiry"
+        eyebrow="Set Up Supply"
+        headline="Request Office or Institutional Supply Details"
+        body="Tell us about your office, school, clinic or institution and we will confirm pricing, delivery schedule and next steps within one business day."
+        segment="18_9l_supply"
+        apiEndpoint="/api/leads/18-9l-supply"
+        fields={OFFICE_18L_FIELDS}
+        submitLabel="Request Supply Details"
+        thankYou={{
+          heading: 'Request received.',
+          body: 'Thank you — we have received your supply enquiry and will confirm pricing and delivery within one business day. For an urgent request, message us on WhatsApp.',
+          whatsappHref: 'https://wa.me/2349040789918?text=' + encodeURIComponent('Hi Kayora, I just submitted an office/institutional supply enquiry and would like to follow up.'),
+        }}
+        formName="office_18_9l_supply"
+        sourcePage="for-offices"
+        className="bg-white"
+      />
 
       {/* Mini FAQ */}
       <section className="bg-kayora-cream py-[clamp(4rem,8vw,8rem)]">
