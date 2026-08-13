@@ -6,26 +6,51 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { cn } from '@/lib/utils';
 
+const SUBJECTS = [
+  'Home / personal order',
+  'Office supply',
+  'Bulk / event order',
+  'Distribution enquiry',
+  'Partnership or sponsorship',
+  'Press or media',
+  'Something else',
+] as const;
+
+const STATES = [
+  'Akwa Ibom',
+  'Cross River',
+  'Rivers',
+  'Bayelsa',
+  'Delta',
+  'Edo',
+  'Enugu',
+  'Anambra',
+  'Abia',
+  'Imo',
+  'Other',
+] as const;
+
+const SKUS = ['30cl — Sharp-sharp', '50cl — Original', '75cl — Jara', '18.9L — Never Finish', 'Not sure yet'] as const;
+
 const schema = z.object({
   fullName: z.string().min(2, 'Please enter your full name'),
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().optional(),
-  subject: z.enum(
-    [
-      'Placing an order',
-      'Distribution enquiry',
-      'Bulk/event order',
-      'Partnership or sponsorship',
-      'Press or media',
-      'Something else',
-    ],
-    { required_error: 'Please select a subject' }
-  ),
+  subject: z.enum(SUBJECTS, { required_error: 'Please select a subject' }),
+  state: z.enum(STATES).optional(),
+  preferredSku: z.enum(SKUS).optional(),
   message: z.string().min(10, 'Please write at least 10 characters'),
   _hp: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
+
+const shortcuts: { label: string; subject: (typeof SUBJECTS)[number] }[] = [
+  { label: 'Home / Personal', subject: 'Home / personal order' },
+  { label: 'Office Supply', subject: 'Office supply' },
+  { label: 'Event Order', subject: 'Bulk / event order' },
+  { label: 'Distributor Enquiry', subject: 'Distribution enquiry' },
+];
 
 const inputClass =
   'w-full h-12 px-4 border border-kayora-mist rounded-md bg-white text-kayora-ink placeholder:text-kayora-stone focus:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 transition';
@@ -40,6 +65,7 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -87,6 +113,23 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      {/* Quick shortcuts — pre-select the subject for common enquiry types */}
+      <div>
+        <p className={labelClass}>What brings you here?</p>
+        <div className="flex flex-wrap gap-2">
+          {shortcuts.map((s) => (
+            <button
+              key={s.subject}
+              type="button"
+              onClick={() => setValue('subject', s.subject, { shouldValidate: true })}
+              className="px-4 py-2 text-sm font-medium border border-kayora-mist rounded-full text-kayora-graphite hover:border-kayora-blue-500 hover:text-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Honeypot — hidden from real users, catches bots that fill every field */}
       <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
         <label htmlFor="contact_website">Website</label>
@@ -169,18 +212,41 @@ export default function ContactForm() {
           {...register('subject')}
         >
           <option value="">Select a subject…</option>
-          <option value="Placing an order">Placing an order</option>
-          <option value="Distribution enquiry">Distribution enquiry</option>
-          <option value="Bulk/event order">Bulk / event order</option>
-          <option value="Partnership or sponsorship">Partnership or sponsorship</option>
-          <option value="Press or media">Press or media</option>
-          <option value="Something else">Something else</option>
+          {SUBJECTS.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
         </select>
         {errors.subject && (
           <p role="alert" className="mt-1 text-xs text-kayora-danger">
             {errors.subject.message}
           </p>
         )}
+      </div>
+
+      {/* State + Preferred SKU */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="state" className={labelClass}>
+            State / Location <span className="text-kayora-stone">(optional)</span>
+          </label>
+          <select id="state" className={cn(inputClass, 'cursor-pointer')} {...register('state')}>
+            <option value="">Select a state…</option>
+            {STATES.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="preferredSku" className={labelClass}>
+            Preferred Size <span className="text-kayora-stone">(optional)</span>
+          </label>
+          <select id="preferredSku" className={cn(inputClass, 'cursor-pointer')} {...register('preferredSku')}>
+            <option value="">Select a size…</option>
+            {SKUS.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Message */}

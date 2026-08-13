@@ -67,9 +67,9 @@ export default function ContactPage() {
       <Hero
         eyebrow="Get in Touch"
         headline={"We're in Eket.\nEasy to Reach."}
-        subhead="Place an order, ask a question, schedule a visit. We respond within hours during business days."
+        subhead="Place an order, ask a question, schedule a visit. We typically respond within hours during business hours (Monday–Saturday, 8:00am–6:00pm WAT)."
         primaryCTA={{ label: 'Call 0904 078 9918', href: 'tel:+2349040789918' }}
-        secondaryCTA={{ label: 'Email Us', href: 'mailto:info@kaybibeverage.com' }}
+        secondaryCTA={{ label: 'Message on WhatsApp', href: 'https://wa.me/2349040789918' }}
         imageSrc="/images/factory/factory-02.jpg"
         imageAlt="Kaybi Beverage Industries facility — 173 Eket Oron Road, Eket"
       />

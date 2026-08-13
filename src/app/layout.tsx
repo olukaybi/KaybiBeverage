@@ -77,7 +77,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': ['Organization', 'LocalBusiness', 'FoodEstablishment'],
+      '@type': ['Organization', 'LocalBusiness'],
       '@id': 'https://www.kayorawater.com/#organization',
       name: 'Kaybi Beverage Industries Limited',
       legalName: 'Kaybi Beverage Industries Limited',
