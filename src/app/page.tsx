@@ -89,6 +89,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section 2b — Use-Case Shortcuts */}
+      <section className="bg-white py-[clamp(4rem,7vw,7rem)] border-t border-kayora-mist">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-10">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">Who It&rsquo;s For</p>
+            <h2 className="font-display text-display-md text-kayora-ink">Find the Right Fit for You</h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: 'For Homes', href: '/for-homes', sub: 'Everyday household supply' },
+              { label: 'For Offices', href: '/for-offices', sub: 'Scheduled office delivery' },
+              { label: 'For Events', href: '/for-events', sub: 'Weddings & ceremonies' },
+              { label: 'For Distributors', href: '/distribution', sub: 'Build a business' },
+            ].map((uc) => (
+              <Link
+                key={uc.href}
+                href={uc.href}
+                className="group flex flex-col justify-between bg-kayora-cream border border-kayora-mist rounded-xl p-5 hover:shadow-md hover:border-kayora-blue-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+              >
+                <div>
+                  <p className="font-display text-lg font-semibold text-kayora-ink group-hover:text-kayora-blue-700 transition-colors">{uc.label}</p>
+                  <p className="text-xs text-kayora-stone mt-1">{uc.sub}</p>
+                </div>
+                <span className="text-kayora-gold-500 mt-4 text-sm font-semibold" aria-hidden="true">→</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Section 3 — Eight-Stage Process */}
       <ProcessSteps />
 
@@ -176,6 +206,56 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Section 4b — Delivery Areas Preview */}
+      <section className="bg-kayora-cream py-[clamp(4rem,7vw,7rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">Where We Deliver</p>
+              <h2 className="font-display text-display-md text-kayora-ink mb-4">
+                Direct Delivery Across Akwa Ibom. Distributors Beyond.
+              </h2>
+              <p className="text-kayora-graphite leading-relaxed max-w-[60ch]">
+                We run our own delivery fleet across Akwa Ibom State — typically 24–48 hours from order. Outside the state, Kayora is available through our authorised distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo.
+              </p>
+            </div>
+            <div>
+              <Link
+                href="/delivery-areas"
+                className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-kayora-cream font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+              >
+                Check Delivery Areas
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4c — FAQ Preview */}
+      <section className="bg-white py-[clamp(4rem,7vw,7rem)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-10">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">Common Questions</p>
+            <h2 className="font-display text-display-md text-kayora-ink">Before You Ask</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {[
+              { q: 'Is Kayora NAFDAC registered?', a: 'Yes — NAFDAC Reg. A1-111026, covering all four pack sizes.' },
+              { q: 'What sizes does Kayora offer?', a: '30cl Sharp-sharp, 50cl Original, 75cl Jara and 18.9L Never Finish.' },
+              { q: 'Do you deliver in Akwa Ibom?', a: 'Yes — direct delivery statewide, typically within 24–48 hours.' },
+            ].map((f) => (
+              <div key={f.q}>
+                <h3 className="font-display text-lg font-semibold text-kayora-ink mb-2">{f.q}</h3>
+                <p className="text-kayora-graphite text-sm leading-relaxed">{f.a}</p>
+              </div>
+            ))}
+          </div>
+          <Link href="/faq" className="inline-block mt-10 text-sm font-semibold text-kayora-blue-700 hover:text-kayora-blue-900 transition-colors">
+            See all frequently asked questions →
+          </Link>
         </div>
       </section>
 

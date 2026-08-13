@@ -153,6 +153,13 @@ const skuData = {
 
 type Slug = keyof typeof skuData;
 
+const growthLinkBySlug: Record<Slug, { label: string; href: string }> = {
+  '30cl': { label: 'Planning an event? See our event water guide', href: '/for-events' },
+  '50cl': { label: 'Stocking your home? See our home water guide', href: '/for-homes' },
+  '75cl': { label: 'Supplying a hotel or restaurant? See our hospitality guide', href: '/for-hotels-restaurants' },
+  '18-9l': { label: 'Supplying an office? See our office water guide', href: '/for-offices' },
+};
+
 export function generateStaticParams() {
   return Object.keys(skuData).map((slug) => ({ slug }));
 }
@@ -188,6 +195,7 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
   // actual sellable unit (a case for PET SKUs, a bottle for 18.9L) — the
   // same number shown to customers on /shop. Never hardcode a price here.
   const product = PRODUCTS.find((p) => p.sku === PRODUCTS_SKU_BY_SLUG[params.slug]);
+  const growthLink = growthLinkBySlug[params.slug as Slug];
 
   const productJsonLd = {
     '@context': 'https://schema.org',
@@ -322,6 +330,14 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
               </div>
             ))}
           </div>
+          {growthLink && (
+            <Link
+              href={growthLink.href}
+              className="inline-block mt-8 text-sm font-semibold text-kayora-blue-700 hover:text-kayora-blue-900 transition-colors"
+            >
+              {growthLink.label} →
+            </Link>
+          )}
         </div>
       </section>
 

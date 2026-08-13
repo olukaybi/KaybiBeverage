@@ -9,13 +9,16 @@ const schema = z.object({
   email: z.string().email().max(200).trim(),
   phone: z.string().max(30).optional(),
   subject: z.enum([
-    'Placing an order',
+    'Home / personal order',
+    'Office supply',
+    'Bulk / event order',
     'Distribution enquiry',
-    'Bulk/event order',
     'Partnership or sponsorship',
     'Press or media',
     'Something else',
   ]),
+  state: z.string().max(50).optional(),
+  preferredSku: z.string().max(50).optional(),
   message: z.string().min(10).max(2000).trim(),
   _hp: z.string().optional(),
 });
@@ -61,7 +64,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Validation failed.', issues: result.error.issues }, { status: 422 });
   }
 
-  const { fullName, email, phone, subject, message, _hp } = result.data;
+  const { fullName, email, phone, subject, state, preferredSku, message, _hp } = result.data;
 
   // Honeypot: filled means bot — silently succeed
   if (_hp) return NextResponse.json({ success: true });
@@ -93,6 +96,8 @@ export async function POST(req: NextRequest) {
   ${htmlRow('Email', `<a href="mailto:${esc(email)}">${esc(email)}</a>`)}
   ${htmlRow('Phone', esc(phone || '—'))}
   ${htmlRow('Subject', esc(subject))}
+  ${state ? htmlRow('State', esc(state)) : ''}
+  ${preferredSku ? htmlRow('Preferred Size', esc(preferredSku)) : ''}
   <tr><td class="section" colspan="2">Message</td></tr>
   <tr><td colspan="2" class="val msg">${esc(message)}</td></tr>
 </table>
@@ -108,7 +113,7 @@ NAME:    ${fullName}
 EMAIL:   ${email}
 PHONE:   ${phone || '—'}
 SUBJECT: ${subject}
-
+${state ? `STATE:   ${state}\n` : ''}${preferredSku ? `SIZE:    ${preferredSku}\n` : ''}
 MESSAGE:
 ${message}
 
