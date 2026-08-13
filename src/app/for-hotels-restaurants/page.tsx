@@ -63,6 +63,8 @@ const serviceJsonLd = {
     { '@type': 'State', name: 'Akwa Ibom State' },
     { '@type': 'State', name: 'Cross River State' },
     { '@type': 'State', name: 'Rivers State' },
+    { '@type': 'State', name: 'Lagos State' },
+    { '@type': 'State', name: 'Kano State' },
   ],
   audience: { '@type': 'Audience', audienceType: 'Hotels and restaurants' },
   url: 'https://www.kayorawater.com/for-hotels-restaurants',

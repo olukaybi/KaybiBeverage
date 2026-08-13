@@ -9,7 +9,7 @@ export const OFFICE_18L_FIELDS: LeadFormField[] = [
     label: 'Location / State',
     type: 'select',
     required: true,
-    options: ['Akwa Ibom', 'Cross River', 'Rivers', 'Bayelsa', 'Delta', 'Edo', 'Enugu', 'Anambra', 'Abia', 'Imo', 'Other'],
+    options: ['Akwa Ibom', 'Cross River', 'Rivers', 'Bayelsa', 'Delta', 'Edo', 'Enugu', 'Anambra', 'Abia', 'Imo', 'Lagos', 'Kano', 'Other'],
   },
   { name: 'organization', label: 'Organization / Household Name', type: 'text', required: true, placeholder: 'e.g. your office, school or family name' },
   {

@@ -18,9 +18,9 @@ const breadcrumbJsonLd = {
 };
 
 export const metadata: Metadata = {
-  title: 'Kayora Distributor Programme | South-South & East Nigeria',
+  title: 'Kayora Distributor Programme | Now in Lagos & Kano',
   description:
-    'Join the Kayora distributor network across Akwa Ibom, Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives.',
+    'Join the Kayora distributor network across Akwa Ibom, Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo — now expanding to Lagos and Kano States. Attractive rebates and other incentives.',
   alternates: { canonical: 'https://www.kayorawater.com/distribution' },
   openGraph: {
     type: 'website',
@@ -104,7 +104,7 @@ export default function DistributionPage() {
       <Hero
         eyebrow="Distribution Network"
         headline={'Carry the Standard.\nBuild a Business.'}
-        subhead="Kayora is recruiting distributors across Akwa Ibom and our live South-South and South-East states — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives, dependable supply, real marketing support — and a brand customers already trust."
+        subhead="Kayora is recruiting distributors across Akwa Ibom, our live South-South and South-East states — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo — and now expanding to Lagos and Kano States. Attractive rebates and other incentives, dependable supply, real marketing support — and a brand customers already trust."
         primaryCTA={{ label: 'Apply to Distribute', href: '#apply', event: 'cta_click_become_distributor', eventParams: { page_name: 'distribution', cta_location: 'hero' } }}
         secondaryCTA={{ label: 'Talk to Our Team', href: '/contact', event: 'cta_click_talk_to_team', eventParams: { page_name: 'distribution', cta_location: 'hero' } }}
         backgroundImage="/09_kayora_warehouse_banner.webp"
@@ -130,7 +130,7 @@ export default function DistributionPage() {
               Where We Operate
             </h2>
             <p className="text-kayora-graphite leading-relaxed max-w-[65ch]">
-              We deliver directly across Akwa Ibom State. Beyond Akwa Ibom, Kayora is available today through our distributor network — live distribution, not a roadmap. If you can move volume in or beyond these areas, we want to hear from you.
+              We deliver directly across Akwa Ibom State. Beyond Akwa Ibom, Kayora is available today through our distributor network — live distribution, not a roadmap. Lagos and Kano States are our newest territories. If you can move volume in or beyond these areas, we want to hear from you.
             </p>
           </div>
 
@@ -159,10 +159,15 @@ export default function DistributionPage() {
                   'Anambra State',
                   'Abia State',
                   'Imo State',
+                  'Lagos State',
+                  'Kano State',
                 ].map((place) => (
                   <li key={place} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-kayora-blue-500 shrink-0" aria-hidden="true" />
                     {place}
+                    {(place === 'Lagos State' || place === 'Kano State') && (
+                      <span className="text-[10px] font-semibold uppercase tracking-wide text-kayora-blue-900 bg-kayora-gold-300 px-1.5 py-0.5 rounded">New</span>
+                    )}
                   </li>
                 ))}
               </ul>

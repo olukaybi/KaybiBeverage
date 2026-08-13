@@ -74,7 +74,7 @@ const faqs = [
       },
       {
         q: 'Where does Kayora deliver?',
-        a: 'We offer direct delivery across Akwa Ibom State, typically within 24–48 hours. Outside Akwa Ibom, we supply through our distributor network covering Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo States. See our Delivery Areas page for full coverage details.',
+        a: 'We offer direct delivery across Akwa Ibom State, typically within 24–48 hours. Outside Akwa Ibom, we supply through our distributor network covering Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo States — now expanding to Lagos and Kano States. See our Delivery Areas page for full coverage details.',
       },
       {
         q: 'What is the minimum order for delivery?',
@@ -91,7 +91,7 @@ const faqs = [
     questions: [
       {
         q: 'How do I become a Kayora distributor?',
-        a: 'We are actively recruiting distributors across Akwa Ibom and in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo States. Visit our Distribution page or contact us directly at 0904 078 9918 or info@kaybibeverage.com to discuss the terms.',
+        a: 'We are actively recruiting distributors across Akwa Ibom and in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo States, now expanding to Lagos and Kano States. Visit our Distribution page or contact us directly at 0904 078 9918 or info@kaybibeverage.com to discuss the terms.',
       },
       {
         q: 'What support do distributors receive?',

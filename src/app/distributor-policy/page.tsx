@@ -156,7 +156,7 @@ export default function DistributorPolicyPage() {
               Become an Authorized Distributor
             </h2>
             <p className="text-kayora-cream/70 leading-relaxed mb-6">
-              We are actively expanding the Kayora distributor network across Akwa Ibom, Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia, and Imo. Submit your details through our distributor application and we will be in touch within one business day.
+              We are actively expanding the Kayora distributor network across Akwa Ibom, Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia, Imo, and now Lagos and Kano. Submit your details through our distributor application and we will be in touch within one business day.
             </p>
             <Link
               href="/distribution#apply"

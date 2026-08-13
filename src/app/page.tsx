@@ -225,7 +225,7 @@ export default function HomePage() {
                 Direct Delivery Across Akwa Ibom. Distributors Beyond.
               </h2>
               <p className="text-kayora-graphite leading-relaxed max-w-[60ch]">
-                We run our own delivery fleet across Akwa Ibom State — typically 24–48 hours from order. Outside the state, Kayora is available through our authorised distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo.
+                We run our own delivery fleet across Akwa Ibom State — typically 24–48 hours from order. Outside the state, Kayora is available through our authorised distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo — now expanding to Lagos and Kano States.
               </p>
             </div>
             <div>
@@ -275,16 +275,16 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-4">
-              For Distributors
+              For Distributors · Now in Lagos &amp; Kano
             </p>
             <h2 className="font-display text-display-md text-kayora-cream mb-6">
               Carry the Standard.<br />Build a Business.
             </h2>
             <p className="text-kayora-cream/80 leading-relaxed mb-4 max-w-[65ch]">
-              Kayora is actively recruiting distributors across Akwa Ibom and our live South-South and South-East states — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives. Reliable supply. Marketing support. And a brand customers already trust.
+              Kayora is actively recruiting distributors across Akwa Ibom, our live South-South and South-East states — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo — and now expanding into Lagos and Kano States. Attractive rebates and other incentives. Reliable supply. Marketing support. And a brand customers already trust.
             </p>
             <p className="text-sm text-kayora-cream/60 mb-10">
-              Direct delivery across Akwa Ibom State · Distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo{' — '}
+              Direct delivery across Akwa Ibom State · Distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia, Imo, Lagos and Kano{' — '}
               <Link href="/distribution" className="text-kayora-cream/80 hover:text-kayora-cream underline underline-offset-2 transition-colors">
                 See full delivery details →
               </Link>
