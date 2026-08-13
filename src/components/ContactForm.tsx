@@ -29,6 +29,8 @@ const STATES = [
   'Anambra',
   'Abia',
   'Imo',
+  'Lagos',
+  'Kano',
   'Other',
 ] as const;
 

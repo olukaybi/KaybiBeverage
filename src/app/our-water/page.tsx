@@ -123,7 +123,7 @@ const faqItems = [
     id: 'faq-outside-akwa-ibom',
     question: 'Where can I buy Kayora outside Akwa Ibom?',
     answer:
-      'Kayora is served through our distributor network across the South-South and South-East — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia, and Imo States. Contact us and we\'ll connect you with your local distributor. Within Akwa Ibom we also deliver directly to homes, offices, and events.',
+      'Kayora is served through our distributor network across the South-South and South-East — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia, and Imo States — and now Lagos and Kano States. Contact us and we\'ll connect you with your local distributor. Within Akwa Ibom we also deliver directly to homes, offices, and events.',
   },
   {
     id: 'faq-verify',
@@ -446,7 +446,7 @@ export default function OurWaterPage() {
 
       <CTASection
         headline="Now You Know What's in the Bottle."
-        body="You can order Kayora for your home, office, event or business directly. We deliver directly across Akwa Ibom State. Beyond Akwa Ibom, Kayora is available through our distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. We respond to enquiries within hours."
+        body="You can order Kayora for your home, office, event or business directly. We deliver directly across Akwa Ibom State. Beyond Akwa Ibom, Kayora is available through our distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia, Imo, Lagos and Kano. We respond to enquiries within hours."
         primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
         variant="blue"

@@ -11,7 +11,7 @@ export const GENERAL_SEQUENCE: SequenceEmail[] = [
 
 Thanks for your interest in Kayora Premium Purified Water.
 
-Kayora is produced by Kaybi Beverage Industries Limited at our facility in Eket, Akwa Ibom State — eight-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Certified. We deliver directly across Akwa Ibom and through our distributor network across the South-South and South-East.
+Kayora is produced by Kaybi Beverage Industries Limited at our facility in Eket, Akwa Ibom State — eight-stage purified, NAFDAC Registered (A1-111026), SON MANCAP Certified. We deliver directly across Akwa Ibom and through our distributor network across the South-South, South-East, and now Lagos and Kano States.
 
 We'll send occasional updates on products, delivery areas and availability — nothing more.`,
     primaryCTA: { label: 'Explore the Range', href: '/products' },
@@ -60,7 +60,7 @@ We're also not a distant brand — our facility is at 173 Eket Oron Road, Eket, 
 If you're ready to order or just want to check availability in your area:
 
 — Direct delivery across Akwa Ibom State, typically within 24–48 hours
-— Distributor network across Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo
+— Distributor network across Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia, Imo, Lagos and Kano
 — For offices, events or bulk needs, our team can put together a quote directly
 
 Message us on WhatsApp or visit our Contact page any time — we typically respond within hours during business days.`,

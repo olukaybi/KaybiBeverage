@@ -116,6 +116,8 @@ const jsonLd = {
         'Anambra State',
         'Abia State',
         'Imo State',
+        'Lagos State',
+        'Kano State',
       ],
       contactPoint: {
         '@type': 'ContactPoint',
