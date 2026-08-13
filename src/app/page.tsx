@@ -3,6 +3,10 @@ import Link from 'next/link';
 import HeroSlider from '@/components/HeroSlider';
 import SKUCard from '@/components/SKUCard';
 import ProcessSteps from '@/components/ProcessSteps';
+import TrackedLink from '@/components/TrackedLink';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import TestimonialSection from '@/components/TestimonialSection';
+import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 export const metadata: Metadata = {
   title: 'Kayora Premium Purified Water | NAFDAC Registered, Eket',
@@ -103,9 +107,11 @@ export default function HomePage() {
               { label: 'For Events', href: '/for-events', sub: 'Weddings & ceremonies' },
               { label: 'For Distributors', href: '/distribution', sub: 'Build a business' },
             ].map((uc) => (
-              <Link
+              <TrackedLink
                 key={uc.href}
                 href={uc.href}
+                event="cta_click_usecase"
+                eventParams={{ page_name: 'homepage', cta_label: uc.label, destination: uc.href }}
                 className="group flex flex-col justify-between bg-kayora-cream border border-kayora-mist rounded-xl p-5 hover:shadow-md hover:border-kayora-blue-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
               >
                 <div>
@@ -113,7 +119,7 @@ export default function HomePage() {
                   <p className="text-xs text-kayora-stone mt-1">{uc.sub}</p>
                 </div>
                 <span className="text-kayora-gold-500 mt-4 text-sm font-semibold" aria-hidden="true">→</span>
-              </Link>
+              </TrackedLink>
             ))}
           </div>
         </div>
@@ -223,12 +229,14 @@ export default function HomePage() {
               </p>
             </div>
             <div>
-              <Link
+              <TrackedLink
                 href="/delivery-areas"
+                event="cta_click_delivery_areas"
+                eventParams={{ page_name: 'homepage' }}
                 className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-kayora-cream font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
               >
                 Check Delivery Areas
-              </Link>
+              </TrackedLink>
             </div>
           </div>
         </div>
@@ -259,6 +267,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section 4d — Trust / Social Proof */}
+      <TestimonialSection className="bg-kayora-cream" />
+
       {/* Section 5 — For Distributors */}
       <section className="bg-kayora-blue-900 py-[clamp(6rem,10vw,10rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -279,18 +290,30 @@ export default function HomePage() {
               </Link>
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
+              <TrackedLink
                 href="/distribution"
+                event="cta_click_become_distributor"
+                eventParams={{ page_name: 'homepage' }}
                 className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-gold-500 text-white font-semibold rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900"
               >
                 Become a Distributor
-              </Link>
-              <Link
+              </TrackedLink>
+              <TrackedLink
                 href="/contact"
+                event="cta_click_talk_to_team"
+                eventParams={{ page_name: 'homepage' }}
                 className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900"
               >
                 Talk to Our Team
-              </Link>
+              </TrackedLink>
+              <WhatsAppButton
+                message={WHATSAPP_INTENTS.general}
+                pageType="homepage"
+                pageName="homepage"
+                ctaLocation="distributor_section"
+                label="Chat on WhatsApp"
+                className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 text-kayora-gold-500 font-semibold hover:text-kayora-gold-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 rounded-lg"
+              />
             </div>
           </div>
         </div>

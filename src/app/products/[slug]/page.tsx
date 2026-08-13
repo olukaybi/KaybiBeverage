@@ -3,8 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import CTASection from '@/components/CTASection';
+import TrackedLink from '@/components/TrackedLink';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import PageViewTracker from '@/components/PageViewTracker';
 import { PRODUCTS } from '@/lib/products';
 import { MERCHANT_RETURN_POLICY, MERCHANT_SHIPPING_DETAILS } from '@/lib/merchantSchema';
+import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 // skuData keys (30cl/50cl/75cl/18-9l) use a different string than the
 // PRODUCTS canonical SKU for the 18.9L bottle ('18.9L') — map explicitly
@@ -239,6 +243,8 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
 
   return (
     <>
+      <PageViewTracker event={`product_view_${params.slug.replace(/-/g, '_')}`} params={{ page_name: `product_${params.slug}`, sku: sku.size }} />
+
       {/* Hero */}
       <section className="bg-kayora-blue-900 pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -261,18 +267,31 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
                 {sku.subhead}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link
+                <TrackedLink
                   href="/cart"
+                  event="cta_click_order_kayora"
+                  eventParams={{ page_name: `product_${params.slug}`, sku: sku.size }}
                   className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-gold-500 text-white font-semibold rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500"
                 >
                   Order Kayora
-                </Link>
-                <Link
+                </TrackedLink>
+                <TrackedLink
                   href="/distribution"
+                  event="cta_click_become_distributor"
+                  eventParams={{ page_name: `product_${params.slug}`, sku: sku.size }}
                   className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   Bulk / Distributor Enquiry
-                </Link>
+                </TrackedLink>
+                <WhatsAppButton
+                  message={WHATSAPP_INTENTS.product(`${sku.size} ${sku.name}`)}
+                  pageType="product"
+                  pageName={`product_${params.slug}`}
+                  sku={sku.size}
+                  ctaLocation="hero"
+                  label="WhatsApp"
+                  className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                />
               </div>
             </div>
             {/* Image */}
@@ -394,8 +413,8 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
       <CTASection
         headline={`Order the Kayora ${sku.size} ${sku.name}`}
         body="Direct delivery across Akwa Ibom State. Distributor network across the South-South and South-East. Call, email or message us and we will respond within hours."
-        primaryCTA={{ label: 'Order Kayora', href: '/cart' }}
-        secondaryCTA={{ label: 'Distributor Enquiry', href: '/distribution' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/cart', event: 'cta_click_order_kayora', eventParams: { page_name: `product_${params.slug}`, sku: sku.size, cta_location: 'bottom' } }}
+        secondaryCTA={{ label: 'Distributor Enquiry', href: '/distribution', event: 'cta_click_become_distributor', eventParams: { page_name: `product_${params.slug}`, sku: sku.size, cta_location: 'bottom' } }}
         variant="cream"
       />
 
@@ -410,9 +429,11 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {sku.related.map((rel) => (
-              <Link
+              <TrackedLink
                 key={rel.slug}
                 href={`/products/${rel.slug}`}
+                event="related_product_click"
+                eventParams={{ page_name: `product_${params.slug}`, from_sku: sku.size, to_sku: rel.size }}
                 className="group flex items-center gap-4 bg-white border border-kayora-mist rounded-xl p-5 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
               >
                 <div className="w-16 h-16 rounded-lg bg-kayora-blue-900/5 flex items-center justify-center shrink-0">
@@ -423,7 +444,7 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
                   <p className="text-sm text-kayora-stone">Kayora {rel.size}</p>
                 </div>
                 <span className="ml-auto text-kayora-stone group-hover:text-kayora-blue-700 transition-colors" aria-hidden="true">→</span>
-              </Link>
+              </TrackedLink>
             ))}
           </div>
         </div>

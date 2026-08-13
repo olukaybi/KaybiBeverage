@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import CTASection from '@/components/CTASection';
+import TrackedLink from '@/components/TrackedLink';
 import { PRODUCTS } from '@/lib/products';
 import { MERCHANT_RETURN_POLICY, MERCHANT_SHIPPING_DETAILS } from '@/lib/merchantSchema';
 
@@ -230,12 +231,14 @@ export default function ProductsPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link
+                  <TrackedLink
                     href={`/products/${sku.slug}`}
+                    event="product_card_click"
+                    eventParams={{ page_name: 'products', sku: sku.slug }}
                     className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
                   >
                     See Details →
-                  </Link>
+                  </TrackedLink>
                 </div>
               </div>
             ))}
@@ -324,8 +327,8 @@ export default function ProductsPage() {
       <CTASection
         headline="Ready to Order?"
         body="Direct delivery across Akwa Ibom State. Distributor network across the South-South and South-East. Reach us and we will have water to you within 24–48 hours."
-        primaryCTA={{ label: 'Order Kayora', href: '/cart' }}
-        secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
+        primaryCTA={{ label: 'Order Kayora', href: '/cart', event: 'cta_click_order_kayora', eventParams: { page_name: 'products' } }}
+        secondaryCTA={{ label: 'Become a Distributor', href: '/distribution', event: 'cta_click_become_distributor', eventParams: { page_name: 'products' } }}
         variant="blue"
       />
 

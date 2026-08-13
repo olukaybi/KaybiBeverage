@@ -3,6 +3,10 @@ import Link from 'next/link';
 import Hero from '@/components/Hero';
 import PillarGrid from '@/components/PillarGrid';
 import CTASection from '@/components/CTASection';
+import TrackedLink from '@/components/TrackedLink';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import PageViewTracker from '@/components/PageViewTracker';
+import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 export const metadata: Metadata = {
   title: 'Kayora for Events | Water for Weddings, Ceremonies & Corporate Functions',
@@ -72,12 +76,14 @@ const breadcrumbJsonLd = {
 export default function ForEventsPage() {
   return (
     <>
+      <PageViewTracker event="page_view_for_events" params={{ page_name: 'for-events', page_type: 'growth', audience_type: 'event' }} />
+
       <Hero
         eyebrow="For Events"
         headline={'Water That Shows Up\nRight for Your Event'}
         subhead="Weddings, naming ceremonies, corporate functions, conferences and church programmes — the 30cl Sharp-sharp and 50cl Original, delivered on schedule and ready to serve."
-        primaryCTA={{ label: 'Request a Bulk Quote', href: '/contact' }}
-        secondaryCTA={{ label: 'Order Kayora', href: '/shop' }}
+        primaryCTA={{ label: 'Request a Bulk Quote', href: '/contact', event: 'cta_click_bulk_quote', eventParams: { page_name: 'for-events', audience_type: 'event' } }}
+        secondaryCTA={{ label: 'Order Kayora', href: '/shop', event: 'cta_click_order_kayora', eventParams: { page_name: 'for-events', audience_type: 'event' } }}
         productImageSrc="/images/products/kayora-30cl-hero-blue.png"
         imageAlt="Kayora 30cl Sharp-sharp — the event bottle"
       />
@@ -97,16 +103,16 @@ export default function ForEventsPage() {
             <h2 className="font-display text-display-md text-kayora-ink">Two Sizes for Every Occasion</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
-            <Link href="/products/30cl" className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
+            <TrackedLink href="/products/30cl" event="product_card_click" eventParams={{ page_name: 'for-events', sku: '30cl' }} className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
               <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">30cl</p>
               <h3 className="font-display text-xl font-semibold text-kayora-ink mb-2 group-hover:text-kayora-blue-700 transition-colors">Sharp-sharp</h3>
               <p className="text-sm text-kayora-graphite leading-relaxed">Cases of 24. The event standard — weddings, ceremonies and conferences.</p>
-            </Link>
-            <Link href="/products/50cl" className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
+            </TrackedLink>
+            <TrackedLink href="/products/50cl" event="product_card_click" eventParams={{ page_name: 'for-events', sku: '50cl' }} className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
               <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">50cl</p>
               <h3 className="font-display text-xl font-semibold text-kayora-ink mb-2 group-hover:text-kayora-blue-700 transition-colors">Original</h3>
               <p className="text-sm text-kayora-graphite leading-relaxed">Cases of 12. For longer events and guests who want a fuller serving.</p>
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </section>
@@ -135,10 +141,21 @@ export default function ForEventsPage() {
       <CTASection
         headline="Planning an Event?"
         body="Tell us your date, headcount and preferred size and we will confirm your quote within one business day."
-        primaryCTA={{ label: 'Request a Bulk Quote', href: '/contact' }}
-        secondaryCTA={{ label: 'View All Products', href: '/products' }}
+        primaryCTA={{ label: 'Request a Bulk Quote', href: '/contact', event: 'cta_click_bulk_quote', eventParams: { page_name: 'for-events', audience_type: 'event' } }}
+        secondaryCTA={{ label: 'View All Products', href: '/products', event: 'cta_click_view_products', eventParams: { page_name: 'for-events', audience_type: 'event' } }}
         variant="blue"
       />
+
+      <div className="bg-kayora-blue-900 pb-16 text-center">
+        <WhatsAppButton
+          message={WHATSAPP_INTENTS.eventOrder}
+          pageType="growth"
+          pageName="for-events"
+          audienceType="event"
+          ctaLocation="bottom"
+          className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 text-kayora-cream font-semibold underline underline-offset-2 hover:text-kayora-gold-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 rounded-lg"
+        />
+      </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />

@@ -18,6 +18,11 @@ const schema = z.object({
   monthlyVolume: z.string().min(1).max(200).trim(),
   yearsInBusiness: z.string().max(100).optional(),
   anythingElse: z.string().max(2000).optional(),
+  utm_source: z.string().max(100).optional(),
+  utm_medium: z.string().max(100).optional(),
+  utm_campaign: z.string().max(100).optional(),
+  utm_content: z.string().max(100).optional(),
+  utm_term: z.string().max(100).optional(),
   _hp: z.string().optional(),
 });
 
@@ -67,8 +72,10 @@ export async function POST(req: NextRequest) {
     city, lga, state,
     phone, whatsapp, email,
     monthlyVolume, yearsInBusiness, anythingElse,
+    utm_source, utm_medium, utm_campaign,
     _hp,
   } = result.data;
+  const campaignLabel = [utm_source, utm_medium, utm_campaign].filter(Boolean).join(' / ');
 
   // Honeypot: filled means bot — silently succeed
   if (_hp) return NextResponse.json({ success: true });
@@ -112,6 +119,7 @@ export async function POST(req: NextRequest) {
 
   <tr><td class="section" colspan="2">Additional Info</td></tr>
   <tr><td colspan="2" class="val msg">${esc(anythingElse || '(none provided)')}</td></tr>
+  ${campaignLabel ? `<tr><td class="section" colspan="2">Campaign</td></tr>${htmlRow('Source', esc(campaignLabel))}` : ''}
 </table>
 <p style="margin-top:24px;font-size:12px;color:#888">
   Reply-To is set to the applicant's address — reply directly from your email client.
@@ -138,7 +146,7 @@ DISTRIBUTION
 
 ADDITIONAL INFO
 ${anythingElse || '(none provided)'}
-
+${campaignLabel ? `\nCAMPAIGN: ${campaignLabel}\n` : ''}
 ---
 Reply-To is set to the applicant's address.`;
 

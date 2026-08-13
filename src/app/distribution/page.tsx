@@ -3,6 +3,10 @@ import Image from 'next/image';
 import Hero from '@/components/Hero';
 import PillarGrid from '@/components/PillarGrid';
 import DistributorForm from '@/components/DistributorForm';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import TestimonialSection from '@/components/TestimonialSection';
+import TrackedAnchor from '@/components/TrackedAnchor';
+import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -101,8 +105,8 @@ export default function DistributionPage() {
         eyebrow="Distribution Network"
         headline={'Carry the Standard.\nBuild a Business.'}
         subhead="Kayora is recruiting distributors across Akwa Ibom and our live South-South and South-East states — Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo. Attractive rebates and other incentives, dependable supply, real marketing support — and a brand customers already trust."
-        primaryCTA={{ label: 'Apply to Distribute', href: '#apply' }}
-        secondaryCTA={{ label: 'Talk to Our Team', href: '/contact' }}
+        primaryCTA={{ label: 'Apply to Distribute', href: '#apply', event: 'cta_click_become_distributor', eventParams: { page_name: 'distribution', cta_location: 'hero' } }}
+        secondaryCTA={{ label: 'Talk to Our Team', href: '/contact', event: 'cta_click_talk_to_team', eventParams: { page_name: 'distribution', cta_location: 'hero' } }}
         backgroundImage="/09_kayora_warehouse_banner.webp"
         backgroundPosition="center center"
         imageAlt="Kayora water palletised at the Eket warehouse — ready for distribution across Akwa Ibom and South-South Nigeria"
@@ -194,6 +198,12 @@ export default function DistributionPage() {
         </div>
       </section>
 
+      <TestimonialSection
+        eyebrow="Partner Confidence"
+        headline="What Backs Every Distributor Agreement"
+        className="bg-kayora-cream"
+      />
+
       {/* How It Works */}
       <section className="bg-white py-[clamp(4rem,8vw,8rem)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -277,18 +287,30 @@ export default function DistributionPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
+                <TrackedAnchor
                   href="#apply"
+                  event="cta_click_become_distributor"
+                  eventParams={{ page_name: 'distribution', cta_location: 'wholesale_section' }}
                   className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-white font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
                 >
                   Apply to distribute
-                </a>
-                <a
+                </TrackedAnchor>
+                <TrackedAnchor
                   href="tel:+2347070238028"
+                  event="phone_click_distribution"
+                  eventParams={{ page_name: 'distribution', cta_location: 'wholesale_section' }}
                   className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-900/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
                 >
                   Call corporate: 07070&nbsp;238028
-                </a>
+                </TrackedAnchor>
+                <WhatsAppButton
+                  message={WHATSAPP_INTENTS.distributor}
+                  pageType="distribution"
+                  pageName="distribution"
+                  audienceType="distributor"
+                  ctaLocation="wholesale_section"
+                  className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-900/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
+                />
               </div>
             </div>
           </div>

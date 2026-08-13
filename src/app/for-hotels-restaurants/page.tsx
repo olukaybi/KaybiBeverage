@@ -3,6 +3,10 @@ import Link from 'next/link';
 import Hero from '@/components/Hero';
 import PillarGrid from '@/components/PillarGrid';
 import CTASection from '@/components/CTASection';
+import TrackedLink from '@/components/TrackedLink';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import PageViewTracker from '@/components/PageViewTracker';
+import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 export const metadata: Metadata = {
   title: 'Kayora for Hotels & Restaurants | Premium Table Water, Hospitality Supply',
@@ -76,12 +80,14 @@ const breadcrumbJsonLd = {
 export default function ForHotelsRestaurantsPage() {
   return (
     <>
+      <PageViewTracker event="page_view_for_hotels_restaurants" params={{ page_name: 'for-hotels-restaurants', page_type: 'growth', audience_type: 'hospitality' }} />
+
       <Hero
         eyebrow="For Hotels & Restaurants"
         headline={'The Water Standard\nfor Hospitality'}
         subhead="A premium table water your guests notice, backed by the regulatory credentials your operation needs. NAFDAC Registered A1-111026, SON MANCAP Certified."
-        primaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        secondaryCTA={{ label: 'Talk to Our Team', href: '/contact' }}
+        primaryCTA={{ label: 'Become a Distributor', href: '/distribution', event: 'cta_click_become_distributor', eventParams: { page_name: 'for-hotels-restaurants', audience_type: 'hospitality' } }}
+        secondaryCTA={{ label: 'Talk to Our Team', href: '/contact', event: 'cta_click_talk_to_team', eventParams: { page_name: 'for-hotels-restaurants', audience_type: 'hospitality' } }}
         productImageSrc="/images/products/kayora-75cl-hero-blue.png"
         imageAlt="Kayora 75cl Jara — premium table water for hospitality"
       />
@@ -101,16 +107,16 @@ export default function ForHotelsRestaurantsPage() {
             <h2 className="font-display text-display-md text-kayora-ink">Front of House, Back of House</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
-            <Link href="/products/75cl" className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
+            <TrackedLink href="/products/75cl" event="product_card_click" eventParams={{ page_name: 'for-hotels-restaurants', sku: '75cl' }} className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
               <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">75cl</p>
               <h3 className="font-display text-xl font-semibold text-kayora-ink mb-2 group-hover:text-kayora-blue-700 transition-colors">Jara</h3>
               <p className="text-sm text-kayora-graphite leading-relaxed">Premium table water for guest-facing dining and service.</p>
-            </Link>
-            <Link href="/products/18-9l" className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
+            </TrackedLink>
+            <TrackedLink href="/products/18-9l" event="product_card_click" eventParams={{ page_name: 'for-hotels-restaurants', sku: '18.9L' }} className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
               <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">18.9L</p>
               <h3 className="font-display text-xl font-semibold text-kayora-ink mb-2 group-hover:text-kayora-blue-700 transition-colors">Never Finish</h3>
               <p className="text-sm text-kayora-graphite leading-relaxed">Back-of-house and guest-area dispenser supply.</p>
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </section>
@@ -139,10 +145,22 @@ export default function ForHotelsRestaurantsPage() {
       <CTASection
         headline="Supply Your Property"
         body="Whether you need a direct account or want to become an authorised distributor for your region, our team will confirm terms within one business day."
-        primaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        secondaryCTA={{ label: 'Talk to Our Team', href: '/contact' }}
+        primaryCTA={{ label: 'Become a Distributor', href: '/distribution', event: 'cta_click_become_distributor', eventParams: { page_name: 'for-hotels-restaurants', audience_type: 'hospitality' } }}
+        secondaryCTA={{ label: 'Talk to Our Team', href: '/contact', event: 'cta_click_talk_to_team', eventParams: { page_name: 'for-hotels-restaurants', audience_type: 'hospitality' } }}
         variant="cream"
       />
+
+      <div className="bg-white pb-16 text-center">
+        <WhatsAppButton
+          message={WHATSAPP_INTENTS.hospitality}
+          pageType="growth"
+          pageName="for-hotels-restaurants"
+          audienceType="hospitality"
+          ctaLocation="bottom"
+          label="Message on WhatsApp"
+          className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 text-kayora-blue-700 font-semibold underline underline-offset-2 hover:text-kayora-blue-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-lg"
+        />
+      </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />

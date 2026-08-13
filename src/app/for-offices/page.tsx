@@ -3,6 +3,10 @@ import Link from 'next/link';
 import Hero from '@/components/Hero';
 import PillarGrid from '@/components/PillarGrid';
 import CTASection from '@/components/CTASection';
+import TrackedLink from '@/components/TrackedLink';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import PageViewTracker from '@/components/PageViewTracker';
+import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 export const metadata: Metadata = {
   title: 'Kayora for Offices | Recurring Office Water Supply, Akwa Ibom',
@@ -72,12 +76,14 @@ const breadcrumbJsonLd = {
 export default function ForOfficesPage() {
   return (
     <>
+      <PageViewTracker event="page_view_for_offices" params={{ page_name: 'for-offices', page_type: 'growth', audience_type: 'office' }} />
+
       <Hero
         eyebrow="For Offices"
         headline={'Reliable Water Supply\nfor Your Office'}
         subhead="Scheduled 18.9L delivery for offices and institutions across Akwa Ibom State — the same eight-stage purified water, NAFDAC Registered A1-111026, without the daily bottle runs."
-        primaryCTA={{ label: 'Talk to Our Team', href: '/contact' }}
-        secondaryCTA={{ label: 'Order Kayora', href: '/shop' }}
+        primaryCTA={{ label: 'Talk to Our Team', href: '/contact', event: 'cta_click_talk_to_team', eventParams: { page_name: 'for-offices', audience_type: 'office' } }}
+        secondaryCTA={{ label: 'Order Kayora', href: '/shop', event: 'cta_click_order_kayora', eventParams: { page_name: 'for-offices', audience_type: 'office' } }}
         backgroundImage="/09_kayora_warehouse_banner.webp"
         backgroundPosition="center center"
         imageAlt="Kayora water cases palletised at the Eket warehouse, ready for office supply"
@@ -98,16 +104,16 @@ export default function ForOfficesPage() {
             <h2 className="font-display text-display-md text-kayora-ink">The Office Standard</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
-            <Link href="/products/18-9l" className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
+            <TrackedLink href="/products/18-9l" event="product_card_click" eventParams={{ page_name: 'for-offices', sku: '18.9L' }} className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
               <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">18.9L</p>
               <h3 className="font-display text-xl font-semibold text-kayora-ink mb-2 group-hover:text-kayora-blue-700 transition-colors">Never Finish</h3>
               <p className="text-sm text-kayora-graphite leading-relaxed">The dispenser standard for offices, institutions and floors of staff.</p>
-            </Link>
-            <Link href="/products/50cl" className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
+            </TrackedLink>
+            <TrackedLink href="/products/50cl" event="product_card_click" eventParams={{ page_name: 'for-offices', sku: '50cl' }} className="group bg-kayora-cream border border-kayora-mist rounded-xl p-6 hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500">
               <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-1">50cl</p>
               <h3 className="font-display text-xl font-semibold text-kayora-ink mb-2 group-hover:text-kayora-blue-700 transition-colors">Original</h3>
               <p className="text-sm text-kayora-graphite leading-relaxed">For desks, meeting rooms and visitor hospitality.</p>
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </section>
@@ -136,10 +142,21 @@ export default function ForOfficesPage() {
       <CTASection
         headline="Set Up Office Supply"
         body="Tell us your office size and preferred schedule and we will confirm pricing and delivery within one business day."
-        primaryCTA={{ label: 'Talk to Our Team', href: '/contact' }}
-        secondaryCTA={{ label: 'View All Products', href: '/products' }}
+        primaryCTA={{ label: 'Talk to Our Team', href: '/contact', event: 'cta_click_talk_to_team', eventParams: { page_name: 'for-offices', audience_type: 'office' } }}
+        secondaryCTA={{ label: 'View All Products', href: '/products', event: 'cta_click_view_products', eventParams: { page_name: 'for-offices', audience_type: 'office' } }}
         variant="blue"
       />
+
+      <div className="bg-kayora-blue-900 pb-16 text-center">
+        <WhatsAppButton
+          message={WHATSAPP_INTENTS.officeSupply}
+          pageType="growth"
+          pageName="for-offices"
+          audienceType="office"
+          ctaLocation="bottom"
+          className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 text-kayora-cream font-semibold underline underline-offset-2 hover:text-kayora-gold-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 rounded-lg"
+        />
+      </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
