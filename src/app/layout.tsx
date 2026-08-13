@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from 'next';
+import { Suspense } from 'react';
 import { Fraunces, Inter } from 'next/font/google';
 import './globals.css';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import CookieConsent from '@/components/CookieConsent';
+import UtmCapture from '@/components/UtmCapture';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -164,6 +166,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen flex flex-col bg-kayora-cream text-kayora-ink font-sans">
+        <Suspense fallback={null}>
+          <UtmCapture />
+        </Suspense>
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

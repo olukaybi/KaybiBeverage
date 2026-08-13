@@ -1,13 +1,28 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import ParallaxBg from '@/components/ParallaxBg';
+import { track, type EventParams } from '@/lib/analytics';
+
+interface CTALink {
+  label: string;
+  href: string;
+  /** Optional — fires track(event, eventParams) on click. Omit for untracked CTAs. */
+  event?: string;
+  eventParams?: EventParams;
+}
+
+function handleCtaClick(cta: CTALink) {
+  if (cta.event) track(cta.event, cta.eventParams);
+}
 
 interface HeroProps {
   eyebrow: string;
   headline: string;
   subhead: string;
-  primaryCTA: { label: string; href: string };
-  secondaryCTA?: { label: string; href: string };
+  primaryCTA: CTALink;
+  secondaryCTA?: CTALink;
   imageSrc?: string;
   imageAlt: string;
   leadBrand?: boolean;
@@ -86,6 +101,7 @@ export default function Hero({
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href={primaryCTA.href}
+                onClick={() => handleCtaClick(primaryCTA)}
                 className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-white font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
               >
                 {primaryCTA.label}
@@ -93,6 +109,7 @@ export default function Hero({
               {secondaryCTA && (
                 <Link
                   href={secondaryCTA.href}
+                  onClick={() => handleCtaClick(secondaryCTA)}
                   className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-900/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
                 >
                   {secondaryCTA.label}
@@ -147,9 +164,9 @@ export default function Hero({
               <h1 className="font-display text-display-lg text-white mb-6 whitespace-pre-line">{headline}</h1>
               <p className="text-lg leading-relaxed text-white/80 mb-10 max-w-[55ch]">{subhead}</p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href={primaryCTA.href} className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-gold-500 text-white font-semibold rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900">{primaryCTA.label}</Link>
+                <Link href={primaryCTA.href} onClick={() => handleCtaClick(primaryCTA)} className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-gold-500 text-white font-semibold rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500 focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900">{primaryCTA.label}</Link>
                 {secondaryCTA && (
-                  <Link href={secondaryCTA.href} className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900">{secondaryCTA.label}</Link>
+                  <Link href={secondaryCTA.href} onClick={() => handleCtaClick(secondaryCTA)} className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900">{secondaryCTA.label}</Link>
                 )}
               </div>
             </div>
@@ -245,6 +262,7 @@ export default function Hero({
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href={primaryCTA.href}
+              onClick={() => handleCtaClick(primaryCTA)}
               className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-kayora-cream font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2"
             >
               {primaryCTA.label}
@@ -252,6 +270,7 @@ export default function Hero({
             {secondaryCTA && (
               <Link
                 href={secondaryCTA.href}
+                onClick={() => handleCtaClick(secondaryCTA)}
                 className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
               >
                 {secondaryCTA.label}

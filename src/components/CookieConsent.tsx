@@ -9,6 +9,11 @@ const GA_ID = 'G-EFLPGZD0MQ';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyWindow = any;
 
+// Set NEXT_PUBLIC_META_PIXEL_ID to enable the Meta Pixel — unset (the
+// production default until the business supplies a real Pixel ID) means
+// this loader is a no-op and only GA4 loads.
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+
 function loadGA() {
   if (typeof window === 'undefined' || (window as AnyWindow).__gaLoaded) return;
   (window as AnyWindow).__gaLoaded = true;
@@ -30,6 +35,30 @@ function loadGA() {
   document.head.appendChild(script);
 }
 
+function loadMetaPixel() {
+  if (!META_PIXEL_ID) return;
+  if (typeof window === 'undefined' || (window as AnyWindow).__pixelLoaded) return;
+  (window as AnyWindow).__pixelLoaded = true;
+
+  const win = window as AnyWindow;
+  win.fbq = win.fbq || function fbq(...args: unknown[]) {
+    (win.fbq.queue = win.fbq.queue || []).push(args);
+  };
+  if (!win._fbq) win._fbq = win.fbq;
+  win.fbq.push = win.fbq;
+  win.fbq.loaded = true;
+  win.fbq.version = '2.0';
+  win.fbq.queue = [];
+
+  win.fbq('init', META_PIXEL_ID);
+  win.fbq('track', 'PageView');
+
+  const script = document.createElement('script');
+  script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+  script.async = true;
+  document.head.appendChild(script);
+}
+
 function hasPrivacySignal(): boolean {
   if (typeof navigator === 'undefined') return false;
   const nav = navigator as Navigator & { globalPrivacyControl?: boolean };
@@ -44,6 +73,7 @@ export default function CookieConsent() {
     const stored = localStorage.getItem(CONSENT_KEY);
     if (stored === 'granted') {
       loadGA();
+      loadMetaPixel();
       return;
     }
     if (stored === 'denied') return;
@@ -58,6 +88,7 @@ export default function CookieConsent() {
     localStorage.setItem(CONSENT_KEY, 'granted');
     setVisible(false);
     loadGA();
+    loadMetaPixel();
   }, []);
 
   const decline = useCallback(() => {

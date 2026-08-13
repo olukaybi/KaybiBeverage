@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { cn } from '@/lib/utils';
+import { track } from '@/lib/analytics';
+import { getStoredUtm } from '@/components/UtmCapture';
 
 const SUBJECTS = [
   'Home / personal order',
@@ -61,6 +63,7 @@ export default function ContactForm() {
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const successRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
 
   const {
     register,
@@ -76,15 +79,24 @@ export default function ContactForm() {
     else if (submitState === 'error') errorRef.current?.focus();
   }, [submitState]);
 
+  function handleFormStart() {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    track('form_start', { form_name: 'contact' });
+  }
+
   async function onSubmit(data: FormValues) {
     setSubmitState('submitting');
     try {
       const res = await fetch('/api/contact-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, ...getStoredUtm() }),
       });
       setSubmitState(res.ok ? 'success' : 'error');
+      if (res.ok) {
+        track('form_submit_contact', { subject: data.subject, state: data.state, preferred_sku: data.preferredSku });
+      }
     } catch {
       setSubmitState('error');
     }
@@ -112,7 +124,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} onFocusCapture={handleFormStart} noValidate className="space-y-6">
       {/* Quick shortcuts — pre-select the subject for common enquiry types */}
       <div>
         <p className={labelClass}>What brings you here?</p>

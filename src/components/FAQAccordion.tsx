@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { track } from '@/lib/analytics';
 
 interface FAQItem {
   id: string;
@@ -29,7 +30,11 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
                 id={buttonId}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
-                onClick={() => setOpenId(isOpen ? null : item.id)}
+                onClick={() => {
+                  const next = isOpen ? null : item.id;
+                  setOpenId(next);
+                  if (next) track('faq_expand', { faq_id: item.id, question: item.question });
+                }}
                 className="w-full flex items-start justify-between gap-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm group"
               >
                 <span className="font-sans font-semibold text-kayora-ink text-base leading-snug group-hover:text-kayora-blue-700 transition-colors">

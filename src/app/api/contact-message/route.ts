@@ -20,6 +20,11 @@ const schema = z.object({
   state: z.string().max(50).optional(),
   preferredSku: z.string().max(50).optional(),
   message: z.string().min(10).max(2000).trim(),
+  utm_source: z.string().max(100).optional(),
+  utm_medium: z.string().max(100).optional(),
+  utm_campaign: z.string().max(100).optional(),
+  utm_content: z.string().max(100).optional(),
+  utm_term: z.string().max(100).optional(),
   _hp: z.string().optional(),
 });
 
@@ -65,6 +70,8 @@ export async function POST(req: NextRequest) {
   }
 
   const { fullName, email, phone, subject, state, preferredSku, message, _hp } = result.data;
+  const { utm_source, utm_medium, utm_campaign } = result.data;
+  const campaignLabel = [utm_source, utm_medium, utm_campaign].filter(Boolean).join(' / ');
 
   // Honeypot: filled means bot — silently succeed
   if (_hp) return NextResponse.json({ success: true });
@@ -98,6 +105,7 @@ export async function POST(req: NextRequest) {
   ${htmlRow('Subject', esc(subject))}
   ${state ? htmlRow('State', esc(state)) : ''}
   ${preferredSku ? htmlRow('Preferred Size', esc(preferredSku)) : ''}
+  ${campaignLabel ? htmlRow('Campaign', esc(campaignLabel)) : ''}
   <tr><td class="section" colspan="2">Message</td></tr>
   <tr><td colspan="2" class="val msg">${esc(message)}</td></tr>
 </table>
@@ -113,7 +121,7 @@ NAME:    ${fullName}
 EMAIL:   ${email}
 PHONE:   ${phone || '—'}
 SUBJECT: ${subject}
-${state ? `STATE:   ${state}\n` : ''}${preferredSku ? `SIZE:    ${preferredSku}\n` : ''}
+${state ? `STATE:   ${state}\n` : ''}${preferredSku ? `SIZE:    ${preferredSku}\n` : ''}${campaignLabel ? `CAMPAIGN: ${campaignLabel}\n` : ''}
 MESSAGE:
 ${message}
 

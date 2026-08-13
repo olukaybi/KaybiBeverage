@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { track } from '@/lib/analytics';
 
 interface Slide {
   id: string;
@@ -244,6 +245,7 @@ export default function HeroSlider() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href={contentSlide.primaryCTA.href}
+                onClick={() => track('cta_click_hero_primary', { page_name: 'homepage', slide_id: contentSlide.id, cta_label: contentSlide.primaryCTA.label })}
                 className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-white font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-900 focus-visible:ring-offset-2"
               >
                 {contentSlide.primaryCTA.label}
@@ -251,6 +253,7 @@ export default function HeroSlider() {
               {contentSlide.secondaryCTA && (
                 <Link
                   href={contentSlide.secondaryCTA.href}
+                  onClick={() => track('cta_click_hero_secondary', { page_name: 'homepage', slide_id: contentSlide.id, cta_label: contentSlide.secondaryCTA?.label })}
                   className={`inline-flex items-center justify-center min-h-[48px] px-8 py-3 font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                     lightBg
                       ? 'border border-kayora-blue-900 text-kayora-blue-900 hover:bg-kayora-blue-900/10 focus-visible:ring-kayora-blue-900'

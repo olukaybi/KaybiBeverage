@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { cn } from '@/lib/utils';
+import { track } from '@/lib/analytics';
+import { getStoredUtm } from '@/components/UtmCapture';
 
 const schema = z.object({
   fullName: z.string().min(2, 'Please enter your full name'),
@@ -35,6 +37,7 @@ export default function DistributorForm() {
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const successRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
 
   const {
     register,
@@ -49,15 +52,25 @@ export default function DistributorForm() {
     else if (submitState === 'error') errorRef.current?.focus();
   }, [submitState]);
 
+  function handleFormStart() {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    track('form_start', { form_name: 'distribution' });
+  }
+
   async function onSubmit(data: FormValues) {
     setSubmitState('submitting');
     try {
       const res = await fetch('/api/distributor-application', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, ...getStoredUtm() }),
       });
       setSubmitState(res.ok ? 'success' : 'error');
+      if (res.ok) {
+        track('form_submit_distribution', { business_type: data.businessType, state: data.state });
+        track('distributor_interest', { business_type: data.businessType, state: data.state });
+      }
     } catch {
       setSubmitState('error');
     }
@@ -85,7 +98,7 @@ export default function DistributorForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} onFocusCapture={handleFormStart} noValidate className="space-y-6">
       {/* Honeypot — hidden from real users, catches bots that fill every field */}
       <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
         <label htmlFor="dist_website">Website</label>

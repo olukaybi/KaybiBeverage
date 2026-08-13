@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import ContactForm from '@/components/ContactForm';
 import MapEmbed from '@/components/MapEmbed';
+import TrackedAnchor from '@/components/TrackedAnchor';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const breadcrumbJsonLd = {
@@ -38,7 +39,7 @@ const contactCards = [
     icon: Phone,
     title: 'Call Us',
     lines: [
-      { text: '0904 078 9918', href: 'tel:+2349040789918' },
+      { text: '0904 078 9918', href: 'tel:+2349040789918', event: 'phone_click_contact' },
     ],
     note: 'Monday–Saturday, 8:00am–6:00pm WAT',
   },
@@ -46,7 +47,7 @@ const contactCards = [
     icon: Mail,
     title: 'Email Us',
     lines: [
-      { text: 'info@kaybibeverage.com', href: 'mailto:info@kaybibeverage.com' },
+      { text: 'info@kaybibeverage.com', href: 'mailto:info@kaybibeverage.com', event: 'email_click_contact' },
     ],
     note: 'We respond within one business day.',
   },
@@ -54,8 +55,8 @@ const contactCards = [
     icon: MapPin,
     title: 'Visit Us',
     lines: [
-      { text: '173 Eket Oron Road, Eket', href: 'https://maps.google.com/?q=4.6420,7.9288' },
-      { text: 'Akwa Ibom State, Nigeria 524101', href: null },
+      { text: '173 Eket Oron Road, Eket', href: 'https://maps.google.com/?q=4.6420,7.9288', event: 'map_click_contact' },
+      { text: 'Akwa Ibom State, Nigeria 524101', href: null, event: undefined },
     ],
     note: 'Facility visits by appointment.',
   },
@@ -68,8 +69,8 @@ export default function ContactPage() {
         eyebrow="Get in Touch"
         headline={"We're in Eket.\nEasy to Reach."}
         subhead="Place an order, ask a question, schedule a visit. We typically respond within hours during business hours (Monday–Saturday, 8:00am–6:00pm WAT)."
-        primaryCTA={{ label: 'Call 0904 078 9918', href: 'tel:+2349040789918' }}
-        secondaryCTA={{ label: 'Message on WhatsApp', href: 'https://wa.me/2349040789918' }}
+        primaryCTA={{ label: 'Call 0904 078 9918', href: 'tel:+2349040789918', event: 'phone_click_contact', eventParams: { page_name: 'contact', cta_location: 'hero' } }}
+        secondaryCTA={{ label: 'Message on WhatsApp', href: 'https://wa.me/2349040789918', event: 'whatsapp_click_contact', eventParams: { page_name: 'contact', cta_location: 'hero' } }}
         imageSrc="/images/factory/factory-02.jpg"
         imageAlt="Kaybi Beverage Industries facility — 173 Eket Oron Road, Eket"
       />
@@ -107,17 +108,19 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-eyebrow uppercase tracking-widest text-kayora-stone mb-1">{title}</p>
-                      {lines.map(({ text, href }) =>
+                      {lines.map(({ text, href, event }) =>
                         href ? (
-                          <a
+                          <TrackedAnchor
                             key={text}
                             href={href}
+                            event={event ?? 'contact_link_click'}
+                            eventParams={{ page_name: 'contact' }}
                             target={href.startsWith('http') ? '_blank' : undefined}
                             rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
                             className="block text-kayora-ink font-medium hover:text-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm"
                           >
                             {text}
-                          </a>
+                          </TrackedAnchor>
                         ) : (
                           <p key={text} className="text-kayora-ink font-medium">{text}</p>
                         )
