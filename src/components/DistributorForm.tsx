@@ -21,7 +21,12 @@ const schema = z.object({
   whatsapp: z.string().optional(),
   email: z.string().email('Please enter a valid email address'),
   monthlyVolume: z.string().min(1, 'Please estimate your monthly volume'),
+  currentFootprint: z.string().min(2, 'Please describe your current distribution or retail footprint'),
+  storageLogistics: z.string().min(2, 'Please describe your storage / logistics capability'),
   yearsInBusiness: z.string().optional(),
+  websiteOrSocial: z.string().optional(),
+  existingBrands: z.string().optional(),
+  preferredTerritory: z.string().optional(),
   anythingElse: z.string().optional(),
   _hp: z.string().optional(),
 });
@@ -64,7 +69,7 @@ export default function DistributorForm() {
       const res = await fetch('/api/distributor-application', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, ...getStoredUtm() }),
+        body: JSON.stringify({ ...data, ...getStoredUtm(), source_page: 'distribution' }),
       });
       setSubmitState(res.ok ? 'success' : 'error');
       if (res.ok) {
@@ -293,6 +298,80 @@ export default function DistributorForm() {
             {...register('yearsInBusiness')}
           />
         </div>
+      </div>
+
+      {/* Current Footprint + Storage/Logistics */}
+      <div>
+        <label htmlFor="currentFootprint" className={labelClass}>
+          Current Distribution / Retail Footprint <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="currentFootprint"
+          type="text"
+          placeholder="e.g. 12 retail outlets across Uyo and Eket"
+          className={cn(inputClass, errors.currentFootprint && 'border-kayora-danger')}
+          {...register('currentFootprint')}
+        />
+        {errors.currentFootprint && (
+          <p role="alert" className="mt-1 text-xs text-kayora-danger">{errors.currentFootprint.message}</p>
+        )}
+      </div>
+      <div>
+        <label htmlFor="storageLogistics" className={labelClass}>
+          Storage / Logistics Capability <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="storageLogistics"
+          type="text"
+          placeholder="e.g. 200 sqm warehouse, 2 delivery vans"
+          className={cn(inputClass, errors.storageLogistics && 'border-kayora-danger')}
+          {...register('storageLogistics')}
+        />
+        {errors.storageLogistics && (
+          <p role="alert" className="mt-1 text-xs text-kayora-danger">{errors.storageLogistics.message}</p>
+        )}
+      </div>
+
+      {/* Website/Social + Preferred Territory */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="websiteOrSocial" className={labelClass}>
+            Website or Social Page <span className="text-kayora-stone">(optional)</span>
+          </label>
+          <input
+            id="websiteOrSocial"
+            type="text"
+            placeholder="e.g. instagram.com/yourbusiness"
+            className={inputClass}
+            {...register('websiteOrSocial')}
+          />
+        </div>
+        <div>
+          <label htmlFor="preferredTerritory" className={labelClass}>
+            Preferred Territory <span className="text-kayora-stone">(optional)</span>
+          </label>
+          <input
+            id="preferredTerritory"
+            type="text"
+            placeholder="e.g. Uyo and surrounding LGAs"
+            className={inputClass}
+            {...register('preferredTerritory')}
+          />
+        </div>
+      </div>
+
+      {/* Existing FMCG brands */}
+      <div>
+        <label htmlFor="existingBrands" className={labelClass}>
+          Existing FMCG Brands Carried <span className="text-kayora-stone">(optional)</span>
+        </label>
+        <input
+          id="existingBrands"
+          type="text"
+          placeholder="e.g. brand names you currently distribute"
+          className={inputClass}
+          {...register('existingBrands')}
+        />
       </div>
 
       {/* Anything else */}

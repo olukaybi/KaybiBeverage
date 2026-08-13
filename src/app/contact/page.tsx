@@ -3,6 +3,8 @@ import Hero from '@/components/Hero';
 import ContactForm from '@/components/ContactForm';
 import MapEmbed from '@/components/MapEmbed';
 import TrackedAnchor from '@/components/TrackedAnchor';
+import LeadForm from '@/components/leadforms/LeadForm';
+import { GENERAL_UPDATES_FIELDS } from '@/lib/leadForms/general';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const breadcrumbJsonLd = {
@@ -169,6 +171,30 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Lightest-touch capture — product/availability updates, not a dominant CTA */}
+      <section className="bg-white py-16 border-t border-kayora-mist">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-2">Stay in the Loop</p>
+          <h2 className="font-display text-xl font-semibold text-kayora-ink mb-2">Receive Product and Availability Updates</h2>
+          <p className="text-sm text-kayora-graphite leading-relaxed mb-6 max-w-[60ch]">
+            Not ready to order yet? Leave your details and we will let you know about new delivery areas, product updates and supply availability — nothing else.
+          </p>
+          <LeadForm
+            segment="general_interest"
+            apiEndpoint="/api/leads/general-updates"
+            fields={GENERAL_UPDATES_FIELDS}
+            submitLabel="Receive Product and Availability Updates"
+            thankYou={{
+              heading: "You're on the list.",
+              body: 'Thank you — we will keep you posted on product and availability updates for your area.',
+            }}
+            formName="general_updates"
+            extraFields={{ source_page: 'contact' }}
+          />
+        </div>
+      </section>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
