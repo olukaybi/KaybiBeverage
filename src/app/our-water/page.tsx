@@ -236,7 +236,7 @@ export default function OurWaterPage() {
         subhead="The long version of the story we tell on the label — without the marketing softness."
         primaryCTA={{ label: 'Order Kayora', href: '/shop' }}
         secondaryCTA={{ label: 'Become a Distributor', href: '/distribution' }}
-        imageSrc="/images/products/kayora-front-view.jpeg"
+        imageSrc="/10_kayora_full_family_lineup.webp"
         imageAlt="Kayora Premium Purified Water — four pack sizes on display"
       />
 
