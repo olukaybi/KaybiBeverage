@@ -45,7 +45,7 @@ const distributorStates = [
   { state: 'Anambra', cities: 'Awka, Onitsha, Nnewi' },
   { state: 'Abia', cities: 'Umuahia, Aba, Ohafia' },
   { state: 'Imo', cities: 'Owerri, Orlu, Okigwe' },
-  { state: 'Lagos', cities: 'Lagos Mainland, Lagos Island, Ikeja', isNew: true },
+  { state: 'Lagos', cities: 'Lagos Mainland, Lagos Island, Ikeja', isNew: true, phone: '+2347085085130', phoneDisplay: '0708 508 5130' },
   { state: 'Kano', cities: 'Kano Municipal, Fagge, Nassarawa', isNew: true },
 ];
 
@@ -138,6 +138,14 @@ export default function DeliveryAreasPage() {
                   )}
                 </p>
                 <p className="text-sm text-kayora-stone">{entry.cities}</p>
+                {entry.phone && (
+                  <p className="text-sm mt-2">
+                    <span className="text-kayora-stone">Lagos distributor: </span>
+                    <a href={`tel:${entry.phone}`} className="text-kayora-blue-700 font-medium hover:underline">
+                      {entry.phoneDisplay}
+                    </a>
+                  </p>
+                )}
               </div>
             ))}
           </div>
