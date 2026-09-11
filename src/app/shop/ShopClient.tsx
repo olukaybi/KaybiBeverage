@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useCartStore } from '@/lib/store/cart';
 import { PRODUCTS, PRODUCT_IMAGES, formatNaira } from '@/lib/products';
 import type { Product } from '@/lib/types';
+import Testimonials from '@/components/Testimonials';
 
 function AddToCartButton({ product }: { product: Product }) {
   const addItem = useCartStore((s) => s.addItem);
@@ -142,6 +143,12 @@ export default function ShopClient() {
             Fresh from our Eket facility. Delivered to your door across Akwa Ibom State.
             All products are NAFDAC Registered (A1-111026) and SON MANCAP Certified.
           </p>
+        </div>
+
+        {/* Testimonials — full-bleed within the page's padded container, same
+            negative-margin breakout convention as the sticky cart bar below */}
+        <div className="-mx-4 sm:-mx-6 lg:-mx-8 mb-12">
+          <Testimonials className="bg-white" />
         </div>
 
         {/* Sticky cart summary bar */}
