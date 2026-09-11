@@ -5,7 +5,7 @@ import SKUCard from '@/components/SKUCard';
 import ProcessSteps from '@/components/ProcessSteps';
 import TrackedLink from '@/components/TrackedLink';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import TestimonialSection from '@/components/TestimonialSection';
+import Testimonials from '@/components/Testimonials';
 import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 export const metadata: Metadata = {
@@ -267,8 +267,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Section 4d — Trust / Social Proof */}
-      <TestimonialSection className="bg-kayora-cream" />
+      {/* Section 4d — Customer Testimonials */}
+      <Testimonials className="bg-kayora-cream" />
 
       {/* Section 5 — For Distributors */}
       <section className="bg-kayora-blue-900 py-[clamp(6rem,10vw,10rem)]">
