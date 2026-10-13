@@ -6,8 +6,8 @@ import { checkRateLimit } from '@/lib/ratelimit';
 
 const schema = z.object({
   fullName: z.string().min(2).max(100).trim(),
-  email: z.string().email().max(200).trim(),
-  phone: z.string().max(30).optional(),
+  email: z.string().email().max(200).trim().optional().or(z.literal('')),
+  phone: z.string().min(7).max(30).trim(),
   subject: z.enum([
     'Home / personal order',
     'Office supply',
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
   if (_hp) return NextResponse.json({ success: true });
 
   const ts = watTimestamp();
-  console.log(`[contact-message] received subject="${subject}" email=${hashEmail(email)}`);
+  console.log(`[contact-message] received subject="${subject}" email=${email ? hashEmail(email) : 'none'}`);
 
   const htmlBody = `<!DOCTYPE html>
 <html><head><meta charset="utf-8">
@@ -100,8 +100,8 @@ export async function POST(req: NextRequest) {
 <table>
   <tr><td class="section" colspan="2">Contact Details</td></tr>
   ${htmlRow('Name', esc(fullName))}
-  ${htmlRow('Email', `<a href="mailto:${esc(email)}">${esc(email)}</a>`)}
-  ${htmlRow('Phone', esc(phone || '—'))}
+  ${htmlRow('Phone', esc(phone))}
+  ${email ? htmlRow('Email', `<a href="mailto:${esc(email)}">${esc(email)}</a>`) : ''}
   ${htmlRow('Subject', esc(subject))}
   ${state ? htmlRow('State', esc(state)) : ''}
   ${preferredSku ? htmlRow('Preferred Size', esc(preferredSku)) : ''}
@@ -118,9 +118,8 @@ export async function POST(req: NextRequest) {
 Received: ${ts}
 
 NAME:    ${fullName}
-EMAIL:   ${email}
-PHONE:   ${phone || '—'}
-SUBJECT: ${subject}
+PHONE:   ${phone}
+${email ? `EMAIL:   ${email}\n` : ''}SUBJECT: ${subject}
 ${state ? `STATE:   ${state}\n` : ''}${preferredSku ? `SIZE:    ${preferredSku}\n` : ''}${campaignLabel ? `CAMPAIGN: ${campaignLabel}\n` : ''}
 MESSAGE:
 ${message}
@@ -131,17 +130,17 @@ Reply-To is set to the submitter's address.`;
   const { error: sendError } = await resend.emails.send({
     from: 'Kayora Water <noreply@kayorawater.com>',
     to: 'info@kaybibeverage.com',
-    replyTo: email,
+    ...(email ? { replyTo: email } : {}),
     subject: `[Kayora] Contact form — ${subject}`,
     html: htmlBody,
     text: textBody,
   });
 
   if (sendError) {
-    console.error(`[contact-message] send failed email=${hashEmail(email)}`, sendError);
+    console.error(`[contact-message] send failed email=${email ? hashEmail(email) : 'none'}`, sendError);
     return NextResponse.json({ error: 'Email delivery failed.' }, { status: 500 });
   }
 
-  console.log(`[contact-message] sent ok email=${hashEmail(email)}`);
+  console.log(`[contact-message] sent ok email=${email ? hashEmail(email) : 'none'}`);
   return NextResponse.json({ success: true });
 }

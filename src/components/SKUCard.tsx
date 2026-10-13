@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatNaira } from '@/lib/products';
 
 interface SKUCardProps {
   name: string;
@@ -9,6 +10,8 @@ interface SKUCardProps {
   imageSrc: string;
   imageAlt: string;
   size: string;
+  priceNaira: number;
+  unitOfSale: string;
 }
 
 export default function SKUCard({
@@ -19,6 +22,8 @@ export default function SKUCard({
   imageSrc,
   imageAlt,
   size,
+  priceNaira,
+  unitOfSale,
 }: SKUCardProps) {
   return (
     <div className="bg-white border border-kayora-mist rounded-xl overflow-hidden flex flex-col transition-transform duration-200 ease-in-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
@@ -45,13 +50,16 @@ export default function SKUCard({
         <p className="text-kayora-graphite text-sm leading-relaxed max-w-[65ch] flex-1 mb-4">
           {description}
         </p>
-        <p className="text-xs text-kayora-stone italic mb-4">{useCase}</p>
+        <p className="text-xs text-kayora-stone italic mb-2">{useCase}</p>
+        <p className="font-display text-sm font-semibold text-kayora-ink mb-4">
+          From {formatNaira(priceNaira)} per {unitOfSale}
+        </p>
         <Link
           href={`/products/${size === '18.9L' ? '18-9l' : size}`}
           className="text-sm font-semibold text-kayora-blue-700 hover:text-kayora-blue-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 rounded-sm inline-flex items-center gap-1 min-h-[48px] items-center"
-          aria-label={`Learn more about Kayora ${size} ${name}`}
+          aria-label={`Order Kayora ${size} ${name}`}
         >
-          See Details &rarr;
+          Order {size} &rarr;
         </Link>
       </div>
     </div>
