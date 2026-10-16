@@ -6,7 +6,7 @@ import DistributorForm from '@/components/DistributorForm';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import TestimonialSection from '@/components/TestimonialSection';
 import TrackedAnchor from '@/components/TrackedAnchor';
-import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
+import { WHATSAPP_INTENTS, CORPORATE_WHATSAPP_NUMBER } from '@/lib/whatsapp';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -310,6 +310,7 @@ export default function DistributionPage() {
                 </TrackedAnchor>
                 <WhatsAppButton
                   message={WHATSAPP_INTENTS.distributor}
+                  phoneNumber={CORPORATE_WHATSAPP_NUMBER}
                   pageType="distribution"
                   pageName="distribution"
                   audienceType="distributor"
