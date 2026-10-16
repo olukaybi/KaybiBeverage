@@ -7,6 +7,7 @@ import TrackedLink from '@/components/TrackedLink';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import Testimonials from '@/components/Testimonials';
 import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
+import { PRODUCTS } from '@/lib/products';
 
 export const metadata: Metadata = {
   title: 'Kayora Premium Purified Water | NAFDAC Registered, Eket',
@@ -86,9 +87,17 @@ export default function HomePage() {
             Four sizes. One standard.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skus.map((sku) => (
-              <SKUCard key={sku.size} {...sku} />
-            ))}
+            {skus.map((sku) => {
+              const product = PRODUCTS.find((p) => p.sku === sku.size);
+              return (
+                <SKUCard
+                  key={sku.size}
+                  {...sku}
+                  priceNaira={product?.price_naira ?? 0}
+                  unitOfSale={product?.unit_of_sale ?? 'bottle'}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
@@ -136,7 +145,7 @@ export default function HomePage() {
               { stat: '4', label: 'Pack sizes', sub: '30cl · 50cl · 75cl · 18.9L' },
               { stat: '8', label: 'Purification stages', sub: 'Borehole to bottle' },
               { stat: '2', label: 'Regulatory bodies', sub: 'NAFDAC + SON MANCAP' },
-              { stat: '9+', label: 'States covered', sub: 'Akwa Ibom & beyond' },
+              { stat: '12', label: 'States covered', sub: 'Akwa Ibom & beyond' },
             ].map(({ stat, label, sub }) => (
               <div key={label} className="text-center">
                 <p className="font-display text-5xl font-bold text-kayora-blue-900 mb-1">{stat}</p>
@@ -253,7 +262,7 @@ export default function HomePage() {
             {[
               { q: 'Is Kayora NAFDAC registered?', a: 'Yes — NAFDAC Reg. A1-111026, covering all four pack sizes.' },
               { q: 'What sizes does Kayora offer?', a: '30cl Sharp-sharp, 50cl Original, 75cl Jara and 18.9L Never Finish.' },
-              { q: 'Do you deliver in Akwa Ibom?', a: 'Yes — direct delivery statewide, typically within 24–48 hours.' },
+              { q: 'Do you deliver in Akwa Ibom?', a: 'Yes. Direct delivery statewide, usually 1 to 4 days depending on area.' },
             ].map((f) => (
               <div key={f.q}>
                 <h3 className="font-display text-lg font-semibold text-kayora-ink mb-2">{f.q}</h3>

@@ -88,7 +88,7 @@ const steps = [
   {
     number: '03',
     title: 'Your bottle is refilled and sealed',
-    body: 'Each refill uses the same eight-stage purification process as a new bottle — borehole source, sediment filtration, activated carbon, reverse osmosis, remineralisation, UV sterilisation, and ozonation. A new steam-cleaned, ozone-sterilised, tamper-evident cap is applied at the point of fill.',
+    body: 'Each refill uses the same eight-stage purification process as a new bottle: borehole, sediment filtration, activated carbon, ion exchange, precision filtration (5µm to 1µm), reverse osmosis, UV sterilisation and ozonation. A new steam-cleaned, ozone-sterilised, tamper-evident cap is applied at the point of fill.',
   },
   {
     number: '04',
@@ -183,7 +183,7 @@ export default function RefillPage() {
             </h2>
             <div className="space-y-5 text-kayora-graphite leading-relaxed max-w-[65ch]">
               <p>
-                Every Kayora refill contains the same water as a new bottle — produced at our Eket facility through eight stages of purification: borehole source, sediment filtration, activated carbon treatment, reverse osmosis, remineralisation, UV sterilisation, and ozone treatment. There is no &ldquo;refill grade.&rdquo; There is only Kayora grade.
+                Every Kayora refill contains the same water as a new bottle, produced at our Eket facility through eight stages of purification: borehole, sediment filtration, activated carbon, ion exchange, precision filtration (5µm to 1µm), reverse osmosis, UV sterilisation and ozonation. There is no &ldquo;refill grade.&rdquo; There is only Kayora grade.
               </p>
               <p>
                 Each refill also includes a new steam-cleaned, ozone-sterilised, tamper-evident cap applied at the point of fill. You will know if the seal has been broken before the bottle reaches you.

@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { track, type EventParams } from '@/lib/analytics';
 
@@ -19,6 +20,8 @@ interface CTASectionProps {
   headline: string;
   body: string;
   primaryCTA: CTALink;
+  /** Replaces the primaryCTA link with a custom element (e.g. an add-to-cart button) while keeping its styling slot. */
+  primaryButton?: ReactNode;
   secondaryCTA?: CTALink;
   variant?: 'blue' | 'cream';
 }
@@ -27,6 +30,7 @@ export default function CTASection({
   headline,
   body,
   primaryCTA,
+  primaryButton,
   secondaryCTA,
   variant = 'blue',
 }: CTASectionProps) {
@@ -54,17 +58,19 @@ export default function CTASection({
           {body}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            href={primaryCTA.href}
-            onClick={() => handleCtaClick(primaryCTA)}
-            className={`inline-flex items-center justify-center min-h-[48px] px-8 py-3 font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-              isBlue
-                ? 'bg-kayora-cream text-kayora-blue-900 hover:bg-kayora-gold-100 focus-visible:ring-kayora-cream'
-                : 'bg-kayora-blue-900 text-kayora-cream hover:bg-kayora-blue-700 focus-visible:ring-kayora-blue-500'
-            }`}
-          >
-            {primaryCTA.label}
-          </Link>
+          {primaryButton ?? (
+            <Link
+              href={primaryCTA.href}
+              onClick={() => handleCtaClick(primaryCTA)}
+              className={`inline-flex items-center justify-center min-h-[48px] px-8 py-3 font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                isBlue
+                  ? 'bg-kayora-cream text-kayora-blue-900 hover:bg-kayora-gold-100 focus-visible:ring-kayora-cream'
+                  : 'bg-kayora-blue-900 text-kayora-cream hover:bg-kayora-blue-700 focus-visible:ring-kayora-blue-500'
+              }`}
+            >
+              {primaryCTA.label}
+            </Link>
+          )}
           {secondaryCTA && (
             <Link
               href={secondaryCTA.href}

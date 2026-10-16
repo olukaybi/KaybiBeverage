@@ -38,8 +38,8 @@ const SKUS = ['30cl — Sharp-sharp', '50cl — Original', '75cl — Jara', '18.
 
 const schema = z.object({
   fullName: z.string().min(2, 'Please enter your full name'),
-  email: z.string().email('Please enter a valid email address'),
-  phone: z.string().optional(),
+  email: z.string().email('Please enter a valid email address').optional().or(z.literal('')),
+  phone: z.string().min(7, 'Please enter a valid phone number'),
   subject: z.enum(SUBJECTS, { required_error: 'Please select a subject' }),
   state: z.enum(STATES).optional(),
   preferredSku: z.enum(SKUS).optional(),
@@ -179,8 +179,26 @@ export default function ContactForm() {
       {/* Email + Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
+          <label htmlFor="phone" className={labelClass}>
+            Phone <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="phone"
+            type="tel"
+            autoComplete="tel"
+            placeholder="08XXXXXXXXX"
+            className={cn(inputClass, errors.phone && 'border-kayora-danger focus-visible:ring-kayora-danger')}
+            {...register('phone')}
+          />
+          {errors.phone && (
+            <p role="alert" className="mt-1 text-xs text-kayora-danger">
+              {errors.phone.message}
+            </p>
+          )}
+        </div>
+        <div>
           <label htmlFor="email" className={labelClass}>
-            Email <span aria-hidden="true">*</span>
+            Email <span className="text-kayora-stone">(optional)</span>
           </label>
           <input
             id="email"
@@ -195,19 +213,6 @@ export default function ContactForm() {
               {errors.email.message}
             </p>
           )}
-        </div>
-        <div>
-          <label htmlFor="phone" className={labelClass}>
-            Phone <span className="text-kayora-stone">(optional)</span>
-          </label>
-          <input
-            id="phone"
-            type="tel"
-            autoComplete="tel"
-            placeholder="08XXXXXXXXX"
-            className={inputClass}
-            {...register('phone')}
-          />
         </div>
       </div>
 

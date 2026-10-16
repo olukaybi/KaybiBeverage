@@ -8,6 +8,7 @@ import { useCartStore } from '@/lib/store/cart';
 import { PRODUCTS, PRODUCT_IMAGES, formatNaira } from '@/lib/products';
 import type { Product } from '@/lib/types';
 import Testimonials from '@/components/Testimonials';
+import { buildWhatsAppLink, WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 function AddToCartButton({ product }: { product: Product }) {
   const addItem = useCartStore((s) => s.addItem);
@@ -52,10 +53,13 @@ function AddToCartButton({ product }: { product: Product }) {
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
   const imageSrc = PRODUCT_IMAGES[product.sku] ?? '';
+  const isRefill = product.sku === '18.9L-refill';
 
   const unitLabel =
     product.unit_of_sale === 'case'
       ? `Case of ${product.bottles_per_unit}`
+      : isRefill
+      ? 'Refill'
       : 'Bottle';
 
   return (
@@ -101,22 +105,37 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           </span>
         </p>
 
-        <p className="text-xs text-kayora-stone">
-          Minimum order: {product.min_order_quantity}{' '}
-          {product.unit_of_sale === 'case' ? 'cases' : 'bottles'}
-          {' '}({product.min_order_quantity * product.bottles_per_unit} bottles)
-        </p>
+        {isRefill ? (
+          <p className="text-xs text-kayora-stone">
+            &#8358;15,000 minimum for delivery. Walk-in exchange at the factory, no minimum.
+          </p>
+        ) : (
+          <p className="text-xs text-kayora-stone">
+            Minimum order: {product.min_order_quantity}{' '}
+            {product.unit_of_sale === 'case' ? 'cases' : 'bottles'}
+            {' '}({formatNaira(product.min_order_quantity * product.price_naira)})
+          </p>
+        )}
 
         <div className="mt-auto">
-          {product.in_stock ? (
-            <AddToCartButton product={product} />
-          ) : (
+          {!product.in_stock ? (
             <button
               disabled
               className="w-full inline-flex items-center justify-center min-h-[48px] px-5 py-2.5 bg-kayora-mist text-kayora-stone text-sm font-semibold rounded-lg cursor-not-allowed"
             >
               Out of stock
             </button>
+          ) : isRefill ? (
+            <a
+              href={buildWhatsAppLink(WHATSAPP_INTENTS.refillOrder)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center min-h-[48px] px-5 py-2.5 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2"
+            >
+              Order refill on WhatsApp
+            </a>
+          ) : (
+            <AddToCartButton product={product} />
           )}
         </div>
       </div>
@@ -198,6 +217,21 @@ export default function ShopClient() {
             <Link href="/contact" className="text-kayora-blue-700 hover:underline">
               Contact us
             </Link>
+            .
+          </p>
+          <p className="mt-2 text-xs text-kayora-stone">
+            Payment: card (via Paystack) or pay on delivery, confirmed by our team by phone or WhatsApp.
+          </p>
+          <p className="mt-2 text-xs text-kayora-stone">
+            Outside Akwa Ibom?{' '}
+            <a
+              href={buildWhatsAppLink(WHATSAPP_INTENTS.distributor)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-kayora-blue-700 hover:underline"
+            >
+              Order through a distributor
+            </a>
             .
           </p>
         </div>

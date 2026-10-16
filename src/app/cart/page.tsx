@@ -6,6 +6,7 @@ import { useCartStore } from '@/lib/store/cart';
 import { formatNaira, DELIVERY_ZONES } from '@/lib/products';
 import { useState } from 'react';
 import type { DeliveryZoneId } from '@/lib/types';
+import { buildWhatsAppLink, WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
 export default function CartPage() {
   const items = useCartStore((s) => s.items);
@@ -35,12 +36,22 @@ export default function CartPage() {
           <p className="text-kayora-graphite mb-8">
             Browse our products and add some Kayora water to your order.
           </p>
-          <Link
-            href="/shop"
-            className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors"
-          >
-            Browse shop
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/shop"
+              className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors"
+            >
+              Browse shop
+            </Link>
+            <a
+              href={buildWhatsAppLink(WHATSAPP_INTENTS.general)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-kayora-blue-900 text-kayora-blue-900 text-sm font-semibold rounded-lg hover:bg-kayora-blue-100 transition-colors"
+            >
+              Order on WhatsApp
+            </a>
+          </div>
         </div>
       </main>
     );

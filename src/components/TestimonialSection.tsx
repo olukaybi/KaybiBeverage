@@ -53,7 +53,7 @@ export default function TestimonialSection({
             {[
               { label: 'NAFDAC Registered', detail: 'A1-111026', sub: 'Inspected and approved' },
               { label: 'SON MANCAP Certified', detail: 'FT-29179 · FT-29180', sub: 'All four pack sizes' },
-              { label: 'Nine States Served', detail: 'Direct + distributor', sub: 'Akwa Ibom & beyond' },
+              { label: '12 States Served', detail: 'Direct + distributor', sub: 'Akwa Ibom & beyond' },
               { label: 'Made in Eket', detail: '173 Eket Oron Road', sub: 'Nigerian-owned, on-site' },
             ].map((item) => (
               <div key={item.label} className="border border-kayora-mist rounded-xl p-6">

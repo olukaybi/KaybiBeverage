@@ -5,11 +5,12 @@ import { notFound } from 'next/navigation';
 import CTASection from '@/components/CTASection';
 import TrackedLink from '@/components/TrackedLink';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import AddMinToCartButton from '@/components/AddMinToCartButton';
 import PageViewTracker from '@/components/PageViewTracker';
 import LeadCaptureSection from '@/components/leadforms/LeadCaptureSection';
 import { OFFICE_18L_FIELDS } from '@/lib/leadForms/office18l';
 import { EVENT_QUOTE_FIELDS } from '@/lib/leadForms/events';
-import { PRODUCTS } from '@/lib/products';
+import { PRODUCTS, formatNaira } from '@/lib/products';
 import { MERCHANT_RETURN_POLICY, MERCHANT_SHIPPING_DETAILS } from '@/lib/merchantSchema';
 import { WHATSAPP_INTENTS } from '@/lib/whatsapp';
 
@@ -266,18 +267,22 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
               <h1 className="font-display text-display-lg text-white mb-6 whitespace-pre-line">
                 {sku.headline}
               </h1>
-              <p className="text-lg leading-relaxed text-white/75 mb-8 max-w-[52ch]">
+              <p className="text-lg leading-relaxed text-white/75 mb-3 max-w-[52ch]">
                 {sku.subhead}
               </p>
+              {product && (
+                <p className="text-sm font-semibold text-kayora-gold-500 mb-8">
+                  {formatNaira(product.price_naira)} per {product.unit_of_sale} &middot; Minimum {product.min_order_quantity}{' '}
+                  {product.unit_of_sale === 'case' ? 'cases' : 'bottles'}
+                </p>
+              )}
               <div className="flex flex-col sm:flex-row gap-4">
-                <TrackedLink
-                  href="/cart"
+                <AddMinToCartButton
+                  sku={PRODUCTS_SKU_BY_SLUG[params.slug]}
                   event="cta_click_order_kayora"
                   eventParams={{ page_name: `product_${params.slug}`, sku: sku.size }}
                   className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-gold-500 text-white font-semibold rounded-lg hover:bg-kayora-gold-500/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-gold-500"
-                >
-                  Order Kayora
-                </TrackedLink>
+                />
                 <TrackedLink
                   href="/distribution"
                   event="cta_click_become_distributor"
@@ -416,7 +421,15 @@ export default function SKUPage({ params }: { params: { slug: string } }) {
       <CTASection
         headline={`Order the Kayora ${sku.size} ${sku.name}`}
         body="Direct delivery across Akwa Ibom State. Distributor network across the South-South and South-East. Call, email or message us and we will respond within hours."
-        primaryCTA={{ label: 'Order Kayora', href: '/cart', event: 'cta_click_order_kayora', eventParams: { page_name: `product_${params.slug}`, sku: sku.size, cta_location: 'bottom' } }}
+        primaryCTA={{ label: 'Order Kayora', href: '/cart' }}
+        primaryButton={
+          <AddMinToCartButton
+            sku={PRODUCTS_SKU_BY_SLUG[params.slug]}
+            event="cta_click_order_kayora"
+            eventParams={{ page_name: `product_${params.slug}`, sku: sku.size, cta_location: 'bottom' }}
+            className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-kayora-blue-900 text-kayora-cream hover:bg-kayora-blue-700 focus-visible:ring-kayora-blue-500"
+          />
+        }
         secondaryCTA={{ label: 'Distributor Enquiry', href: '/distribution', event: 'cta_click_become_distributor', eventParams: { page_name: `product_${params.slug}`, sku: sku.size, cta_location: 'bottom' } }}
         variant="cream"
       />

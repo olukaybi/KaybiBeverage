@@ -18,4 +18,5 @@ export const WHATSAPP_INTENTS = {
   hospitality: 'Hi Kayora, I would like to discuss water supply for my hotel/restaurant.',
   distributor: 'Hi Kayora, I am interested in becoming a distributor.',
   product: (skuLabel: string) => `Hi Kayora, I would like to order the ${skuLabel}.`,
+  refillOrder: 'Hi Kayora, I would like to order an 18.9L refill.',
 } as const;

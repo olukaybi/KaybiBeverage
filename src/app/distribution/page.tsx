@@ -267,7 +267,7 @@ export default function DistributionPage() {
                   <div>
                     <p className="font-semibold text-kayora-ink mb-0.5">Case pack</p>
                     <p className="text-kayora-graphite text-sm leading-relaxed">
-                      Twelve bottles per shrink-wrapped case. Available across our 30cl, 50cl and 75cl pack sizes. The 18.9L dispenser bottle ships individually.
+                      24 bottles per case for 30cl; 12 for 50cl and 75cl. The 18.9L ships individually.
                     </p>
                   </div>
                 </div>
