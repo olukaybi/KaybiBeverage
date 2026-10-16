@@ -5,8 +5,11 @@
  */
 export const WHATSAPP_NUMBER = '2349040789918';
 
-export function buildWhatsAppLink(message: string): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+/** Corporate / distributor line — same number used for the tel: link on /distribution. */
+export const CORPORATE_WHATSAPP_NUMBER = '2347070238028';
+
+export function buildWhatsAppLink(message: string, number: string = WHATSAPP_NUMBER): string {
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
 /** Pre-composed, page-context intent messages — keeps prefills consistent and commercially useful. */

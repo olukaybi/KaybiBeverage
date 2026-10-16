@@ -12,6 +12,8 @@ interface WhatsAppButtonProps {
   audienceType?: string;
   ctaLocation?: string;
   className?: string;
+  /** Overrides the default customer-facing number (e.g. the corporate/distributor line). */
+  phoneNumber?: string;
 }
 
 /**
@@ -29,10 +31,11 @@ export default function WhatsAppButton({
   audienceType,
   ctaLocation,
   className = 'inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-kayora-blue-900',
+  phoneNumber,
 }: WhatsAppButtonProps) {
   return (
     <a
-      href={buildWhatsAppLink(message)}
+      href={buildWhatsAppLink(message, phoneNumber)}
       target="_blank"
       rel="noopener noreferrer"
       onClick={() =>
