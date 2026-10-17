@@ -5,6 +5,31 @@
       "headers": {
         "x-api-key": "$API_KEY_21ST"
       }
+    },
+    "perplexity": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-perplexity"],
+      "env": {
+        "PERPLEXITY_API_KEY": "$PERPLEXITY_API_KEY"
+      }
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "$FIRECRAWL_API_KEY"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"]
+    },
+    "composio": {
+      "command": "npx",
+      "args": ["-y", "composio-core", "mcp"],
+      "env": {
+        "COMPOSIO_API_KEY": "$COMPOSIO_API_KEY"
+      }
     }
   }
 }
