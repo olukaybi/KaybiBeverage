@@ -74,7 +74,7 @@ const faqs = [
       },
       {
         q: 'Where does Kayora deliver?',
-        a: 'We offer direct delivery across Akwa Ibom State, typically within 24–48 hours. Outside Akwa Ibom, we supply through our distributor network covering Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo States — now expanding to Lagos State. See our Delivery Areas page for full coverage details.',
+        a: 'In cities with an authorised Kayora distributor, please order directly from them: see Where to Buy on our Delivery Areas page. Everywhere else, order from our Eket factory at kayorawater.com/shop or on WhatsApp. Custom and event orders are always handled by the factory.',
       },
       {
         q: 'What is the minimum order for delivery?',

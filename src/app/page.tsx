@@ -238,7 +238,7 @@ export default function HomePage() {
                 We run our own delivery fleet across Akwa Ibom State — typically 24–48 hours from order. Outside the state, Kayora is available through our authorised distributor network in Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo — now expanding to Lagos State.
               </p>
             </div>
-            <div>
+            <div className="flex flex-col sm:flex-row gap-4">
               <TrackedLink
                 href="/delivery-areas"
                 event="cta_click_delivery_areas"
@@ -246,6 +246,14 @@ export default function HomePage() {
                 className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 bg-kayora-blue-900 text-kayora-cream font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
               >
                 Check Delivery Areas
+              </TrackedLink>
+              <TrackedLink
+                href="/delivery-areas#where-to-buy"
+                event="cta_click_where_to_buy"
+                eventParams={{ page_name: 'homepage' }}
+                className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-kayora-blue-900 text-kayora-blue-900 font-semibold rounded-lg hover:bg-kayora-blue-900/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+              >
+                See Where to Buy
               </TrackedLink>
             </div>
           </div>

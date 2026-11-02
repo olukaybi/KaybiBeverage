@@ -7,6 +7,11 @@ import { z } from 'zod';
 import { cn } from '@/lib/utils';
 import { track, trackFormSubmit } from '@/lib/analytics';
 import { getStoredUtm } from '@/components/UtmCapture';
+import { findDistributor } from '@/lib/distributors';
+import WhatsAppButton from '@/components/WhatsAppButton';
+
+/** Subjects where the factory — not a city distributor — always handles the enquiry. */
+const FACTORY_ONLY_SUBJECTS = ['Bulk / event order', 'Distribution enquiry'];
 
 const SUBJECTS = [
   'Home / personal order',
@@ -70,10 +75,17 @@ export default function ContactForm() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
+
+  const watchedState = watch('state');
+  const watchedSubject = watch('subject');
+  const matchedDistributor = watchedState ? findDistributor(watchedState) : null;
+  const showDistributorNotice =
+    !!matchedDistributor && !FACTORY_ONLY_SUBJECTS.includes(watchedSubject ?? '');
 
   useEffect(() => {
     if (submitState === 'success') successRef.current?.focus();
@@ -254,6 +266,24 @@ export default function ContactForm() {
               <option key={s} value={s}>{s}</option>
             ))}
           </select>
+          {showDistributorNotice && matchedDistributor && (
+            <div className="mt-2 p-3 bg-kayora-blue-100 border border-kayora-mist rounded-lg">
+              <p className="text-xs text-kayora-graphite mb-2">
+                We have a Kayora distributor in {matchedDistributor.city}. For the fastest service, message{' '}
+                {matchedDistributor.name || 'them'} on WhatsApp.
+              </p>
+              <WhatsAppButton
+                message={`Hi, I'd like to order Kayora in ${matchedDistributor.city}.`}
+                phoneNumber={matchedDistributor.whatsapp}
+                pageType="contact"
+                pageName="contact"
+                audienceType="distributor-city"
+                ctaLocation="state_field_notice"
+                label={`Message ${matchedDistributor.name || matchedDistributor.city} distributor`}
+                className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 bg-kayora-blue-900 text-kayora-cream text-xs font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+              />
+            </div>
+          )}
         </div>
         <div>
           <label htmlFor="preferredSku" className={labelClass}>

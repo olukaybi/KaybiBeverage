@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import CTASection from '@/components/CTASection';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import { DISTRIBUTORS } from '@/lib/distributors';
 
 export const metadata: Metadata = {
   title: 'Delivery Areas — Kayora Premium Purified Water | Now in Lagos',
@@ -74,6 +76,64 @@ export default function DeliveryAreasPage() {
               We deliver directly across Akwa Ibom State. Beyond that, our distributor network covers the South-South and South-East — and now Lagos State.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Where to Buy — active city distributors */}
+      <section id="where-to-buy" className="bg-white py-[clamp(5rem,9vw,9rem)] scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-12">
+            <p className="text-eyebrow uppercase tracking-widest text-kayora-gold-500 font-sans mb-3">
+              Where to Buy
+            </p>
+            <h2 className="font-display text-display-md text-kayora-ink mb-4">
+              Order Directly From Your City
+            </h2>
+            <p className="text-kayora-graphite leading-relaxed">
+              In the cities below, an authorised Kayora distributor handles orders directly — for the fastest service, order from them rather than the factory.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            {DISTRIBUTORS.filter((d) => d.active).map((d) => (
+              <div key={d.id} className="bg-kayora-cream border border-kayora-mist rounded-xl p-6 flex flex-col">
+                <p className="font-display text-lg font-semibold text-kayora-ink mb-1">{d.city}</p>
+                <p className="text-sm text-kayora-ink font-medium mb-2">{d.name || `Our ${d.city} distributor`}</p>
+                <p className="text-sm text-kayora-stone mb-1">Covers: {d.covers.join(', ')}</p>
+                {d.sizes.length > 0 && (
+                  <p className="text-sm text-kayora-stone mb-4">Stocks: {d.sizes.join(', ')}</p>
+                )}
+                <div className="mt-auto space-y-2">
+                  <WhatsAppButton
+                    message={`Hi, I'd like to order Kayora in ${d.city}.`}
+                    phoneNumber={d.whatsapp}
+                    pageType="delivery-areas"
+                    pageName="delivery_areas"
+                    audienceType="distributor-city"
+                    ctaLocation={`where_to_buy_${d.id}`}
+                    label={`Message ${d.name || 'distributor'} on WhatsApp`}
+                    className="w-full inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-kayora-blue-900 text-kayora-cream text-sm font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+                  />
+                  {d.phone && (
+                    <a
+                      href={`tel:${d.phone}`}
+                      className="w-full inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 border border-kayora-blue-900 text-kayora-blue-900 text-sm font-semibold rounded-lg hover:bg-kayora-blue-900/10 transition-colors"
+                    >
+                      Call {d.city} distributor
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-kayora-graphite text-sm leading-relaxed max-w-2xl">
+            Not in one of these cities? Our factory in Eket serves you directly. Custom and event orders are always handled by the factory.{' '}
+            <Link href="/contact" className="text-kayora-blue-700 hover:underline">
+              Contact us
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
