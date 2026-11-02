@@ -12,6 +12,7 @@ interface SKUCardProps {
   size: string;
   priceNaira: number;
   unitOfSale: string;
+  minOrderQuantity: number;
 }
 
 export default function SKUCard({
@@ -24,6 +25,7 @@ export default function SKUCard({
   size,
   priceNaira,
   unitOfSale,
+  minOrderQuantity,
 }: SKUCardProps) {
   return (
     <div className="bg-white border border-kayora-mist rounded-xl overflow-hidden flex flex-col transition-transform duration-200 ease-in-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
@@ -51,8 +53,11 @@ export default function SKUCard({
           {description}
         </p>
         <p className="text-xs text-kayora-stone italic mb-2">{useCase}</p>
-        <p className="font-display text-sm font-semibold text-kayora-ink mb-4">
+        <p className="font-display text-sm font-semibold text-kayora-ink mb-1">
           From {formatNaira(priceNaira)} per {unitOfSale}
+        </p>
+        <p className="text-xs text-kayora-stone mb-4">
+          Minimum {minOrderQuantity} {unitOfSale === 'case' ? 'cases' : 'bottles'}
         </p>
         <Link
           href={`/products/${size === '18.9L' ? '18-9l' : size}`}

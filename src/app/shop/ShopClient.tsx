@@ -18,6 +18,9 @@ function AddToCartButton({ product }: { product: Product }) {
   const inCart = items.find((i) => i.sku === product.sku);
   const qty = inCart ? inCart.quantity : 0;
 
+  const unit = product.unit_of_sale === 'case' ? 'cases' : 'bottles';
+  const minTotal = formatNaira(product.min_order_quantity * product.price_naira);
+
   function handleAdd() {
     addItem(
       {
@@ -46,7 +49,7 @@ function AddToCartButton({ product }: { product: Product }) {
         ? 'Added!'
         : qty > 0
         ? `Add more (${qty} in cart)`
-        : `Add to cart — min ${product.min_order_quantity}`}
+        : `Add ${product.min_order_quantity} ${unit} · ${minTotal}`}
     </button>
   );
 }

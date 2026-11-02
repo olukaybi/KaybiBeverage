@@ -95,6 +95,7 @@ export default function HomePage() {
                   {...sku}
                   priceNaira={product?.price_naira ?? 0}
                   unitOfSale={product?.unit_of_sale ?? 'bottle'}
+                  minOrderQuantity={product?.min_order_quantity ?? 0}
                 />
               );
             })}
