@@ -3,9 +3,9 @@ import Link from 'next/link';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Delivery Areas — Kayora Premium Purified Water | Now in Lagos & Kano',
+  title: 'Delivery Areas — Kayora Premium Purified Water | Now in Lagos',
   description:
-    'Kayora delivers directly across Akwa Ibom State within 24–48 hours. Distributor network covers Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo States — now expanding to Lagos and Kano States.',
+    'Kayora delivers directly across Akwa Ibom State within 24–48 hours. Distributor network covers Cross River, Rivers, Bayelsa, Delta, Edo, Enugu, Anambra, Abia and Imo States — now expanding to Lagos State.',
   alternates: { canonical: 'https://www.kayorawater.com/delivery-areas' },
   openGraph: {
     type: 'website',
@@ -46,7 +46,6 @@ const distributorStates = [
   { state: 'Abia', cities: 'Umuahia, Aba, Ohafia' },
   { state: 'Imo', cities: 'Owerri, Orlu, Okigwe' },
   { state: 'Lagos', cities: 'Lagos Mainland, Lagos Island, Ikeja', isNew: true, phone: '+2347085085130', phoneDisplay: '0708 508 5130' },
-  { state: 'Kano', cities: 'Kano Municipal, Fagge, Nassarawa', isNew: true },
 ];
 
 const breadcrumbJsonLd = {
@@ -72,7 +71,7 @@ export default function DeliveryAreasPage() {
               Delivery Areas
             </h1>
             <p className="text-lg leading-relaxed text-white/75 max-w-[55ch]">
-              We deliver directly across Akwa Ibom State. Beyond that, our distributor network covers the South-South and South-East — and now Lagos and Kano States.
+              We deliver directly across Akwa Ibom State. Beyond that, our distributor network covers the South-South and South-East — and now Lagos State.
             </p>
           </div>
         </div>
@@ -124,7 +123,7 @@ export default function DeliveryAreasPage() {
               National Distributor Coverage
             </h2>
             <p className="text-kayora-graphite leading-relaxed">
-              Outside Akwa Ibom, Kayora is available through our authorised distributor network. Distributors stock all four sizes and operate their own local delivery in these states. Lagos and Kano States are our newest territories. Contact us for current distributor contact details in your area.
+              Outside Akwa Ibom, Kayora is available through our authorised distributor network. Distributors stock all four sizes and operate their own local delivery in these states. Lagos State is our newest territory. Contact us for current distributor contact details in your area.
             </p>
           </div>
 
