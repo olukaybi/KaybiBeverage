@@ -30,7 +30,6 @@ const STATES = [
   'Abia',
   'Imo',
   'Lagos',
-  'Kano',
   'Other',
 ] as const;
 
