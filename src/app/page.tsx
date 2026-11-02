@@ -146,7 +146,7 @@ export default function HomePage() {
               { stat: '4', label: 'Pack sizes', sub: '30cl · 50cl · 75cl · 18.9L' },
               { stat: '8', label: 'Purification stages', sub: 'Borehole to bottle' },
               { stat: '2', label: 'Regulatory bodies', sub: 'NAFDAC + SON MANCAP' },
-              { stat: '12', label: 'States covered', sub: 'Akwa Ibom & beyond' },
+              { stat: '11', label: 'States covered', sub: 'Akwa Ibom & beyond' },
             ].map(({ stat, label, sub }) => (
               <div key={label} className="text-center">
                 <p className="font-display text-5xl font-bold text-kayora-blue-900 mb-1">{stat}</p>
