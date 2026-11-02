@@ -14,6 +14,7 @@ interface LeadCaptureSectionProps {
   formName: string;
   sourcePage: string;
   className?: string;
+  showDistributorNotice?: boolean;
 }
 
 const CONSENT_TEXT = 'Your information is used solely to respond to your enquiry. We do not share it with third parties.';
@@ -36,6 +37,7 @@ export default function LeadCaptureSection({
   formName,
   sourcePage,
   className = 'bg-kayora-cream',
+  showDistributorNotice,
 }: LeadCaptureSectionProps) {
   return (
     <section id={id} className={`py-[clamp(4rem,8vw,8rem)] scroll-mt-24 ${className}`}>
@@ -52,6 +54,7 @@ export default function LeadCaptureSection({
           consentText={CONSENT_TEXT}
           formName={formName}
           extraFields={{ source_page: sourcePage }}
+          showDistributorNotice={showDistributorNotice}
         />
       </div>
     </section>

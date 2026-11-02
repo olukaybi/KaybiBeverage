@@ -137,6 +137,7 @@ export default function ForOfficesPage() {
         formName="office_18_9l_supply"
         sourcePage="for-offices"
         className="bg-white"
+        showDistributorNotice
       />
 
       {/* Mini FAQ */}

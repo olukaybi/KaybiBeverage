@@ -5,6 +5,11 @@ import { cn } from '@/lib/utils';
 import { track, trackFormSubmit } from '@/lib/analytics';
 import { getStoredUtm } from '@/components/UtmCapture';
 import type { LeadSegment } from '@/lib/leadSegments';
+import { findDistributor } from '@/lib/distributors';
+import WhatsAppButton from '@/components/WhatsAppButton';
+
+/** Enquiry-type/subject values where the factory — not a city distributor — always handles the enquiry. */
+const FACTORY_ONLY_PATTERN = /event|bulk|custom|distribution/i;
 
 export interface LeadFormField {
   name: string;
@@ -28,17 +33,24 @@ interface LeadFormProps {
   formName: string;
   /** e.g. { source_page: 'products/18-9l' } — merged into the submitted payload. */
   extraFields?: Record<string, string>;
+  /** Shows an inline distributor notice under a field named 'location' when it matches an active city distributor. */
+  showDistributorNotice?: boolean;
 }
 
 const inputClass =
   'w-full h-12 px-4 border border-kayora-mist rounded-md bg-white text-kayora-ink placeholder:text-kayora-stone focus:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 transition';
 const labelClass = 'block text-eyebrow uppercase tracking-widest text-kayora-graphite mb-1.5';
 
-export default function LeadForm({ segment, apiEndpoint, fields, submitLabel, thankYou, consentText, formName, extraFields }: LeadFormProps) {
+export default function LeadForm({ segment, apiEndpoint, fields, submitLabel, thankYou, consentText, formName, extraFields, showDistributorNotice }: LeadFormProps) {
   const [state, setState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [location, setLocation] = useState('');
+  const [enquiryType, setEnquiryType] = useState('');
   const successRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
+
+  const matchedDistributor = showDistributorNotice ? findDistributor(location) : null;
+  const factoryOnly = FACTORY_ONLY_PATTERN.test(enquiryType);
 
   function handleFormStart() {
     if (startedRef.current) return;
@@ -116,7 +128,20 @@ export default function LeadForm({ segment, apiEndpoint, fields, submitLabel, th
                 {!field.required && <span className="text-kayora-stone normal-case tracking-normal">(optional)</span>}
               </label>
               {field.type === 'select' ? (
-                <select id={field.name} name={field.name} required={field.required} className={cn(inputClass, 'cursor-pointer')} defaultValue="">
+                <select
+                  id={field.name}
+                  name={field.name}
+                  required={field.required}
+                  className={cn(inputClass, 'cursor-pointer')}
+                  defaultValue=""
+                  onChange={
+                    field.name === 'location'
+                      ? (e) => setLocation(e.target.value)
+                      : field.name === 'enquiryType'
+                      ? (e) => setEnquiryType(e.target.value)
+                      : undefined
+                  }
+                >
                   <option value="" disabled>Select…</option>
                   {field.options?.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>
@@ -142,6 +167,24 @@ export default function LeadForm({ segment, apiEndpoint, fields, submitLabel, th
                 />
               )}
               {field.helperText && <p className="text-xs text-kayora-stone mt-1">{field.helperText}</p>}
+              {field.name === 'location' && matchedDistributor && !factoryOnly && (
+                <div className="mt-2 p-3 bg-kayora-blue-100 border border-kayora-mist rounded-lg">
+                  <p className="text-xs text-kayora-graphite mb-2">
+                    We have a Kayora distributor in {matchedDistributor.city}. For the fastest service, message{' '}
+                    {matchedDistributor.name || 'them'} on WhatsApp.
+                  </p>
+                  <WhatsAppButton
+                    message={`Hi, I'd like to order Kayora in ${matchedDistributor.city}.`}
+                    phoneNumber={matchedDistributor.whatsapp}
+                    pageType={formName}
+                    pageName={formName}
+                    audienceType="distributor-city"
+                    ctaLocation="location_field_notice"
+                    label={`Message ${matchedDistributor.name || matchedDistributor.city} distributor`}
+                    className="inline-flex items-center justify-center min-h-[40px] px-4 py-2 bg-kayora-blue-900 text-kayora-cream text-xs font-semibold rounded-lg hover:bg-kayora-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500"
+                  />
+                </div>
+              )}
             </div>
           );
         })}
