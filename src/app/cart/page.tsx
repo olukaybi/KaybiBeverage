@@ -7,6 +7,7 @@ import { formatNaira, DELIVERY_ZONES } from '@/lib/products';
 import { useState } from 'react';
 import type { DeliveryZoneId } from '@/lib/types';
 import { buildWhatsAppLink, WHATSAPP_INTENTS } from '@/lib/whatsapp';
+import { trackBeginCheckout } from '@/lib/analytics';
 
 export default function CartPage() {
   const items = useCartStore((s) => s.items);
@@ -219,6 +220,9 @@ export default function CartPage() {
 
               <Link
                 href={`/checkout?zone=${zone}`}
+                onClick={() => {
+                  if (!checkoutBlocked) trackBeginCheckout({ value: total, item_count: items.length });
+                }}
                 className={`mt-5 flex items-center justify-center min-h-[48px] w-full px-5 py-3 text-sm font-semibold rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kayora-blue-500 focus-visible:ring-offset-2 ${
                   checkoutBlocked
                     ? 'bg-kayora-mist text-kayora-stone cursor-not-allowed pointer-events-none'

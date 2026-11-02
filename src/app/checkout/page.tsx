@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useCartStore } from '@/lib/store/cart';
 import { DELIVERY_ZONES, formatNaira, minDeliveryDate } from '@/lib/products';
 import type { DeliveryZoneId } from '@/lib/types';
+import { trackPurchase } from '@/lib/analytics';
 
 declare global {
   interface Window {
@@ -198,6 +199,7 @@ function CheckoutForm() {
                 return;
               }
               orderPlacedRef.current = true;
+              trackPurchase({ order_number: verifyData.order_number, value: total, payment_method: 'card' });
               clearCart();
               router.push(`/order-confirmation/${verifyData.order_number}?paid=true`);
             } catch (err) {
@@ -255,6 +257,7 @@ function CheckoutForm() {
       }
 
       orderPlacedRef.current = true;
+      trackPurchase({ order_number: data.order_number, value: total, payment_method: 'pay_on_delivery' });
       clearCart();
       router.push(`/order-confirmation/${data.order_number}`);
     } catch {

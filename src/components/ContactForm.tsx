@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { cn } from '@/lib/utils';
-import { track } from '@/lib/analytics';
+import { track, trackFormSubmit } from '@/lib/analytics';
 import { getStoredUtm } from '@/components/UtmCapture';
 
 const SUBJECTS = [
@@ -98,6 +98,7 @@ export default function ContactForm() {
       setSubmitState(res.ok ? 'success' : 'error');
       if (res.ok) {
         track('form_submit_contact', { subject: data.subject, state: data.state, preferred_sku: data.preferredSku });
+        trackFormSubmit('contact', { subject: data.subject, state: data.state, preferred_sku: data.preferredSku });
       }
     } catch {
       setSubmitState('error');

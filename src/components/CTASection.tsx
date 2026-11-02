@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import { track, type EventParams } from '@/lib/analytics';
+import { track, trackPhoneClick, type EventParams } from '@/lib/analytics';
 
 interface CTALink {
   label: string;
@@ -14,6 +14,7 @@ interface CTALink {
 
 function handleCtaClick(cta: CTALink) {
   if (cta.event) track(cta.event, cta.eventParams);
+  if (cta.href.startsWith('tel:')) trackPhoneClick(cta.eventParams ?? {});
 }
 
 interface CTASectionProps {

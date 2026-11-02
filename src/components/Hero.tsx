@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import ParallaxBg from '@/components/ParallaxBg';
-import { track, type EventParams } from '@/lib/analytics';
+import { track, trackPhoneClick, type EventParams } from '@/lib/analytics';
 
 interface CTALink {
   label: string;
@@ -15,6 +15,7 @@ interface CTALink {
 
 function handleCtaClick(cta: CTALink) {
   if (cta.event) track(cta.event, cta.eventParams);
+  if (cta.href.startsWith('tel:')) trackPhoneClick(cta.eventParams ?? {});
 }
 
 interface HeroProps {

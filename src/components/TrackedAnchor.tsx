@@ -1,7 +1,7 @@
 'use client';
 
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
-import { track, type EventParams } from '@/lib/analytics';
+import { track, trackPhoneClick, type EventParams } from '@/lib/analytics';
 
 interface TrackedAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   event: string;
@@ -16,7 +16,13 @@ interface TrackedAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  */
 export default function TrackedAnchor({ event, eventParams, children, ...anchorProps }: TrackedAnchorProps) {
   return (
-    <a {...anchorProps} onClick={() => track(event, eventParams)}>
+    <a
+      {...anchorProps}
+      onClick={() => {
+        track(event, eventParams);
+        if (anchorProps.href?.startsWith('tel:')) trackPhoneClick(eventParams ?? {});
+      }}
+    >
       {children}
     </a>
   );
