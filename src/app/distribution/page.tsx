@@ -257,7 +257,7 @@ export default function DistributionPage() {
                 Built for trade.
               </h2>
               <p className="text-base lg:text-lg leading-relaxed text-kayora-graphite mb-8">
-                Kayora ships in shrink-wrapped 12-bottle cases from our Eket facility, palletised for warehouse and last-mile efficiency. Hotels, restaurants, and authorised distributors order direct — attractive rebates and other incentives on consistent volume.
+                Kayora ships in shrink-wrapped cases (24 bottles for 30cl, 12 for 50cl and 75cl) from our Eket facility, palletised for warehouse and last-mile efficiency. Hotels, restaurants, and authorised distributors order direct — attractive rebates and other incentives on consistent volume.
               </p>
 
               <div className="space-y-5 mb-8">

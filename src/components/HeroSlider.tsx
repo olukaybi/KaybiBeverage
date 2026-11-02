@@ -14,6 +14,8 @@ interface Slide {
   primaryCTA: { label: string; href: string };
   secondaryCTA?: { label: string; href: string };
   overlayStrength: number;
+  /** Replaces the flat overlay with a left-to-right gradient, darkest where the text sits — used for slide 1, where the content is right-aligned over a bright banner image. */
+  overlayGradient?: 'left-to-right';
   objectFit: 'cover' | 'contain';
   objectPosition?: string;
   imageTransform?: string;
@@ -31,6 +33,7 @@ const slides: Slide[] = [
     primaryCTA: { label: 'Order Kayora', href: '/shop' },
     secondaryCTA: { label: 'Become a Distributor', href: '/distribution' },
     overlayStrength: 0.35,
+    overlayGradient: 'left-to-right',
     objectFit: 'cover',
     objectPosition: 'left top',
     contentAlign: 'right',
@@ -216,10 +219,19 @@ export default function HeroSlider() {
               }}
               sizes="100vw"
             />
-            {/* Overlay — lighter for product slides so bottles stay vivid */}
+            {/* Overlay — lighter for product slides so bottles stay vivid.
+                Slide 1 uses a left-to-right gradient instead of a flat tint,
+                since its text sits on the right over a bright banner image
+                and needs stronger contrast there without darkening the
+                whole image. */}
             <div
               className="absolute inset-0"
-              style={{ background: `rgba(10,28,54,${bg.overlayStrength})` }}
+              style={{
+                background:
+                  bg.overlayGradient === 'left-to-right'
+                    ? `linear-gradient(to right, rgba(10,28,54,${bg.overlayStrength * 0.4}) 0%, rgba(10,28,54,${bg.overlayStrength * 1.8}) 100%)`
+                    : `rgba(10,28,54,${bg.overlayStrength})`,
+              }}
               aria-hidden="true"
             />
           </div>

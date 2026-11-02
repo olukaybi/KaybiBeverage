@@ -70,7 +70,7 @@ const faqs = [
     questions: [
       {
         q: 'How do I order Kayora?',
-        a: 'You can place orders by calling us on 0904 078 9918, emailing info@kaybibeverage.com, or filling in the order form on our Contact page. We handle direct orders for homes, offices, events and institutions across Akwa Ibom State.',
+        a: 'Order online at kayorawater.com/shop with card payment or pay later, or call or WhatsApp 0904 078 9918. Hotels and distributors can request trade terms on our Distribution page.',
       },
       {
         q: 'Where does Kayora deliver?',
@@ -78,7 +78,7 @@ const faqs = [
       },
       {
         q: 'What is the minimum order for delivery?',
-        a: 'Minimum order quantities vary by size and location. Contact us directly on 0904 078 9918 or via our Contact page and our team will confirm the minimums and pricing for your specific requirement.',
+        a: 'Online minimums are 10 cases for 30cl, 50cl and 75cl, and 5 bottles for 18.9L. For anything smaller or custom, message us on WhatsApp and we will advise.',
       },
       {
         q: 'How long does delivery take?',
