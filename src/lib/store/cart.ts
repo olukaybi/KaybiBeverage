@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { CartItem, ProductSku } from '@/lib/types';
+import { trackAddToCart } from '@/lib/analytics';
 
 interface CartStore {
   items: CartItem[];
@@ -18,6 +19,7 @@ export const useCartStore = create<CartStore>()(
       items: [],
 
       addItem: (item, quantity) => {
+        trackAddToCart(item, quantity);
         set((state) => {
           const existing = state.items.find((i) => i.sku === item.sku);
           if (existing) {

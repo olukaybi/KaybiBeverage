@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { cn } from '@/lib/utils';
-import { track } from '@/lib/analytics';
+import { track, trackFormSubmit } from '@/lib/analytics';
 import { getStoredUtm } from '@/components/UtmCapture';
 
 const schema = z.object({
@@ -75,6 +75,7 @@ export default function DistributorForm() {
       if (res.ok) {
         track('form_submit_distribution', { business_type: data.businessType, state: data.state });
         track('distributor_interest', { business_type: data.businessType, state: data.state });
+        trackFormSubmit('distribution', { business_type: data.businessType, state: data.state });
       }
     } catch {
       setSubmitState('error');

@@ -2,7 +2,7 @@
 
 import { useState, useRef, type FormEvent } from 'react';
 import { cn } from '@/lib/utils';
-import { track } from '@/lib/analytics';
+import { track, trackFormSubmit } from '@/lib/analytics';
 import { getStoredUtm } from '@/components/UtmCapture';
 import type { LeadSegment } from '@/lib/leadSegments';
 
@@ -64,6 +64,7 @@ export default function LeadForm({ segment, apiEndpoint, fields, submitLabel, th
       setState(res.ok ? 'success' : 'error');
       if (res.ok) {
         track(`form_submit_${segment}`, { form_name: formName, segment, preferred_sku: data.preferredSku, location: data.location || data.state });
+        trackFormSubmit(formName, { segment, preferred_sku: data.preferredSku, location: data.location || data.state });
         setTimeout(() => successRef.current?.focus(), 0);
       } else {
         setTimeout(() => errorRef.current?.focus(), 0);
